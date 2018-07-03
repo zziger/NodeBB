@@ -1,5 +1,6 @@
 'use strict';
 
+var path = require('path');
 var async = require('async');
 var nconf = require('nconf');
 var validator = require('validator');
@@ -319,4 +320,9 @@ Controllers.termsOfUse = function (req, res, next) {
 	res.render('tos', {
 		termsOfUse: meta.config.termsOfUse,
 	});
+};
+
+Controllers.serviceWorker = function (req, res) {
+	console.log('I\'m hit!');
+	res.sendFile(path.join(__dirname, '../../public/src/sw.js'));
 };

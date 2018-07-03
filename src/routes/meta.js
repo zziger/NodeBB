@@ -9,4 +9,5 @@ module.exports = function (app, middleware, controllers) {
 	app.get('/manifest.json', controllers.manifest);
 	app.get('/css/previews/:theme', controllers.admin.themes.get);
 	app.get('/osd.xml', controllers.osd.handle);
+	app.get('/sw.js', controllers.serviceWorker);
 };
