@@ -290,7 +290,6 @@ $(document).ready(function () {
 
 		apiXHR = $.ajax({
 			url: config.relative_path + '/api/' + url,
-			cache: false,
 			headers: {
 				'X-Return-To': app.previousUrl,
 			},
