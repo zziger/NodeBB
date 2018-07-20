@@ -88,15 +88,12 @@ define('forum/footer', ['notifications', 'chat', 'components', 'translator'], fu
 
 	if ('serviceWorker' in navigator) {
 		console.log('service workers supported');
-		window.addEventListener('load', function () {
-			console.log('load fired');
-			navigator.serviceWorker.register('/sw.js').then(function (registration) {
-				// Registration was successful
-				console.log('ServiceWorker registration successful with scope: ', registration.scope);
-			}, function (err) {
-				// registration failed :(
-				console.log('ServiceWorker registration failed: ', err);
-			});
+		navigator.serviceWorker.register(config.relative_path + '/sw.js').then(function (registration) {
+			// Registration was successful
+			console.log('ServiceWorker registration successful with scope: ', registration.scope);
+		}, function (err) {
+			// registration failed :(
+			console.log('ServiceWorker registration failed: ', err);
 		});
 	}
 });
