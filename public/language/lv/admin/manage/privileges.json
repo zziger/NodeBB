@@ -6,10 +6,10 @@
 	"upload-images": "Upload Images",
 	"upload-files": "Upload Files",
 	"signature": "Signature",
-	"ban": "Ban",
-	"search-content": "Search Content",
-	"search-users": "Search Users",
-	"search-tags": "Search Tags",
+	"ban": "Bloķēt",
+	"search-content": "Meklēt saturā",
+	"search-users": "Meklēt lietotājus",
+	"search-tags": "Meklēt birkās",
 
 	"find-category": "Find Category",
 	"access-category": "Access Category",
@@ -22,7 +22,7 @@
 	"delete-posts": "Delete Posts",
 	"view_deleted": "View Deleted Posts",
 	"upvote-posts": "Ziņas, kurām ir balsis par",
-	"downvote-posts": "Downvote Posts",
+	"downvote-posts": "Ziņas, kurām ir balsis pret",
 	"delete-topics": "Delete Topics",
 	"purge": "Purge",
 	"moderate": "Moderate"

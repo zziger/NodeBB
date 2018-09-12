@@ -123,6 +123,8 @@ postgresModule.init = function (callback) {
 			require('./postgres/list')(wrappedDB, postgresModule);
 			require('./postgres/transaction')(db, dbNamespace, postgresModule);
 
+			postgresModule.async = require('../promisify')(postgresModule, ['client', 'sessionStore', 'pool']);
+
 			callback();
 		});
 	});
@@ -364,15 +366,18 @@ postgresModule.initSessionStore = function (callback) {
 
 	db.query(`
 CREATE TABLE IF NOT EXISTS "session" (
-	"sid" VARCHAR NOT NULL
-		COLLATE "default",
-	"sess" JSON NOT NULL,
-	"expire" TIMESTAMP(6) NOT NULL,
-	CONSTRAINT "session_pkey"
-		PRIMARY KEY ("sid")
-		NOT DEFERRABLE
-		INITIALLY IMMEDIATE
-) WITH (OIDS=FALSE)`, function (err) {
+	"sid" CHAR(32) NOT NULL
+		COLLATE "C"
+		PRIMARY KEY,
+	"sess" JSONB NOT NULL,
+	"expire" TIMESTAMPTZ NOT NULL
+) WITHOUT OIDS;
+
+CREATE INDEX IF NOT EXISTS "session_expire_idx" ON "session"("expire");
+
+ALTER TABLE "session"
+	ALTER "sid" SET STORAGE MAIN,
+	CLUSTER ON "session_expire_idx";`, function (err) {
 		if (err) {
 			return callback(err);
 		}
