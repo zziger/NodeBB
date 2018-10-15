@@ -98,6 +98,9 @@ module.exports = function (Plugins) {
 		case 'static':
 			fireStaticHook(hook, hookList, params, callback);
 			break;
+		case 'response':
+			fireResponseHook(hook, hookList, params, callback);
+			break;
 		default:
 			winston.warn('[plugins] Unknown hookType: ' + hookType + ', hook : ' + hook);
 			callback();
@@ -169,6 +172,24 @@ module.exports = function (Plugins) {
 			} else {
 				next();
 			}
+		}, callback);
+	}
+
+	function fireResponseHook(hook, hookList, params, callback) {
+		if (!Array.isArray(hookList) || !hookList.length) {
+			return callback(null, params);
+		}
+
+		async.until(() => hookList.length > 0 && params.res.headersSent === false, (next) => {
+			const hookObj = hookList.pop();
+			if (typeof hookObj.method !== 'function') {
+				if (global.env === 'development') {
+					winston.warn('[plugins] Expected method for hook \'' + hook + '\' in plugin \'' + hookObj.id + '\' not found, skipping.');
+				}
+				return next(null, params);
+			}
+
+			hookObj.method(params, next);
 		}, callback);
 	}
 
