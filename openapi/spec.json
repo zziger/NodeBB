@@ -1,0 +1,4170 @@
+{
+	"openapi": "3.0.0",
+	"tags": [
+		{
+			"name": "admin"
+		},
+		{
+			"name": "admin-api"
+		},
+		{
+			"name": "meta"
+		},
+		{
+			"name": "api"
+		},
+		{
+			"name": "feed"
+		},
+		{
+			"name": "main"
+		},
+		{
+			"name": "categories"
+		},
+		{
+			"name": "topics"
+		},
+		{
+			"name": "posts"
+		},
+		{
+			"name": "accounts"
+		},
+		{
+			"name": "users"
+		},
+		{
+			"name": "groups"
+		},
+		{
+			"name": "mod"
+		},
+		{
+			"name": "globalMod"
+		},
+		{
+			"name": "tag"
+		}
+	],
+	"x-tagGroups": [
+		{
+			"name": "General",
+			"tags": [
+				"api"
+			]
+		},
+		{
+			"name": "Admin",
+			"tags": [
+				"meta",
+				"admin",
+				"admin-api",
+				"feed"
+			]
+		},
+		{
+			"name": "Pages",
+			"tags": [
+				"categories",
+				"topics",
+				"posts",
+				"accounts",
+				"users",
+				"groups",
+				"mod",
+				"globalMod",
+				"tag"
+			]
+		}
+	],
+	"paths": {
+		"/ping": {
+			"get": {
+				"tags": [ "meta" ],
+				"summary": "/ping",
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/sping": {
+			"get": {
+				"tags": [ "meta" ],
+				"summary": "/sping",
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/admin/plugins/composer-default": {
+			"get": {
+				"tags": [ "admin" ],
+				"summary": "/admin/plugins/composer-default",
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/api/admin/plugins/composer-default": {
+			"get": {
+				"tags": [ "admin-api" ],
+				"summary": "/api/admin/plugins/composer-default",
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/admin/plugins/persona": {
+			"tags": [ "admin" ],
+			"get": {
+				"summary": "/admin/plugins/persona",
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/api/admin/plugins/persona": {
+			"get": {
+				"tags": [ "admin-api" ],
+				"summary": "/api/admin/plugins/persona",
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/admin/plugins/markdown": {
+			"get": {
+				"tags": [ "admin" ],
+				"summary": "/admin/plugins/markdown",
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/api/admin/plugins/markdown": {
+			"get": {
+				"tags": [ "admin-api" ],
+				"summary": "/api/admin/plugins/markdown",
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/api/post/{pid}/raw": {
+			"get": {
+				"tags": [ "api" ],
+				"summary": "/api/post/{pid}/raw",
+				"parameters": [
+					{
+						"name": "pid",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/admin/plugins/mentions": {
+			"get": {
+				"tags": [ "admin" ],
+				"summary": "/admin/plugins/mentions",
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/api/admin/plugins/mentions": {
+			"get": {
+				"tags": [ "admin-api" ],
+				"summary": "/api/admin/plugins/mentions",
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/admin/plugins/emoji": {
+			"get": {
+				"tags": [ "admin" ],
+				"summary": "/admin/plugins/emoji",
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/api/admin/plugins/emoji": {
+			"get": {
+				"tags": [ "admin-api" ],
+				"summary": "/api/admin/plugins/emoji",
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/api/admin/plugins/emoji/save": {
+			"get": {
+				"tags": [ "admin-api" ],
+				"summary": "/api/admin/plugins/emoji/save",
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/api/admin/plugins/emoji/build": {
+			"get": {
+				"tags": [ "admin-api" ],
+				"summary": "/api/admin/plugins/emoji/build",
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/api/admin/plugins/emoji/upload": {
+			"post": {
+				"tags": [ "admin-api" ],
+				"summary": "/api/admin/plugins/emoji/upload",
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/admin/plugins/dbsearch": {
+			"get": {
+				"tags": [ "admin" ],
+				"summary": "/admin/plugins/dbsearch",
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/api/admin/plugins/dbsearch": {
+			"get": {
+				"tags": [ "admin-api" ],
+				"summary": "/api/admin/plugins/dbsearch",
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/api/admin/plugins/dbsearch/save": {
+			"post": {
+				"tags": [ "admin-api" ],
+				"summary": "/api/admin/plugins/dbsearch/save",
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/register": {
+			"post": {
+				"tags": [ "api" ],
+				"summary": "/register",
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			},
+			"get": {
+				"tags": [ "page" ],
+				"summary": "/register",
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/register/complete": {
+			"post": {
+				"summary": "/register/complete",
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			},
+			"get": {
+				"summary": "/register/complete",
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/register/abort": {
+			"post": {
+				"summary": "/register/abort",
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/login": {
+			"post": {
+				"summary": "/login",
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			},
+			"get": {
+				"summary": "/login",
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/logout": {
+			"post": {
+				"summary": "/logout",
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/admin": {
+			"get": {
+				"summary": "/admin",
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/admin/general/dashboard": {
+			"get": {
+				"summary": "/admin/general/dashboard",
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/admin/general/languages": {
+			"get": {
+				"summary": "/admin/general/languages",
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/admin/general/sounds": {
+			"get": {
+				"summary": "/admin/general/sounds",
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/admin/general/navigation": {
+			"get": {
+				"summary": "/admin/general/navigation",
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/admin/general/homepage": {
+			"get": {
+				"summary": "/admin/general/homepage",
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/admin/general/social": {
+			"get": {
+				"summary": "/admin/general/social",
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/admin/manage/categories": {
+			"get": {
+				"summary": "/admin/manage/categories",
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/admin/manage/categories/{category_id}": {
+			"get": {
+				"summary": "/admin/manage/categories/{category_id}",
+				"parameters": [
+					{
+						"name": "category_id",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/admin/manage/categories/{category_id}/analytics": {
+			"get": {
+				"summary": "/admin/manage/categories/{category_id}/analytics",
+				"parameters": [
+					{
+						"name": "category_id",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/admin/manage/privileges/{cid}": {
+			"get": {
+				"summary": "/admin/manage/privileges/{cid}",
+				"parameters": [
+					{
+						"name": "cid",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/admin/manage/tags": {
+			"get": {
+				"summary": "/admin/manage/tags",
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/admin/manage/post-queue": {
+			"get": {
+				"summary": "/admin/manage/post-queue",
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/admin/manage/ip-blacklist": {
+			"get": {
+				"summary": "/admin/manage/ip-blacklist",
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/admin/manage/users": {
+			"get": {
+				"summary": "/admin/manage/users",
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/admin/manage/users/search": {
+			"get": {
+				"summary": "/admin/manage/users/search",
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/admin/manage/users/latest": {
+			"get": {
+				"summary": "/admin/manage/users/latest",
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/admin/manage/users/not-validated": {
+			"get": {
+				"summary": "/admin/manage/users/not-validated",
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/admin/manage/users/no-posts": {
+			"get": {
+				"summary": "/admin/manage/users/no-posts",
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/admin/manage/users/top-posters": {
+			"get": {
+				"summary": "/admin/manage/users/top-posters",
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/admin/manage/users/most-reputation": {
+			"get": {
+				"summary": "/admin/manage/users/most-reputation",
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/admin/manage/users/inactive": {
+			"get": {
+				"summary": "/admin/manage/users/inactive",
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/admin/manage/users/flagged": {
+			"get": {
+				"summary": "/admin/manage/users/flagged",
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/admin/manage/users/banned": {
+			"get": {
+				"summary": "/admin/manage/users/banned",
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/admin/manage/registration": {
+			"get": {
+				"summary": "/admin/manage/registration",
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/admin/manage/admins-mods": {
+			"get": {
+				"summary": "/admin/manage/admins-mods",
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/admin/manage/groups": {
+			"get": {
+				"summary": "/admin/manage/groups",
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/admin/manage/groups/{name}": {
+			"get": {
+				"summary": "/admin/manage/groups/{name}",
+				"parameters": [
+					{
+						"name": "name",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/admin/manage/uploads": {
+			"get": {
+				"summary": "/admin/manage/uploads",
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/admin/settings/{term}": {
+			"get": {
+				"summary": "/admin/settings/{term}",
+				"parameters": [
+					{
+						"name": "term",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/admin/appearance/{term}": {
+			"get": {
+				"summary": "/admin/appearance/{term}",
+				"parameters": [
+					{
+						"name": "term",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/admin/extend/plugins": {
+			"get": {
+				"summary": "/admin/extend/plugins",
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/admin/extend/widgets": {
+			"get": {
+				"summary": "/admin/extend/widgets",
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/admin/extend/rewards": {
+			"get": {
+				"summary": "/admin/extend/rewards",
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/admin/advanced/database": {
+			"get": {
+				"summary": "/admin/advanced/database",
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/admin/advanced/events": {
+			"get": {
+				"summary": "/admin/advanced/events",
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/admin/advanced/hooks": {
+			"get": {
+				"summary": "/admin/advanced/hooks",
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/admin/advanced/logs": {
+			"get": {
+				"summary": "/admin/advanced/logs",
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/admin/advanced/errors": {
+			"get": {
+				"summary": "/admin/advanced/errors",
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/admin/advanced/errors/export": {
+			"get": {
+				"summary": "/admin/advanced/errors/export",
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/admin/advanced/cache": {
+			"get": {
+				"summary": "/admin/advanced/cache",
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/admin/development/logger": {
+			"get": {
+				"summary": "/admin/development/logger",
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/admin/development/info": {
+			"get": {
+				"summary": "/admin/development/info",
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/api/admin": {
+			"get": {
+				"summary": "/api/admin",
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/api/admin/general/dashboard": {
+			"get": {
+				"summary": "/api/admin/general/dashboard",
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/api/admin/general/languages": {
+			"get": {
+				"summary": "/api/admin/general/languages",
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/api/admin/general/sounds": {
+			"get": {
+				"summary": "/api/admin/general/sounds",
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/api/admin/general/navigation": {
+			"get": {
+				"summary": "/api/admin/general/navigation",
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/api/admin/general/homepage": {
+			"get": {
+				"summary": "/api/admin/general/homepage",
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/api/admin/general/social": {
+			"get": {
+				"summary": "/api/admin/general/social",
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/api/admin/manage/categories": {
+			"get": {
+				"summary": "/api/admin/manage/categories",
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/api/admin/manage/categories/{category_id}": {
+			"get": {
+				"summary": "/api/admin/manage/categories/{category_id}",
+				"parameters": [
+					{
+						"name": "category_id",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/api/admin/manage/categories/{category_id}/analytics": {
+			"get": {
+				"summary": "/api/admin/manage/categories/{category_id}/analytics",
+				"parameters": [
+					{
+						"name": "category_id",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/api/admin/manage/privileges/{cid}": {
+			"get": {
+				"summary": "/api/admin/manage/privileges/{cid}",
+				"parameters": [
+					{
+						"name": "cid",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/api/admin/manage/tags": {
+			"get": {
+				"summary": "/api/admin/manage/tags",
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/api/admin/manage/post-queue": {
+			"get": {
+				"summary": "/api/admin/manage/post-queue",
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/api/admin/manage/ip-blacklist": {
+			"get": {
+				"summary": "/api/admin/manage/ip-blacklist",
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/api/admin/manage/users": {
+			"get": {
+				"summary": "/api/admin/manage/users",
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/api/admin/manage/users/search": {
+			"get": {
+				"summary": "/api/admin/manage/users/search",
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/api/admin/manage/users/latest": {
+			"get": {
+				"summary": "/api/admin/manage/users/latest",
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/api/admin/manage/users/not-validated": {
+			"get": {
+				"summary": "/api/admin/manage/users/not-validated",
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/api/admin/manage/users/no-posts": {
+			"get": {
+				"summary": "/api/admin/manage/users/no-posts",
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/api/admin/manage/users/top-posters": {
+			"get": {
+				"summary": "/api/admin/manage/users/top-posters",
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/api/admin/manage/users/most-reputation": {
+			"get": {
+				"summary": "/api/admin/manage/users/most-reputation",
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/api/admin/manage/users/inactive": {
+			"get": {
+				"summary": "/api/admin/manage/users/inactive",
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/api/admin/manage/users/flagged": {
+			"get": {
+				"summary": "/api/admin/manage/users/flagged",
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/api/admin/manage/users/banned": {
+			"get": {
+				"summary": "/api/admin/manage/users/banned",
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/api/admin/manage/registration": {
+			"get": {
+				"summary": "/api/admin/manage/registration",
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/api/admin/manage/admins-mods": {
+			"get": {
+				"summary": "/api/admin/manage/admins-mods",
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/api/admin/manage/groups": {
+			"get": {
+				"summary": "/api/admin/manage/groups",
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/api/admin/manage/groups/{name}": {
+			"get": {
+				"summary": "/api/admin/manage/groups/{name}",
+				"parameters": [
+					{
+						"name": "name",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/api/admin/manage/uploads": {
+			"get": {
+				"summary": "/api/admin/manage/uploads",
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/api/admin/settings/{term}": {
+			"get": {
+				"summary": "/api/admin/settings/{term}",
+				"parameters": [
+					{
+						"name": "term",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/api/admin/appearance/{term}": {
+			"get": {
+				"summary": "/api/admin/appearance/{term}",
+				"parameters": [
+					{
+						"name": "term",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/api/admin/extend/plugins": {
+			"get": {
+				"summary": "/api/admin/extend/plugins",
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/api/admin/extend/widgets": {
+			"get": {
+				"summary": "/api/admin/extend/widgets",
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/api/admin/extend/rewards": {
+			"get": {
+				"summary": "/api/admin/extend/rewards",
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/api/admin/advanced/database": {
+			"get": {
+				"summary": "/api/admin/advanced/database",
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/api/admin/advanced/events": {
+			"get": {
+				"summary": "/api/admin/advanced/events",
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/api/admin/advanced/hooks": {
+			"get": {
+				"summary": "/api/admin/advanced/hooks",
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/api/admin/advanced/logs": {
+			"get": {
+				"summary": "/api/admin/advanced/logs",
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/api/admin/advanced/errors": {
+			"get": {
+				"summary": "/api/admin/advanced/errors",
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/api/admin/advanced/errors/export": {
+			"get": {
+				"summary": "/api/admin/advanced/errors/export",
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/api/admin/advanced/cache": {
+			"get": {
+				"summary": "/api/admin/advanced/cache",
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/api/admin/development/logger": {
+			"get": {
+				"summary": "/api/admin/development/logger",
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/api/admin/development/info": {
+			"get": {
+				"summary": "/api/admin/development/info",
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/api/admin/users/csv": {
+			"get": {
+				"summary": "/api/admin/users/csv",
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/api/admin/analytics": {
+			"get": {
+				"summary": "/api/admin/analytics",
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/api/admin/category/uploadpicture": {
+			"post": {
+				"summary": "/api/admin/category/uploadpicture",
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/api/admin/uploadfavicon": {
+			"post": {
+				"summary": "/api/admin/uploadfavicon",
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/api/admin/uploadTouchIcon": {
+			"post": {
+				"summary": "/api/admin/uploadTouchIcon",
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/api/admin/uploadlogo": {
+			"post": {
+				"summary": "/api/admin/uploadlogo",
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/api/admin/uploadOgImage": {
+			"post": {
+				"summary": "/api/admin/uploadOgImage",
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/api/admin/upload/sound": {
+			"post": {
+				"summary": "/api/admin/upload/sound",
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/api/admin/upload/file": {
+			"post": {
+				"summary": "/api/admin/upload/file",
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/api/admin/uploadDefaultAvatar": {
+			"post": {
+				"summary": "/api/admin/uploadDefaultAvatar",
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/sitemap.xml": {
+			"get": {
+				"summary": "/sitemap.xml",
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/sitemap/pages.xml": {
+			"get": {
+				"summary": "/sitemap/pages.xml",
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/sitemap/categories.xml": {
+			"get": {
+				"summary": "/sitemap/categories.xml",
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/\\/sitemap\\/topics\\.(\\d+)\\.xml/": {
+			"get": {
+				"summary": "/\\/sitemap\\/topics\\.(\\d+)\\.xml/",
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/robots.txt": {
+			"get": {
+				"summary": "/robots.txt",
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/manifest.json": {
+			"get": {
+				"summary": "/manifest.json",
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/css/previews/{theme}": {
+			"get": {
+				"summary": "/css/previews/{theme}",
+				"parameters": [
+					{
+						"name": "theme",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/osd.xml": {
+			"get": {
+				"summary": "/osd.xml",
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/api/config": {
+			"get": {
+				"summary": "/api/config",
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/api/me": {
+			"get": {
+				"summary": "/api/me",
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/api/user/uid/{uid}": {
+			"get": {
+				"summary": "/api/user/uid/{uid}",
+				"parameters": [
+					{
+						"name": "uid",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/api/user/username/{username}": {
+			"get": {
+				"summary": "/api/user/username/{username}",
+				"parameters": [
+					{
+						"name": "username",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/api/user/email/{email}": {
+			"get": {
+				"summary": "/api/user/email/{email}",
+				"parameters": [
+					{
+						"name": "email",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/api/user/uid/{userslug}/export/posts": {
+			"get": {
+				"summary": "/api/user/uid/{userslug}/export/posts",
+				"parameters": [
+					{
+						"name": "userslug",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/api/user/uid/{userslug}/export/uploads": {
+			"get": {
+				"summary": "/api/user/uid/{userslug}/export/uploads",
+				"parameters": [
+					{
+						"name": "userslug",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/api/user/uid/{userslug}/export/profile": {
+			"get": {
+				"summary": "/api/user/uid/{userslug}/export/profile",
+				"parameters": [
+					{
+						"name": "userslug",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/api/{type}/pid/{id}": {
+			"get": {
+				"summary": "/api/{type}/pid/{id}",
+				"parameters": [
+					{
+						"name": "type",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"name": "id",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/api/{type}/tid/{id}": {
+			"get": {
+				"summary": "/api/{type}/tid/{id}",
+				"parameters": [
+					{
+						"name": "type",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"name": "id",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/api/{type}/cid/{id}": {
+			"get": {
+				"summary": "/api/{type}/cid/{id}",
+				"parameters": [
+					{
+						"name": "type",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"name": "id",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/api/categories/{cid}/moderators": {
+			"get": {
+				"summary": "/api/categories/{cid}/moderators",
+				"parameters": [
+					{
+						"name": "cid",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/api/recent/posts/{term}": {
+			"get": {
+				"summary": "/api/recent/posts/{term}",
+				"parameters": [
+					{
+						"name": "term",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/api/unread/total": {
+			"get": {
+				"summary": "/api/unread/total",
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/api/topic/teaser/{topic_id}": {
+			"get": {
+				"summary": "/api/topic/teaser/{topic_id}",
+				"parameters": [
+					{
+						"name": "topic_id",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/api/topic/pagination/{topic_id}": {
+			"get": {
+				"summary": "/api/topic/pagination/{topic_id}",
+				"parameters": [
+					{
+						"name": "topic_id",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/api/post/upload": {
+			"post": {
+				"summary": "/api/post/upload",
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/api/topic/thumb/upload": {
+			"post": {
+				"summary": "/api/topic/thumb/upload",
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/api/user/{userslug}/uploadpicture": {
+			"post": {
+				"summary": "/api/user/{userslug}/uploadpicture",
+				"parameters": [
+					{
+						"name": "userslug",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/api/user/{userslug}/uploadcover": {
+			"post": {
+				"summary": "/api/user/{userslug}/uploadcover",
+				"parameters": [
+					{
+						"name": "userslug",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/api/groups/uploadpicture": {
+			"post": {
+				"summary": "/api/groups/uploadpicture",
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/topic/{topic_id.rss}": {
+			"get": {
+				"summary": "/topic/{topic_id.rss}",
+				"parameters": [
+					{
+						"name": "topic_id.rss",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/category/{category_id.rss}": {
+			"get": {
+				"summary": "/category/{category_id.rss}",
+				"parameters": [
+					{
+						"name": "category_id.rss",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/topics.rss": {
+			"get": {
+				"summary": "/topics.rss",
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/recent.rss": {
+			"get": {
+				"summary": "/recent.rss",
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/top.rss": {
+			"get": {
+				"summary": "/top.rss",
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/top/{term.rss}": {
+			"get": {
+				"summary": "/top/{term.rss}",
+				"parameters": [
+					{
+						"name": "term.rss",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/popular.rss": {
+			"get": {
+				"summary": "/popular.rss",
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/popular/{term.rss}": {
+			"get": {
+				"summary": "/popular/{term.rss}",
+				"parameters": [
+					{
+						"name": "term.rss",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/recentposts.rss": {
+			"get": {
+				"summary": "/recentposts.rss",
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/category/{category_id}/recentposts.rss": {
+			"get": {
+				"summary": "/category/{category_id}/recentposts.rss",
+				"parameters": [
+					{
+						"name": "category_id",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/user/{userslug}/topics.rss": {
+			"get": {
+				"summary": "/user/{userslug}/topics.rss",
+				"parameters": [
+					{
+						"name": "userslug",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/tags/{tag.rss}": {
+			"get": {
+				"summary": "/tags/{tag.rss}",
+				"parameters": [
+					{
+						"name": "tag.rss",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/api/login": {
+			"get": {
+				"summary": "/api/login",
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/api/register": {
+			"get": {
+				"summary": "/api/register",
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/api/register/complete": {
+			"get": {
+				"summary": "/api/register/complete",
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/compose": {
+			"get": {
+				"summary": "/compose",
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			},
+			"post": {
+				"summary": "/compose",
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/api/compose": {
+			"get": {
+				"summary": "/api/compose",
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/confirm/{code}": {
+			"get": {
+				"summary": "/confirm/{code}",
+				"parameters": [
+					{
+						"name": "code",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/api/confirm/{code}": {
+			"get": {
+				"summary": "/api/confirm/{code}",
+				"parameters": [
+					{
+						"name": "code",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/outgoing": {
+			"get": {
+				"summary": "/outgoing",
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/api/outgoing": {
+			"get": {
+				"summary": "/api/outgoing",
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/search": {
+			"get": {
+				"summary": "/search",
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/api/search": {
+			"get": {
+				"summary": "/api/search",
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/reset/{code}": {
+			"get": {
+				"summary": "/reset/{code}",
+				"parameters": [
+					{
+						"name": "code",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/api/reset/{code}": {
+			"get": {
+				"summary": "/api/reset/{code}",
+				"parameters": [
+					{
+						"name": "code",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/tos": {
+			"get": {
+				"summary": "/tos",
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/api/tos": {
+			"get": {
+				"summary": "/api/tos",
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/email/unsubscribe/{token}": {
+			"post": {
+				"summary": "/email/unsubscribe/{token}",
+				"parameters": [
+					{
+						"name": "token",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/topic/{topic_id}/{slug}/{post_index}": {
+			"get": {
+				"summary": "/topic/{topic_id}/{slug}/{post_index}",
+				"parameters": [
+					{
+						"name": "topic_id",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"name": "slug",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"name": "post_index",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/api/topic/{topic_id}/{slug}/{post_index}": {
+			"get": {
+				"summary": "/api/topic/{topic_id}/{slug}/{post_index}",
+				"parameters": [
+					{
+						"name": "topic_id",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"name": "slug",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"name": "post_index",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/topic/{topic_id}/{slug}": {
+			"get": {
+				"summary": "/topic/{topic_id}/{slug}",
+				"parameters": [
+					{
+						"name": "topic_id",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"name": "slug",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/api/topic/{topic_id}/{slug}": {
+			"get": {
+				"summary": "/api/topic/{topic_id}/{slug}",
+				"parameters": [
+					{
+						"name": "topic_id",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"name": "slug",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/post/{pid}": {
+			"get": {
+				"summary": "/post/{pid}",
+				"parameters": [
+					{
+						"name": "pid",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/api/post/{pid}": {
+			"get": {
+				"summary": "/api/post/{pid}",
+				"parameters": [
+					{
+						"name": "pid",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/flags": {
+			"get": {
+				"summary": "/flags",
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/api/flags": {
+			"get": {
+				"summary": "/api/flags",
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/flags/{flagId}": {
+			"get": {
+				"summary": "/flags/{flagId}",
+				"parameters": [
+					{
+						"name": "flagId",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/api/flags/{flagId}": {
+			"get": {
+				"summary": "/api/flags/{flagId}",
+				"parameters": [
+					{
+						"name": "flagId",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/post-queue": {
+			"get": {
+				"summary": "/post-queue",
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/api/post-queue": {
+			"get": {
+				"summary": "/api/post-queue",
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/ip-blacklist": {
+			"get": {
+				"summary": "/ip-blacklist",
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/api/ip-blacklist": {
+			"get": {
+				"summary": "/api/ip-blacklist",
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/registration-queue": {
+			"get": {
+				"summary": "/registration-queue",
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/api/registration-queue": {
+			"get": {
+				"summary": "/api/registration-queue",
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/tags/{tag}": {
+			"get": {
+				"summary": "/tags/{tag}",
+				"parameters": [
+					{
+						"name": "tag",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/api/tags/{tag}": {
+			"get": {
+				"summary": "/api/tags/{tag}",
+				"parameters": [
+					{
+						"name": "tag",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/tags": {
+			"get": {
+				"summary": "/tags",
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/api/tags": {
+			"get": {
+				"summary": "/api/tags",
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/categories": {
+			"get": {
+				"summary": "/categories",
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/api/categories": {
+			"get": {
+				"summary": "/api/categories",
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/popular": {
+			"get": {
+				"summary": "/popular",
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/api/popular": {
+			"get": {
+				"summary": "/api/popular",
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/recent": {
+			"get": {
+				"summary": "/recent",
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/api/recent": {
+			"get": {
+				"summary": "/api/recent",
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/top": {
+			"get": {
+				"summary": "/top",
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/api/top": {
+			"get": {
+				"summary": "/api/top",
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/unread": {
+			"get": {
+				"summary": "/unread",
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/api/unread": {
+			"get": {
+				"summary": "/api/unread",
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/category/{category_id}/{slug}/{topic_index}": {
+			"get": {
+				"summary": "/category/{category_id}/{slug}/{topic_index}",
+				"parameters": [
+					{
+						"name": "category_id",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"name": "slug",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"name": "topic_index",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/api/category/{category_id}/{slug}/{topic_index}": {
+			"get": {
+				"summary": "/api/category/{category_id}/{slug}/{topic_index}",
+				"parameters": [
+					{
+						"name": "category_id",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"name": "slug",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"name": "topic_index",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/category/{category_id}/{slug}": {
+			"get": {
+				"summary": "/category/{category_id}/{slug}",
+				"parameters": [
+					{
+						"name": "category_id",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"name": "slug",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/api/category/{category_id}/{slug}": {
+			"get": {
+				"summary": "/api/category/{category_id}/{slug}",
+				"parameters": [
+					{
+						"name": "category_id",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"name": "slug",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/me/*": {
+			"get": {
+				"summary": "/me/*",
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/api/me/*": {
+			"get": {
+				"summary": "/api/me/*",
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/uid/{uid*}": {
+			"get": {
+				"summary": "/uid/{uid*}",
+				"parameters": [
+					{
+						"name": "uid*",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/api/uid/{uid*}": {
+			"get": {
+				"summary": "/api/uid/{uid*}",
+				"parameters": [
+					{
+						"name": "uid*",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/user/{userslug}": {
+			"get": {
+				"summary": "/user/{userslug}",
+				"parameters": [
+					{
+						"name": "userslug",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/api/user/{userslug}": {
+			"get": {
+				"summary": "/api/user/{userslug}",
+				"parameters": [
+					{
+						"name": "userslug",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/user/{userslug}/following": {
+			"get": {
+				"summary": "/user/{userslug}/following",
+				"parameters": [
+					{
+						"name": "userslug",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/api/user/{userslug}/following": {
+			"get": {
+				"summary": "/api/user/{userslug}/following",
+				"parameters": [
+					{
+						"name": "userslug",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/user/{userslug}/followers": {
+			"get": {
+				"summary": "/user/{userslug}/followers",
+				"parameters": [
+					{
+						"name": "userslug",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/api/user/{userslug}/followers": {
+			"get": {
+				"summary": "/api/user/{userslug}/followers",
+				"parameters": [
+					{
+						"name": "userslug",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/user/{userslug}/categories": {
+			"get": {
+				"summary": "/user/{userslug}/categories",
+				"parameters": [
+					{
+						"name": "userslug",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/api/user/{userslug}/categories": {
+			"get": {
+				"summary": "/api/user/{userslug}/categories",
+				"parameters": [
+					{
+						"name": "userslug",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/user/{userslug}/posts": {
+			"get": {
+				"summary": "/user/{userslug}/posts",
+				"parameters": [
+					{
+						"name": "userslug",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/api/user/{userslug}/posts": {
+			"get": {
+				"summary": "/api/user/{userslug}/posts",
+				"parameters": [
+					{
+						"name": "userslug",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/user/{userslug}/topics": {
+			"get": {
+				"summary": "/user/{userslug}/topics",
+				"parameters": [
+					{
+						"name": "userslug",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/api/user/{userslug}/topics": {
+			"get": {
+				"summary": "/api/user/{userslug}/topics",
+				"parameters": [
+					{
+						"name": "userslug",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/user/{userslug}/best": {
+			"get": {
+				"summary": "/user/{userslug}/best",
+				"parameters": [
+					{
+						"name": "userslug",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/api/user/{userslug}/best": {
+			"get": {
+				"summary": "/api/user/{userslug}/best",
+				"parameters": [
+					{
+						"name": "userslug",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/user/{userslug}/groups": {
+			"get": {
+				"summary": "/user/{userslug}/groups",
+				"parameters": [
+					{
+						"name": "userslug",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/api/user/{userslug}/groups": {
+			"get": {
+				"summary": "/api/user/{userslug}/groups",
+				"parameters": [
+					{
+						"name": "userslug",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/user/{userslug}/bookmarks": {
+			"get": {
+				"summary": "/user/{userslug}/bookmarks",
+				"parameters": [
+					{
+						"name": "userslug",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/api/user/{userslug}/bookmarks": {
+			"get": {
+				"summary": "/api/user/{userslug}/bookmarks",
+				"parameters": [
+					{
+						"name": "userslug",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/user/{userslug}/watched": {
+			"get": {
+				"summary": "/user/{userslug}/watched",
+				"parameters": [
+					{
+						"name": "userslug",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/api/user/{userslug}/watched": {
+			"get": {
+				"summary": "/api/user/{userslug}/watched",
+				"parameters": [
+					{
+						"name": "userslug",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/user/{userslug}/ignored": {
+			"get": {
+				"summary": "/user/{userslug}/ignored",
+				"parameters": [
+					{
+						"name": "userslug",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/api/user/{userslug}/ignored": {
+			"get": {
+				"summary": "/api/user/{userslug}/ignored",
+				"parameters": [
+					{
+						"name": "userslug",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/user/{userslug}/upvoted": {
+			"get": {
+				"summary": "/user/{userslug}/upvoted",
+				"parameters": [
+					{
+						"name": "userslug",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/api/user/{userslug}/upvoted": {
+			"get": {
+				"summary": "/api/user/{userslug}/upvoted",
+				"parameters": [
+					{
+						"name": "userslug",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/user/{userslug}/downvoted": {
+			"get": {
+				"summary": "/user/{userslug}/downvoted",
+				"parameters": [
+					{
+						"name": "userslug",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/api/user/{userslug}/downvoted": {
+			"get": {
+				"summary": "/api/user/{userslug}/downvoted",
+				"parameters": [
+					{
+						"name": "userslug",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/user/{userslug}/edit": {
+			"get": {
+				"summary": "/user/{userslug}/edit",
+				"parameters": [
+					{
+						"name": "userslug",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/api/user/{userslug}/edit": {
+			"get": {
+				"summary": "/api/user/{userslug}/edit",
+				"parameters": [
+					{
+						"name": "userslug",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/user/{userslug}/edit/username": {
+			"get": {
+				"summary": "/user/{userslug}/edit/username",
+				"parameters": [
+					{
+						"name": "userslug",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/api/user/{userslug}/edit/username": {
+			"get": {
+				"summary": "/api/user/{userslug}/edit/username",
+				"parameters": [
+					{
+						"name": "userslug",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/user/{userslug}/edit/email": {
+			"get": {
+				"summary": "/user/{userslug}/edit/email",
+				"parameters": [
+					{
+						"name": "userslug",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/api/user/{userslug}/edit/email": {
+			"get": {
+				"summary": "/api/user/{userslug}/edit/email",
+				"parameters": [
+					{
+						"name": "userslug",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/user/{userslug}/edit/password": {
+			"get": {
+				"summary": "/user/{userslug}/edit/password",
+				"parameters": [
+					{
+						"name": "userslug",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/api/user/{userslug}/edit/password": {
+			"get": {
+				"summary": "/api/user/{userslug}/edit/password",
+				"parameters": [
+					{
+						"name": "userslug",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/user/{userslug}/info": {
+			"get": {
+				"summary": "/user/{userslug}/info",
+				"parameters": [
+					{
+						"name": "userslug",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/api/user/{userslug}/info": {
+			"get": {
+				"summary": "/api/user/{userslug}/info",
+				"parameters": [
+					{
+						"name": "userslug",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/user/{userslug}/settings": {
+			"get": {
+				"summary": "/user/{userslug}/settings",
+				"parameters": [
+					{
+						"name": "userslug",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/api/user/{userslug}/settings": {
+			"get": {
+				"summary": "/api/user/{userslug}/settings",
+				"parameters": [
+					{
+						"name": "userslug",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/user/{userslug}/uploads": {
+			"get": {
+				"summary": "/user/{userslug}/uploads",
+				"parameters": [
+					{
+						"name": "userslug",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/api/user/{userslug}/uploads": {
+			"get": {
+				"summary": "/api/user/{userslug}/uploads",
+				"parameters": [
+					{
+						"name": "userslug",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/user/{userslug}/consent": {
+			"get": {
+				"summary": "/user/{userslug}/consent",
+				"parameters": [
+					{
+						"name": "userslug",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/api/user/{userslug}/consent": {
+			"get": {
+				"summary": "/api/user/{userslug}/consent",
+				"parameters": [
+					{
+						"name": "userslug",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/user/{userslug}/blocks": {
+			"get": {
+				"summary": "/user/{userslug}/blocks",
+				"parameters": [
+					{
+						"name": "userslug",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/api/user/{userslug}/blocks": {
+			"get": {
+				"summary": "/api/user/{userslug}/blocks",
+				"parameters": [
+					{
+						"name": "userslug",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/user/{userslug}/sessions": {
+			"get": {
+				"summary": "/user/{userslug}/sessions",
+				"parameters": [
+					{
+						"name": "userslug",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/api/user/{userslug}/sessions": {
+			"get": {
+				"summary": "/api/user/{userslug}/sessions",
+				"parameters": [
+					{
+						"name": "userslug",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/api/user/{userslug}/session/{uuid}": {
+			"delete": {
+				"summary": "/api/user/{userslug}/session/{uuid}",
+				"parameters": [
+					{
+						"name": "userslug",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"name": "uuid",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/notifications": {
+			"get": {
+				"summary": "/notifications",
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/api/notifications": {
+			"get": {
+				"summary": "/api/notifications",
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/user/{userslug}/chats/{roomid}": {
+			"get": {
+				"summary": "/user/{userslug}/chats/{roomid}",
+				"parameters": [
+					{
+						"name": "userslug",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"name": "roomid",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/api/user/{userslug}/chats/{roomid}": {
+			"get": {
+				"summary": "/api/user/{userslug}/chats/{roomid}",
+				"parameters": [
+					{
+						"name": "userslug",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"name": "roomid",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/chats/{roomid}": {
+			"get": {
+				"summary": "/chats/{roomid}",
+				"parameters": [
+					{
+						"name": "roomid",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/api/chats/{roomid}": {
+			"get": {
+				"summary": "/api/chats/{roomid}",
+				"parameters": [
+					{
+						"name": "roomid",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/users": {
+			"get": {
+				"summary": "/users",
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/api/users": {
+			"get": {
+				"summary": "/api/users",
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/groups": {
+			"get": {
+				"summary": "/groups",
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/api/groups": {
+			"get": {
+				"summary": "/api/groups",
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/groups/{slug}": {
+			"get": {
+				"summary": "/groups/{slug}",
+				"parameters": [
+					{
+						"name": "slug",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/api/groups/{slug}": {
+			"get": {
+				"summary": "/api/groups/{slug}",
+				"parameters": [
+					{
+						"name": "slug",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/groups/{slug}/members": {
+			"get": {
+				"summary": "/groups/{slug}/members",
+				"parameters": [
+					{
+						"name": "slug",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/api/groups/{slug}/members": {
+			"get": {
+				"summary": "/api/groups/{slug}/members",
+				"parameters": [
+					{
+						"name": "slug",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		},
+		"/debug/test": {
+			"get": {
+				"summary": "/debug/test",
+				"responses": {
+					"default": {
+						"description": "Default response"
+					}
+				}
+			}
+		}
+	}
+}
