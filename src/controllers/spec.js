@@ -14,9 +14,7 @@ const fromPackage = {
 			name: pkg.license,
 		},
 		description: '[Specification JSON](/api/spec)',
-		'x-logo': {
-
-		},
+		'x-logo': {},
 	},
 };
 
