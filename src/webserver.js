@@ -20,6 +20,14 @@ var useragent = require('express-useragent');
 var favicon = require('serve-favicon');
 var detector = require('spider-detector');
 var helmet = require('helmet');
+var dirname = require('./cli/paths').baseDir;
+var expressOasGenerator;
+var expressOasPostRoutes;
+if (nconf.get('oas')) {
+	var oasJson = path.join(dirname, './openapi/spec.v2.json');
+	expressOasGenerator = require('express-oas-generator');
+	expressOasPostRoutes = expressOasGenerator.init(app, {}, oasJson, 10000, 'api/spec');
+}
 
 var Benchpress = require('benchpressjs');
 var db = require('./database');
@@ -106,6 +114,9 @@ async function initializeNodeBB() {
 	await meta.sounds.addUploads();
 	await meta.blacklist.load();
 	await flags.init();
+	if (expressOasPostRoutes) {
+		await expressOasPostRoutes();
+	}
 }
 
 function setupExpressApp(app) {
