@@ -19,12 +19,8 @@ const fromPackage = {
 
 const filterPaths = ({ json, include, exclude }) => {
 	json.paths = Object.keys(json.paths)
-		.filter((path) => {
-			return /\/api/.test(path);
-		})
-		.filter((path) => {
-			return include ? include.test(path) : exclude ? exclude.test(path) : true;
-		})
+		.filter(path => /\/api/.test(path))
+		.filter(path => (include ? include.test(path) : exclude ? exclude.test(path) : true))
 		.reduce((paths, k) => {
 			paths[k] = json.paths[k];
 			return paths;
@@ -32,7 +28,8 @@ const filterPaths = ({ json, include, exclude }) => {
 };
 
 const getSpecJson = ({ version, include, exclude }) => {
-	let filepath, v3 = false, v2 = false;
+	let filepath; let v3 = false; let
+		v2 = false;
 	if (version === '3') {
 		v3 = true;
 		filepath = path.join(dirname, 'openapi/spec.v3.json');
