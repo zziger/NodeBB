@@ -1,5 +1,6 @@
 'use strict';
 
+require('bootstrap');
 
 app = window.app || {};
 

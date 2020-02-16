@@ -143,6 +143,7 @@ function addCoreRoutes(app, router, middleware) {
 	app.use(middleware.privateUploads);
 
 	var statics = [
+		{ route: '/dist', path: path.join(__dirname, '../../dist') },
 		{ route: '/assets', path: path.join(__dirname, '../../build/public') },
 		{ route: '/assets', path: path.join(__dirname, '../../public') },
 		{ route: '/plugins', path: path.join(__dirname, '../../build/public/plugins') },

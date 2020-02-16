@@ -40,7 +40,6 @@ module.exports = {
 		new CleanWebpackPlugin(), // cleans dist folder
 		new MiniCssExtractPlugin(), // extract css to separate file
 	],
-	devtool: 'inline-source-map',
 	entry: {
 		app: './public/src/app.js',
 	},
@@ -51,6 +50,7 @@ module.exports = {
 			admin: path.resolve(__dirname, 'public/src/admin'),
 			vendor: path.resolve(__dirname, 'public/vendor'),
 			plugins: path.resolve(__dirname, 'public/plugins'),
+			composer: path.resolve(__dirname, 'node_modules/nodebb-plugin-composer-default/static/lib/composer'),
 			benchpress: path.resolve(__dirname, 'node_modules/benchpressjs'),
 		},
 	},
@@ -61,8 +61,7 @@ module.exports = {
 	},
 	target: 'node', // in order to ignore built-in modules like path, fs, etc.
 	externals: [nodeExternals({
-		// this WILL include `jquery` and `webpack/hot/dev-server` in the bundle, as well as `lodash/*`
-		whitelist: ['benchpress', 'benchpressjs'],
+		whitelist: ['jquery', 'bootstrap', 'popper.js', 'benchpress', 'benchpressjs'],
 	})], // in order to ignore all modules in node_modules folder
 	module: {
 		rules: [

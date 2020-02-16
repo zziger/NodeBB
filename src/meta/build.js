@@ -34,10 +34,12 @@ var targetHandlers = {
 		meta.js.buildModules(parallel, callback);
 	},
 	'client js bundle': function (parallel, callback) {
-		meta.js.buildBundle('client', parallel, callback);
+		return callback();
+		// meta.js.buildBundle('client', parallel, callback);
 	},
 	'admin js bundle': function (parallel, callback) {
-		meta.js.buildBundle('admin', parallel, callback);
+		return callback();
+		// meta.js.buildBundle('admin', parallel, callback);
 	},
 	javascript: [
 		'plugin static dirs',
@@ -46,10 +48,12 @@ var targetHandlers = {
 		'admin js bundle',
 	],
 	'client side styles': function (parallel, callback) {
-		meta.css.buildBundle('client', parallel, callback);
+		return callback();
+		// meta.css.buildBundle('client', parallel, callback);
 	},
 	'admin control panel styles': function (parallel, callback) {
-		meta.css.buildBundle('admin', parallel, callback);
+		return callback();
+		// meta.css.buildBundle('admin', parallel, callback);
 	},
 	styles: [
 		'client side styles',
