@@ -18,8 +18,9 @@ app.cacheBuster = null;
 	var registerMessage = params.register;
 	var isTouchDevice = utils.isTouchDevice();
 
-	require(['translator'], function (t) {
-		console.log('t', t);
+	require(['translator', 'benchpress'], function (t, b) {
+		console.log('translator', t);
+		console.log('benchpress', b);
 		t.translate('[[global:votes]]', function (a) {
 			console.log('translator', a);
 		});
