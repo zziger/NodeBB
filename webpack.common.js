@@ -33,7 +33,7 @@ const path = require('path');
 
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const nodeExternals = require('webpack-node-externals');
+// const nodeExternals = require('webpack-node-externals');
 
 module.exports = {
 	plugins: [
@@ -59,10 +59,11 @@ module.exports = {
 		chunkFilename: '[name].bundle.js',
 		path: path.resolve(__dirname, 'dist'),
 	},
-	target: 'node', // in order to ignore built-in modules like path, fs, etc.
-	externals: [nodeExternals({
-		whitelist: ['jquery', 'bootstrap', 'popper.js', 'benchpress', 'benchpressjs'],
-	})], // in order to ignore all modules in node_modules folder
+	node: { fs: 'empty' },
+	// target: 'node', // in order to ignore built-in modules like path, fs, etc.
+	// externals: [nodeExternals({
+	// 	whitelist: ['jquery', 'bootstrap', 'popper.js', 'benchpress', 'benchpressjs'],
+	// })], // in order to ignore all modules in node_modules folder
 	module: {
 		rules: [
 			// {
