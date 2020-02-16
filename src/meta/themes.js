@@ -16,7 +16,7 @@ const file = require('../file');
 const db = require('../database');
 const Meta = require('../meta');
 const events = require('../events');
-const utils = require('../../public/src/utils');
+const utils = require('../utils');
 
 const Themes = module.exports;
 

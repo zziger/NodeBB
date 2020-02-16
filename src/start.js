@@ -59,7 +59,7 @@ start.start = async function () {
 			winston.error('    ./nodebb upgrade');
 			break;
 		default:
-			winston.error(err);
+			winston.error(err.stack);
 			break;
 		}
 

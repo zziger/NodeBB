@@ -2,7 +2,7 @@
 
 require('bootstrap');
 
-require('./utils');
+window.utils = require('./utils')(require('xregexp'));
 
 app = window.app || {};
 
@@ -16,6 +16,15 @@ app.cacheBuster = null;
 	var showWelcomeMessage = !!params.loggedin;
 	var registerMessage = params.register;
 	var isTouchDevice = utils.isTouchDevice();
+
+	// var t = require('translator');
+	// console.log('asd', t);
+	// require(['translator'], function (t) {
+	// 	console.log('t', t);
+	// 	t.translate('[[global:votes]]', function (a) {
+	// 		console.log('translator', a);
+	// 	});
+	// });
 
 	require(['benchpress'], function (Benchpress) {
 		Benchpress.setGlobal('config', config);
@@ -35,9 +44,9 @@ app.cacheBuster = null;
 
 	app.cacheBuster = config['cache-buster'];
 
-	bootbox.setDefaults({
-		locale: config.userLang,
-	});
+	// bootbox.setDefaults({
+	// 	locale: config.userLang,
+	// });
 
 	app.load = function () {
 		app.loadProgressiveStylesheet();

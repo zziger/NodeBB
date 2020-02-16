@@ -58,6 +58,7 @@ module.exports = {
 		filename: '[name].bundle.js',
 		chunkFilename: '[name].bundle.js',
 		path: path.resolve(__dirname, 'dist'),
+		publicPath: '/dist/',
 	},
 	node: { fs: 'empty' },
 	// target: 'node', // in order to ignore built-in modules like path, fs, etc.

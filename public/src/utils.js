@@ -1,26 +1,7 @@
 'use strict';
 
-(function (factory) {
-	if (typeof module === 'object' && module.exports) {
-		var winston = require('winston');
-
-		module.exports = factory(require('xregexp'), winston);
-
-		process.profile = function (operation, start) {
-			console.log('%s took %d milliseconds', operation, process.elapsedTimeSince(start));
-		};
-
-		process.elapsedTimeSince = function (start) {
-			var diff = process.hrtime(start);
-			return (diff[0] * 1e3) + (diff[1] / 1e6);
-		};
-	} else {
-		window.utils = factory(window.XRegExp, console);
-	}
-	// eslint-disable-next-line
-}(function (XRegExp, console) {
+module.exports = function (XRegExp) {
 	var freeze = Object.freeze || function (obj) { return obj; };
-
 	// add default escape function for escaping HTML entities
 	var escapeCharMap = freeze({
 		'&': '&amp;',
@@ -810,4 +791,4 @@
 	}
 
 	return utils;
-}));
+};

@@ -1,43 +1,6 @@
 'use strict';
 
-(function (factory) {
-	function loadClient(language, namespace) {
-		return Promise.resolve(jQuery.getJSON(config.relative_path + '/assets/language/' + language + '/' + namespace + '.json?' + config['cache-buster']));
-	}
-	var warn = function () { console.warn.apply(console, arguments); };
-	if (typeof define === 'function' && define.amd) {
-		// AMD. Register as a named module
-		define('translator', [], function () {
-			return factory(utils, loadClient, warn);
-		});
-	} else if (typeof module === 'object' && module.exports) {
-		// Node
-		(function () {
-			var languages = require('../../../src/languages');
-
-			if (global.env === 'development') {
-				var winston = require('winston');
-				warn = function (a) {
-					winston.warn(a);
-				};
-			}
-
-			function loadServer(language, namespace) {
-				return new Promise(function (resolve, reject) {
-					languages.get(language, namespace, function (err, data) {
-						if (err) {
-							reject(err);
-						} else {
-							resolve(data);
-						}
-					});
-				});
-			}
-
-			module.exports = factory(require('../utils'), loadServer, warn);
-		}());
-	}
-}(function (utils, load, warn) {
+module.exports = function (utils, load, warn) {
 	var assign = Object.assign || jQuery.extend;
 
 	function escapeHTML(str) {
@@ -630,4 +593,46 @@
 	};
 
 	return adaptor;
-}));
+};
+
+
+// (function (factory) {
+// 	function loadClient(language, namespace) {
+// 		return Promise.resolve(jQuery.getJSON(config.relative_path + '/assets/language/' + language + '/' + namespace + '.json?' + config['cache-buster']));
+// 	}
+// 	var warn = function () { console.warn.apply(console, arguments); };
+// 	if (typeof define === 'function' && define.amd) {
+// 		// AMD. Register as a named module
+// 		define('translator', [], function () {
+// 			return factory(utils, loadClient, warn);
+// 		});
+// 	} else if (typeof module === 'object' && module.exports) {
+// 		// Node
+// 		(function () {
+// 			var languages = require('../../../src/languages');
+
+// 			if (global.env === 'development') {
+// 				var winston = require('winston');
+// 				warn = function (a) {
+// 					winston.warn(a);
+// 				};
+// 			}
+
+// 			function loadServer(language, namespace) {
+// 				return new Promise(function (resolve, reject) {
+// 					languages.get(language, namespace, function (err, data) {
+// 						if (err) {
+// 							reject(err);
+// 						} else {
+// 							resolve(data);
+// 						}
+// 					});
+// 				});
+// 			}
+
+// 			module.exports = factory(require('../utils'), loadServer, warn);
+// 		}());
+// 	}
+// }(function (utils, load, warn) {
+//
+// }));
