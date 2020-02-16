@@ -5,7 +5,7 @@
 		// var relative_path = require('nconf').get('relative_path');
 		// module.exports = factory(require('../utils'), require('benchpressjs'), relative_path);
 	} else if (typeof define === 'function' && define.amd) {
-		define('helpers', ['benchpressjs'], function (Benchpress) {
+		define('helpers', ['benchpress'], function (Benchpress) {
 			return factory(utils, Benchpress, config.relative_path);
 		});
 	}

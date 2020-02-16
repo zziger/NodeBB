@@ -47,11 +47,11 @@ module.exports = {
 	resolve: {
 		modules: ['public/src/modules', 'public/src/client', 'node_modules'],
 		alias: {
-			forum: './public/src/client',
-			// admin: '../admin',
-			// vendor: '../../vendor',
-			// plugins: '../../plugins',
-			benchpress: 'node_modules/benchpressjs/build',
+			forum: path.resolve(__dirname, 'public/src/client'),
+			admin: path.resolve(__dirname, 'public/src/admin'),
+			vendor: path.resolve(__dirname, 'public/vendor'),
+			plugins: path.resolve(__dirname, 'public/plugins'),
+			benchpress: path.resolve(__dirname, 'node_modules/benchpressjs'),
 		},
 	},
 	output: {
