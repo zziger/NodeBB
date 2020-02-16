@@ -1,8 +1,9 @@
 'use strict';
 
 require('bootstrap');
+require('../scss/app.scss');
 
-window.utils = require('./utils')(require('xregexp'));
+window.utils = require('./utils');
 
 app = window.app || {};
 
@@ -17,14 +18,12 @@ app.cacheBuster = null;
 	var registerMessage = params.register;
 	var isTouchDevice = utils.isTouchDevice();
 
-	// var t = require('translator');
-	// console.log('asd', t);
-	// require(['translator'], function (t) {
-	// 	console.log('t', t);
-	// 	t.translate('[[global:votes]]', function (a) {
-	// 		console.log('translator', a);
-	// 	});
-	// });
+	require(['translator'], function (t) {
+		console.log('t', t);
+		t.translate('[[global:votes]]', function (a) {
+			console.log('translator', a);
+		});
+	});
 
 	require(['benchpress'], function (Benchpress) {
 		Benchpress.setGlobal('config', config);

@@ -44,7 +44,7 @@ module.exports = {
 		app: './public/src/app.js',
 	},
 	resolve: {
-		modules: ['public/src/modules', 'public/src/client', 'node_modules'],
+		modules: ['public/src', 'public/src/modules', 'public/src/client', 'node_modules'],
 		alias: {
 			forum: path.resolve(__dirname, 'public/src/client'),
 			admin: path.resolve(__dirname, 'public/src/admin'),
