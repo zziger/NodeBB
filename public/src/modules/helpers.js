@@ -2,7 +2,9 @@
 
 (function (factory) {
 	if (typeof module === 'object' && module.exports) {
-		var relative_path = require('nconf').get('relative_path');
+		// TODO: this causes error in webpack
+		// var relative_path = require('nconf').get('relative_path');
+		var relative_path = '';
 		module.exports = factory(require('../utils'), require('benchpressjs'), relative_path);
 	} else if (typeof define === 'function' && define.amd) {
 		define('helpers', ['benchpress'], function (Benchpress) {

@@ -2,6 +2,8 @@
 
 require('bootstrap');
 
+require('./utils');
+
 app = window.app || {};
 
 app.isFocused = true;
