@@ -1,7 +1,7 @@
 'use strict';
 
 
-define('taskbar', ['benchpress', 'translator'], function (Benchpress, translator) {
+define('taskbar', ['benchpressjs', 'translator'], function (Benchpress, translator) {
 	var taskbar = {};
 
 	taskbar.init = function () {

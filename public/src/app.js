@@ -14,7 +14,7 @@ app.cacheBuster = null;
 	var registerMessage = params.register;
 	var isTouchDevice = utils.isTouchDevice();
 
-	require(['benchpress'], function (Benchpress) {
+	require(['benchpressjs'], function (Benchpress) {
 		Benchpress.setGlobal('config', config);
 		if (Object.defineProperty) {
 			Object.defineProperty(window, 'templates', {
@@ -112,8 +112,9 @@ app.cacheBuster = null;
 		 *   config (obj)
 		 *   next (string)
 		 */
+
 		require([
-			'benchpress',
+			'benchpressjs',
 			'translator',
 			'forum/unread',
 			'forum/header/notifications',
@@ -770,7 +771,7 @@ app.cacheBuster = null;
 	};
 
 	app.parseAndTranslate = function (template, blockName, data, callback) {
-		require(['translator', 'benchpress'], function (translator, Benchpress) {
+		require(['translator', 'benchpressjs'], function (translator, Benchpress) {
 			function translate(html, callback) {
 				translator.translate(html, function (translatedHTML) {
 					translatedHTML = translator.unescape(translatedHTML);

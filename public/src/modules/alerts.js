@@ -1,7 +1,7 @@
 'use strict';
 
 
-define('alerts', ['translator', 'components', 'benchpress'], function (translator, components, Benchpress) {
+define('alerts', ['translator', 'components', 'benchpressjs'], function (translator, components, Benchpress) {
 	var module = {};
 
 	module.alert = function (params) {
