@@ -46,6 +46,7 @@ module.exports = {
 	resolve: {
 		modules: ['public/src', 'public/src/modules', 'public/src/client', 'node_modules'],
 		alias: {
+			assets: path.resolve(__dirname, 'build/public'),
 			forum: path.resolve(__dirname, 'public/src/client'),
 			admin: path.resolve(__dirname, 'public/src/admin'),
 			vendor: path.resolve(__dirname, 'public/vendor'),

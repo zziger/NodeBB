@@ -1,4 +1,3 @@
-'use strict';
 
 var XRegExp = require('xregexp');
 
@@ -479,10 +478,11 @@ var utils = {
 		return !utils.isAbsoluteUrl(url);
 	},
 
-	makeNumbersHumanReadable: function (elements) {
-		elements.each(function () {
-			$(this).html(utils.makeNumberHumanReadable($(this).attr('title')));
-		});
+	makeNumbersHumanReadable: function (/* elements */) {
+		console.warn('TODO: makeNumbersHumanReadable');
+		// elements.each(function () {
+		// 	$(this).html(utils.makeNumberHumanReadable($(this).attr('title')));
+		// });
 	},
 
 	makeNumberHumanReadable: function (num) {
@@ -498,10 +498,11 @@ var utils = {
 		return n;
 	},
 
-	addCommasToNumbers: function (elements) {
-		elements.each(function (index, element) {
-			$(element).html(utils.addCommas($(element).html()));
-		});
+	addCommasToNumbers: function (/* elements */) {
+		console.warn('TODO: addCommasToNumbers');
+		// elements.each(function (index, element) {
+		// 	$(element).html(utils.addCommas($(element).html()));
+		// });
 	},
 
 	// takes a string like 1000 and returns 1,000
@@ -570,21 +571,23 @@ var utils = {
 	},
 
 	findBootstrapEnvironment: function () {
+		console.warn('TODO: findBootstrapEnvironment');
+		return 'lg';
 		// http://stackoverflow.com/questions/14441456/how-to-detect-which-device-view-youre-on-using-twitter-bootstrap-api
-		var envs = ['xs', 'sm', 'md', 'lg'];
-		var $el = $('<div>');
+		// var envs = ['xs', 'sm', 'md', 'lg'];
+		// var $el = $('<div>');
 
-		$el.appendTo($('body'));
+		// $el.appendTo($('body'));
 
-		for (var i = envs.length - 1; i >= 0; i -= 1) {
-			var env = envs[i];
+		// for (var i = envs.length - 1; i >= 0; i -= 1) {
+		// 	var env = envs[i];
 
-			$el.addClass('hidden-' + env);
-			if ($el.is(':hidden')) {
-				$el.remove();
-				return env;
-			}
-		}
+		// 	$el.addClass('hidden-' + env);
+		// 	if ($el.is(':hidden')) {
+		// 		$el.remove();
+		// 		return env;
+		// 	}
+		// }
 	},
 
 	isMobile: function () {
@@ -632,8 +635,8 @@ var utils = {
 		return (
 			rect.top >= 0 &&
 			rect.left >= 0 &&
-			rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) && /* or $(window).height() */
-			rect.right <= (window.innerWidth || document.documentElement.clientWidth) /* or $(window).width() */
+			rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+			rect.right <= (window.innerWidth || document.documentElement.clientWidth)
 		);
 	},
 

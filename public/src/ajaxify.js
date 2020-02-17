@@ -1,9 +1,14 @@
-'use strict';
 
+import $ from 'jquery';
+import render from './widgets';
 
-ajaxify = window.ajaxify || {};
+window.ajaxify = window.ajaxify || {};
+ajaxify.widgets = { render: render };
 
 $(document).ready(function () {
+	ajaxify.count = 0;
+	ajaxify.currentPage = null;
+
 	var location = document.location || window.location;
 	var rootUrl = location.protocol + '//' + (location.hostname || location.host) + (location.port ? ':' + location.port : '');
 	var apiXHR = null;
@@ -37,9 +42,6 @@ $(document).ready(function () {
 			}
 		}
 	});
-
-	ajaxify.count = 0;
-	ajaxify.currentPage = null;
 
 	ajaxify.go = function (url, callback, quiet) {
 		if (!socket.connected) {
@@ -235,7 +237,7 @@ $(document).ready(function () {
 
 	ajaxify.loadScript = function (tpl_url, callback) {
 		var location = !app.inAdmin ? 'forum/' : '';
-
+		console.log('tpl', tpl_url, 'location', location);
 		if (tpl_url.startsWith('admin')) {
 			location = '';
 		}
@@ -245,39 +247,39 @@ $(document).ready(function () {
 		};
 
 		$(window).trigger('action:script.load', data);
+		callback();
+		// // Require and parse modules
+		// var outstanding = data.scripts.length;
 
-		// Require and parse modules
-		var outstanding = data.scripts.length;
-
-		data.scripts.map(function (script) {
-			if (typeof script === 'function') {
-				return function (next) {
-					script();
-					next();
-				};
-			}
-			if (typeof script === 'string') {
-				return function (next) {
-					require([script], function (script) {
-						if (script && script.init) {
-							script.init();
-						}
-						next();
-					}, function () {
-						// ignore 404 error
-						next();
-					});
-				};
-			}
-			return null;
-		}).filter(Boolean).forEach(function (fn) {
-			fn(function () {
-				outstanding -= 1;
-				if (outstanding === 0) {
-					callback();
-				}
-			});
-		});
+		// data.scripts.map(function (script) {
+		// 	if (typeof script === 'function') {
+		// 		return function (next) {
+		// 			script();
+		// 			next();
+		// 		};
+		// 	}
+		// 	if (typeof script === 'string') {
+		// 		return function (next) {
+		// 			require([script], function (script) {
+		// 				if (script && script.init) {
+		// 					script.init();
+		// 				}
+		// 				next();
+		// 			}, function () {
+		// 				// ignore 404 error
+		// 				next();
+		// 			});
+		// 		};
+		// 	}
+		// 	return null;
+		// }).filter(Boolean).forEach(function (fn) {
+		// 	fn(function () {
+		// 		outstanding -= 1;
+		// 		if (outstanding === 0) {
+		// 			callback();
+		// 		}
+		// 	});
+		// });
 	};
 
 	ajaxify.loadData = function (url, callback) {
@@ -327,11 +329,14 @@ $(document).ready(function () {
 		});
 	};
 
-	ajaxify.loadTemplate = function (template, callback) {
-		require([config.relative_path + '/assets/templates/' + template + '.js'], callback, function (err) {
+	ajaxify.loadTemplate = async function derp(template, callback) {
+		try {
+			const tplFunction = await import(/* webpackChunkName: "[request]" */ 'assets/templates/' + template + '.js');
+			return callback(tplFunction.default);
+		} catch (err) {
 			console.error('Unable to load template: ' + template);
 			throw err;
-		});
+		}
 	};
 
 	function ajaxifyAnchors() {

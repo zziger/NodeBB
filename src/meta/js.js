@@ -24,29 +24,29 @@ var JS = module.exports;
 JS.scripts = {
 	base: [
 		'node_modules/promise-polyfill/dist/polyfill.js',
-		'node_modules/jquery/dist/jquery.js',
-		'node_modules/socket.io-client/dist/socket.io.js',
+		'node_modules/jquery/dist/jquery.js', // done
+		'node_modules/socket.io-client/dist/socket.io.js', // done
 		'node_modules/textcomplete/dist/textcomplete.min.js',
 		'node_modules/textcomplete.contenteditable/dist/textcomplete.codemirror.min.js',
 		'public/vendor/jquery/timeago/jquery.timeago.js',
 		'public/vendor/jquery/js/jquery.form.min.js',
 		'public/vendor/visibility/visibility.min.js',
-		'node_modules/bootstrap/dist/js/bootstrap.js',
+		'node_modules/bootstrap/dist/js/bootstrap.js', // done
 		'public/vendor/jquery/bootstrap-tagsinput/bootstrap-tagsinput.min.js',
 		'public/vendor/requirejs/require.js',
 		'public/src/require-config.js',
 		'public/vendor/bootbox/bootbox.js',
 		'public/vendor/bootbox/wrapper.js',
 		'public/vendor/tinycon/tinycon.js',
-		'public/vendor/xregexp/xregexp.js',
+		'public/vendor/xregexp/xregexp.js', // done
 		'public/vendor/xregexp/unicode/unicode-base.js',
-		'node_modules/benchpressjs/build/benchpress.js',
-		'public/src/utils.js',
-		'public/src/sockets.js',
-		'public/src/app.js',
-		'public/src/ajaxify.js',
-		'public/src/overrides.js',
-		'public/src/widgets.js',
+		'node_modules/benchpressjs/build/benchpress.js', // done
+		'public/src/utils.js', // done
+		'public/src/sockets.js', // done
+		'public/src/app.js', // done
+		'public/src/ajaxify.js', // done
+		'public/src/overrides.js', // done
+		'public/src/widgets.js', // done
 	],
 
 	// files listed below are only available client-side, or are bundled in to reduce # of network requests on cold load

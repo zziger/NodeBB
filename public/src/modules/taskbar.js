@@ -1,5 +1,5 @@
 
-define('taskbar', ['benchpress', 'translator'], function (Benchpress, translator) {
+define('taskbar', ['benchpress', 'translator', 'jquery'], function (Benchpress, translator, $) {
 	var taskbar = {};
 
 	taskbar.init = function () {

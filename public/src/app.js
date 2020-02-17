@@ -1,9 +1,14 @@
-require('bootstrap');
+import 'bootstrap';
+import $ from 'jquery';
+import Visibility from 'visibilityjs';
+
 require('../scss/app.scss');
 
-require('./sockets');
-
 window.utils = require('./utils');
+
+require('./sockets');
+require('./overrides');
+require('./ajaxify');
 
 app = window.app || {};
 
@@ -326,17 +331,18 @@ app.cacheBuster = null;
 			.addClass('active');
 	}
 
-	app.createUserTooltips = function (els, placement) {
-		if (isTouchDevice) {
-			return;
-		}
-		els = els || $('body');
-		els.find('.avatar,img[title].teaser-pic,img[title].user-img,div.user-icon,span.user-icon').each(function () {
-			$(this).tooltip({
-				placement: placement || $(this).attr('title-placement') || 'top',
-				title: $(this).attr('title'),
-			});
-		});
+	app.createUserTooltips = function (/* els, placement */) {
+		console.warn('TODO: app.createUserTooltips');
+		// if (isTouchDevice) {
+		// 	return;
+		// }
+		// els = els || $('body');
+		// els.find('.avatar,img[title].teaser-pic,img[title].user-img,div.user-icon,span.user-icon').each(function () {
+		// 	$(this).tooltip({
+		// 		placement: placement || $(this).attr('title-placement') || 'top',
+		// 		title: $(this).attr('title'),
+		// 	});
+		// });
 	};
 
 	app.createStatusTooltips = function () {
@@ -351,7 +357,8 @@ app.cacheBuster = null;
 	app.processPage = function () {
 		highlightNavigationLink();
 
-		$('.timeago').timeago();
+		console.warn('TODO: app.processPage timeago not added yet');
+		// $('.timeago').timeago();
 
 		utils.makeNumbersHumanReadable($('.human-readable-number'));
 
