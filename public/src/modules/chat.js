@@ -1,5 +1,3 @@
-'use strict';
-
 define('chat', [
 	'components',
 	'taskbar',

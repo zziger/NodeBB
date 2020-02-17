@@ -1,5 +1,3 @@
-'use strict';
-
 define('forum/header/chat', ['components'], function (components) {
 	var chat = {};
 

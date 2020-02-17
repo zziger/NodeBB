@@ -18,7 +18,7 @@
 		"jquery": true,
 		"amd": true,
 		"browser": true,
-		"es6": false
+		"es6": true
 	},
 	"rules": {
 		"no-dupe-class-members": "off",
@@ -30,7 +30,8 @@
 		"prefer-template": "off"
 	},
 	"parserOptions": {
-		"ecmaVersion": 5,
+		"ecmaVersion": 6,
+		"sourceType": "module",
 		"ecmaFeatures": {
 			"arrowFunctions": false,
 			"classes": false,
@@ -42,7 +43,7 @@
 			"generators": false,
 			"globalReturn": false,
 			"jsx": false,
-			"modules": false,
+			"modules": true,
 			"objectLiteralComputedProperties": false,
 			"objectLiteralDuplicateProperties": false,
 			"objectLiteralShorthandMethods": false,

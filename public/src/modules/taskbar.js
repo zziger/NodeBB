@@ -1,5 +1,3 @@
-'use strict';
-
 
 define('taskbar', ['benchpress', 'translator'], function (Benchpress, translator) {
 	var taskbar = {};

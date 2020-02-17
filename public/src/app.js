@@ -1,7 +1,7 @@
-'use strict';
-
 require('bootstrap');
 require('../scss/app.scss');
+
+require('./sockets');
 
 window.utils = require('./utils');
 
