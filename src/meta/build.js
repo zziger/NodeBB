@@ -34,12 +34,10 @@ var targetHandlers = {
 		meta.js.buildModules(parallel, callback);
 	},
 	'client js bundle': function (parallel, callback) {
-		return callback();
-		// meta.js.buildBundle('client', parallel, callback);
+		meta.js.buildBundle('client', parallel, callback);
 	},
 	'admin js bundle': function (parallel, callback) {
-		return callback();
-		// meta.js.buildBundle('admin', parallel, callback);
+		meta.js.buildBundle('admin', parallel, callback);
 	},
 	javascript: [
 		'plugin static dirs',

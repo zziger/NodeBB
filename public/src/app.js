@@ -1,14 +1,15 @@
-import 'bootstrap';
-import $ from 'jquery';
-import Visibility from 'visibilityjs';
-
+require('bootstrap');
 require('../scss/app.scss');
 
+window.$ = require('jquery');
+window.jQuery = window.$;
+const Visibility = require('visibilityjs');
 window.utils = require('./utils');
-
 require('./sockets');
 require('./overrides');
 require('./ajaxify');
+
+require('./clientScripts');
 
 app = window.app || {};
 

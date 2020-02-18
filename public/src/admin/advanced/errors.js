@@ -1,7 +1,5 @@
-'use strict';
 
-
-define('admin/advanced/errors', ['Chart'], function (Chart) {
+define('admin/advanced/errors', ['chart.js'], function (Chart) {
 	var Errors = {};
 
 	Errors.init = function () {

@@ -1,7 +1,5 @@
-'use strict';
 
-
-define('admin/manage/ip-blacklist', ['Chart', 'benchpress'], function (Chart, Benchpress) {
+define('admin/manage/ip-blacklist', ['chart.js', 'benchpress'], function (Chart, Benchpress) {
 	var Blacklist = {};
 
 	Blacklist.init = function () {

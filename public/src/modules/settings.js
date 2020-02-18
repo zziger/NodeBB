@@ -1,17 +1,5 @@
-'use strict';
-
 
 define('settings', function () {
-	var DEFAULT_PLUGINS = [
-		'settings/checkbox',
-		'settings/number',
-		'settings/textarea',
-		'settings/select',
-		'settings/array',
-		'settings/key',
-		'settings/object',
-	];
-
 	var Settings;
 	var onReady = [];
 	var waitingJobs = 0;
@@ -538,7 +526,15 @@ define('settings', function () {
 
 
 	helper.registerReadyJobs(1);
-	require(DEFAULT_PLUGINS, function () {
+	require([
+		'settings/checkbox',
+		'settings/number',
+		'settings/textarea',
+		'settings/select',
+		'settings/array',
+		'settings/key',
+		'settings/object',
+	], function () {
 		for (var i = 0; i < arguments.length; i += 1) {
 			Settings.registerPlugin(arguments[i]);
 		}

@@ -29,8 +29,8 @@ JS.scripts = {
 		'node_modules/textcomplete/dist/textcomplete.min.js',
 		'node_modules/textcomplete.contenteditable/dist/textcomplete.codemirror.min.js',
 		'public/vendor/jquery/timeago/jquery.timeago.js',
-		'public/vendor/jquery/js/jquery.form.min.js',
-		'public/vendor/visibility/visibility.min.js',
+		'public/vendor/jquery/js/jquery.form.min.js', // done
+		'public/vendor/visibility/visibility.min.js', // done
 		'node_modules/bootstrap/dist/js/bootstrap.js', // done
 		'public/vendor/jquery/bootstrap-tagsinput/bootstrap-tagsinput.min.js',
 		'public/vendor/requirejs/require.js',
@@ -99,13 +99,13 @@ JS.scripts = {
 
 	// modules listed below are built (/src/modules) so they can be defined anonymously
 	modules: {
-		'Chart.js': 'node_modules/chart.js/dist/Chart.min.js',
-		'mousetrap.js': 'node_modules/mousetrap/mousetrap.min.js',
-		'cropper.js': 'node_modules/cropperjs/dist/cropper.min.js',
-		'jqueryui.js': 'public/vendor/jquery/js/jquery-ui.js',
-		'zxcvbn.js': 'node_modules/zxcvbn/dist/zxcvbn.js',
-		ace: 'node_modules/ace-builds/src-min',
-		'clipboard.js': 'node_modules/clipboard/dist/clipboard.min.js',
+		// 'Chart.js': 'node_modules/chart.js/dist/Chart.min.js',
+		// 'mousetrap.js': 'node_modules/mousetrap/mousetrap.min.js',
+		// 'cropper.js': 'node_modules/cropperjs/dist/cropper.min.js',
+		// 'jqueryui.js': 'public/vendor/jquery/js/jquery-ui.js',
+		// 'zxcvbn.js': 'node_modules/zxcvbn/dist/zxcvbn.js',
+		// ace: 'node_modules/ace-builds/src-min',
+		// 'clipboard.js': 'node_modules/clipboard/dist/clipboard.min.js',
 	},
 };
 
@@ -260,7 +260,7 @@ JS.buildModules = function (fork, callback) {
 	async.waterfall([
 		clearModules,
 		function (next) {
-			if (global.env === 'development') {
+			if (true || global.env === 'development') {
 				return linkModules(callback);
 			}
 
@@ -321,15 +321,7 @@ function getBundleScriptList(target, callback) {
 			return callback(err);
 		}
 
-		var scripts = JS.scripts.base;
-
-		if (target === 'client' && global.env !== 'development') {
-			scripts = scripts.concat(JS.scripts.rjs);
-		} else if (target === 'acp') {
-			scripts = scripts.concat(JS.scripts.admin);
-		}
-
-		scripts = scripts.concat(pluginScripts).map(function (script) {
+		pluginScripts = pluginScripts.map(function (script) {
 			var srcPath = path.resolve(basePath, script).replace(/\\/g, '/');
 			return {
 				srcPath: srcPath,
@@ -337,14 +329,14 @@ function getBundleScriptList(target, callback) {
 			};
 		});
 
-		callback(null, scripts);
+		callback(null, pluginScripts);
 	});
 }
 
 JS.buildBundle = function (target, fork, callback) {
 	var fileNames = {
-		client: 'nodebb.min.js',
-		admin: 'acp.min.js',
+		client: 'clientScripts.min.js',
+		admin: 'acpScripts.min.js',
 	};
 
 	async.waterfall([

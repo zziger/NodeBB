@@ -1,6 +1,5 @@
-'use strict';
 
-define('forum/flags/list', ['components', 'Chart'], function (components, Chart) {
+define('forum/flags/list', ['components', 'chart.js'], function (components, Chart) {
 	var Flags = {};
 
 	Flags.init = function () {

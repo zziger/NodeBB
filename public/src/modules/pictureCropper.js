@@ -1,6 +1,5 @@
-'use strict';
 
-define('pictureCropper', ['cropper'], function (Cropper) {
+define('pictureCropper', ['cropperjs'], function (Cropper) {
 	var module = {};
 
 	module.show = function (data, callback) {

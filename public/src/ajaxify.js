@@ -235,19 +235,34 @@ $(document).ready(function () {
 		ajaxify.go(ajaxify.currentPage + window.location.search + window.location.hash, callback, true);
 	};
 
-	ajaxify.loadScript = function (tpl_url, callback) {
-		var location = !app.inAdmin ? 'forum/' : '';
-		console.log('tpl', tpl_url, 'location', location);
-		if (tpl_url.startsWith('admin')) {
-			location = '';
+	ajaxify.loadScript = async function (tpl_url, callback) {
+		var pageScript;
+		try {
+			if (app.inAdmin) {
+				pageScript = await import(/* webpackChunkName: "admin/[request]" */ 'admin/' + tpl_url.replace(/^admin/, ''));
+			} else {
+				pageScript = await import(/* webpackChunkName: "forum/[request]" */ 'forum/' + tpl_url);
+			}
+		} catch (err) {
+			console.warn('error loading script' + err.message);
 		}
-		var data = {
-			tpl_url: tpl_url,
-			scripts: [location + tpl_url],
-		};
 
-		$(window).trigger('action:script.load', data);
+		if (pageScript && pageScript.init) {
+			pageScript.init();
+		}
 		callback();
+		// var location = !app.inAdmin ? 'forum/' : '';
+		// console.log('tpl', tpl_url, 'location', location);
+		// if (tpl_url.startsWith('admin')) {
+		// 	location = '';
+		// }
+		// var data = {
+		// 	tpl_url: tpl_url,
+		// 	scripts: [location + tpl_url],
+		// };
+
+		// $(window).trigger('action:script.load', data);
+
 		// // Require and parse modules
 		// var outstanding = data.scripts.length;
 
@@ -331,7 +346,7 @@ $(document).ready(function () {
 
 	ajaxify.loadTemplate = async function derp(template, callback) {
 		try {
-			const tplFunction = await import(/* webpackChunkName: "[request]" */ 'assets/templates/' + template + '.js');
+			const tplFunction = await import(/* webpackChunkName: "tpl/[request]" */ 'assets/templates/' + template + '.js');
 			return callback(tplFunction.default);
 		} catch (err) {
 			console.error('Unable to load template: ' + template);

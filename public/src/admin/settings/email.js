@@ -1,9 +1,7 @@
-'use strict';
 
-
-define('admin/settings/email', ['ace/ace', 'admin/settings'], function (ace) {
+define('admin/settings/email', ['admin/settings'], function () {
 	var module = {};
-	var emailEditor;
+	// var emailEditor;
 
 	module.init = function () {
 		configureEmailTester();
@@ -31,47 +29,48 @@ define('admin/settings/email', ['ace/ace', 'admin/settings'], function (ace) {
 	}
 
 	function configureEmailEditor() {
-		$('#email-editor-selector').on('change', updateEmailEditor);
+		console.warn('TODO: configureEmailEditor ace disabled');
+		// $('#email-editor-selector').on('change', updateEmailEditor);
 
-		emailEditor = ace.edit('email-editor');
-		emailEditor.$blockScrolling = Infinity;
-		emailEditor.setTheme('ace/theme/twilight');
-		emailEditor.getSession().setMode('ace/mode/html');
+		// emailEditor = ace.edit('email-editor');
+		// emailEditor.$blockScrolling = Infinity;
+		// emailEditor.setTheme('ace/theme/twilight');
+		// emailEditor.getSession().setMode('ace/mode/html');
 
-		emailEditor.on('change', function () {
-			var emailPath = $('#email-editor-selector').val();
-			var original;
-			ajaxify.data.emails.forEach(function (email) {
-				if (email.path === emailPath) {
-					original = email.original;
-				}
-			});
-			var newEmail = emailEditor.getValue();
-			$('#email-editor-holder').val(newEmail !== original ? newEmail : '');
-		});
+		// emailEditor.on('change', function () {
+		// 	var emailPath = $('#email-editor-selector').val();
+		// 	var original;
+		// 	ajaxify.data.emails.forEach(function (email) {
+		// 		if (email.path === emailPath) {
+		// 			original = email.original;
+		// 		}
+		// 	});
+		// 	var newEmail = emailEditor.getValue();
+		// 	$('#email-editor-holder').val(newEmail !== original ? newEmail : '');
+		// });
 
-		$('button[data-action="email.revert"]').off('click').on('click', function () {
-			ajaxify.data.emails.forEach(function (email) {
-				if (email.path === $('#email-editor-selector').val()) {
-					emailEditor.getSession().setValue(email.original);
-					$('#email-editor-holder').val('');
-				}
-			});
-		});
+		// $('button[data-action="email.revert"]').off('click').on('click', function () {
+		// 	ajaxify.data.emails.forEach(function (email) {
+		// 		if (email.path === $('#email-editor-selector').val()) {
+		// 			emailEditor.getSession().setValue(email.original);
+		// 			$('#email-editor-holder').val('');
+		// 		}
+		// 	});
+		// });
 
-		updateEmailEditor();
+		// updateEmailEditor();
 	}
 
-	function updateEmailEditor() {
-		ajaxify.data.emails.forEach(function (email) {
-			if (email.path === $('#email-editor-selector').val()) {
-				emailEditor.getSession().setValue(email.text);
-				$('#email-editor-holder')
-					.val(email.text !== email.original ? email.text : '')
-					.attr('data-field', 'email:custom:' + email.path);
-			}
-		});
-	}
+	// function updateEmailEditor() {
+	// 	ajaxify.data.emails.forEach(function (email) {
+	// 		if (email.path === $('#email-editor-selector').val()) {
+	// 			emailEditor.getSession().setValue(email.text);
+	// 			$('#email-editor-holder')
+	// 				.val(email.text !== email.original ? email.text : '')
+	// 				.attr('data-field', 'email:custom:' + email.path);
+	// 		}
+	// 	});
+	// }
 
 	function handleDigestHourChange() {
 		var hour = parseInt($('#digestHour').val(), 10);

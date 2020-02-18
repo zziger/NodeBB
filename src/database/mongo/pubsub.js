@@ -8,3 +8,6 @@ client.on('error', err => console.error(err));
 const channel = client.channel('pubsub');
 channel.on('error', err => console.error(err));
 module.exports = channel;
+module.exports.closeIt = function (callback) {
+	client.close(err => callback(err));
+};
