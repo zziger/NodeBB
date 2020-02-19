@@ -14,7 +14,11 @@
         "lint": "eslint --cache ./nodebb .",
         "pretest": "npm run lint",
         "test": "nyc --reporter=html --reporter=text-summary mocha",
-        "coveralls": "nyc report --reporter=text-lcov | coveralls && rm -r coverage"
+        "coveralls": "nyc report --reporter=text-lcov | coveralls && rm -r coverage",
+        "dev": "webpack --config webpack.dev.js",
+        "build": "webpack --config webpack.prod.js",
+        "watch": "webpack --watch --config webpack.dev.js",
+        "analyze": "webpack --config webpack.dev.js --json > analysis.json"
     },
     "husky": {
         "hooks": {
