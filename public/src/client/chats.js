@@ -1,5 +1,3 @@
-'use strict';
-
 
 define('forum/chats', [
 	'components',
@@ -50,7 +48,6 @@ define('forum/chats', [
 
 	Chats.addEventListeners = function () {
 		Chats.addSendHandlers(ajaxify.data.roomId, $('.chat-input'), $('.expanded-chat button[data-action="send"]'));
-		Chats.addPopoutHandler();
 		Chats.addActionHandlers(components.get('chat/messages'), ajaxify.data.roomId);
 		Chats.addMemberHandler(ajaxify.data.roomId, components.get('chat/controls').find('[data-action="members"]'));
 		Chats.addRenameHandler(ajaxify.data.roomId, components.get('chat/controls').find('[data-action="rename"]'));
@@ -74,26 +71,6 @@ define('forum/chats', [
 					return app.alertError(err);
 				}
 				ipEl.html(ip);
-			});
-		});
-	};
-
-	Chats.addPopoutHandler = function () {
-		$('[data-action="pop-out"]').on('click', function () {
-			var text = components.get('chat/input').val();
-			var roomId = ajaxify.data.roomId;
-
-			if (app.previousUrl && app.previousUrl.match(/chats/)) {
-				ajaxify.go('user/' + ajaxify.data.userslug + '/chats', function () {
-					app.openChat(roomId, ajaxify.data.uid);
-				}, true);
-			} else {
-				window.history.go(-1);
-				app.openChat(roomId, ajaxify.data.uid);
-			}
-
-			$(window).one('action:chat.loaded', function () {
-				components.get('chat/input').val(text);
 			});
 		});
 	};
@@ -273,15 +250,8 @@ define('forum/chats', [
 								app.alertError(err.message);
 							}
 
-							// Return user to chats page. If modal, close modal.
-							var modal = buttonEl.parents('.chat-modal');
-							if (modal.length) {
-								require(['chat'], function (chatLib) {
-									chatLib.close(modal);
-								});
-							} else {
-								ajaxify.go('chats');
-							}
+							// Return user to chats page.
+							ajaxify.go('chats');
 						});
 					}
 				},
@@ -379,26 +349,6 @@ define('forum/chats', [
 		if (data.strategies.length) {
 			autocomplete.setup(data);
 		}
-	};
-
-	Chats.leave = function (el) {
-		var roomId = el.attr('data-roomid');
-		socket.emit('modules.chats.leave', roomId, function (err) {
-			if (err) {
-				return app.alertError(err.message);
-			}
-			if (parseInt(roomId, 10) === parseInt(ajaxify.data.roomId, 10)) {
-				ajaxify.go('user/' + ajaxify.data.userslug + '/chats');
-			} else {
-				el.remove();
-			}
-			require(['chat'], function (chat) {
-				var modal = chat.getModal(roomId);
-				if (modal.length) {
-					chat.close(modal);
-				}
-			});
-		});
 	};
 
 	Chats.switchChat = function (roomid) {

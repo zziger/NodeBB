@@ -104,9 +104,7 @@ app.cacheBuster = null;
 			}
 		});
 
-		require(['taskbar', 'helpers', 'forum/pagination'], function (taskbar, helpers, pagination) {
-			taskbar.init();
-
+		require(['helpers', 'forum/pagination'], function (helpers, pagination) {
 			helpers.register();
 
 			pagination.init();
@@ -419,34 +417,11 @@ app.cacheBuster = null;
 		}
 	};
 
-	app.openChat = function (roomId, uid) {
+	app.openChat = function (roomId) {
 		if (!app.user.uid) {
 			return app.alertError('[[error:not-logged-in]]');
 		}
-
-		require(['chat'], function (chat) {
-			function loadAndCenter(chatModal) {
-				chat.load(chatModal.attr('data-uuid'));
-				chat.center(chatModal);
-				chat.focusInput(chatModal);
-			}
-
-			if (chat.modalExists(roomId)) {
-				loadAndCenter(chat.getModal(roomId));
-			} else {
-				socket.emit('modules.chats.loadRoom', { roomId: roomId, uid: uid || app.user.uid }, function (err, roomData) {
-					if (err) {
-						return app.alertError(err.message);
-					}
-					roomData.users = roomData.users.filter(function (user) {
-						return user && parseInt(user.uid, 10) !== parseInt(app.user.uid, 10);
-					});
-					roomData.uid = uid || app.user.uid;
-					roomData.isSelf = true;
-					chat.createModal(roomData, loadAndCenter);
-				});
-			}
-		});
+		ajaxify.go('chats/' + roomId);
 	};
 
 	app.newChat = function (touid, callback) {
