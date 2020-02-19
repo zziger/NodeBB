@@ -7,6 +7,6 @@ module.exports = async function () {
 	const commonCfg = await common();
 	return merge(commonCfg, {
 		mode: 'development',
-		devtool: 'inline-source-map',
+		// devtool: 'inline-source-map',
 	});
 };

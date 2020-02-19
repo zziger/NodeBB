@@ -24,77 +24,44 @@ var JS = module.exports;
 JS.scripts = {
 	base: [
 		'node_modules/promise-polyfill/dist/polyfill.js',
-		'node_modules/jquery/dist/jquery.js', // done
-		'node_modules/socket.io-client/dist/socket.io.js', // done
-		'node_modules/textcomplete/dist/textcomplete.min.js', // done
-		'node_modules/textcomplete.contenteditable/dist/textcomplete.codemirror.min.js', // done
+		// 'node_modules/jquery/dist/jquery.js', // done
+		// 'node_modules/socket.io-client/dist/socket.io.js', // done
+		// 'node_modules/textcomplete/dist/textcomplete.min.js', // done
+		// 'node_modules/textcomplete.contenteditable/dist/textcomplete.codemirror.min.js', // done
 		'public/vendor/jquery/timeago/jquery.timeago.js',
-		'public/vendor/jquery/js/jquery.form.min.js', // done
-		'public/vendor/visibility/visibility.min.js', // done
-		'node_modules/bootstrap/dist/js/bootstrap.js', // done
+		// 'public/vendor/jquery/js/jquery.form.min.js', // done
+		// 'public/vendor/visibility/visibility.min.js', // done
+		// 'node_modules/bootstrap/dist/js/bootstrap.js', // done
 		'public/vendor/jquery/bootstrap-tagsinput/bootstrap-tagsinput.min.js',
-		'public/vendor/requirejs/require.js',
-		'public/src/require-config.js',
-		'public/vendor/bootbox/bootbox.js', // done
-		'public/vendor/bootbox/wrapper.js', // done
+		// 'public/vendor/requirejs/require.js', // done
+		// 'public/src/require-config.js', 	// done
+		// 'public/vendor/bootbox/bootbox.js', // done
+		// 'public/vendor/bootbox/wrapper.js', // done
 		'public/vendor/tinycon/tinycon.js',
-		'public/vendor/xregexp/xregexp.js', // done
-		'public/vendor/xregexp/unicode/unicode-base.js',
-		'node_modules/benchpressjs/build/benchpress.js', // done
-		'public/src/utils.js', // done
-		'public/src/sockets.js', // done
-		'public/src/app.js', // done
-		'public/src/ajaxify.js', // done
-		'public/src/overrides.js', // done
-		'public/src/widgets.js', // done
+		// 'public/vendor/xregexp/xregexp.js', // done
+		// 'public/vendor/xregexp/unicode/unicode-base.js', // done
+		// 'node_modules/benchpressjs/build/benchpress.js', // done
+		// 'public/src/utils.js', // done
+		// 'public/src/sockets.js', // done
+		// 'public/src/app.js', // done
+		// 'public/src/ajaxify.js', // done
+		// 'public/src/overrides.js', // done
+		// 'public/src/widgets.js', // done
 	],
 
 	// files listed below are only available client-side, or are bundled in to reduce # of network requests on cold load
-	rjs: [
-		'public/src/client/footer.js',
-		'public/src/client/header/chat.js',
-		'public/src/client/header/notifications.js',
-		'public/src/client/infinitescroll.js',
-		'public/src/client/pagination.js',
-		'public/src/client/recent.js',
-		'public/src/client/unread.js',
-		'public/src/client/topic.js',
-		'public/src/client/topic/events.js',
-		'public/src/client/topic/posts.js',
-		'public/src/client/topic/images.js',
-		'public/src/client/topic/votes.js',
-		'public/src/client/topic/postTools.js',
-		'public/src/client/topic/threadTools.js',
-		'public/src/client/categories.js',
-		'public/src/client/category.js',
-		'public/src/client/category/tools.js',
-
-		'public/src/modules/translator.js',
-		'public/src/modules/components.js',
-		'public/src/modules/sort.js',
-		'public/src/modules/navigator.js',
-		'public/src/modules/topicSelect.js',
-		'public/src/modules/topicList.js',
-		'public/src/modules/categorySelector.js',
-		'public/src/modules/categorySearch.js',
-		'public/src/modules/share.js',
-		'public/src/modules/alerts.js',
-		'public/src/modules/taskbar.js',
-		'public/src/modules/helpers.js',
-		'public/src/modules/storage.js',
-		'public/src/modules/handleBack.js',
-	],
+	rjs: [],
 
 	admin: [
 		'node_modules/material-design-lite/material.js',
 		'public/vendor/jquery/sortable/Sortable.js',
 		'public/vendor/colorpicker/colorpicker.js',
-		'public/src/admin/admin.js',
+		// 'public/src/admin/admin.js', // done
 		'public/vendor/semver/semver.browser.js',
 		'public/vendor/jquery/serializeObject/jquery.ba-serializeobject.min.js',
 		'public/vendor/jquery/deserialize/jquery.deserialize.min.js',
-		'public/vendor/slideout/slideout.min.js',
-		'public/vendor/nprogress.min.js',
+		// 'public/vendor/slideout/slideout.min.js', // done
+		// 'public/vendor/nprogress.min.js', // done
 	],
 
 	// modules listed below are built (/src/modules) so they can be defined anonymously

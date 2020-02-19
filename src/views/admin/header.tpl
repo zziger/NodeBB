@@ -4,7 +4,7 @@
 		<title>{title}</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-		<link rel="stylesheet" type="text/css" href="{relative_path}/assets/admin.css?{cache-buster}" />
+		<link rel="stylesheet" type="text/css" href="{relative_path}/dist/admin.css?{cache-buster}" />
 		<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
 		<script>
@@ -19,7 +19,7 @@
 			};
 		</script>
 
-		<script type="text/javascript" src="{relative_path}/assets/acp.min.js?{cache-buster}"></script>
+		<script type="text/javascript" src="{relative_path}/dist/admin.bundle.js?{cache-buster}"></script>
 
 		<!-- BEGIN scripts -->
 		<script type="text/javascript" src="{scripts.src}"></script>

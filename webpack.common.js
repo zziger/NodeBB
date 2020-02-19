@@ -1,33 +1,9 @@
 'use strict';
 
-// webpack can handle these
-//  info: [build]         plugin static dirs  build started
-//  info: [build]          requirejs modules  build started
-//  info: [build]           client js bundle  build started
-//  info: [build]            admin js bundle  build started
-//  info: [build]         client side styles  build started
-//  info: [build] admin control panel styles  build started
-
-// these need webpack loaders ?
-//  info: [build]                  templates  build started
-//  info: [build]                  languages  build started
-//  info: [build]                     sounds  build started
-
-
-// things to figure out
-// ajaxify.js load template via require([]) and load page script via require([])
-
-// what about plugins? >_>
-// allJsFilesOfFolder.js:
-// require.context("../scripts/", true, /\.js$/);
-// This will bundle all scripts inside scripts and all its subfolders
-// You need to install @types/webpack-env to have context at your hand.
-
 const path = require('path');
 
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-
 
 async function getPluginFolders() {
 	const nconf = require('nconf');
@@ -69,6 +45,12 @@ module.exports = async function () {
 			app: './public/src/app.js',
 			admin: './public/src/admin/admin.js',
 		},
+		output: {
+			filename: '[name].bundle.js',
+			chunkFilename: '[name].bundle.js',
+			path: path.resolve(__dirname, 'dist'),
+			publicPath: '/dist/',
+		},
 		resolve: {
 			modules: [
 				'build/public/src/modules',
@@ -86,13 +68,10 @@ module.exports = async function () {
 				benchpress: path.resolve(__dirname, 'node_modules/benchpressjs'),
 			},
 		},
-		output: {
-			filename: '[name].bundle.js',
-			chunkFilename: '[name].bundle.js',
-			path: path.resolve(__dirname, 'dist'),
-			publicPath: '/dist/',
-		},
 		node: { fs: 'empty' },
+		externals: {
+			nconf: 'nconf',
+		},
 		module: {
 			rules: [
 				// {

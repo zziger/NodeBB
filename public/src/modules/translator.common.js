@@ -1,5 +1,3 @@
-'use strict';
-
 module.exports = function (utils, load, warn) {
 	var assign = Object.assign || jQuery.extend;
 

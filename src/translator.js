@@ -7,4 +7,4 @@ const warn = function (msg) {
 	winston.warn(msg);
 };
 
-module.exports = require('../public/src/modules/translator.core')(require('./utils'), languages.get, warn);
+module.exports = require('../public/src/modules/translator.common')(require('./utils'), languages.get, warn);

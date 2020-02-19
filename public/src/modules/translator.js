@@ -1,7 +1,6 @@
-'use strict';
 
 // AMD. Register as a named module
-var factory = require('./translator.core');
+var factory = require('./translator.common');
 
 define('translator', ['jquery', 'utils'], function (jQuery, utils) {
 	function loadClient(language, namespace) {

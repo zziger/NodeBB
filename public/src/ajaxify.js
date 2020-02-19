@@ -233,7 +233,7 @@ $(document).ready(function () {
 		var pageScript;
 		try {
 			if (app.inAdmin) {
-				pageScript = await import(/* webpackChunkName: "admin/[request]" */ 'admin/' + tpl_url.replace(/^admin/, ''));
+				pageScript = await import(/* webpackChunkName: "admin/[request]" */ 'admin/' + tpl_url.replace(/^admin\//, ''));
 			} else {
 				pageScript = await import(/* webpackChunkName: "forum/[request]" */ 'forum/' + tpl_url);
 			}
@@ -348,6 +348,8 @@ $(document).ready(function () {
 		}
 	};
 
+	Benchpress.registerLoader(ajaxify.loadTemplate);
+
 	function ajaxifyAnchors() {
 		function hrefEmpty(href) {
 			return href === undefined || href === '' || href === 'javascript:;';
@@ -440,10 +442,6 @@ $(document).ready(function () {
 			process.call(_self);
 		});
 	}
-
-	require(['benchpress'], function (Benchpress) {
-		Benchpress.registerLoader(ajaxify.loadTemplate);
-	});
 
 	if (window.history && window.history.pushState) {
 		// Progressive Enhancement, ajaxify available only to modern browsers

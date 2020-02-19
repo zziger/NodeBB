@@ -9,4 +9,4 @@ process.elapsedTimeSince = function (start) {
 	return (diff[0] * 1e3) + (diff[1] / 1e6);
 };
 
-module.exports = require('../public/src/utils');
+module.exports = require('../public/src/utils.common');

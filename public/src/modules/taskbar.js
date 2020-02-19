@@ -43,11 +43,6 @@ define('taskbar', ['benchpress', 'translator', 'jquery'], function (Benchpress, 
 		var btnEl = taskbar.tasklist.find('[data-module="' + module + '"][data-uuid="' + uuid + '"]');
 		var fnName = 'close';
 
-		// TODO: Refactor chat module to not take uuid in close instead of by jQuery element
-		if (module === 'chat') {
-			fnName = 'closeByUUID';
-		}
-
 		if (btnEl.length) {
 			require([module], function (module) {
 				if (typeof module[fnName] === 'function') {

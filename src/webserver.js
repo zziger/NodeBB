@@ -32,7 +32,7 @@ var flags = require('./flags');
 var routes = require('./routes');
 var auth = require('./routes/authentication');
 
-var helpers = require('../public/src/modules/helpers');
+var helpers = require('./helpers');
 
 if (nconf.get('ssl')) {
 	server = require('https').createServer({
