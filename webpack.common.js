@@ -52,6 +52,7 @@ module.exports = async function () {
 			publicPath: '/dist/',
 		},
 		resolve: {
+			symlinks: false,
 			modules: [
 				'build/public/src/modules',
 				'public/src',
