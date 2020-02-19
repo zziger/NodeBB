@@ -1,5 +1,3 @@
-'use strict';
-
 
 define('forum/topic/postTools', [
 	'share',
@@ -10,10 +8,10 @@ define('forum/topic/postTools', [
 ], function (share, navigator, components, translator, votes) {
 	var PostTools = {};
 
-	var staleReplyAnyway = false;
+	// var staleReplyAnyway = false;
 
 	PostTools.init = function (tid) {
-		staleReplyAnyway = false;
+		// staleReplyAnyway = false;
 
 		renderMenu();
 
@@ -401,41 +399,43 @@ define('forum/topic/postTools', [
 	}
 
 	function showStaleWarning(callback) {
-		var staleThreshold = Math.min(Date.now() - (1000 * 60 * 60 * 24 * ajaxify.data.topicStaleDays), 8640000000000000);
-		if (staleReplyAnyway || ajaxify.data.lastposttime >= staleThreshold) {
-			return callback();
-		}
+		console.warn('TODO: showStaleWarning, bootbox not loaded');
+		return callback();
+		// var staleThreshold = Math.min(Date.now() - (1000 * 60 * 60 * 24 * ajaxify.data.topicStaleDays), 8640000000000000);
+		// if (staleReplyAnyway || ajaxify.data.lastposttime >= staleThreshold) {
+		// 	return callback();
+		// }
 
-		translator.translate('[[topic:stale.warning]]', function (translated) {
-			var warning = bootbox.dialog({
-				title: '[[topic:stale.title]]',
-				message: translated,
-				buttons: {
-					reply: {
-						label: '[[topic:stale.reply_anyway]]',
-						className: 'btn-link',
-						callback: function () {
-							staleReplyAnyway = true;
-							callback();
-						},
-					},
-					create: {
-						label: '[[topic:stale.create]]',
-						className: 'btn-primary',
-						callback: function () {
-							translator.translate('[[topic:link_back, ' + ajaxify.data.title + ', ' + config.relative_path + '/topic/' + ajaxify.data.slug + ']]', function (body) {
-								$(window).trigger('action:composer.topic.new', {
-									cid: ajaxify.data.cid,
-									body: body,
-								});
-							});
-						},
-					},
-				},
-			});
+		// translator.translate('[[topic:stale.warning]]', function (translated) {
+		// 	var warning = bootbox.dialog({
+		// 		title: '[[topic:stale.title]]',
+		// 		message: translated,
+		// 		buttons: {
+		// 			reply: {
+		// 				label: '[[topic:stale.reply_anyway]]',
+		// 				className: 'btn-link',
+		// 				callback: function () {
+		// 					staleReplyAnyway = true;
+		// 					callback();
+		// 				},
+		// 			},
+		// 			create: {
+		// 				label: '[[topic:stale.create]]',
+		// 				className: 'btn-primary',
+		// 				callback: function () {
+		// 					translator.translate('[[topic:link_back, ' + ajaxify.data.title + ', ' + config.relative_path + '/topic/' + ajaxify.data.slug + ']]', function (body) {
+		// 						$(window).trigger('action:composer.topic.new', {
+		// 							cid: ajaxify.data.cid,
+		// 							body: body,
+		// 						});
+		// 					});
+		// 				},
+		// 			},
+		// 		},
+		// 	});
 
-			warning.modal();
-		});
+		// 	warning.modal();
+		// });
 	}
 
 	return PostTools;
