@@ -3,8 +3,9 @@ require('../scss/app.scss');
 
 window.$ = require('jquery');
 window.jQuery = window.$;
-const Visibility = require('visibilityjs');
+window.bootbox = require('bootbox');
 window.utils = require('./utils');
+const Visibility = require('visibilityjs');
 require('./sockets');
 require('./overrides');
 require('./ajaxify');
@@ -50,9 +51,9 @@ app.cacheBuster = null;
 
 	app.cacheBuster = config['cache-buster'];
 
-	// bootbox.setDefaults({
-	// 	locale: config.userLang,
-	// });
+	bootbox.setDefaults({
+		locale: config.userLang,
+	});
 
 	app.load = function () {
 		app.loadProgressiveStylesheet();

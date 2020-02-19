@@ -1,90 +1,125 @@
 
 import $ from 'jquery';
-
+import translator from './modules/translator';
 window.overrides = window.overrides || {};
 
+function translate(elements, type, str) {
+	return elements.each(function () {
+		var el = $(this);
+		translator.translate(str, function (translated) {
+			el[type](translated);
+		});
+	});
+}
+
 if (typeof window !== 'undefined') {
-	(function ($) {
-		require(['translator'], function (translator) {
-			$.fn.getCursorPosition = function () {
-				var el = $(this).get(0);
-				var pos = 0;
-				if ('selectionStart' in el) {
-					pos = el.selectionStart;
-				} else if ('selection' in document) {
-					el.focus();
-					var Sel = document.selection.createRange();
-					var SelLength = document.selection.createRange().text.length;
-					Sel.moveStart('character', -el.value.length);
-					pos = Sel.text.length - SelLength;
-				}
-				return pos;
-			};
+	$.fn.getCursorPosition = function () {
+		var el = $(this).get(0);
+		var pos = 0;
+		if ('selectionStart' in el) {
+			pos = el.selectionStart;
+		} else if ('selection' in document) {
+			el.focus();
+			var Sel = document.selection.createRange();
+			var SelLength = document.selection.createRange().text.length;
+			Sel.moveStart('character', -el.value.length);
+			pos = Sel.text.length - SelLength;
+		}
+		return pos;
+	};
 
-			$.fn.selectRange = function (start, end) {
-				if (!end) {
-					end = start;
-				}
-				return this.each(function () {
-					if (this.setSelectionRange) {
-						this.focus();
-						this.setSelectionRange(start, end);
-					} else if (this.createTextRange) {
-						var range = this.createTextRange();
-						range.collapse(true);
-						range.moveEnd('character', end);
-						range.moveStart('character', start);
-						range.select();
-					}
-				});
-			};
-
-			// http://stackoverflow.com/questions/511088/use-javascript-to-place-cursor-at-end-of-text-in-text-input-element
-			$.fn.putCursorAtEnd = function () {
-				return this.each(function () {
-					$(this).focus();
-
-					if (this.setSelectionRange) {
-						var len = $(this).val().length * 2;
-						this.setSelectionRange(len, len);
-					} else {
-						$(this).val($(this).val());
-					}
-					this.scrollTop = 999999;
-				});
-			};
-
-			$.fn.translateHtml = function (str) {
-				return translate(this, 'html', str);
-			};
-
-			$.fn.translateText = function (str) {
-				return translate(this, 'text', str);
-			};
-
-			$.fn.translateVal = function (str) {
-				return translate(this, 'val', str);
-			};
-
-			$.fn.translateAttr = function (attr, str) {
-				return this.each(function () {
-					var el = $(this);
-					translator.translate(str, function (translated) {
-						el.attr(attr, translated);
-					});
-				});
-			};
-
-			function translate(elements, type, str) {
-				return elements.each(function () {
-					var el = $(this);
-					translator.translate(str, function (translated) {
-						el[type](translated);
-					});
-				});
+	$.fn.selectRange = function (start, end) {
+		if (!end) {
+			end = start;
+		}
+		return this.each(function () {
+			if (this.setSelectionRange) {
+				this.focus();
+				this.setSelectionRange(start, end);
+			} else if (this.createTextRange) {
+				var range = this.createTextRange();
+				range.collapse(true);
+				range.moveEnd('character', end);
+				range.moveStart('character', start);
+				range.select();
 			}
 		});
-	}($ || { fn: {} }));
+	};
+
+	// http://stackoverflow.com/questions/511088/use-javascript-to-place-cursor-at-end-of-text-in-text-input-element
+	$.fn.putCursorAtEnd = function () {
+		return this.each(function () {
+			$(this).focus();
+
+			if (this.setSelectionRange) {
+				var len = $(this).val().length * 2;
+				this.setSelectionRange(len, len);
+			} else {
+				$(this).val($(this).val());
+			}
+			this.scrollTop = 999999;
+		});
+	};
+
+	$.fn.translateHtml = function (str) {
+		return translate(this, 'html', str);
+	};
+
+	$.fn.translateText = function (str) {
+		return translate(this, 'text', str);
+	};
+
+	$.fn.translateVal = function (str) {
+		return translate(this, 'val', str);
+	};
+
+	$.fn.translateAttr = function (attr, str) {
+		return this.each(function () {
+			var el = $(this);
+			translator.translate(str, function (translated) {
+				el.attr(attr, translated);
+			});
+		});
+	};
+
+	// bootbox translations
+	// TODO, bootbox has its own locales maybe we don't need this anymore
+	var dialog = bootbox.dialog;
+	var attrsToTranslate = ['placeholder', 'title', 'value'];
+	bootbox.dialog = function (options) {
+		var show = options.show !== false;
+		options.show = false;
+
+		var $elem = dialog.call(bootbox, options);
+		var element = $elem[0];
+
+		if (/\[\[.+\]\]/.test(element.outerHTML)) {
+			translator.translateInPlace(element, attrsToTranslate).then(function () {
+				if (show) {
+					$elem.modal('show');
+				}
+			});
+		} else if (show) {
+			$elem.modal('show');
+		}
+
+		return $elem;
+	};
+	var translatorObj = translator.Translator.create();
+	Promise.all([
+		translatorObj.translateKey('modules:bootbox.ok', []),
+		translatorObj.translateKey('modules:bootbox.cancel', []),
+		translatorObj.translateKey('modules:bootbox.confirm', []),
+	]).then(function (translations) {
+		var lang = translator.getLanguage();
+		bootbox.addLocale(lang, {
+			OK: translations[0],
+			CANCEL: translations[1],
+			CONFIRM: translations[2],
+		});
+
+		bootbox.setLocale(lang);
+	});
 
 	(function () {
 		// FIX FOR #1245 - https://github.com/NodeBB/NodeBB/issues/1245
