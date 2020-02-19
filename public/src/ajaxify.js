@@ -1,6 +1,10 @@
 
 import $ from 'jquery';
+import Benchpress from 'benchpressjs';
 import render from './widgets';
+import translator from './modules/translator';
+
+translator.translate('[[error:no-connection]]');
 
 window.ajaxify = window.ajaxify || {};
 ajaxify.widgets = { render: render };
@@ -14,18 +18,8 @@ $(document).ready(function () {
 	var apiXHR = null;
 	var ajaxifyTimer;
 
-	var translator;
-	var Benchpress;
 	var retry = true;
 	var previousBodyClass = '';
-
-	// Dumb hack to fool ajaxify into thinking translator is still a global
-	// When ajaxify is migrated to a require.js module, then this can be merged into the "define" call
-	require(['translator', 'benchpress'], function (_translator, _Benchpress) {
-		translator = _translator;
-		translator.translate('[[error:no-connection]]');
-		Benchpress = _Benchpress;
-	});
 
 	$(window).on('popstate', function (ev) {
 		ev = ev.originalEvent;
