@@ -26,7 +26,6 @@ JS.scripts = {
 		'node_modules/promise-polyfill/dist/polyfill.js',
 		'public/vendor/jquery/timeago/jquery.timeago.js',
 		'public/vendor/jquery/bootstrap-tagsinput/bootstrap-tagsinput.min.js',
-		'public/vendor/tinycon/tinycon.js',
 	],
 
 	admin: [
