@@ -6,6 +6,7 @@ require('../vendor/jquery/bootstrap-tagsinput/bootstrap-tagsinput.css');
 window.$ = require('jquery');
 window.jQuery = window.$;
 window.bootbox = require('bootbox');
+require('jquery-form');
 window.utils = require('./utils');
 
 const Visibility = require('visibilityjs');
