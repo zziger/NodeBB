@@ -552,7 +552,7 @@ define('admin/general/dashboard', ['chart.js', 'translator', 'benchpress'], func
 		clearInterval(intervals.graphs);
 
 		intervals.rooms = setInterval(function () {
-			if (app.isFocused && app.isConnected) {
+			if (app.isFocused && socket && socket.connected) {
 				socket.emit('admin.rooms.getAll', Admin.updateRoomUsage);
 			}
 		}, realtime ? DEFAULTS.realtimeInterval : DEFAULTS.roomInterval);

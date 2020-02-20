@@ -1,10 +1,7 @@
-// makes eslint rage
 import io from 'socket.io-client';
 import $ from 'jquery';
 
 app = window.app || {};
-
-app.isConnected = false;
 
 var reconnecting = false;
 
@@ -55,8 +52,6 @@ function addHandlers() {
 }
 
 function onConnect() {
-	app.isConnected = true;
-
 	if (!reconnecting) {
 		app.showMessages();
 		$(window).trigger('action:connected');
@@ -134,7 +129,6 @@ function onReconnecting() {
 
 function onDisconnect() {
 	$(window).trigger('action:disconnected');
-	app.isConnected = false;
 }
 
 function onEventBanned(data) {
