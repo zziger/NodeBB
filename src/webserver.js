@@ -32,7 +32,7 @@ var flags = require('./flags');
 var routes = require('./routes');
 var auth = require('./routes/authentication');
 
-var helpers = require('./helpers');
+var helpers = require('../public/src/modules/helpers.common')(require('./utils'), Benchpress, nconf.get('relative_path'));
 
 if (nconf.get('ssl')) {
 	server = require('https').createServer({
