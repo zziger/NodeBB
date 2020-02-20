@@ -24,33 +24,10 @@ var JS = module.exports;
 JS.scripts = {
 	base: [
 		'node_modules/promise-polyfill/dist/polyfill.js',
-		// 'node_modules/jquery/dist/jquery.js', // done
-		// 'node_modules/socket.io-client/dist/socket.io.js', // done
-		// 'node_modules/textcomplete/dist/textcomplete.min.js', // done
-		// 'node_modules/textcomplete.contenteditable/dist/textcomplete.codemirror.min.js', // done
 		'public/vendor/jquery/timeago/jquery.timeago.js',
-		// 'public/vendor/jquery/js/jquery.form.min.js', // done
-		// 'public/vendor/visibility/visibility.min.js', // done
-		// 'node_modules/bootstrap/dist/js/bootstrap.js', // done
 		'public/vendor/jquery/bootstrap-tagsinput/bootstrap-tagsinput.min.js',
-		// 'public/vendor/requirejs/require.js', // done
-		// 'public/src/require-config.js', 	// done
-		// 'public/vendor/bootbox/bootbox.js', // done
-		// 'public/vendor/bootbox/wrapper.js', // done
 		'public/vendor/tinycon/tinycon.js',
-		// 'public/vendor/xregexp/xregexp.js', // done
-		// 'public/vendor/xregexp/unicode/unicode-base.js', // done
-		// 'node_modules/benchpressjs/build/benchpress.js', // done
-		// 'public/src/utils.js', // done
-		// 'public/src/sockets.js', // done
-		// 'public/src/app.js', // done
-		// 'public/src/ajaxify.js', // done
-		// 'public/src/overrides.js', // done
-		// 'public/src/widgets.js', // done
 	],
-
-	// files listed below are only available client-side, or are bundled in to reduce # of network requests on cold load
-	rjs: [],
 
 	admin: [
 		'node_modules/material-design-lite/material.js',
@@ -64,16 +41,9 @@ JS.scripts = {
 		// 'public/vendor/nprogress.min.js', // done
 	],
 
-	// modules listed below are built (/src/modules) so they can be defined anonymously
-	modules: {
-		// 'Chart.js': 'node_modules/chart.js/dist/Chart.min.js',
-		// 'mousetrap.js': 'node_modules/mousetrap/mousetrap.min.js',
-		// 'cropper.js': 'node_modules/cropperjs/dist/cropper.min.js',
-		// 'jqueryui.js': 'public/vendor/jquery/js/jquery-ui.js',
-		// 'zxcvbn.js': 'node_modules/zxcvbn/dist/zxcvbn.js',
-		// ace: 'node_modules/ace-builds/src-min',
-		// 'clipboard.js': 'node_modules/clipboard/dist/clipboard.min.js',
-	},
+	// plugins add entries into this object,
+	// they get linked into /build/public/src/modules
+	modules: { },
 };
 
 function linkIfLinux(srcPath, destPath, next) {
@@ -288,7 +258,7 @@ function getBundleScriptList(target, callback) {
 			return callback(err);
 		}
 
-		pluginScripts = pluginScripts.map(function (script) {
+		pluginScripts = JS.scripts.base.concat(pluginScripts).map(function (script) {
 			var srcPath = path.resolve(basePath, script).replace(/\\/g, '/');
 			return {
 				srcPath: srcPath,

@@ -120,48 +120,48 @@ module.exports = function (grunt) {
 					plugins = [];
 				}
 
-				const lessUpdated_Client = plugins.map(p => 'node_modules/' + p + '/**/*.less');
-				const lessUpdated_Admin = plugins.map(p => 'node_modules/' + p + '/**/*.less');
-				const clientUpdated = plugins.map(p => 'node_modules/' + p + '/**/*.js');
+				// const lessUpdated_Client = plugins.map(p => 'node_modules/' + p + '/**/*.less');
+				// const lessUpdated_Admin = plugins.map(p => 'node_modules/' + p + '/**/*.less');
+				// const clientUpdated = plugins.map(p => 'node_modules/' + p + '/**/*.js');
 				const templatesUpdated = plugins.map(p => 'node_modules/' + p + '/**/*.tpl');
 				const langUpdated = plugins.map(p => 'node_modules/' + p + '/**/*.json');
 
 				grunt.config(['watch'], {
-					lessUpdated_Client: {
-						files: [
-							'public/less/*.less',
-							'!public/less/admin/**/*.less',
-							...lessUpdated_Client,
-							'!node_modules/nodebb-*/node_modules/**',
-							'!node_modules/nodebb-*/.git/**',
-						],
-						options: {
-							interval: 1000,
-						},
-					},
-					lessUpdated_Admin: {
-						files: [
-							'public/less/admin/**/*.less',
-							...lessUpdated_Admin,
-							'!node_modules/nodebb-*/node_modules/**',
-							'!node_modules/nodebb-*/.git/**',
-						],
-						options: {
-							interval: 1000,
-						},
-					},
-					clientUpdated: {
-						files: [
-							'public/src/**/*.js',
-							...clientUpdated,
-							'!node_modules/nodebb-*/node_modules/**',
-							'node_modules/benchpressjs/build/benchpress.js',
-							'!node_modules/nodebb-*/.git/**',
-						],
-						options: {
-							interval: 1000,
-						},
-					},
+					// lessUpdated_Client: {
+					// 	files: [
+					// 		'public/less/*.less',
+					// 		'!public/less/admin/**/*.less',
+					// 		...lessUpdated_Client,
+					// 		'!node_modules/nodebb-*/node_modules/**',
+					// 		'!node_modules/nodebb-*/.git/**',
+					// 	],
+					// 	options: {
+					// 		interval: 1000,
+					// 	},
+					// },
+					// lessUpdated_Admin: {
+					// 	files: [
+					// 		'public/less/admin/**/*.less',
+					// 		...lessUpdated_Admin,
+					// 		'!node_modules/nodebb-*/node_modules/**',
+					// 		'!node_modules/nodebb-*/.git/**',
+					// 	],
+					// 	options: {
+					// 		interval: 1000,
+					// 	},
+					// },
+					// clientUpdated: {
+					// 	files: [
+					// 		'public/src/**/*.js',
+					// 		...clientUpdated,
+					// 		'!node_modules/nodebb-*/node_modules/**',
+					// 		'node_modules/benchpressjs/build/benchpress.js',
+					// 		'!node_modules/nodebb-*/.git/**',
+					// 	],
+					// 	options: {
+					// 		interval: 1000,
+					// 	},
+					// },
 					serverUpdated: {
 						files: ['*.js', 'install/*.js', 'src/**/*.js', '!src/upgrades/**'],
 						options: {

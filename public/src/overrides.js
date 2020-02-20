@@ -144,52 +144,51 @@ if (typeof window !== 'undefined') {
 			});
 	}());
 
-	// var timeagoFn;
+	var timeagoFn;
 	overrides.overrideTimeago = function () {
-		console.warn('TODO: overrides.overrideTimeago, timeago not added yet!');
-		// if (!timeagoFn) {
-		// 	timeagoFn = $.fn.timeago;
-		// }
+		if (!timeagoFn) {
+			timeagoFn = $.fn.timeago;
+		}
 
-		// if (parseInt(config.timeagoCutoff, 10) === 0) {
-		// 	$.timeago.settings.cutoff = 1;
-		// } else if (parseInt(config.timeagoCutoff, 10) > 0) {
-		// 	$.timeago.settings.cutoff = 1000 * 60 * 60 * 24 * (parseInt(config.timeagoCutoff, 10) || 30);
-		// }
+		if (parseInt(config.timeagoCutoff, 10) === 0) {
+			$.timeago.settings.cutoff = 1;
+		} else if (parseInt(config.timeagoCutoff, 10) > 0) {
+			$.timeago.settings.cutoff = 1000 * 60 * 60 * 24 * (parseInt(config.timeagoCutoff, 10) || 30);
+		}
 
-		// $.timeago.settings.allowFuture = true;
-		// var userLang = config.userLang.replace('_', '-');
-		// var options = { year: 'numeric', month: 'short', day: 'numeric', hour: 'numeric', minute: 'numeric' };
-		// var formatFn = function (date) {
-		// 	return date.toLocaleString(userLang, options);
-		// };
-		// try {
-		// 	if (typeof Intl !== 'undefined') {
-		// 		var dtFormat = new Intl.DateTimeFormat(userLang, options);
-		// 		formatFn = dtFormat.format;
-		// 	}
-		// } catch (err) {
-		// 	console.error(err);
-		// }
+		$.timeago.settings.allowFuture = true;
+		var userLang = config.userLang.replace('_', '-');
+		var options = { year: 'numeric', month: 'short', day: 'numeric', hour: 'numeric', minute: 'numeric' };
+		var formatFn = function (date) {
+			return date.toLocaleString(userLang, options);
+		};
+		try {
+			if (typeof Intl !== 'undefined') {
+				var dtFormat = new Intl.DateTimeFormat(userLang, options);
+				formatFn = dtFormat.format;
+			}
+		} catch (err) {
+			console.error(err);
+		}
 
-		// var iso;
-		// var date;
-		// $.fn.timeago = function () {
-		// 	var els = $(this);
-		// 	// Convert "old" format to new format (#5108)
-		// 	els.each(function () {
-		// 		iso = this.getAttribute('title');
-		// 		if (!iso) {
-		// 			return;
-		// 		}
-		// 		this.setAttribute('datetime', iso);
-		// 		date = new Date(iso);
-		// 		if (!isNaN(date)) {
-		// 			this.textContent = formatFn(date);
-		// 		}
-		// 	});
+		var iso;
+		var date;
+		$.fn.timeago = function () {
+			var els = $(this);
+			// Convert "old" format to new format (#5108)
+			els.each(function () {
+				iso = this.getAttribute('title');
+				if (!iso) {
+					return;
+				}
+				this.setAttribute('datetime', iso);
+				date = new Date(iso);
+				if (!isNaN(date)) {
+					this.textContent = formatFn(date);
+				}
+			});
 
-		// 	timeagoFn.apply(this, arguments);
-		// };
+			timeagoFn.apply(this, arguments);
+		};
 	};
 }
