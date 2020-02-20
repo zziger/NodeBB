@@ -14,6 +14,7 @@ async function getPluginFolders() {
 	nconf.defaults({
 		base_dir: __dirname,
 		views_dir: './build/public/templates',
+		isCluster: 'false',
 	});
 	const winston = require('winston');
 	winston.configure({

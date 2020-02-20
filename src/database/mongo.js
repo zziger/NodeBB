@@ -163,13 +163,7 @@ async function getCollectionStats(db) {
 
 mongoModule.close = function (callback) {
 	callback = callback || function () {};
-	const async = require('async');
-	async.series([
-		require('./mongo/pubsub').closeIt,
-		function (next) {
-			client.close(err => next(err));
-		},
-	], callback);
+	client.close(err => callback(err));
 };
 
 mongoModule.socketAdapter = function () {
