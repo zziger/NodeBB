@@ -5,6 +5,7 @@ const async = require('async');
 const winston = require('winston');
 const nconf = require('nconf');
 const _ = require('lodash');
+const db = require('../database');
 
 const cacheBuster = require('./cacheBuster');
 let meta;
@@ -98,7 +99,7 @@ aliases = Object.keys(aliases).reduce(function (prev, key) {
 }, {});
 
 function beforeBuild(targets, callback) {
-	var db = require('../database');
+
 	require('colors');
 	process.stdout.write('  started'.green + '\n'.reset);
 
@@ -136,7 +137,7 @@ function buildTargets(targets, parallel, callback) {
 
 	all(targets, function (target, next) {
 		targetHandlers[target](parallel, step(_.padStart(target, length) + ' ', next));
-	}, callback);
+	}, err => callback(err));
 }
 
 exports.build = function (targets, options, callback) {
@@ -214,6 +215,9 @@ exports.build = function (targets, options, callback) {
 			startTime = Date.now();
 			buildTargets(targets, !series, next);
 		},
+		async function () {
+			await bundle();
+		},
 		function (next) {
 			totalTime = (Date.now() - startTime) / 1000;
 			cacheBuster.write(next);
@@ -228,6 +232,39 @@ exports.build = function (targets, options, callback) {
 		callback();
 	});
 };
+
+
+function getWebpackConfig() {
+	return require(global.env !== 'development' ? '../../webpack.prod' : '../../webpack.dev');
+}
+
+async function bundle() {
+	winston.info('[build] Bundling with Webpack.');
+	const webpack = require('webpack');
+	const webpackCfg = getWebpackConfig();
+	const pluginPaths = await db.getSortedSetRange('plugins:active', 0, -1);
+	if (!pluginPaths.includes('nodebb-plugin-composer-default')) {
+		pluginPaths.push('nodebb-plugin-composer-default');
+	}
+
+	pluginPaths.map(p => 'node_modules/' + p + '/node_modules');
+	webpackCfg.resolve.modules = webpackCfg.resolve.modules.concat(pluginPaths);
+	const util = require('util');
+	const webpackAsync = util.promisify(webpack);
+	try {
+		const stats = await webpackAsync(webpackCfg);
+
+		if (stats.hasErrors() || stats.hasWarnings()) {
+			const info = stats.toString('minimal');
+			console.log(info);
+		}
+	} catch (err) {
+		console.error(err.stack || err);
+		if (err.details) {
+			console.error(err.details);
+		}
+	}
+}
 
 exports.buildAll = function (callback) {
 	exports.build(allTargets, callback);

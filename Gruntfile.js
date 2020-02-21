@@ -21,6 +21,7 @@ nconf.file({
 nconf.defaults({
 	base_dir: __dirname,
 	views_dir: './build/public/templates',
+	isCluster: 'false',
 });
 var winston = require('winston');
 winston.configure({
@@ -122,7 +123,7 @@ module.exports = function (grunt) {
 
 				// const lessUpdated_Client = plugins.map(p => 'node_modules/' + p + '/**/*.less');
 				// const lessUpdated_Admin = plugins.map(p => 'node_modules/' + p + '/**/*.less');
-				// const clientUpdated = plugins.map(p => 'node_modules/' + p + '/**/*.js');
+				const clientUpdated = plugins.map(p => 'node_modules/' + p + '/**/*.js');
 				const templatesUpdated = plugins.map(p => 'node_modules/' + p + '/**/*.tpl');
 				const langUpdated = plugins.map(p => 'node_modules/' + p + '/**/*.json');
 
@@ -150,18 +151,18 @@ module.exports = function (grunt) {
 					// 		interval: 1000,
 					// 	},
 					// },
-					// clientUpdated: {
-					// 	files: [
-					// 		'public/src/**/*.js',
-					// 		...clientUpdated,
-					// 		'!node_modules/nodebb-*/node_modules/**',
-					// 		'node_modules/benchpressjs/build/benchpress.js',
-					// 		'!node_modules/nodebb-*/.git/**',
-					// 	],
-					// 	options: {
-					// 		interval: 1000,
-					// 	},
-					// },
+					clientUpdated: {
+						files: [
+							'public/src/**/*.js',
+							...clientUpdated,
+							'!node_modules/nodebb-*/node_modules/**',
+							'node_modules/benchpressjs/build/benchpress.js',
+							'!node_modules/nodebb-*/.git/**',
+						],
+						options: {
+							interval: 1000,
+						},
+					},
 					serverUpdated: {
 						files: ['*.js', 'install/*.js', 'src/**/*.js', '!src/upgrades/**'],
 						options: {
