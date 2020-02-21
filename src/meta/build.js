@@ -239,6 +239,11 @@ function getWebpackConfig() {
 }
 
 async function bundle() {
+	// TODO:
+	// if (process.env.NODE_ENV === 'development') {
+	// 	console.log('not bundling');
+	// 	return;
+	// }
 	winston.info('[build] Bundling with Webpack.');
 	const webpack = require('webpack');
 	const webpackCfg = getWebpackConfig();

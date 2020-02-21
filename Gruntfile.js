@@ -3,10 +3,11 @@
 
 var async = require('async');
 var fork = require('child_process').fork;
+const webpack = require('webpack');
+let compiler;
 var env = process.env;
 var worker;
 var updateWorker;
-var initWorker;
 var incomplete = [];
 var running = 0;
 
@@ -153,7 +154,7 @@ module.exports = function (grunt) {
 					// },
 					clientUpdated: {
 						files: [
-							'public/src/**/*.js',
+							// 'public/src/**/*.js',
 							...clientUpdated,
 							'!node_modules/nodebb-*/node_modules/**',
 							'node_modules/benchpressjs/build/benchpress.js',
@@ -196,30 +197,78 @@ module.exports = function (grunt) {
 						},
 					},
 				});
-				next();
+
+				if (grunt.option('skip')) {
+					next();
+				} else {
+					const initWorker = fork('app.js', initArgs, {
+						env: env,
+					});
+
+					initWorker.on('exit', function () {
+						next();
+					});
+				}
 			},
 		], done);
 	});
 
-	grunt.task.run('init');
+	function getWebpackConfig() {
+		// return require(process.env.NODE_ENV !== 'development' ? './webpack.prod' : './webpack.dev');
+		return require('./webpack.dev');
+	}
 
-	env.NODE_ENV = 'development';
+	async function bundle(callback) {
+		winston.info('[build] Bundling with Webpack.');
 
-	if (grunt.option('skip')) {
+		const webpackCfg = getWebpackConfig();
+		const pluginPaths = await db.getSortedSetRange('plugins:active', 0, -1);
+		if (!pluginPaths.includes('nodebb-plugin-composer-default')) {
+			pluginPaths.push('nodebb-plugin-composer-default');
+		}
+
+		pluginPaths.map(p => 'node_modules/' + p + '/node_modules');
+		webpackCfg.resolve.modules = webpackCfg.resolve.modules.concat(pluginPaths);
+		const util = require('util');
+		compiler = webpack(webpackCfg);
+
+		try {
+			const watchAsync = util.promisify(function (opts, cb) {
+				compiler.watch(opts, cb);
+			});
+			const stats = await watchAsync({
+				poll: 1000,
+				info: 'verbose',
+				'info-verbosity': 'verbose',
+			});
+
+			if (stats.hasErrors() || stats.hasWarnings()) {
+				const info = stats.toString('minimal');
+				console.log(info);
+			}
+		} catch (err) {
+			console.error(err.stack || err);
+			if (err.details) {
+				console.error(err.details);
+			}
+			return callback(err);
+		}
+		callback();
+	}
+	grunt.registerTask('webpack', function () {
+		var done = this.async();
+		bundle(done);
+	});
+
+	grunt.registerTask('run', function () {
 		worker = fork('app.js', args, {
 			env: env,
 		});
-	} else {
-		initWorker = fork('app.js', initArgs, {
-			env: env,
-		});
+	});
 
-		initWorker.on('exit', function () {
-			worker = fork('app.js', args, {
-				env: env,
-			});
-		});
-	}
+	grunt.task.run(['init', 'webpack', 'run', 'watch']);
+
+	env.NODE_ENV = 'development';
 
 	grunt.event.on('watch', update);
 };
