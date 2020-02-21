@@ -47,7 +47,7 @@
 	&.avatar-md {
 		width: 32px;
 		height: 32px;
-		@include user-icon-style(32px, 1.5rem);
+		@include user-icon-style(32px, 1.25rem);
 	}
 
 	&.avatar-lg {
