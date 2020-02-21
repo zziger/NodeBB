@@ -59,8 +59,8 @@ module.exports = async function () {
 				'public/src',
 				'public/src/modules',
 				'public/src/client',
-				...plugins,
 				'node_modules',
+				...plugins,
 			],
 			alias: {
 				assets: path.resolve(__dirname, 'build/public'),

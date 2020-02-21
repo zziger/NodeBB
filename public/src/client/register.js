@@ -1,12 +1,12 @@
-'use strict';
 
-
-define('forum/register', ['translator', 'zxcvbn'], function (translator, zxcvbn) {
+define('forum/register', ['translator'], function (translator) {
 	var Register = {};
 	var validationError = false;
 	var successIcon = '';
+	var zxcvbn;
+	Register.init = async function () {
+		zxcvbn = (await import(/* webpackChunkName: "zxcvbn" */ 'zxcvbn')).default;
 
-	Register.init = function () {
 		var email = $('#email');
 		var username = $('#username');
 		var password = $('#password');

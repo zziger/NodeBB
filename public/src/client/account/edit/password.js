@@ -1,10 +1,9 @@
-'use strict';
 
-
-define('forum/account/edit/password', ['forum/account/header', 'translator', 'zxcvbn'], function (header, translator, zxcvbn) {
+define('forum/account/edit/password', ['forum/account/header', 'translator'], function (header, translator) {
 	var AccountEditPassword = {};
-
-	AccountEditPassword.init = function () {
+	var zxcvbn;
+	AccountEditPassword.init = async function () {
+		zxcvbn = (await import(/* webpackChunkName: "zxcvbn" */ 'zxcvbn')).default;
 		header.init();
 
 		handlePasswordChange();

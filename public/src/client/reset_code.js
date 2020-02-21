@@ -1,7 +1,5 @@
-'use strict';
 
-
-define('forum/reset_code', ['zxcvbn'], function (zxcvbn) {
+define('forum/reset_code', function () {
 	var	ResetCode = {};
 
 	ResetCode.init = function () {
@@ -11,7 +9,8 @@ define('forum/reset_code', ['zxcvbn'], function (zxcvbn) {
 		var password = $('#password');
 		var repeat = $('#repeat');
 
-		resetEl.on('click', function () {
+		resetEl.on('click', async function () {
+			var zxcvbn = (await import(/* webpackChunkName: "zxcvbn" */ 'zxcvbn')).default;
 			var strength = zxcvbn(password.val());
 			if (password.val().length < ajaxify.data.minimumPasswordLength) {
 				$('#notice').removeClass('hidden');
