@@ -10,6 +10,10 @@ require('jquery-form');
 window.utils = require('./utils');
 
 const Visibility = require('visibilityjs');
+const Benchpress = require('benchpressjs');
+Benchpress.setGlobal('config', config);
+
+const translator = require('./modules/translator');
 
 require('./sockets');
 require('./overrides');
@@ -20,31 +24,13 @@ app = window.app || {};
 app.isFocused = true;
 app.currentRoom = null;
 app.widgets = {};
-app.cacheBuster = null;
+app.cacheBuster = config['cache-buster'];
 
 (function () {
 	var params = utils.params();
 	var showWelcomeMessage = !!params.loggedin;
 	var registerMessage = params.register;
 	var isTouchDevice = utils.isTouchDevice();
-
-	require(['benchpress'], function (Benchpress) {
-		Benchpress.setGlobal('config', config);
-		if (Object.defineProperty) {
-			Object.defineProperty(window, 'templates', {
-				configurable: true,
-				enumerable: true,
-				get: function () {
-					console.warn('[deprecated] Accessing benchpress (formerly known as templates.js) globally is deprecated. Use `require(["benchpress"], function (Benchpress) { ... })` instead');
-					return Benchpress;
-				},
-			});
-		} else {
-			window.templates = Benchpress;
-		}
-	});
-
-	app.cacheBuster = config['cache-buster'];
 
 	bootbox.setDefaults({
 		locale: config.userLang,
@@ -126,12 +112,10 @@ app.cacheBuster = null;
 		 */
 
 		require([
-			'benchpress',
-			'translator',
 			'forum/unread',
 			'forum/header/notifications',
 			'forum/header/chat',
-		], function (Benchpress, translator, Unread, Notifications, Chat) {
+		], function (Unread, Notifications, Chat) {
 			app.user = data.header.user;
 			data.header.config = data.config;
 			config = data.config;
@@ -271,17 +255,13 @@ app.cacheBuster = null;
 
 		socket.disconnect();
 
-		require(['translator'], function (translator) {
-			translator.translate('[[error:invalid-session-text]]', function (translated) {
-				bootbox.alert({
-					title: '[[error:invalid-session]]',
-					message: translated,
-					closeButton: false,
-					callback: function () {
-						window.location.reload();
-					},
-				});
-			});
+		bootbox.alert({
+			title: '[[error:invalid-session]]',
+			message: '[[error:invalid-session-text]]',
+			closeButton: false,
+			callback: function () {
+				window.location.reload();
+			},
 		});
 	};
 
@@ -394,13 +374,9 @@ app.cacheBuster = null;
 				break;
 
 			case 'modal':
-				require(['translator'], function (translator) {
-					translator.translate(message || messages[type].message, function (translated) {
-						bootbox.alert({
-							title: messages[type].title,
-							message: translated,
-						});
-					});
+				bootbox.alert({
+					title: messages[type].title,
+					message: message || messages[type].message,
 				});
 				break;
 			}
@@ -483,20 +459,18 @@ app.cacheBuster = null;
 				titleObj.titles[0] = window.document.title;
 			}
 
-			require(['translator'], function (translator) {
-				translator.translate(title, function (translated) {
-					titleObj.titles[1] = translated;
-					if (titleObj.interval) {
-						clearInterval(titleObj.interval);
-					}
+			translator.translate(title, function (translated) {
+				titleObj.titles[1] = translated;
+				if (titleObj.interval) {
+					clearInterval(titleObj.interval);
+				}
 
-					titleObj.interval = setInterval(function () {
-						var title = titleObj.titles[titleObj.titles.indexOf(window.document.title) ^ 1];
-						if (title) {
-							window.document.title = $('<div/>').html(title).text();
-						}
-					}, 2000);
-				});
+				titleObj.interval = setInterval(function () {
+					var title = titleObj.titles[titleObj.titles.indexOf(window.document.title) ^ 1];
+					if (title) {
+						window.document.title = $('<div/>').html(title).text();
+					}
+				}, 2000);
 			});
 		} else {
 			if (titleObj.interval) {
@@ -512,18 +486,17 @@ app.cacheBuster = null;
 		if (!title) {
 			return;
 		}
-		require(['translator'], function (translator) {
-			title = config.titleLayout.replace(/&#123;/g, '{').replace(/&#125;/g, '}')
-				.replace('{pageTitle}', function () { return title; })
-				.replace('{browserTitle}', function () { return config.browserTitle; });
 
-			// Allow translation strings in title on ajaxify (#5927)
-			title = translator.unescape(title);
+		title = config.titleLayout.replace(/&#123;/g, '{').replace(/&#125;/g, '}')
+			.replace('{pageTitle}', function () { return title; })
+			.replace('{browserTitle}', function () { return config.browserTitle; });
 
-			translator.translate(title, function (translated) {
-				titleObj.titles[0] = translated;
-				app.alternatingTitle('');
-			});
+		// Allow translation strings in title on ajaxify (#5927)
+		title = translator.unescape(title);
+
+		translator.translate(title, function (translated) {
+			titleObj.titles[0] = translated;
+			app.alternatingTitle('');
 		});
 	};
 
@@ -697,13 +670,11 @@ app.cacheBuster = null;
 			return;
 		}
 
-		require(['translator'], function (translator) {
-			translator.translate('[[global:' + status + ']]', function (translated) {
-				el.removeClass('online offline dnd away')
-					.addClass(status)
-					.attr('title', translated)
-					.attr('data-original-title', translated);
-			});
+		translator.translate('[[global:' + status + ']]', function (translated) {
+			el.removeClass('online offline dnd away')
+				.addClass(status)
+				.attr('title', translated)
+				.attr('data-original-title', translated);
 		});
 	};
 
@@ -763,26 +734,24 @@ app.cacheBuster = null;
 	};
 
 	app.parseAndTranslate = function (template, blockName, data, callback) {
-		require(['translator', 'benchpress'], function (translator, Benchpress) {
-			function translate(html, callback) {
-				translator.translate(html, function (translatedHTML) {
-					translatedHTML = translator.unescape(translatedHTML);
-					callback($(translatedHTML));
-				});
-			}
+		function translate(html, callback) {
+			translator.translate(html, function (translatedHTML) {
+				translatedHTML = translator.unescape(translatedHTML);
+				callback($(translatedHTML));
+			});
+		}
 
-			if (typeof blockName === 'string') {
-				Benchpress.parse(template, blockName, data, function (html) {
-					translate(html, callback);
-				});
-			} else {
-				callback = data;
-				data = blockName;
-				Benchpress.parse(template, data, function (html) {
-					translate(html, callback);
-				});
-			}
-		});
+		if (typeof blockName === 'string') {
+			Benchpress.parse(template, blockName, data, function (html) {
+				translate(html, callback);
+			});
+		} else {
+			callback = data;
+			data = blockName;
+			Benchpress.parse(template, data, function (html) {
+				translate(html, callback);
+			});
+		}
 	};
 
 	app.loadProgressiveStylesheet = function () {
@@ -794,7 +763,7 @@ app.cacheBuster = null;
 	};
 
 	app.showCookieWarning = function () {
-		require(['translator', 'storage'], function (translator, storage) {
+		require(['storage'], function (storage) {
 			if (!config.cookies.enabled || !navigator.cookieEnabled) {
 				// Skip warning if cookie consent subsystem disabled (obviously), or cookies not in use
 				return;

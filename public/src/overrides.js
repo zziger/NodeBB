@@ -83,9 +83,10 @@ if (typeof window !== 'undefined') {
 	};
 
 	// bootbox translations
-	// TODO, bootbox has its own locales maybe we don't need this anymore
+	// TODO, bootbox has its own locales, maybe we don't need this anymore
 	var dialog = bootbox.dialog;
 	var attrsToTranslate = ['placeholder', 'title', 'value'];
+	var translatorObj = translator.Translator.create();
 	bootbox.dialog = function (options) {
 		var show = options.show !== false;
 		options.show = false;
@@ -94,7 +95,7 @@ if (typeof window !== 'undefined') {
 		var element = $elem[0];
 
 		if (/\[\[.+\]\]/.test(element.outerHTML)) {
-			translator.translateInPlace(element, attrsToTranslate).then(function () {
+			translatorObj.translateInPlace(element, attrsToTranslate).then(function () {
 				if (show) {
 					$elem.modal('show');
 				}
@@ -105,7 +106,7 @@ if (typeof window !== 'undefined') {
 
 		return $elem;
 	};
-	var translatorObj = translator.Translator.create();
+
 	Promise.all([
 		translatorObj.translateKey('modules:bootbox.ok', []),
 		translatorObj.translateKey('modules:bootbox.cancel', []),
