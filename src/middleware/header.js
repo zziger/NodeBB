@@ -173,6 +173,17 @@ module.exports = function (middleware) {
 					modifyNavItem(item, '/unread?filter=new', 'new', unreadCount.newTopic);
 					modifyNavItem(item, '/unread?filter=watched', 'watched', unreadCount.watchedTopic);
 					modifyNavItem(item, '/unread?filter=unreplied', 'unreplied', unreadCount.unrepliedTopic);
+
+					// Handle deprecated bootstrap display values
+					if (item.textClass === 'visible-xs-inline') {
+						item.textClass = '';
+					}
+
+					// Sensible default
+					if (!item.textClass) {
+						item.textClass = 'd-sm-none';
+					}
+
 					return item;
 				});
 
