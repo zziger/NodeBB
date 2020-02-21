@@ -194,12 +194,12 @@ $(document).ready(function () {
 
 				// Only executed on ajaxify. Otherwise these'd be in ajaxify.end()
 				app.refreshTitle(data.title);
-				ajaxify.updateTags();
+				updateTags();
 			});
 		});
 	}
 
-	ajaxify.updateTags = function () {
+	function updateTags() {
 		var metaWhitelist = ['title', 'description', /og:.+/, /article:.+/].map(function (val) {
 			return new RegExp(val);
 		});
@@ -261,7 +261,7 @@ $(document).ready(function () {
 				});
 				document.head.appendChild(linkEl);
 			});
-	};
+	}
 
 	ajaxify.end = function (url, tpl_url) {
 		ajaxify.loadScript(tpl_url, function done() {

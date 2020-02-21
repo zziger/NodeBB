@@ -79,7 +79,6 @@ define('notifications', [
 		}
 
 		app.alert(payload);
-		app.refreshTitle();
 
 		if (ajaxify.currentPage === 'notifications') {
 			ajaxify.refresh();
