@@ -1,5 +1,8 @@
 'use strict';
 
+const fs = require('fs').promises;
+const path = require('path');
+const util = require('util');
 const os = require('os');
 const async = require('async');
 const winston = require('winston');
@@ -242,15 +245,13 @@ function getWebpackConfig() {
 exports.webpack = async function (options) {
 	winston.info('[build] Bundling with Webpack.');
 	const webpack = require('webpack');
-	const webpackCfg = getWebpackConfig();
-	let pluginPaths = await db.getSortedSetRange('plugins:active', 0, -1);
-	if (!pluginPaths.includes('nodebb-plugin-composer-default')) {
-		pluginPaths.push('nodebb-plugin-composer-default');
+	const activePlugins = await db.getSortedSetRange('plugins:active', 0, -1);
+	if (!activePlugins.includes('nodebb-plugin-composer-default')) {
+		activePlugins.push('nodebb-plugin-composer-default');
 	}
+	await fs.writeFile(path.resolve(__dirname, '../../build/active_plugins.json'), JSON.stringify(activePlugins));
 
-	pluginPaths = pluginPaths.map(p => 'node_modules/' + p + '/node_modules');
-	webpackCfg.resolve.modules = webpackCfg.resolve.modules.concat(pluginPaths);
-	const util = require('util');
+	const webpackCfg = getWebpackConfig();
 	const compiler = webpack(webpackCfg);
 	const webpackRun = util.promisify(compiler.run).bind(compiler);
 	const webpackWatch = util.promisify(compiler.watch).bind(compiler);

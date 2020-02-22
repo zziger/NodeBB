@@ -5,6 +5,8 @@ const path = require('path');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
+const activePlugins = require('./build/active_plugins');
+
 module.exports = {
 	plugins: [
 		new CleanWebpackPlugin(), // cleans dist folder
@@ -28,6 +30,7 @@ module.exports = {
 			'public/src/modules',
 			'public/src/client',
 			'node_modules',
+			...activePlugins.map(p => 'node_modules/' + p + '/node_modules'),
 		],
 		alias: {
 			assets: path.resolve(__dirname, 'build/public'),
