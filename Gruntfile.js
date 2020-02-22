@@ -29,6 +29,12 @@ module.exports = function (grunt) {
 	prestart.setupWinston();
 
 	function update(action, filepath, target) {
+		worker.kill();
+
+		if (filepath === 'Gruntfile.js') {
+			return;
+		}
+
 		var compiling;
 
 		if (target === 'lessUpdated_Client') {
@@ -49,11 +55,6 @@ module.exports = function (grunt) {
 			incomplete.push(compiling);
 		}
 
-		worker.kill();
-
-		if (filepath === 'Gruntfile.js') {
-			return;
-		}
 		if (!incomplete.length) {
 			run();
 			return;
@@ -76,15 +77,14 @@ module.exports = function (grunt) {
 
 	grunt.registerTask('init', async function () {
 		var done = this.async();
-		await db.init();
-		let plugins = await db.getSortedSetRange('plugins:active', 0, -1);
-		addBaseThemes(plugins);
-		if (!plugins.includes('nodebb-plugin-composer-default')) {
-			plugins.push('nodebb-plugin-composer-default');
-		}
-
-		if (process.argv.includes('--core')) {
-			plugins = [];
+		let plugins = [];
+		if (!process.argv.includes('--core')) {
+			await db.init();
+			plugins = await db.getSortedSetRange('plugins:active', 0, -1);
+			addBaseThemes(plugins);
+			if (!plugins.includes('nodebb-plugin-composer-default')) {
+				plugins.push('nodebb-plugin-composer-default');
+			}
 		}
 
 		// const lessUpdated_Client = plugins.map(p => 'node_modules/' + p + '/**/*.less');
