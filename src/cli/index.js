@@ -191,6 +191,7 @@ program
 	.command('build [targets...]')
 	.description('Compile static assets ' + '(JS, CSS, templates, languages, sounds)'.red)
 	.option('-s, --series', 'Run builds in series without extra processes')
+	.option('-w, --webpack', 'Bundle assets with webpack', true)
 	.action(function (targets, options) {
 		require('./manage').build(targets.length ? targets : true, options);
 	})

@@ -112,8 +112,6 @@ module.exports = async function (app, middleware) {
 	await plugins.reloadRoutes({ router: router });
 	await authRoutes.reloadRoutes({ router: router });
 	addCoreRoutes(app, router, middleware);
-
-	winston.info('Routes added');
 };
 
 function addCoreRoutes(app, router, middleware) {

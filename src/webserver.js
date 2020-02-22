@@ -81,7 +81,6 @@ exports.listen = async function () {
 	helpers.register();
 	logger.init(app);
 	await initializeNodeBB();
-	winston.info('NodeBB Ready');
 
 	require('./socket.io').server.emit('event:nodebb.ready', {
 		'cache-buster': meta.config['cache-buster'],
@@ -235,7 +234,7 @@ function listen(callback) {
 	}
 	port = parseInt(port, 10);
 	if ((port !== 80 && port !== 443) || nconf.get('trust_proxy') === true) {
-		winston.info('Enabling \'trust proxy\'');
+		winston.verbose('Enabling \'trust proxy\'');
 		app.enable('trust proxy');
 	}
 

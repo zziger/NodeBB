@@ -28,16 +28,13 @@ nconf.argv().env({
 
 const winston = require('winston');
 const path = require('path');
-
 const file = require('./src/file');
 
 global.env = process.env.NODE_ENV || 'production';
 
 // Alternate configuration file support
-const	configFile = path.resolve(__dirname, nconf.any(['config', 'CONFIG']) || 'config.json');
-
+const configFile = path.resolve(__dirname, nconf.any(['config', 'CONFIG']) || 'config.json');
 const configExists = file.existsSync(configFile) || (nconf.get('url') && nconf.get('secret') && nconf.get('database'));
-
 const prestart = require('./src/prestart');
 prestart.loadConfig(configFile);
 prestart.setupWinston();
@@ -71,7 +68,7 @@ if (nconf.get('setup') || nconf.get('install')) {
 } else if (nconf.get('plugins')) {
 	require('./src/cli/manage').listPlugins();
 } else if (nconf.get('build')) {
-	require('./src/cli/manage').build(nconf.get('build'));
+	require('./src/cli/manage').build(nconf.get('build'), { webpack: true });
 } else if (nconf.get('events')) {
 	require('./src/cli/manage').listEvents();
 } else {

@@ -99,7 +99,6 @@ aliases = Object.keys(aliases).reduce(function (prev, key) {
 }, {});
 
 function beforeBuild(targets, callback) {
-
 	require('colors');
 	process.stdout.write('  started'.green + '\n'.reset);
 
@@ -216,7 +215,9 @@ exports.build = function (targets, options, callback) {
 			buildTargets(targets, !series, next);
 		},
 		async function () {
-			await bundle();
+			if (options.webpack) {
+				await exports.webpack(options);
+			}
 		},
 		function (next) {
 			totalTime = (Date.now() - startTime) / 1000;
@@ -235,29 +236,35 @@ exports.build = function (targets, options, callback) {
 
 
 function getWebpackConfig() {
-	return require(global.env !== 'development' ? '../../webpack.prod' : '../../webpack.dev');
+	return require(process.env.NODE_ENV !== 'development' ? '../../webpack.prod' : '../../webpack.dev');
 }
 
-async function bundle() {
-	// TODO:
-	// if (process.env.NODE_ENV === 'development') {
-	// 	console.log('not bundling');
-	// 	return;
-	// }
+exports.webpack = async function (options) {
 	winston.info('[build] Bundling with Webpack.');
 	const webpack = require('webpack');
 	const webpackCfg = getWebpackConfig();
-	const pluginPaths = await db.getSortedSetRange('plugins:active', 0, -1);
+	let pluginPaths = await db.getSortedSetRange('plugins:active', 0, -1);
 	if (!pluginPaths.includes('nodebb-plugin-composer-default')) {
 		pluginPaths.push('nodebb-plugin-composer-default');
 	}
 
-	pluginPaths.map(p => 'node_modules/' + p + '/node_modules');
+	pluginPaths = pluginPaths.map(p => 'node_modules/' + p + '/node_modules');
 	webpackCfg.resolve.modules = webpackCfg.resolve.modules.concat(pluginPaths);
 	const util = require('util');
-	const webpackAsync = util.promisify(webpack);
+	const compiler = webpack(webpackCfg);
+	const webpackRun = util.promisify(compiler.run).bind(compiler);
+	const webpackWatch = util.promisify(compiler.watch).bind(compiler);
 	try {
-		const stats = await webpackAsync(webpackCfg);
+		let stats;
+		if (options.watch) {
+			stats = await webpackWatch({
+				poll: 1000,
+				info: 'verbose',
+				'info-verbosity': 'verbose',
+			});
+		} else {
+			stats = await webpackRun();
+		}
 
 		if (stats.hasErrors() || stats.hasWarnings()) {
 			const info = stats.toString('minimal');
@@ -269,7 +276,7 @@ async function bundle() {
 			console.error(err.details);
 		}
 	}
-}
+};
 
 exports.buildAll = function (callback) {
 	exports.build(allTargets, callback);

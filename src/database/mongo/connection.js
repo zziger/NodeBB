@@ -6,7 +6,7 @@ const winston = require('winston');
 const _ = require('lodash');
 
 const connection = module.exports;
-
+let passwordWarned = false;
 connection.getConnectionString = function (mongo) {
 	mongo = mongo || nconf.get('mongo');
 	var usernamePassword = '';
@@ -14,7 +14,10 @@ connection.getConnectionString = function (mongo) {
 	if (mongo.username && mongo.password) {
 		usernamePassword = nconf.get('mongo:username') + ':' + encodeURIComponent(nconf.get('mongo:password')) + '@';
 	} else if (!uri.includes('@') || !uri.slice(uri.indexOf('://') + 3, uri.indexOf('@'))) {
-		winston.warn('You have no mongo username/password setup!');
+		if (!passwordWarned) {
+			winston.warn('You have no mongo username/password setup!');
+			passwordWarned = true;
+		}
 	}
 
 	// Sensible defaults for Mongo, if not set

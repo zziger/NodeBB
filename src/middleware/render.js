@@ -60,19 +60,27 @@ module.exports = function (middleware) {
 			}
 			const ajaxifyData = JSON.stringify(options).replace(/<\//g, '<\\/');
 
-			const renderAsync = util.promisify((templateToRender, options, next) => render.call(self, templateToRender, options, next));
-
-			const results = await utils.promiseParallel({
-				header: renderHeaderFooterAsync('renderHeader', req, res, options),
-				content: renderAsync(templateToRender, options),
-				footer: renderHeaderFooterAsync('renderFooter', req, res, options),
+			const renderAsync = util.promisify((templateToRender, options, next) => {
+				render.call(self, templateToRender, options, function (err, html) {
+					if (err) {
+						winston.error(err.stack);
+						return next(null, '');
+					}
+					next(null, html);
+				});
 			});
 
-			const str = results.header +
+			const [header, content, footer] = await Promise.all([
+				renderHeaderFooterAsync('renderHeader', req, res, options),
+				renderAsync(templateToRender, options),
+				renderHeaderFooterAsync('renderFooter', req, res, options),
+			]);
+
+			const str = header +
 				(res.locals.postHeader || '') +
-				results.content + '<script id="ajaxify-data"></script>' +
+				content + '<script id="ajaxify-data"></script>' +
 				(res.locals.preFooter || '') +
-				results.footer;
+				footer;
 
 			let translated = await translate(str, req, res);
 			translated = translated.replace('<script id="ajaxify-data"></script>', function () {

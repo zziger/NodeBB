@@ -285,7 +285,7 @@ JS.buildBundle = function (target, fork, callback) {
 			});
 		},
 		function (files, next) {
-			var minify = global.env !== 'development';
+			var minify = process.env.NODE_ENV !== 'development';
 			var filePath = path.join(__dirname, '../../build/public', fileNames[target]);
 
 			minifier.js.bundle({
