@@ -1,8 +1,5 @@
 require('bootstrap');
 
-// TODO: couldn't find BS4 compatible npm module for tagsinput
-require('../vendor/jquery/bootstrap-tagsinput/bootstrap-tagsinput.css');
-
 window.$ = require('jquery');
 window.jQuery = window.$;
 window.bootbox = require('bootbox');
