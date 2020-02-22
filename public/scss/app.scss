@@ -3,3 +3,13 @@
 @import "../vendor/jquery/bootstrap-tagsinput/bootstrap-tagsinput.css";
 
 @import "./components/avatars";
+
+// @import "../../__test/test.scss";
+// @import "../../node_modules/__test/test.scss";
+
+@import "~nodebb-theme-palette/theme.scss";
+@import "~__test/test.scss";
+
+// body {
+//     background-color: blue;
+// }

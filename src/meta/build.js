@@ -259,9 +259,8 @@ exports.webpack = async function (options) {
 		let stats;
 		if (options.watch) {
 			stats = await webpackWatch({
-				poll: 1000,
-				info: 'verbose',
-				'info-verbosity': 'verbose',
+				aggregateTimeout: 300,
+				poll: undefined,
 			});
 		} else {
 			stats = await webpackRun();
