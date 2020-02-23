@@ -11,6 +11,23 @@ module.exports = {
 	plugins: [
 		new CleanWebpackPlugin(), // cleans dist folder
 		new MiniCssExtractPlugin(), // extract css to separate file
+		{
+			apply: (compiler) => {
+				compiler.hooks.watchRun.tap('nbbWatchPlugin', () => {
+					// show changed files
+					const watcher = compiler.watchFileSystem.watcher || compiler.watchFileSystem.wfs.watcher;
+					const changedFiles = Object.keys(watcher.mtimes).map((f) => {
+						if (f.startsWith(__dirname)) {
+							f = f.slice(__dirname.length + 1);
+						}
+						return 'webpack:watchRun > ' + f;
+					});
+					if (changedFiles.length) {
+						console.log(changedFiles.join('\n'));
+					}
+				});
+			},
+		},
 	],
 	entry: {
 		app: './public/src/app.js',

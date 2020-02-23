@@ -64,7 +64,7 @@ function minifyModules(modules, fork, callback) {
 		return prev;
 	}, []);
 
-	async.each(moduleDirs, mkdirpCallback, function (err) {
+	async.eachSeries(moduleDirs, mkdirpCallback, function (err) {
 		if (err) {
 			return callback(err);
 		}

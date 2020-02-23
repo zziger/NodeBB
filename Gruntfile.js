@@ -1,12 +1,14 @@
 'use strict';
 
 const path = require('path');
+const util = require('util');
 const nconf = require('nconf');
 nconf.argv().env({
 	separator: '__',
 });
 const winston = require('winston');
 const fork = require('child_process').fork;
+const sleep = util.promisify(setTimeout);
 const env = process.env;
 var worker;
 var incomplete = [];
@@ -130,6 +132,9 @@ module.exports = function (grunt) {
 					'app.js',
 					'install/*.js',
 					'src/**/*.js',
+					'public/src/modules/translator.common.js',
+					'public/src/modules/helpers.common.js',
+					'public/src/utils.common.js',
 					serverUpdated,
 					'!src/upgrades/**'],
 				options: {
@@ -161,6 +166,10 @@ module.exports = function (grunt) {
 			await build.build(true, { webpack: false });
 		}
 		run();
+		// the build step writes a lot of tpl/js files,
+		// wait a second before stating webpack watch,
+		// this prevents unnessary watch triggers
+		await sleep(1000);
 		await build.webpack({ watch: true });
 		done();
 	});

@@ -68,7 +68,8 @@ var targetHandlers = {
 		meta.languages.build(callback);
 	},
 	sounds: function (parallel, callback) {
-		meta.sounds.build(callback);
+		return callback();
+		// meta.sounds.build(callback);
 	},
 };
 
@@ -195,7 +196,7 @@ exports.build = function (targets, options, callback) {
 
 	if (!targets) {
 		winston.info('[build] No valid targets supplied. Aborting.');
-		callback();
+		return callback();
 	}
 
 	var startTime;
@@ -243,7 +244,7 @@ function getWebpackConfig() {
 }
 
 exports.webpack = async function (options) {
-	winston.info('[build] Bundling with Webpack.');
+	winston.info('[build] ' + (options.watch ? 'Watching' : 'Bundling') + ' with Webpack.');
 	const webpack = require('webpack');
 	const activePlugins = await db.getSortedSetRange('plugins:active', 0, -1);
 	if (!activePlugins.includes('nodebb-plugin-composer-default')) {
