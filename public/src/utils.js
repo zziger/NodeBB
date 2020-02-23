@@ -1,6 +1,14 @@
 var $ = require('jquery');
 var utils = require('./utils.common');
 
+utils.getLanguage = function () {
+	var lang = 'en-GB';
+	if (typeof window === 'object' && window.config && window.utils) {
+		lang = utils.params().lang || config.userLang || config.defaultLang || 'en-GB';
+	}
+	return lang;
+};
+
 utils.makeNumbersHumanReadable = function (elements) {
 	elements.each(function () {
 		$(this).html(utils.makeNumberHumanReadable($(this).attr('title')));

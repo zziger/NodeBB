@@ -359,18 +359,7 @@ module.exports = function (utils, load, warn) {
 		 * @returns {string}
 		 */
 		Translator.getLanguage = function getLanguage() {
-			var lang;
-
-			if (typeof window === 'object' && window.config && window.utils) {
-				lang = utils.params().lang || config.userLang || config.defaultLang || 'en-GB';
-			} else {
-				// TODO: this causes chain reaction of requires from server side into bundle
-				// var meta = require('../../../src/meta');
-				// lang = meta.config && meta.config.defaultLang ? meta.config.defaultLang : 'en-GB';
-				return 'en-GB';
-			}
-
-			return lang;
+			return utils.getLanguage();
 		};
 
 		/**

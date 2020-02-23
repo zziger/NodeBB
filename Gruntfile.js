@@ -96,11 +96,7 @@ module.exports = function (grunt) {
 		grunt.config(['watch'], {
 			// lessUpdated_Client: {
 			// 	files: [
-			// 		'public/less/*.less',
-			// 		'!public/less/admin/**/*.less',
 			// 		...lessUpdated_Client,
-			// 		'!node_modules/nodebb-*/node_modules/**',
-			// 		'!node_modules/nodebb-*/.git/**',
 			// 	],
 			// 	options: {
 			// 		interval: 1000,
@@ -108,10 +104,7 @@ module.exports = function (grunt) {
 			// },
 			// lessUpdated_Admin: {
 			// 	files: [
-			// 		'public/less/admin/**/*.less',
 			// 		...lessUpdated_Admin,
-			// 		'!node_modules/nodebb-*/node_modules/**',
-			// 		'!node_modules/nodebb-*/.git/**',
 			// 	],
 			// 	options: {
 			// 		interval: 1000,
@@ -119,7 +112,6 @@ module.exports = function (grunt) {
 			// },
 			clientUpdated: {
 				files: [
-					// 'public/src/**/*.js',
 					...clientUpdated,
 					'node_modules/benchpressjs/build/benchpress.js',
 				],
@@ -136,7 +128,8 @@ module.exports = function (grunt) {
 					'public/src/modules/helpers.common.js',
 					'public/src/utils.common.js',
 					serverUpdated,
-					'!src/upgrades/**'],
+					'!src/upgrades/**',
+				],
 				options: {
 					interval: 1000,
 				},
