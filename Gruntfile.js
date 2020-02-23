@@ -30,41 +30,6 @@ module.exports = function (grunt) {
 	}
 	prestart.setupWinston();
 
-	function update(action, filepath, target) {
-		if (filepath === 'Gruntfile.js') {
-			return;
-		}
-
-		var compiling;
-
-		if (target === 'lessUpdated_Client') {
-			compiling = 'clientCSS';
-		} else if (target === 'lessUpdated_Admin') {
-			compiling = 'acpCSS';
-		} else if (target === 'clientUpdated') {
-			compiling = 'js';
-		} else if (target === 'templatesUpdated') {
-			compiling = 'tpl';
-		} else if (target === 'langUpdated') {
-			compiling = 'lang';
-		} else if (target === 'serverUpdated') {
-			return run();
-		}
-
-		if (compiling && !incomplete.includes(compiling)) {
-			incomplete.push(compiling);
-		}
-
-		require('./src/meta/build').build(incomplete, { webpack: false }, function (err) {
-			if (err) {
-				winston.error(err.stack);
-			}
-			if (worker) {
-				worker.send({ compiling: compiling });
-			}
-		});
-	}
-
 	grunt.initConfig({
 		watch: {},
 	});
@@ -179,7 +144,36 @@ module.exports = function (grunt) {
 	grunt.task.run('init');
 
 	grunt.event.removeAllListeners('watch');
-	grunt.event.on('watch', update);
+	grunt.event.on('watch', function update(action, filepath, target) {
+		var compiling;
+
+		if (target === 'lessUpdated_Client') {
+			compiling = 'clientCSS';
+		} else if (target === 'lessUpdated_Admin') {
+			compiling = 'acpCSS';
+		} else if (target === 'clientUpdated') {
+			compiling = 'js';
+		} else if (target === 'templatesUpdated') {
+			compiling = 'tpl';
+		} else if (target === 'langUpdated') {
+			compiling = 'lang';
+		} else if (target === 'serverUpdated') {
+			return run();
+		}
+
+		if (compiling && !incomplete.includes(compiling)) {
+			incomplete.push(compiling);
+		}
+
+		require('./src/meta/build').build(incomplete, { webpack: false }, function (err) {
+			if (err) {
+				winston.error(err.stack);
+			}
+			if (worker) {
+				worker.send({ compiling: compiling });
+			}
+		});
+	});
 };
 
 function addBaseThemes(plugins) {
