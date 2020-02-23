@@ -85,8 +85,7 @@ module.exports = function (grunt) {
 
 		// const lessUpdated_Client = plugins.map(p => 'node_modules/' + p + '/**/*.less');
 		// const lessUpdated_Admin = plugins.map(p => 'node_modules/' + p + '/**/*.less');
-		const clientUpdated = plugins.map(p => 'node_modules/' + p + '/*.js')
-			.concat(plugins.map(p => 'node_modules/' + p + '/+(public|static)/**/*.js'));
+		const clientUpdated = plugins.map(p => 'node_modules/' + p + '/+(public|static)/**/*.js');
 		const serverUpdated = plugins.map(p => 'node_modules/' + p + '/*.js')
 			.concat(plugins.map(p => 'node_modules/' + p + '/+(lib|src)/**/*.js'));
 		const templatesUpdated = plugins.map(p => 'node_modules/' + p + '/+(public|static|templates)/**/*.tpl');
