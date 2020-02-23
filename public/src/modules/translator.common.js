@@ -490,6 +490,11 @@ module.exports = function (utils, load, warn) {
 		unescape: Translator.unescape,
 		getLanguage: Translator.getLanguage,
 
+		flush: function () {
+			Object.keys(Translator.cache).forEach((code) => {
+				Translator.cache[code].translations = {};
+			});
+		},
 		/**
 		 * Legacy translator function for backwards compatibility
 		 */

@@ -29,8 +29,6 @@ module.exports = function (grunt) {
 	prestart.setupWinston();
 
 	function update(action, filepath, target) {
-		worker.kill();
-
 		if (filepath === 'Gruntfile.js') {
 			return;
 		}
@@ -48,22 +46,20 @@ module.exports = function (grunt) {
 		} else if (target === 'langUpdated') {
 			compiling = 'lang';
 		} else if (target === 'serverUpdated') {
-			// Do nothing, just restart
+			return run();
 		}
 
 		if (compiling && !incomplete.includes(compiling)) {
 			incomplete.push(compiling);
 		}
 
-		if (!incomplete.length) {
-			run();
-			return;
-		}
 		require('./src/meta/build').build(incomplete, { webpack: false }, function (err) {
 			if (err) {
 				winston.error(err.stack);
 			}
-			run();
+			if (worker) {
+				worker.send({ compiling: compiling });
+			}
 		});
 	}
 
@@ -89,9 +85,12 @@ module.exports = function (grunt) {
 
 		// const lessUpdated_Client = plugins.map(p => 'node_modules/' + p + '/**/*.less');
 		// const lessUpdated_Admin = plugins.map(p => 'node_modules/' + p + '/**/*.less');
-		const clientUpdated = plugins.map(p => 'node_modules/' + p + '/**/*.js');
-		const templatesUpdated = plugins.map(p => 'node_modules/' + p + '/**/*.tpl');
-		const langUpdated = plugins.map(p => 'node_modules/' + p + '/**/*.json');
+		const clientUpdated = plugins.map(p => 'node_modules/' + p + '/*.js')
+			.concat(plugins.map(p => 'node_modules/' + p + '/+(public|static)/**/*.js'));
+		const serverUpdated = plugins.map(p => 'node_modules/' + p + '/*.js')
+			.concat(plugins.map(p => 'node_modules/' + p + '/+(lib|src)/**/*.js'));
+		const templatesUpdated = plugins.map(p => 'node_modules/' + p + '/+(public|static|templates)/**/*.tpl');
+		const langUpdated = plugins.map(p => 'node_modules/' + p + '/+(public|static|languages)/**/*.json');
 
 		grunt.config(['watch'], {
 			// lessUpdated_Client: {
@@ -121,16 +120,19 @@ module.exports = function (grunt) {
 				files: [
 					// 'public/src/**/*.js',
 					...clientUpdated,
-					'!node_modules/nodebb-*/node_modules/**',
 					'node_modules/benchpressjs/build/benchpress.js',
-					'!node_modules/nodebb-*/.git/**',
 				],
 				options: {
 					interval: 1000,
 				},
 			},
 			serverUpdated: {
-				files: ['*.js', 'install/*.js', 'src/**/*.js', '!src/upgrades/**'],
+				files: [
+					'app.js',
+					'install/*.js',
+					'src/**/*.js',
+					serverUpdated,
+					'!src/upgrades/**'],
 				options: {
 					interval: 1000,
 				},
@@ -139,8 +141,6 @@ module.exports = function (grunt) {
 				files: [
 					'src/views/**/*.tpl',
 					...templatesUpdated,
-					'!node_modules/nodebb-*/node_modules/**',
-					'!node_modules/nodebb-*/.git/**',
 				],
 				options: {
 					interval: 1000,
@@ -151,11 +151,6 @@ module.exports = function (grunt) {
 					'public/language/en-GB/*.json',
 					'public/language/en-GB/**/*.json',
 					...langUpdated,
-					'!node_modules/nodebb-*/node_modules/**',
-					'!node_modules/nodebb-*/.git/**',
-					'!node_modules/nodebb-*/plugin.json',
-					'!node_modules/nodebb-*/package.json',
-					'!node_modules/nodebb-*/theme.json',
 				],
 				options: {
 					interval: 1000,
@@ -172,6 +167,9 @@ module.exports = function (grunt) {
 	});
 
 	function run() {
+		if (worker) {
+			worker.kill();
+		}
 		worker = fork('app.js', args, {
 			env: env,
 		});
