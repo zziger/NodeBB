@@ -259,10 +259,7 @@ exports.webpack = async function (options) {
 	try {
 		let stats;
 		if (options.watch) {
-			stats = await webpackWatch({
-				aggregateTimeout: 300,
-				poll: undefined,
-			});
+			stats = await webpackWatch(webpackCfg.watchOptions);
 		} else {
 			stats = await webpackRun();
 		}

@@ -39,6 +39,10 @@ module.exports = {
 		path: path.resolve(__dirname, 'dist'),
 		publicPath: '/dist/',
 	},
+	watchOptions: {
+		poll: 500,
+		aggregateTimeout: 300,
+	},
 	resolve: {
 		symlinks: false,
 		modules: [
