@@ -146,7 +146,6 @@ module.exports = function (grunt) {
 	grunt.event.removeAllListeners('watch');
 	grunt.event.on('watch', function update(action, filepath, target) {
 		var compiling;
-
 		if (target === 'lessUpdated_Client') {
 			compiling = 'clientCSS';
 		} else if (target === 'lessUpdated_Admin') {
@@ -158,6 +157,9 @@ module.exports = function (grunt) {
 		} else if (target === 'langUpdated') {
 			compiling = 'lang';
 		} else if (target === 'serverUpdated') {
+			// empty require cache
+			const paths = ['./src/meta/build.js', './src/meta/index.js'];
+			paths.forEach(p => delete require.cache[require.resolve(p)]);
 			return run();
 		}
 
