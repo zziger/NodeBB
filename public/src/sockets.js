@@ -63,7 +63,7 @@ function onConnect() {
 
 		reconnectEl.tooltip('destroy');
 		reconnectEl.html('<i class="fa fa-check"></i>');
-		reconnectAlert.fadeOut(500);
+		reconnectAlert.toast('hide');
 		reconnecting = false;
 
 		reJoinCurrentRoom();
@@ -119,7 +119,7 @@ function onReconnecting() {
 
 	if (!reconnectEl.hasClass('active')) {
 		reconnectEl.html('<i class="fa fa-spinner fa-spin"></i>');
-		reconnectAlert.fadeIn(500).removeClass('hide');
+		reconnectAlert.toast('show');
 	}
 
 	reconnectEl.addClass('active').removeClass('hide').tooltip({

@@ -22,7 +22,7 @@ export default function render(template) {
 		});
 
 		if (location === 'footer' && !$('#content [widget-area="footer"],#content [data-widget-area="footer"]').length) {
-			$('#content').append($('<div class="row"><div data-widget-area="footer" class="col-xs-12"></div></div>'));
+			$('#content').append($('<div class="row"><div data-widget-area="footer" class="col-12 mt-2"></div></div>'));
 		} else if (location === 'sidebar' && !$('#content [widget-area="sidebar"],#content [data-widget-area="sidebar"]').length) {
 			if ($('[component="account/cover"]').length) {
 				$('[component="account/cover"]').nextAll().wrapAll($('<div class="row"><div class="col-lg-9 col-xs-12"></div><div data-widget-area="sidebar" class="col-lg-3 col-xs-12"></div></div></div>'));
