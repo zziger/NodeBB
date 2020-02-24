@@ -35,7 +35,7 @@ var targetHandlers = {
 		meta.js.linkStatics(callback);
 	},
 	'requirejs modules': function (parallel, callback) {
-		meta.js.buildModules(parallel, callback);
+		meta.js.buildModules(callback);
 	},
 	'client js bundle': function (parallel, callback) {
 		meta.js.buildBundle('client', parallel, callback);

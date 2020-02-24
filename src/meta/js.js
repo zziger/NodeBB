@@ -55,43 +55,6 @@ function linkIfLinux(srcPath, destPath, next) {
 
 var basePath = path.resolve(__dirname, '../..');
 
-function minifyModules(modules, fork, callback) {
-	var moduleDirs = modules.reduce(function (prev, mod) {
-		var dir = path.resolve(path.dirname(mod.destPath));
-		if (!prev.includes(dir)) {
-			prev.push(dir);
-		}
-		return prev;
-	}, []);
-
-	async.eachSeries(moduleDirs, mkdirpCallback, function (err) {
-		if (err) {
-			return callback(err);
-		}
-
-		var filtered = modules.reduce(function (prev, mod) {
-			if (mod.srcPath.endsWith('.min.js') || path.dirname(mod.srcPath).endsWith('min')) {
-				prev.skip.push(mod);
-			} else {
-				prev.minify.push(mod);
-			}
-
-			return prev;
-		}, { minify: [], skip: [] });
-
-		async.parallel([
-			function (cb) {
-				minifier.js.minifyBatch(filtered.minify, fork, cb);
-			},
-			function (cb) {
-				async.each(filtered.skip, function (mod, next) {
-					linkIfLinux(mod.srcPath, mod.destPath, next);
-				}, cb);
-			},
-		], callback);
-	});
-}
-
 function linkModules(callback) {
 	var modules = JS.scripts.modules;
 
@@ -101,9 +64,7 @@ function linkModules(callback) {
 
 		async.parallel({
 			dir: function (cb) {
-				mkdirpCallback(path.dirname(destPath), function (err) {
-					cb(err);
-				});
+				mkdirpCallback(path.dirname(destPath), cb);
 			},
 			stats: function (cb) {
 				fs.stat(srcPath, cb);
@@ -123,64 +84,6 @@ function linkModules(callback) {
 
 var moduleDirs = ['modules', 'admin', 'client'];
 
-function getModuleList(callback) {
-	var modules = Object.keys(JS.scripts.modules).map(function (relPath) {
-		return {
-			srcPath: path.join(__dirname, '../../', JS.scripts.modules[relPath]),
-			destPath: path.join(__dirname, '../../build/public/src/modules', relPath),
-		};
-	});
-
-	var coreDirs = moduleDirs.map(function (dir) {
-		return {
-			srcPath: path.join(__dirname, '../../public/src', dir),
-			destPath: path.join(__dirname, '../../build/public/src', dir),
-		};
-	});
-
-	modules = modules.concat(coreDirs);
-
-	var moduleFiles = [];
-	async.each(modules, function (module, next) {
-		var srcPath = module.srcPath;
-		var destPath = module.destPath;
-
-		fs.stat(srcPath, function (err, stats) {
-			if (err) {
-				return next(err);
-			}
-			if (!stats.isDirectory()) {
-				moduleFiles.push(module);
-				return next();
-			}
-
-			file.walk(srcPath, function (err, files) {
-				if (err) {
-					return next(err);
-				}
-
-				var mods = files.filter(function (filePath) {
-					return path.extname(filePath) === '.js';
-				}).map(function (filePath) {
-					return {
-						srcPath: path.normalize(filePath),
-						destPath: path.join(destPath, path.relative(srcPath, filePath)),
-					};
-				});
-
-				moduleFiles = moduleFiles.concat(mods).map(function (mod) {
-					mod.filename = path.relative(basePath, mod.srcPath).replace(/\\/g, '/');
-					return mod;
-				});
-
-				next();
-			});
-		});
-	}, function (err) {
-		callback(err, moduleFiles);
-	});
-}
-
 function clearModules(callback) {
 	var builtPaths = moduleDirs.map(function (p) {
 		return path.join(__dirname, '../../build/public/src', p);
@@ -192,18 +95,11 @@ function clearModules(callback) {
 	});
 }
 
-JS.buildModules = function (fork, callback) {
+JS.buildModules = function (callback) {
 	async.waterfall([
 		clearModules,
 		function (next) {
-			if (true || global.env === 'development') {
-				return linkModules(callback);
-			}
-
-			getModuleList(next);
-		},
-		function (modules, next) {
-			minifyModules(modules, fork, next);
+			linkModules(next);
 		},
 	], callback);
 };
