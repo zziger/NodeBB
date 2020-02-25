@@ -126,22 +126,30 @@ async function compile() {
 	const _rimraf = util.promisify(rimraf);
 
 	await _rimraf(viewsPath);
-	await mkdirp(viewsPath);
 
 	let files = await db.getSortedSetRange('plugins:active', 0, -1);
 	files = await getTemplateDirs(files);
 	files = await getTemplateFiles(files);
 
-	await async.eachLimit(Object.keys(files), 4, async (name) => {
+	const names = Object.keys(files);
+	const paths = {};
+	names.forEach((n) => {
+		paths[path.join(viewsPath, path.dirname(n))] = 1;
+	});
+
+	await async.eachSeries(Object.keys(paths), mkdirp);
+
+	await async.eachLimit(names, 4, async (name) => {
 		const filePath = files[name];
 		let imported = await fsReadFile(filePath, 'utf8');
 		imported = await processImports(files, name, imported);
 
-		await mkdirp(path.join(viewsPath, path.dirname(name)));
+		const compiled = await Benchpress.precompile(imported, { minify: process.env.NODE_ENV !== 'development' });
 
-		await fsWriteFile(path.join(viewsPath, name), imported);
-		const compiled = await Benchpress.precompile(imported, { minify: global.env !== 'development' });
-		await fsWriteFile(path.join(viewsPath, name.replace(/\.tpl$/, '.js')), compiled);
+		await Promise.all([
+			fsWriteFile(path.join(viewsPath, name), imported),
+			fsWriteFile(path.join(viewsPath, name.replace(/\.tpl$/, '.js')), compiled),
+		]);
 	});
 
 	winston.verbose('[meta/templates] Successfully compiled templates.');

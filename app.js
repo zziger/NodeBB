@@ -30,6 +30,7 @@ const winston = require('winston');
 const path = require('path');
 const file = require('./src/file');
 
+process.env.NODE_ENV = process.env.NODE_ENV || 'production';
 global.env = process.env.NODE_ENV || 'production';
 
 // Alternate configuration file support

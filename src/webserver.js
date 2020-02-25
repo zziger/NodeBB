@@ -116,12 +116,8 @@ function setupExpressApp(app) {
 
 	app.renderAsync = util.promisify((tpl, data, callback) => app.render(tpl, data, callback));
 
-	app.engine('tpl', function (filepath, data, next) {
-		filepath = filepath.replace(/\.tpl$/, '.js');
-
-		Benchpress.__express(filepath, data, next);
-	});
-	app.set('view engine', 'tpl');
+	app.engine('js', Benchpress.__express);
+	app.set('view engine', 'js');
 	app.set('views', viewsDir);
 	app.set('json spaces', global.env === 'development' ? 4 : 0);
 	app.use(flash());
