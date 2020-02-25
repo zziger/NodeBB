@@ -2,6 +2,9 @@
 'use strict';
 
 const _ = require('lodash');
+const fs = require('fs').promises;
+const path = require('path');
+const nconf = require('nconf');
 
 const db = require('../database');
 const user = require('../user');
@@ -130,18 +133,32 @@ Categories.getCategories = async function (cids, uid) {
 	}
 	uid = parseInt(uid, 10);
 
-	const [categories, tagWhitelist, hasRead] = await Promise.all([
-		Categories.getCategoriesData(cids),
+	let categories = await Categories.getCategoriesData(cids);
+	const [tagWhitelist, hasRead] = await Promise.all([
 		Categories.getTagWhitelist(cids),
 		Categories.hasReadCategories(cids, uid),
 	]);
-	categories.forEach(function (category, i) {
+
+	categories = await Promise.all(categories.map(async (category, i) => {
 		if (category) {
 			category.tagWhitelist = tagWhitelist[i];
 			category['unread-class'] = (category.topic_count === 0 || (hasRead[i] && uid !== 0)) ? '' : 'unread';
+			if (!category.backgroundImage) {
+				category.backgroundImage = await Categories.getFallbackImage(category.cid);
+			}
 		}
-	});
+
+		return category;
+	}));
+
 	return categories;
+};
+
+Categories.getFallbackImage = async (cid) => {
+	const imageDir = path.resolve(nconf.get('base_dir'), 'public/images/covers');
+	const images = await fs.readdir(imageDir);
+
+	return path.resolve(nconf.get('relative_path') + '/assets/images/covers/' + images[cid % images.length]);
 };
 
 Categories.getTagWhitelist = async function (cids) {
