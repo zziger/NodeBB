@@ -157,8 +157,7 @@ Categories.getCategories = async function (cids, uid) {
 Categories.getFallbackImage = async (cid) => {
 	const imageDir = path.resolve(nconf.get('base_dir'), 'public/images/covers');
 	const images = await fs.readdir(imageDir);
-
-	return path.resolve(nconf.get('relative_path') + '/assets/images/covers/' + images[cid % images.length]);
+	return nconf.get('relative_path') + '/assets/images/covers/' + images[cid % images.length];
 };
 
 Categories.getTagWhitelist = async function (cids) {
