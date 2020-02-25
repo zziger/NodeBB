@@ -137,7 +137,7 @@ async function compile() {
 		paths[path.join(viewsPath, path.dirname(n))] = 1;
 	});
 
-	await async.eachSeries(Object.keys(paths), mkdirp);
+	await async.eachSeries(Object.keys(paths), async path => mkdirp(path));
 
 	await async.eachLimit(names, 4, async (name) => {
 		const filePath = files[name];
