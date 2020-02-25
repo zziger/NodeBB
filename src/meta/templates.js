@@ -1,6 +1,7 @@
 'use strict';
 
 const util = require('util');
+const async = require('async');
 let mkdirp = require('mkdirp');
 mkdirp = mkdirp.hasOwnProperty('native') ? mkdirp : util.promisify(mkdirp);
 const rimraf = require('rimraf');
@@ -130,9 +131,8 @@ async function compile() {
 	let files = await db.getSortedSetRange('plugins:active', 0, -1);
 	files = await getTemplateDirs(files);
 	files = await getTemplateFiles(files);
-	fs.writeFile(path.join(viewsPath, 'template_map.json'), JSON.stringify(files, null, 2));
 
-	await Promise.all(Object.keys(files).map(async (name) => {
+	await async.eachLimit(Object.keys(files), 4, async (name) => {
 		const filePath = files[name];
 		let imported = await fsReadFile(filePath, 'utf8');
 		imported = await processImports(files, name, imported);
@@ -142,7 +142,7 @@ async function compile() {
 		await fsWriteFile(path.join(viewsPath, name), imported);
 		const compiled = await Benchpress.precompile(imported, { minify: global.env !== 'development' });
 		await fsWriteFile(path.join(viewsPath, name.replace(/\.tpl$/, '.js')), compiled);
-	}));
+	});
 
 	winston.verbose('[meta/templates] Successfully compiled templates.');
 }

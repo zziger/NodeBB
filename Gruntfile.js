@@ -11,7 +11,6 @@ const fork = require('child_process').fork;
 const sleep = util.promisify(setTimeout);
 const env = process.env;
 var worker;
-var incomplete = [];
 
 env.NODE_ENV = env.NODE_ENV || 'development';
 
@@ -163,11 +162,7 @@ module.exports = function (grunt) {
 			return run();
 		}
 
-		if (compiling && !incomplete.includes(compiling)) {
-			incomplete.push(compiling);
-		}
-
-		require('./src/meta/build').build(incomplete, { webpack: false }, function (err) {
+		require('./src/meta/build').build([compiling], { webpack: false }, function (err) {
 			if (err) {
 				winston.error(err.stack);
 			}

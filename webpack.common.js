@@ -6,25 +6,20 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const activePlugins = require('./build/active_plugins');
-
+let showEmits = false;
 module.exports = {
 	plugins: [
 		new CleanWebpackPlugin(), // cleans dist folder
 		new MiniCssExtractPlugin(), // extract css to separate file
 		{
 			apply: (compiler) => {
-				compiler.hooks.watchRun.tap('nbbWatchPlugin', () => {
-					// show changed files
-					const watcher = compiler.watchFileSystem.watcher || compiler.watchFileSystem.wfs.watcher;
-					const changedFiles = Object.keys(watcher.mtimes).map((f) => {
-						if (f.startsWith(__dirname)) {
-							f = f.slice(__dirname.length + 1);
-						}
-						return 'webpack:watchRun > ' + f;
-					});
-					if (changedFiles.length) {
-						console.log(changedFiles.join('\n'));
+				compiler.hooks.assetEmitted.tap('nbbWatchPlugin', (file) => {
+					if (showEmits) {
+						console.log('webpack:assetEmitted > ' + module.exports.output.publicPath + file);
 					}
+				});
+				compiler.hooks.done.tap('done', () => {
+					showEmits = true;
 				});
 			},
 		},
@@ -37,11 +32,11 @@ module.exports = {
 		filename: '[name].bundle.js',
 		chunkFilename: '[name].bundle.js',
 		path: path.resolve(__dirname, 'dist'),
-		publicPath: 'dist/',
+		publicPath: '/dist/',
 	},
 	watchOptions: {
 		poll: 500,
-		aggregateTimeout: 300,
+		aggregateTimeout: 500,
 	},
 	resolve: {
 		symlinks: false,
@@ -67,15 +62,6 @@ module.exports = {
 	},
 	module: {
 		rules: [
-			{
-				test: /\.tpl$/,
-				use: [
-					{
-						loader: path.resolve('nbbTplLoader.js'),
-						options: {},
-					},
-				],
-			},
 			// {
 			// 	test: /\.js$/,
 			// 	exclude: /(node_modules|bower_components)/,
