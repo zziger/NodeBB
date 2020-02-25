@@ -37,7 +37,7 @@ module.exports = {
 		filename: '[name].bundle.js',
 		chunkFilename: '[name].bundle.js',
 		path: path.resolve(__dirname, 'dist'),
-		publicPath: '/dist/',
+		publicPath: 'dist/',
 	},
 	watchOptions: {
 		poll: 500,
@@ -67,6 +67,15 @@ module.exports = {
 	},
 	module: {
 		rules: [
+			{
+				test: /\.tpl$/,
+				use: [
+					{
+						loader: path.resolve('nbbTplLoader.js'),
+						options: {},
+					},
+				],
+			},
 			// {
 			// 	test: /\.js$/,
 			// 	exclude: /(node_modules|bower_components)/,

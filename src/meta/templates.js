@@ -130,6 +130,7 @@ async function compile() {
 	let files = await db.getSortedSetRange('plugins:active', 0, -1);
 	files = await getTemplateDirs(files);
 	files = await getTemplateFiles(files);
+	fs.writeFile(path.join(viewsPath, 'template_map.json'), JSON.stringify(files, null, 2));
 
 	await Promise.all(Object.keys(files).map(async (name) => {
 		const filePath = files[name];
