@@ -25,6 +25,13 @@ require('./recentreplies')(Categories);
 require('./update')(Categories);
 require('./watch')(Categories);
 
+// Run once on library load
+(async () => {
+	// Fallback category background images
+	const imageDir = path.resolve(nconf.get('base_dir'), 'public/images/covers');
+	Categories.fallbackCategoryImages = await fs.readdir(imageDir);
+})();
+
 Categories.exists = async function (cid) {
 	if (Array.isArray(cid)) {
 		return await db.exists(cid.map(cid => 'category:' + cid));
@@ -154,11 +161,7 @@ Categories.getCategories = async function (cids, uid) {
 	return categories;
 };
 
-Categories.getFallbackImage = async (cid) => {
-	const imageDir = path.resolve(nconf.get('base_dir'), 'public/images/covers');
-	const images = await fs.readdir(imageDir);
-	return nconf.get('relative_path') + '/assets/images/covers/' + images[cid % images.length];
-};
+Categories.getFallbackImage = async cid => nconf.get('relative_path') + '/assets/images/covers/' + Categories.fallbackCategoryImages[cid % Categories.fallbackCategoryImages.length];
 
 Categories.getTagWhitelist = async function (cids) {
 	const cachedData = {};
