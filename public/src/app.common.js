@@ -100,66 +100,6 @@ app.cacheBuster = config['cache-buster'];
 		});
 	};
 
-	app.updateHeader = function (data, callback) {
-		/**
-		 * data:
-		 *   header (obj)
-		 *   config (obj)
-		 *   next (string)
-		 */
-
-		require([
-			'forum/unread',
-			'forum/header/notifications',
-			'forum/header/chat',
-		], function (Unread, Notifications, Chat) {
-			app.user = data.header.user;
-			data.header.config = data.config;
-			config = data.config;
-			Benchpress.setGlobal('config', config);
-
-			var htmlEl = $('html');
-			htmlEl.attr('data-dir', data.header.languageDirection);
-			htmlEl.css('direction', data.header.languageDirection);
-
-			// Manually reconnect socket.io
-			socket.close();
-			socket.open();
-
-			// Re-render top bar menu
-			var toRender = {
-				'slideout-menu': $('.slideout-menu'),
-				menu: $('#header-menu .container'),
-				'chats-menu': $('#chats-menu'),
-			};
-			Promise.all(Object.keys(toRender).map(function (tpl) {
-				return Benchpress.render('partials/' + tpl, data.header).then(function (render) {
-					return translator.Translator.create().translate(render);
-				});
-			})).then(function (html) {
-				Object.keys(toRender)
-					.map(function (k) { return toRender[k]; })
-					.forEach(function (element, idx) {
-						element.html(html[idx]);
-					});
-				Unread.initUnreadTopics();
-				Notifications.prepareDOM();
-				Chat.prepareDOM();
-				app.reskin(data.header.bootswatchSkin);
-				translator.switchTimeagoLanguage(callback);
-				bootbox.setLocale(config.userLang);
-
-				if (config.searchEnabled) {
-					app.handleSearch();
-				}
-
-				handleStatusChange();
-
-				$(window).trigger('action:app.updateHeader');
-			});
-		});
-	};
-
 	app.logout = function (e) {
 		if (e) {
 			e.preventDefault();
@@ -179,29 +119,12 @@ app.cacheBuster = config['cache-buster'];
 				'x-csrf-token': config.csrf_token,
 			},
 			success: function (data) {
-				// ACP logouts go to frontend via page load, not ajaxify
-				if (ajaxify.data.template.name.startsWith('admin/')) {
-					$(window).trigger('action:app.loggedOut', data);
-					window.location.href = config.relative_path + (data.next || '/');
-					return;
+				$(window).trigger('action:app.loggedOut', data);
+				if (data.next) {
+					window.location.href = data.next;
+				} else {
+					window.location.reload();
 				}
-
-				app.updateHeader(data, function () {
-					// Overwrite in hook (below) to redirect elsewhere
-					data.next = data.next || undefined;
-
-					$(window).trigger('action:app.loggedOut', data);
-					if (data.next) {
-						if (data.next.startsWith('http')) {
-							window.location.href = data.next;
-							return;
-						}
-
-						ajaxify.go(data.next);
-					} else {
-						ajaxify.refresh();
-					}
-				});
 			},
 		});
 	};

@@ -1,6 +1,6 @@
-
+<!-- IMPORT admin/partials/settings/header.tpl -->
 <div class="row post-cache">
-	<div class="col-lg-9">
+	<div class="col-lg-12">
 		<div class="row">
 			<div class="col-lg-3">
 				<div class="panel panel-default">
@@ -102,18 +102,6 @@
 			</div>
 		</div>
 	</div>
-	<div class="col-lg-3 acp-sidebar">
-		<div class="panel panel-default">
-			<div class="panel-heading">[[admin/advanced/cache:control-panel]]</div>
-			<div class="panel-body">
-				<button class="btn btn-primary" id="save">[[admin/advanced/cache:update-settings]]</button>
-			</div>
-		</div>
-	</div>
 </div>
 
-<script>
-	require(['admin/settings'], function(Settings) {
-		Settings.prepare();
-	});
-</script>
+<!-- IMPORT admin/partials/settings/footer.tpl -->

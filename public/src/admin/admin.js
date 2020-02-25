@@ -26,6 +26,12 @@ var Slideout = require('slideout');
 	$(window).on('action:ajaxify.end', function () {
 		showCorrectNavTab();
 		startLogoutTimer();
+		if ($('.settings').length) {
+			require(['admin/settings'], function (Settings) {
+				Settings.prepare();
+				Settings.populateTOC();
+			});
+		}
 	});
 
 	function showCorrectNavTab() {

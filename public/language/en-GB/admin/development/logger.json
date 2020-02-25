@@ -5,8 +5,5 @@
 	"enable-http": "Enable HTTP logging",
 	"enable-socket": "Enable socket.io event logging",
 	"file-path": "Path to log file",
-	"file-path-placeholder": "/path/to/log/file.log ::: leave blank to log to your terminal",
-
-	"control-panel": "Logger Control Panel",
-	"update-settings": "Update Logger Settings"
+	"file-path-placeholder": "/path/to/log/file.log ::: leave blank to log to your terminal"
 }

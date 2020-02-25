@@ -1,3 +1,4 @@
+<!-- IMPORT admin/partials/settings/header.tpl -->
 <div class="row logger">
 	<div class="col-lg-9">
 		<div class="panel panel-default">
@@ -31,22 +32,7 @@
 				</form>
 			</div>
 		</div>
-
-	</div>
-
-	<div class="col-lg-3 acp-sidebar">
-		<div class="panel panel-default">
-			<div class="panel-heading">[[admin/development/logger:control-panel]]</div>
-			<div class="panel-body">
-				<button class="btn btn-primary" id="save">[[admin/development/logger:update-settings]]</button>
-			</div>
-		</div>
 	</div>
 </div>
 
-
-<script>
-	require(['admin/settings'], function(Settings) {
-		Settings.prepare();
-	});
-</script>
+<!-- IMPORT admin/partials/settings/footer.tpl -->
