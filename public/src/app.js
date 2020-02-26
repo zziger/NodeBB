@@ -2,7 +2,7 @@ require('./app.common');
 
 require('../scss/app.scss');
 
-require('./clientScripts');
+require('../../build/public/clientScripts.min.js');
 
 const notifications = require('./client/header/notifications');
 const chat = require('./client/header/chat');
