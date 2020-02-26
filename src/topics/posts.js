@@ -9,7 +9,7 @@ var user = require('../user');
 var posts = require('../posts');
 var meta = require('../meta');
 var plugins = require('../plugins');
-var utils = require('../../public/src/utils');
+var utils = require('../utils');
 
 module.exports = function (Topics) {
 	Topics.onNewPostMade = async function (postData) {

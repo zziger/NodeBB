@@ -7,7 +7,6 @@ node_modules/
 logs/
 /public/templates
 /public/uploads
-/public/sounds
 /public/vendor
 /public/src/modules/string.js
 .idea/
@@ -16,6 +15,7 @@ logs/
 *.iws
 /coverage
 /build
+/dist
 .eslintrc
 test/files
 *.min.js

@@ -1,6 +1,3 @@
-'use strict';
-
-
 define('admin/settings/cookies', [
 	'admin/modules/colorpicker',
 ], function (colorpicker) {

@@ -1,7 +1,4 @@
-'use strict';
-
-
-define('forum/account/settings', ['forum/account/header', 'components', 'sounds', 'translator'], function (header, components, sounds, translator) {
+define('forum/account/settings', ['forum/account/header', 'components', 'translator'], function (header, components, translator) {
 	var	AccountSettings = {};
 
 	// If page skin is changed but not saved, switch the skin back
@@ -35,14 +32,6 @@ define('forum/account/settings', ['forum/account/header', 'components', 'sounds'
 		});
 
 		$('[data-property="homePageRoute"]').on('change', toggleCustomRoute);
-
-		$('.account').find('button[data-action="play"]').on('click', function (e) {
-			e.preventDefault();
-
-			var	soundName = $(this).parent().parent().find('select')
-				.val();
-			sounds.playSound(soundName);
-		});
 
 		toggleCustomRoute();
 
@@ -92,8 +81,6 @@ define('forum/account/settings', ['forum/account/header', 'components', 'sounds'
 					}
 				}
 			}
-
-			sounds.loadMap();
 
 			if (languageChanged && parseInt(app.user.uid, 10) === parseInt(ajaxify.data.theirid, 10)) {
 				translator.translate('[[language:dir]]', config.userLang, function (translated) {

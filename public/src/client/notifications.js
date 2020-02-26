@@ -1,6 +1,3 @@
-'use strict';
-
-
 define('forum/notifications', ['components'], function (components) {
 	var Notifications = {};
 

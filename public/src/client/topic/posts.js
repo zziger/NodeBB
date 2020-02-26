@@ -1,6 +1,3 @@
-'use strict';
-
-
 define('forum/topic/posts', [
 	'forum/pagination',
 	'forum/infinitescroll',

@@ -1,6 +1,3 @@
-'use strict';
-
-
 define('sort', ['components'], function (components) {
 	var module = {};
 

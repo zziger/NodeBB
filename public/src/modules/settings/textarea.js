@@ -1,5 +1,3 @@
-'use strict';
-
 define('settings/textarea', function () {
 	var Settings = null;
 	var SettingsArea;

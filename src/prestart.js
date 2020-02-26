@@ -87,6 +87,18 @@ function loadConfig(configFile) {
 	nconf.stores.env.readOnly = true;
 
 	nconf.set('runJobs', nconf.get('isPrimary') === 'true' && !nconf.get('jobsDisabled'));
+
+	if (!nconf.get('sessionKey')) {
+		nconf.set('sessionKey', 'express.sid');
+	}
+	// Parse out the relative_path and other goodies from the configured URL
+	const urlObject = url.parse(nconf.get('url'));
+	const relativePath = urlObject.pathname !== '/' ? urlObject.pathname.replace(/\/+$/, '') : '';
+	nconf.set('base_url', urlObject.protocol + '//' + urlObject.host);
+	nconf.set('secure', urlObject.protocol === 'https:');
+	nconf.set('use_port', !!urlObject.port);
+	nconf.set('relative_path', relativePath);
+	nconf.set('port', nconf.get('PORT') || nconf.get('port') || urlObject.port || (nconf.get('PORT_ENV_VAR') ? nconf.get(nconf.get('PORT_ENV_VAR')) : false) || 4567);
 }
 
 function versionCheck() {

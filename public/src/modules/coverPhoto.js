@@ -1,6 +1,3 @@
-'use strict';
-
-
 define('coverPhoto', [
 	'vendor/jquery/draggable-background/backgroundDraggable',
 ], function () {

@@ -1,6 +1,3 @@
-'use strict';
-
-
 define('forum/topic/change-owner', [
 	'components',
 	'postSelect',

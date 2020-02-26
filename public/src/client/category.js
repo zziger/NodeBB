@@ -1,5 +1,3 @@
-'use strict';
-
 define('forum/category', [
 	'forum/infinitescroll',
 	'share',

@@ -140,9 +140,6 @@ describe('Build', function (done) {
 	it('should build requirejs modules', function (done) {
 		build.build(['requirejs modules'], function (err) {
 			assert.ifError(err);
-			var filename = path.join(__dirname, '../build/public/src/modules/Chart.js');
-			assert(file.existsSync(filename));
-			assert(fs.readFileSync(filename).toString().startsWith('/*!\n * Chart.js'));
 			done();
 		});
 	});
@@ -150,9 +147,8 @@ describe('Build', function (done) {
 	it('should build client js bundle', function (done) {
 		build.build(['client js bundle'], function (err) {
 			assert.ifError(err);
-			var filename = path.join(__dirname, '../build/public/nodebb.min.js');
-			assert(file.existsSync(filename));
-			assert(fs.readFileSync(filename).length > 1000);
+			assert(file.existsSync(path.join(__dirname, '../dist/app.bundle.js')));
+			assert(file.existsSync(path.join(__dirname, '../dist/app.css')));
 			done();
 		});
 	});
@@ -160,34 +156,8 @@ describe('Build', function (done) {
 	it('should build admin js bundle', function (done) {
 		build.build(['admin js bundle'], function (err) {
 			assert.ifError(err);
-			var filename = path.join(__dirname, '../build/public/acp.min.js');
-			assert(file.existsSync(filename));
-			assert(fs.readFileSync(filename).length > 1000);
-			done();
-		});
-	});
-
-	it('should build client side styles', function (done) {
-		build.build(['client side styles'], function (err) {
-			assert.ifError(err);
-			var filename = path.join(__dirname, '../build/public/client.css');
-			assert(file.existsSync(filename));
-			assert(fs.readFileSync(filename).toString().startsWith('/*! normalize.css'));
-			done();
-		});
-	});
-
-	it('should build admin control panel styles', function (done) {
-		build.build(['admin control panel styles'], function (err) {
-			assert.ifError(err);
-			var filename = path.join(__dirname, '../build/public/admin.css');
-			assert(file.existsSync(filename));
-			var adminCSS = fs.readFileSync(filename).toString();
-			if (global.env === 'production') {
-				assert(adminCSS.startsWith('@charset "UTF-8";') || adminCSS.startsWith('@import url'));
-			} else {
-				assert(adminCSS.startsWith('.recent-replies'));
-			}
+			assert(file.existsSync(path.join(__dirname, '../dist/admin.bundle.js')));
+			assert(file.existsSync(path.join(__dirname, '../dist/admin.css')));
 			done();
 		});
 	});
@@ -216,22 +186,6 @@ describe('Build', function (done) {
 			assert(file.existsSync(mdFile), 'markdown.json exists');
 			var md = fs.readFileSync(mdFile).toString();
 			assert.strictEqual(JSON.parse(md).bold, 'bolded text', 'markdown.json contains correct translations');
-
-			done();
-		});
-	});
-
-	it('should build sounds', function (done) {
-		build.build(['sounds'], function (err) {
-			assert.ifError(err);
-
-			var mapFile = path.join(__dirname, '../build/public/sounds/fileMap.json');
-			assert(file.existsSync(mapFile));
-			var fileMap = JSON.parse(fs.readFileSync(mapFile));
-			assert.strictEqual(fileMap['Default | Deedle-dum'], 'nodebb-plugin-soundpack-default/notification.mp3');
-
-			var deebleDumFile = path.join(__dirname, '../build/public/sounds/nodebb-plugin-soundpack-default/notification.mp3');
-			assert(file.existsSync(deebleDumFile));
 
 			done();
 		});

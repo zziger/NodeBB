@@ -1,6 +1,3 @@
-'use strict';
-
-
 define('admin/general/social', [], function () {
 	var social = {};
 

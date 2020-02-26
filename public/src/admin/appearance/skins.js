@@ -1,6 +1,3 @@
-'use strict';
-
-
 define('admin/appearance/skins', ['translator', 'benchpress'], function (translator, Benchpress) {
 	var Skins = {};
 

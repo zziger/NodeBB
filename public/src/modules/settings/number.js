@@ -1,5 +1,3 @@
-'use strict';
-
 define('settings/number', function () {
 	return {
 		types: ['number'],

@@ -1,6 +1,3 @@
-'use strict';
-
-
 define('forum/search', ['search', 'autocomplete', 'storage'], function (searchModule, autocomplete, storage) {
 	var	Search = {};
 

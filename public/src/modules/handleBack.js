@@ -1,5 +1,3 @@
-'use strict';
-
 define('handleBack', [
 	'components',
 	'storage',

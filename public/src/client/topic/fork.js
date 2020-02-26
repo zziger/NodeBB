@@ -1,6 +1,3 @@
-'use strict';
-
-
 define('forum/topic/fork', ['components', 'postSelect'], function (components, postSelect) {
 	var Fork = {};
 	var forkModal;

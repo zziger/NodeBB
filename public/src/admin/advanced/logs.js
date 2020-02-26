@@ -1,6 +1,3 @@
-'use strict';
-
-
 define('admin/advanced/logs', function () {
 	var	Logs = {};
 

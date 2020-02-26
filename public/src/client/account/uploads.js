@@ -1,5 +1,3 @@
-'use strict';
-
 define('forum/account/uploads', ['forum/account/header'], function (header) {
 	var AccountUploads = {};
 

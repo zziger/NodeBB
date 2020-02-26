@@ -1,10 +1,10 @@
 'use strict';
 
 
-var assert = require('assert');
-var shim = require('../public/src/modules/translator.js');
-var Translator = shim.Translator;
-var db = require('./mocks/databasemock');
+const assert = require('assert');
+const shim = require('../src/translator');
+const Translator = shim.Translator;
+const db = require('./mocks/databasemock');
 
 describe('Translator shim', function () {
 	describe('.translate()', function () {

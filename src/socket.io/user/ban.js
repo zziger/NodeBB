@@ -11,7 +11,7 @@ const privileges = require('../../privileges');
 const plugins = require('../../plugins');
 const emailer = require('../../emailer');
 const translator = require('../../translator');
-const utils = require('../../../public/src/utils');
+const utils = require('../../utils');
 
 module.exports = function (SocketUser) {
 	SocketUser.banUsers = async function (socket, data) {

@@ -1,5 +1,3 @@
-'use strict';
-
 define('categorySearch', function () {
 	var categorySearch = {};
 

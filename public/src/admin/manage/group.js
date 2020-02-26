@@ -1,6 +1,3 @@
-'use strict';
-
-
 define('admin/manage/group', [
 	'forum/groups/memberlist',
 	'iconSelect',

@@ -1,6 +1,3 @@
-'use strict';
-
-
 define('forum/groups/memberlist', ['autocomplete'], function (autocomplete) {
 	var MemberList = {};
 	var searchInterval;

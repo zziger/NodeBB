@@ -1,5 +1,3 @@
-'use strict';
-
 define('settings/object', function () {
 	var SettingsObject;
 	var helper = null;

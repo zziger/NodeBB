@@ -1,6 +1,3 @@
-'use strict';
-
-
 define('postSelect', ['components'], function (components) {
 	var PostSelect = {};
 	var onSelect;

@@ -1,6 +1,5 @@
-'use strict';
 
-
+// TODO: remove this file, move the functionality to app.load
 define('forum/footer', [
 	'components',
 	'translator',

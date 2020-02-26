@@ -1,6 +1,3 @@
-'use strict';
-
-
 define('iconSelect', ['benchpress'], function (Benchpress) {
 	var iconSelect = {};
 

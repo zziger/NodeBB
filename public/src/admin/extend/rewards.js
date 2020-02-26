@@ -1,9 +1,5 @@
-'use strict';
-
-
 define('admin/extend/rewards', ['translator', 'benchpress'], function (translator, Benchpress) {
 	var rewards = {};
-
 
 	var available;
 	var active;

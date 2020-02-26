@@ -1,5 +1,3 @@
-'use strict';
-
 define('admin/manage/users', ['translator', 'benchpress', 'autocomplete'], function (translator, Benchpress, autocomplete) {
 	var Users = {};
 

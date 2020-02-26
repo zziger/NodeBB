@@ -1,6 +1,3 @@
-'use strict';
-
-
 define('forum/topic/replies', ['navigator', 'components', 'forum/topic/posts'], function (navigator, components, posts) {
 	var Replies = {};
 

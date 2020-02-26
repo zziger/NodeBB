@@ -1,6 +1,3 @@
-'use strict';
-
-
 define('admin/settings', ['uploader'], function (uploader) {
 	var Settings = {};
 
@@ -121,12 +118,7 @@ define('admin/settings', ['uploader'], function (uploader) {
 					showHelp: uploadBtn.attr('data-help') ? uploadBtn.attr('data-help') === 1 : undefined,
 					accept: uploadBtn.attr('data-accept'),
 				}, function (image) {
-					// need to move these into template, ex data-callback
-					if (ajaxify.currentPage === 'admin/general/sounds') {
-						ajaxify.refresh();
-					} else {
-						$('#' + uploadBtn.attr('data-target')).val(image);
-					}
+					$('#' + uploadBtn.attr('data-target')).val(image);
 				});
 			});
 		});

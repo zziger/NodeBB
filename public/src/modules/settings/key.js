@@ -1,5 +1,3 @@
-'use strict';
-
 define('settings/key', function () {
 	var SettingsKey;
 	var helper = null;

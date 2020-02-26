@@ -1,6 +1,3 @@
-'use strict';
-
-
 define('forum/chats/recent', function () {
 	var recent = {};
 

@@ -1,5 +1,3 @@
-'use strict';
-
 define('topicList', [
 	'forum/infinitescroll',
 	'handleBack',

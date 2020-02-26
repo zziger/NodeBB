@@ -1,5 +1,3 @@
-'use strict';
-
 define('forum/flags/detail', ['forum/flags/list', 'components', 'translator', 'benchpress'], function (FlagsList, components, translator, Benchpress) {
 	var Flags = {};
 

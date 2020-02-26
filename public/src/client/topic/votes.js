@@ -1,6 +1,3 @@
-'use strict';
-
-
 define('forum/topic/votes', ['components', 'translator', 'benchpress'], function (components, translator, Benchpress) {
 	var Votes = {};
 

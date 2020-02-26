@@ -1,6 +1,3 @@
-'use strict';
-
-
 define('forum/account/edit', ['forum/account/header', 'translator', 'components', 'pictureCropper', 'benchpress'], function (header, translator, components, pictureCropper, Benchpress) {
 	var AccountEdit = {};
 

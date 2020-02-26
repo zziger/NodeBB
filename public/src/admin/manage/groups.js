@@ -1,6 +1,3 @@
-'use strict';
-
-
 define('admin/manage/groups', ['translator', 'benchpress'], function (translator, Benchpress) {
 	var	Groups = {};
 

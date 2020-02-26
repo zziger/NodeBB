@@ -1,5 +1,3 @@
-'use strict';
-
 define('settings/array', function () {
 	var SettingsArray;
 	var helper = null;

@@ -16,7 +16,6 @@
 			<li><a href="{relative_path}/admin/general/homepage">[[admin/menu:general/homepage]]</a></li>
 			<li><a href="{relative_path}/admin/general/navigation">[[admin/menu:general/navigation]]</a></li>
 			<li><a href="{relative_path}/admin/general/languages">[[admin/menu:general/languages]]</a></li>
-			<li><a href="{relative_path}/admin/general/sounds">[[admin/menu:general/sounds]]</a></li>
 			<li><a href="{relative_path}/admin/general/social">[[admin/menu:general/social]]</a></li>
 		</ul>
 	</section>
@@ -179,7 +178,6 @@
 					<li><a href="{relative_path}/admin/general/homepage">[[admin/menu:general/homepage]]</a></li>
 					<li><a href="{relative_path}/admin/general/navigation">[[admin/menu:general/navigation]]</a></li>
 					<li><a href="{relative_path}/admin/general/languages">[[admin/menu:general/languages]]</a></li>
-					<li><a href="{relative_path}/admin/general/sounds">[[admin/menu:general/sounds]]</a></li>
 					<li><a href="{relative_path}/admin/general/social">[[admin/menu:general/social]]</a></li>
 				</ul>
 			</li>

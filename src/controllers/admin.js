@@ -1,6 +1,6 @@
 'use strict';
 
-var adminController = {
+module.exports = {
 	dashboard: require('./admin/dashboard'),
 	categories: require('./admin/categories'),
 	privileges: require('./admin/privileges'),
@@ -25,7 +25,6 @@ var adminController = {
 	languages: require('./admin/languages'),
 	settings: require('./admin/settings'),
 	logger: require('./admin/logger'),
-	sounds: require('./admin/sounds'),
 	homepage: require('./admin/homepage'),
 	navigation: require('./admin/navigation'),
 	social: require('./admin/social'),
@@ -34,6 +33,3 @@ var adminController = {
 	uploads: require('./admin/uploads'),
 	info: require('./admin/info'),
 };
-
-
-module.exports = adminController;

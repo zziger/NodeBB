@@ -1,6 +1,3 @@
-'use strict';
-
-
 define('forum/account/edit/username', ['forum/account/header'], function (header) {
 	var AccountEditUsername = {};
 

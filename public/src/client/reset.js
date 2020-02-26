@@ -1,6 +1,3 @@
-'use strict';
-
-
 define('forum/reset', function () {
 	var	ResetPassword = {};
 

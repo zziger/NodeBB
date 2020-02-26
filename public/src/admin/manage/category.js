@@ -1,5 +1,3 @@
-'use strict';
-
 define('admin/manage/category', [
 	'uploader',
 	'iconSelect',

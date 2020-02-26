@@ -38,7 +38,6 @@ Plugins.clientScripts = [];
 Plugins.acpScripts = [];
 Plugins.libraryPaths = [];
 Plugins.versionWarning = [];
-Plugins.soundpacks = [];
 Plugins.languageData = {};
 Plugins.loadedPlugins = [];
 

@@ -2,7 +2,6 @@
 
 const path = require('path');
 const nconf = require('nconf');
-const mime = require('mime');
 const fs = require('fs');
 const util = require('util');
 const readdirAsync = util.promisify(fs.readdir);
@@ -172,24 +171,6 @@ uploadsController.uploadTouchIcon = async function (req, res, next) {
 
 uploadsController.uploadLogo = async function (req, res, next) {
 	await upload('site-logo', req, res, next);
-};
-
-uploadsController.uploadSound = async function (req, res, next) {
-	const uploadedFile = req.files.files[0];
-
-	const mimeType = mime.getType(uploadedFile.name);
-	if (!/^audio\//.test(mimeType)) {
-		return next(Error('[[error:invalid-data]]'));
-	}
-	try {
-		await file.saveFileToLocal(uploadedFile.name, 'sounds', uploadedFile.path);
-		await meta.sounds.build();
-		res.json([{}]);
-	} catch (err) {
-		next(err);
-	} finally {
-		file.delete(uploadedFile.path);
-	}
 };
 
 uploadsController.uploadFile = async function (req, res, next) {

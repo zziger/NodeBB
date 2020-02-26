@@ -1,6 +1,3 @@
-'use strict';
-
-
 define('forum/topic/move-post', ['components', 'postSelect'], function (components, postSelect) {
 	var MovePost = {};
 

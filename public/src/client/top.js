@@ -1,5 +1,3 @@
-'use strict';
-
 define('forum/top', ['topicList'], function (topicList) {
 	var	Top = {};
 

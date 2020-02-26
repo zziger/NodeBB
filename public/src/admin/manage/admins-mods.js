@@ -1,5 +1,3 @@
-'use strict';
-
 define('admin/manage/admins-mods', ['translator', 'benchpress', 'autocomplete'], function (translator, Benchpress, autocomplete) {
 	var AdminsMods = {};
 

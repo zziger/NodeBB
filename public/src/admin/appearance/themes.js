@@ -1,6 +1,3 @@
-'use strict';
-
-
 define('admin/appearance/themes', ['translator', 'benchpress'], function (translator, Benchpress) {
 	var Themes = {};
 

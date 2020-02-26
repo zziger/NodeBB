@@ -1,5 +1,3 @@
-'use strict';
-
 
 define('admin/advanced/events', function () {
 	var	Events = {};

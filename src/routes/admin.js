@@ -9,7 +9,6 @@ module.exports = function (app, middleware, controllers) {
 
 	helpers.setupAdminPageRoute(app, '/admin/general/dashboard', middleware, middlewares, controllers.admin.dashboard.get);
 	helpers.setupAdminPageRoute(app, '/admin/general/languages', middleware, middlewares, controllers.admin.languages.get);
-	helpers.setupAdminPageRoute(app, '/admin/general/sounds', middleware, middlewares, controllers.admin.sounds.get);
 	helpers.setupAdminPageRoute(app, '/admin/general/navigation', middleware, middlewares, controllers.admin.navigation.get);
 	helpers.setupAdminPageRoute(app, '/admin/general/homepage', middleware, middlewares, controllers.admin.homepage.get);
 	helpers.setupAdminPageRoute(app, '/admin/general/social', middleware, middlewares, controllers.admin.social.get);
@@ -80,7 +79,6 @@ function apiRoutes(router, middleware, controllers) {
 	router.post('/api/admin/uploadTouchIcon', middlewares, helpers.tryRoute(controllers.admin.uploads.uploadTouchIcon));
 	router.post('/api/admin/uploadlogo', middlewares, helpers.tryRoute(controllers.admin.uploads.uploadLogo));
 	router.post('/api/admin/uploadOgImage', middlewares, helpers.tryRoute(controllers.admin.uploads.uploadOgImage));
-	router.post('/api/admin/upload/sound', middlewares, helpers.tryRoute(controllers.admin.uploads.uploadSound));
 	router.post('/api/admin/upload/file', middlewares, helpers.tryRoute(controllers.admin.uploads.uploadFile));
 	router.post('/api/admin/uploadDefaultAvatar', middlewares, helpers.tryRoute(controllers.admin.uploads.uploadDefaultAvatar));
 }

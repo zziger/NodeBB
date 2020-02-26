@@ -1,6 +1,3 @@
-'use strict';
-
-
 define('forum/account/topics', ['forum/account/header', 'forum/infinitescroll'], function (header, infinitescroll) {
 	var AccountTopics = {};
 	var method;

@@ -5,7 +5,7 @@ var nconf = require('nconf');
 var fs = require('fs');
 var winston = require('winston');
 
-var utils = require('../../public/src/utils');
+var utils = require('../../src/utils');
 
 var helpers = module.exports;
 

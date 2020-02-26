@@ -1,6 +1,3 @@
-'use strict';
-
-
 define('share', function () {
 	var module = {};
 

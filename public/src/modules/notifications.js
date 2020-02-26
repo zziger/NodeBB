@@ -1,7 +1,7 @@
 
 define('notifications', [
-	'sounds', 'translator', 'components', 'navigator', 'benchpress', 'tinycon',
-], function (sounds, translator, components, navigator, Benchpress, Tinycon) {
+	'translator', 'components', 'navigator', 'benchpress', 'tinycon',
+], function (translator, components, navigator, Benchpress, Tinycon) {
 	var Notifications = {};
 
 	var unreadNotifs = {};
@@ -93,7 +93,6 @@ define('notifications', [
 		});
 
 		if (!unreadNotifs[notifData.nid]) {
-			sounds.play('notification', notifData.nid);
 			unreadNotifs[notifData.nid] = true;
 		}
 	};

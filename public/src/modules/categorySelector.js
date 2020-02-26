@@ -1,5 +1,3 @@
-'use strict';
-
 define('categorySelector', ['benchpress', 'translator', 'categorySearch'], function (Benchpress, translator, categorySearch) {
 	var categorySelector = {};
 

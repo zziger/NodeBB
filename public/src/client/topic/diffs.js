@@ -1,5 +1,3 @@
-'use strict';
-
 define('forum/topic/diffs', ['forum/topic/images', 'benchpress', 'translator'], function (Images, Benchpress, translator) {
 	var Diffs = {};
 

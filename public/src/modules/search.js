@@ -1,6 +1,3 @@
-'use strict';
-
-
 define('search', ['navigator', 'translator', 'storage'], function (nav, translator, storage) {
 	var Search = {
 		current: {},

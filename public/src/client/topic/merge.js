@@ -1,6 +1,3 @@
-'use strict';
-
-
 define('forum/topic/merge', function () {
 	var Merge = {};
 	var modal;

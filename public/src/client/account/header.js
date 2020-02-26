@@ -1,6 +1,3 @@
-'use strict';
-
-
 define('forum/account/header', [
 	'coverPhoto',
 	'pictureCropper',

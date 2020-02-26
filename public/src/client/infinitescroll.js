@@ -1,6 +1,3 @@
-'use strict';
-
-
 define('forum/infinitescroll', function () {
 	var scroll = {};
 	var callback;

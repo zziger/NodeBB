@@ -1,7 +1,3 @@
-
-'use strict';
-
-
 define('autocomplete', function () {
 	var module = {};
 

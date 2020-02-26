@@ -1,6 +1,3 @@
-'use strict';
-
-
 define('uploader', ['translator', 'benchpress'], function (translator, Benchpress) {
 	var module = {};
 

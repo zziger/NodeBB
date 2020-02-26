@@ -1,6 +1,3 @@
-'use strict';
-
-
 define('forum/groups/details', [
 	'forum/groups/memberlist',
 	'iconSelect',

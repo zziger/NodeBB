@@ -1,6 +1,3 @@
-'use strict';
-
-
 define('forum/tags', ['forum/infinitescroll'], function (infinitescroll) {
 	var Tags = {};
 	var timeoutId = 0;

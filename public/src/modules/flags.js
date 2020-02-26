@@ -1,6 +1,3 @@
-'use strict';
-
-
 define('flags', function () {
 	var Flag = {};
 	var flagModal;

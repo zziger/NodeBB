@@ -1,6 +1,3 @@
-'use strict';
-
-
 define('forum/account/consent', ['forum/account/header'], function (header) {
 	var Consent = {};
 

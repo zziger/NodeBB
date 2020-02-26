@@ -1,5 +1,3 @@
-'use strict';
-
 define('admin/manage/categories', [
 	'vendor/jquery/serializeObject/jquery.ba-serializeobject.min',
 	'translator',

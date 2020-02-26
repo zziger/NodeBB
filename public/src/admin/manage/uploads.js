@@ -1,6 +1,3 @@
-'use strict';
-
-
 define('admin/manage/uploads', ['uploader'], function (uploader) {
 	var Uploads = {};
 

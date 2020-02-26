@@ -1,5 +1,3 @@
-'use strict';
-
 define('forum/account/blocks', ['forum/account/header', 'autocomplete'], function (header, autocomplete) {
 	var Blocks = {};
 

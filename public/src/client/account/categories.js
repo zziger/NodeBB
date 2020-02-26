@@ -1,6 +1,3 @@
-'use strict';
-
-
 define('forum/account/categories', ['forum/account/header'], function (header) {
 	var Categories = {};
 

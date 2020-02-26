@@ -1,10 +1,11 @@
 'use strict';
 
-var nconf = require('nconf');
-var assert = require('assert');
+const nconf = require('nconf');
+const assert = require('assert');
+const benchpress = require('benchpressjs');
 
-var db = require('./mocks/databasemock');
-var helpers = require('../public/src/modules/helpers');
+const db = require('./mocks/databasemock');
+const helpers = require('../public/src/modules/helpers.common')(require('../src/utils'), benchpress, nconf.get('relative_path'));
 
 describe('helpers', function () {
 	it('should return false if item doesn\'t exist', function (done) {

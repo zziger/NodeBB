@@ -1,6 +1,3 @@
-'use strict';
-
-
 define('admin/manage/post-queue', function () {
 	var PostQueue = {};
 

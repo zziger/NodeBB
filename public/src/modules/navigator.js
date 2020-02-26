@@ -1,5 +1,3 @@
-'use strict';
-
 define('navigator', ['forum/pagination', 'components'], function (pagination, components) {
 	var navigator = {};
 	var index = 1;

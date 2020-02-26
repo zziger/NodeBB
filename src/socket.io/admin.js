@@ -21,7 +21,7 @@ const analytics = require('../analytics');
 const websockets = require('../socket.io/index');
 const index = require('./index');
 const getAdminSearchDict = require('../admin/search').getDictionary;
-const utils = require('../../public/src/utils');
+const utils = require('../utils');
 
 const SocketAdmin = module.exports;
 SocketAdmin.user = require('./admin/user');

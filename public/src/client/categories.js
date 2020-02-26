@@ -1,6 +1,3 @@
-'use strict';
-
-
 define('forum/categories', ['components'], function (components) {
 	var	categories = {};
 

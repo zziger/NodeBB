@@ -1,5 +1,3 @@
-'use strict';
-
 define('admin/manage/privileges', [
 	'autocomplete',
 	'translator',

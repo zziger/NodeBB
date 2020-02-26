@@ -1,6 +1,3 @@
-'use strict';
-
-
 define('forum/topic/images', [], function () {
 	var Images = {};
 

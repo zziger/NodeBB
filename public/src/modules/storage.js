@@ -1,5 +1,3 @@
-'use strict';
-
 /**
  * Checks localStorage and provides a fallback if it doesn't exist or is disabled
  */

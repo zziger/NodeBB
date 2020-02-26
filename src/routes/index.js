@@ -1,7 +1,6 @@
 'use strict';
 
 var nconf = require('nconf');
-var winston = require('winston');
 var path = require('path');
 var express = require('express');
 
@@ -164,19 +163,6 @@ function addCoreRoutes(app, router, middleware) {
 	// Skins
 	meta.css.supportedSkins.forEach(function (skin) {
 		app.use(relativePath + '/assets/client-' + skin + '.css', middleware.buildSkinAsset);
-	});
-
-	// only warn once
-	var warned = new Set();
-
-	// DEPRECATED (v1.12.0)
-	app.use(relativePath + '/assets/stylesheet.css', function (req, res) {
-		if (!warned.has(req.path)) {
-			winston.warn('[deprecated] Accessing `/assets/stylesheet.css` is deprecated to be REMOVED in NodeBB v1.12.0. ' +
-			'Use `/assets/client.css` to access this file');
-			warned.add(req.path);
-		}
-		res.redirect(relativePath + '/assets/client.css?' + meta.config['cache-buster']);
 	});
 
 	app.use(controllers['404'].handle404);

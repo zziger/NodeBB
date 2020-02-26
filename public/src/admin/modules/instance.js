@@ -1,5 +1,3 @@
-'use strict';
-
 define('admin/modules/instance', [
 	// need to preload the compiled alert template
 	// otherwise it can be unloaded when rebuild & restart is run

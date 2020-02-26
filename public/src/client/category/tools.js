@@ -1,7 +1,3 @@
-
-'use strict';
-
-
 define('forum/category/tools', [
 	'topicSelect',
 	'components',

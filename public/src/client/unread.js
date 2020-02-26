@@ -1,6 +1,3 @@
-'use strict';
-
-
 define('forum/unread', ['topicSelect', 'components', 'topicList'], function (topicSelect, components, topicList) {
 	var Unread = {};
 

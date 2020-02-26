@@ -1,6 +1,3 @@
-'use strict';
-
-
 define('forum/topic/move', ['categorySelector'], function (categorySelector) {
 	var Move = {};
 	var modal;

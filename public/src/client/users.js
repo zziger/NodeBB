@@ -1,6 +1,3 @@
-'use strict';
-
-
 define('forum/users', ['translator', 'benchpress'], function (translator, Benchpress) {
 	var	Users = {};
 

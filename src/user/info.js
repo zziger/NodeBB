@@ -7,7 +7,7 @@ var db = require('../database');
 var user = require('../user');
 var posts = require('../posts');
 var topics = require('../topics');
-var utils = require('../../public/src/utils');
+var utils = require('../utils');
 
 module.exports = function (User) {
 	User.getLatestBanInfo = async function (uid) {

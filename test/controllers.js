@@ -299,7 +299,7 @@ describe('Controllers', function () {
 
 	it('should load /register/complete', function (done) {
 		function hookMethod(data, next) {
-			data.interstitials.push({ template: 'topic.tpl', data: {} });
+			data.interstitials.push({ template: 'topic.js', data: {} });
 			next(null, data);
 		}
 
@@ -551,17 +551,8 @@ describe('Controllers', function () {
 		});
 	});
 
-	it('should load stylesheet.css', function (done) {
-		request(nconf.get('url') + '/assets/stylesheet.css', function (err, res, body) {
-			assert.ifError(err);
-			assert.equal(res.statusCode, 200);
-			assert(body);
-			done();
-		});
-	});
-
-	it('should load client.css', function (done) {
-		request(nconf.get('url') + '/assets/client.css', function (err, res, body) {
+	it('should load app.css', function (done) {
+		request(nconf.get('url') + '/dist/app.css', function (err, res, body) {
 			assert.ifError(err);
 			assert.equal(res.statusCode, 200);
 			assert(body);
@@ -570,7 +561,7 @@ describe('Controllers', function () {
 	});
 
 	it('should load admin.css', function (done) {
-		request(nconf.get('url') + '/assets/admin.css', function (err, res, body) {
+		request(nconf.get('url') + '/dist/admin.css', function (err, res, body) {
 			assert.ifError(err);
 			assert.equal(res.statusCode, 200);
 			assert(body);
@@ -579,8 +570,8 @@ describe('Controllers', function () {
 	});
 
 
-	it('should load nodebb.min.js', function (done) {
-		request(nconf.get('url') + '/assets/nodebb.min.js', function (err, res, body) {
+	it('should load app.bundle.js', function (done) {
+		request(nconf.get('url') + '/dist/app.bundle.js', function (err, res, body) {
 			assert.ifError(err);
 			assert.equal(res.statusCode, 200);
 			assert(body);
@@ -588,8 +579,8 @@ describe('Controllers', function () {
 		});
 	});
 
-	it('should load acp.min.js', function (done) {
-		request(nconf.get('url') + '/assets/acp.min.js', function (err, res, body) {
+	it('should load admin.bundle.js', function (done) {
+		request(nconf.get('url') + '/dist/admin.bundle.js', function (err, res, body) {
 			assert.ifError(err);
 			assert.equal(res.statusCode, 200);
 			assert(body);

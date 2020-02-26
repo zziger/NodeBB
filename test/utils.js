@@ -3,18 +3,18 @@
 
 var assert = require('assert');
 var JSDOM = require('jsdom').JSDOM;
-var utils = require('./../public/src/utils.js');
 const db = require('./mocks/databasemock');
 
 describe('Utility Methods', function () {
 	// https://gist.github.com/robballou/9ee108758dc5e0e2d028
 	// create some jsdom magic to allow jQuery to work
 	var dom = new JSDOM('<html><body></body></html>');
-	var window = dom.window;
-	global.jQuery = require('jquery')(window);
+	global.window = dom.window;
+	global.document = dom.window.document;
+	global.jQuery = require('jquery');
 	global.$ = global.jQuery;
-	var $ = global.$;
-	global.window = window;
+	var $ = global.jQuery;
+	var utils = require('./../public/src/utils.js');
 
 	// https://github.com/jprichardson/string.js/blob/master/test/string.test.js
 	it('should decode HTML entities', function (done) {
@@ -32,6 +32,7 @@ describe('Utility Methods', function () {
 		);
 		done();
 	});
+
 	it('should strip HTML tags', function (done) {
 		assert.strictEqual(utils.stripHTMLTags('<p>just <b>some</b> text</p>'), 'just some text');
 		assert.strictEqual(utils.stripHTMLTags('<p>just <b>some</b> text</p>', ['p']), 'just <b>some</b> text');
@@ -225,17 +226,7 @@ describe('Utility Methods', function () {
 	});
 
 	it('should return false if not touch device', function (done) {
-		global.document = global.document || {};
-		global.document.documentElement = {};
 		assert(!utils.isTouchDevice());
-		done();
-	});
-
-	it('should return true if touch device', function (done) {
-		global.document.documentElement = {
-			ontouchstart: 1,
-		};
-		assert(utils.isTouchDevice());
 		done();
 	});
 
@@ -246,7 +237,6 @@ describe('Utility Methods', function () {
 	});
 
 	it('should get empty object for url params', function (done) {
-		global.document = window.document;
 		var params = utils.params();
 		assert.equal(Object.keys(params), 0);
 		done();

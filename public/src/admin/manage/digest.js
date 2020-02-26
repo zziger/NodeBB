@@ -1,6 +1,3 @@
-'use strict';
-
-
 define('admin/manage/digest', function () {
 	var Digest = {};
 
