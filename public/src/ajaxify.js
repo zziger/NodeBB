@@ -28,6 +28,16 @@ ajaxify.init = function () {
 	Benchpress.registerLoader(ajaxify.loadTemplate);
 };
 
+ajaxify.loadTemplate = async function (template, callback) {
+	try {
+		const tplFunction = await import(/* webpackChunkName: "tpl/[request]" */ 'assets/templates/' + template + '.js');
+		callback(tplFunction.default);
+	} catch (err) {
+		console.error('Unable to load template: ' + template);
+		throw err;
+	}
+};
+
 function ajaxifyAnchors() {
 	function hrefEmpty(href) {
 		return href === undefined || href === '' || href === 'javascript:;';
