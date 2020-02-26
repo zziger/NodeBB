@@ -2,6 +2,7 @@ define('forum/category/tools', [
 	'topicSelect',
 	'components',
 	'translator',
+	'jquery-ui/ui/widgets/sortable',
 ], function (topicSelect, components, translator) {
 	var CategoryTools = {};
 
@@ -253,28 +254,28 @@ define('forum/category/tools', [
 		if (!ajaxify.data.privileges.isAdminOrMod) {
 			return;
 		}
-		app.loadJQueryUI(function () {
-			var topicListEl = $('[component="category"]').filter(function (i, e) {
-				return !$(e).parents('[widget-area],[data-widget-area]').length;
-			});
-			topicListEl.sortable({
-				handle: '[component="topic/pinned"]',
-				items: '[component="category/topic"].pinned',
-				update: function () {
-					var data = [];
 
-					var pinnedTopics = topicListEl.find('[component="category/topic"].pinned');
-					pinnedTopics.each(function (index, element) {
-						data.push({ tid: $(element).attr('data-tid'), order: pinnedTopics.length - index - 1 });
-					});
+		var topicListEl = $('[component="category"]').filter(function (i, e) {
+			return !$(e).parents('[widget-area],[data-widget-area]').length;
+		});
 
-					socket.emit('topics.orderPinnedTopics', data, function (err) {
-						if (err) {
-							return app.alertError(err.message);
-						}
-					});
-				},
-			});
+		topicListEl.sortable({
+			handle: '[component="topic/pinned"]',
+			items: '[component="category/topic"].pinned',
+			update: function () {
+				var data = [];
+
+				var pinnedTopics = topicListEl.find('[component="category/topic"].pinned');
+				pinnedTopics.each(function (index, element) {
+					data.push({ tid: $(element).attr('data-tid'), order: pinnedTopics.length - index - 1 });
+				});
+
+				socket.emit('topics.orderPinnedTopics', data, function (err) {
+					if (err) {
+						return app.alertError(err.message);
+					}
+				});
+			},
 		});
 	}
 

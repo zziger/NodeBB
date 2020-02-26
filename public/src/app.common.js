@@ -12,6 +12,15 @@ Benchpress.setGlobal('config', config);
 
 const translator = require('./modules/translator');
 
+// temp for testing
+require('jquery-ui/ui/widgets/datepicker');
+$('#inputBirthday').datepicker({
+	changeMonth: true,
+	changeYear: true,
+	yearRange: '1900:-5y',
+	defaultDate: '-13y',
+});
+
 require('./sockets');
 require('./overrides');
 require('./ajaxify');
@@ -610,18 +619,6 @@ window.addEventListener('DOMContentLoaded', function () {
 			cid: cid || ajaxify.data.cid || 0,
 			tags: tags || (ajaxify.data.tag ? [ajaxify.data.tag] : []),
 		});
-	};
-
-	app.loadJQueryUI = function (callback) {
-		if (typeof $().autocomplete === 'function') {
-			return callback();
-		}
-
-		var scriptEl = document.createElement('script');
-		scriptEl.type = 'text/javascript';
-		scriptEl.src = config.relative_path + '/assets/vendor/jquery/js/jquery-ui.js?' + config['cache-buster'];
-		scriptEl.onload = callback;
-		document.head.appendChild(scriptEl);
 	};
 
 	app.showEmailConfirmWarning = function (err) {

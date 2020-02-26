@@ -1,4 +1,10 @@
-define('forum/account/edit', ['forum/account/header', 'translator', 'components', 'pictureCropper', 'benchpress'], function (header, translator, components, pictureCropper, Benchpress) {
+define('forum/account/edit', [
+	'forum/account/header',
+	'translator',
+	'pictureCropper',
+	'benchpress',
+	'jquery-ui/ui/widgets/datepicker',
+], function (header, translator, pictureCropper, Benchpress) {
 	var AccountEdit = {};
 
 	AccountEdit.init = function () {
@@ -6,13 +12,11 @@ define('forum/account/edit', ['forum/account/header', 'translator', 'components'
 
 		$('#submitBtn').on('click', updateProfile);
 
-		app.loadJQueryUI(function () {
-			$('#inputBirthday').datepicker({
-				changeMonth: true,
-				changeYear: true,
-				yearRange: '1900:-5y',
-				defaultDate: '-13y',
-			});
+		$('#inputBirthday').datepicker({
+			changeMonth: true,
+			changeYear: true,
+			yearRange: '1900:-5y',
+			defaultDate: '-13y',
 		});
 
 		handleImageChange();
