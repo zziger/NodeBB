@@ -228,7 +228,7 @@ define('forum/topic', [
 
 					history.replaceState({
 						url: newUrl + search,
-					}, null, window.location.protocol + '//' + window.location.host + RELATIVE_PATH + '/' + newUrl + search);
+					}, null, window.location.protocol + '//' + window.location.host + config.relative_path + '/' + newUrl + search);
 				}
 				currentUrl = newUrl;
 			}, 500);

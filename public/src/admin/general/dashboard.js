@@ -518,7 +518,7 @@ define('admin/general/dashboard', ['chart.js', 'translator', 'benchpress'], func
 			var legend = $('#topics-legend').html('');
 			var html = '';
 			topics.forEach(function (topic, i) {
-				var	label = topic.count === '0' ? topic.title : '<a title="' + topic.title + '"href="' + RELATIVE_PATH + '/topic/' + topic.tid + '" target="_blank"> ' + topic.title + '</a>';
+				var	label = topic.count === '0' ? topic.title : '<a title="' + topic.title + '"href="' + config.relative_path + '/topic/' + topic.tid + '" target="_blank"> ' + topic.title + '</a>';
 
 				html += '<li>' +
 					'<div style="background-color: ' + topicColors[i] + ';"></div>' +

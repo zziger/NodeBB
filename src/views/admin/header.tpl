@@ -8,7 +8,6 @@
 		<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
 		<script>
-			var RELATIVE_PATH = "{relative_path}";
 			var config = JSON.parse('{{configJSON}}');
 			var app = {
 				template: "{template.name}",
