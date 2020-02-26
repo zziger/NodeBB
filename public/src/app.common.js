@@ -611,7 +611,6 @@ window.addEventListener('DOMContentLoaded', function () {
 				callback($(translator.unescape(translatedHTML)));
 			});
 		});
-		console.log(args);
 		Benchpress.parse.apply(Benchpress, args);
 	};
 

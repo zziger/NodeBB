@@ -1,11 +1,9 @@
-require('./app.common');
+import '../scss/app.scss';
+import './app.common';
+import '../../build/public/clientScripts.min';
 
-require('../scss/app.scss');
-
-require('../../build/public/clientScripts.min.js');
-
-const notifications = require('./client/header/notifications');
-const chat = require('./client/header/chat');
+import notifications from './client/header/notifications';
+import chat from './client/header/chat';
 
 $(window).on('action:app.load', async function () {
 	notifications.prepareDOM();

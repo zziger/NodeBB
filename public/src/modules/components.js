@@ -4,57 +4,57 @@ define('components', function () {
 	components.core = {
 		'topic/teaser': function (tid) {
 			if (tid) {
-				return $('[component="category/topic"][data-tid="' + tid + '"] [component="topic/teaser"]');
+				return $('[data-component="category/topic"][data-tid="' + tid + '"] [data-component="topic/teaser"]');
 			}
-			return $('[component="topic/teaser"]');
+			return $('[data-component="topic/teaser"]');
 		},
 		topic: function (name, value) {
-			return $('[component="topic"][data-' + name + '="' + value + '"]');
+			return $('[data-component="topic"][data-' + name + '="' + value + '"]');
 		},
 		post: function (name, value) {
-			return $('[component="post"][data-' + name + '="' + value + '"]');
+			return $('[data-component="post"][data-' + name + '="' + value + '"]');
 		},
 		'post/content': function (pid) {
-			return $('[component="post"][data-pid="' + pid + '"] [component="post/content"]');
+			return $('[data-component="post"][data-pid="' + pid + '"] [data-component="post/content"]');
 		},
 		'post/header': function (pid) {
-			return $('[component="post"][data-pid="' + pid + '"] [component="post/header"]');
+			return $('[data-component="post"][data-pid="' + pid + '"] [data-component="post/header"]');
 		},
 		'post/anchor': function (index) {
-			return $('[component="post"][data-index="' + index + '"] [component="post/anchor"]');
+			return $('[data-component="post"][data-index="' + index + '"] [data-component="post/anchor"]');
 		},
 		'post/vote-count': function (pid) {
-			return $('[component="post"][data-pid="' + pid + '"] [component="post/vote-count"]');
+			return $('[data-component="post"][data-pid="' + pid + '"] [data-component="post/vote-count"]');
 		},
 		'post/bookmark-count': function (pid) {
-			return $('[component="post"][data-pid="' + pid + '"] [component="post/bookmark-count"]');
+			return $('[data-component="post"][data-pid="' + pid + '"] [data-component="post/bookmark-count"]');
 		},
 
 		'user/postcount': function (uid) {
-			return $('[component="user/postcount"][data-uid="' + uid + '"]');
+			return $('[data-component="user/postcount"][data-uid="' + uid + '"]');
 		},
 		'user/reputation': function (uid) {
-			return $('[component="user/reputation"][data-uid="' + uid + '"]');
+			return $('[data-component="user/reputation"][data-uid="' + uid + '"]');
 		},
 
 		'category/topic': function (name, value) {
-			return $('[component="category/topic"][data-' + name + '="' + value + '"]');
+			return $('[data-component="category/topic"][data-' + name + '="' + value + '"]');
 		},
 
 		'categories/category': function (name, value) {
-			return $('[component="categories/category"][data-' + name + '="' + value + '"]');
+			return $('[data-component="categories/category"][data-' + name + '="' + value + '"]');
 		},
 
 		'chat/message': function (messageId) {
-			return $('[component="chat/message"][data-mid="' + messageId + '"]');
+			return $('[data-component="chat/message"][data-mid="' + messageId + '"]');
 		},
 
 		'chat/message/body': function (messageId) {
-			return $('[component="chat/message"][data-mid="' + messageId + '"] [component="chat/message/body"]');
+			return $('[data-component="chat/message"][data-mid="' + messageId + '"] [data-component="chat/message/body"]');
 		},
 
 		'chat/recent/room': function (roomid) {
-			return $('[component="chat/recent/room"][data-roomid="' + roomid + '"]');
+			return $('[data-component="chat/recent/room"][data-roomid="' + roomid + '"]');
 		},
 	};
 
@@ -64,7 +64,7 @@ define('components', function () {
 		if (components.core[arguments[0]] && args.length) {
 			return components.core[arguments[0]].apply(this, args);
 		}
-		return $('[component="' + arguments[0] + '"]');
+		return $('[data-component="' + arguments[0] + '"]');
 	};
 
 	return components;
