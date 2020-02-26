@@ -18,6 +18,12 @@ define('forum/header/chat', ['components'], function (components) {
 
 		socket.removeListener('event:chats.roomRename', onRoomRename);
 		socket.on('event:chats.roomRename', onRoomRename);
+
+		socket.on('event:unread.updateChatCount', function (count) {
+			$('[component="chat/icon"]')
+				.toggleClass('unread-count', count > 0)
+				.attr('data-content', count > 99 ? '99+' : count);
+		});
 	};
 
 	function loadChatsDropdown(chatsListEl) {

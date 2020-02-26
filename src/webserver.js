@@ -112,7 +112,6 @@ function setupExpressApp(app) {
 
 	const relativePath = nconf.get('relative_path');
 	const viewsDir = nconf.get('views_dir');
-	console.log('wtf', viewsDir);
 
 	app.renderAsync = util.promisify((tpl, data, callback) => app.render(tpl, data, callback));
 

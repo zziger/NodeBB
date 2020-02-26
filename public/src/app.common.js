@@ -23,6 +23,11 @@ app.currentRoom = null;
 app.widgets = {};
 app.cacheBuster = config['cache-buster'];
 
+window.addEventListener('DOMContentLoaded', function () {
+	ajaxify.init();
+	app.load();
+});
+
 (function () {
 	var params = utils.params();
 	var showWelcomeMessage = !!params.loggedin;
@@ -34,6 +39,8 @@ app.cacheBuster = config['cache-buster'];
 	});
 
 	app.load = function () {
+		translator.prepareDOM();
+
 		app.loadProgressiveStylesheet();
 
 		overrides.overrideTimeago();
