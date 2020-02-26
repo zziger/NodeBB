@@ -6,23 +6,10 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const activePlugins = require('./build/active_plugins');
-let showEmits = false;
 module.exports = {
 	plugins: [
 		new CleanWebpackPlugin(), // cleans dist folder
 		new MiniCssExtractPlugin(), // extract css to separate file
-		{
-			apply: (compiler) => {
-				compiler.hooks.assetEmitted.tap('nbbWatchPlugin', (file) => {
-					if (showEmits) {
-						console.log('webpack:assetEmitted > ' + module.exports.output.publicPath + file);
-					}
-				});
-				compiler.hooks.done.tap('done', () => {
-					showEmits = true;
-				});
-			},
-		},
 	],
 	entry: {
 		app: './public/src/app.js',
@@ -82,10 +69,6 @@ module.exports = {
 					{
 						loader: MiniCssExtractPlugin.loader,
 					},
-					// {
-					// Adds CSS to the DOM by injecting a `<style>` tag
-					// loader: 'style-loader'
-					// },
 					{
 						// Interprets `@import` and `url()` like `import/require()` and will resolve them
 						loader: 'css-loader',
