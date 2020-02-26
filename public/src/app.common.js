@@ -75,7 +75,6 @@ window.addEventListener('DOMContentLoaded', function () {
 		Visibility.change(function (event, state) {
 			if (state === 'visible') {
 				app.isFocused = true;
-				app.alternatingTitle('');
 			} else if (state === 'hidden') {
 				app.isFocused = false;
 			}
@@ -116,10 +115,7 @@ window.addEventListener('DOMContentLoaded', function () {
 		});
 	};
 
-	app.logout = function (e) {
-		if (e) {
-			e.preventDefault();
-		}
+	app.logout = function () {
 		$(window).trigger('action:app.logout');
 
 		/*
@@ -143,6 +139,7 @@ window.addEventListener('DOMContentLoaded', function () {
 				}
 			},
 		});
+		return false;
 	};
 
 	app.alert = function (params) {
@@ -376,63 +373,6 @@ window.addEventListener('DOMContentLoaded', function () {
 					createChat();
 				}
 			});
-		});
-	};
-
-	var	titleObj = {
-		active: false,
-		interval: undefined,
-		titles: [],
-	};
-
-	app.alternatingTitle = function (title) {
-		if (typeof title !== 'string') {
-			return;
-		}
-
-		if (title.length > 0 && !app.isFocused) {
-			if (!titleObj.titles[0]) {
-				titleObj.titles[0] = window.document.title;
-			}
-
-			translator.translate(title, function (translated) {
-				titleObj.titles[1] = translated;
-				if (titleObj.interval) {
-					clearInterval(titleObj.interval);
-				}
-
-				titleObj.interval = setInterval(function () {
-					var title = titleObj.titles[titleObj.titles.indexOf(window.document.title) ^ 1];
-					if (title) {
-						window.document.title = $('<div/>').html(title).text();
-					}
-				}, 2000);
-			});
-		} else {
-			if (titleObj.interval) {
-				clearInterval(titleObj.interval);
-			}
-			if (titleObj.titles[0]) {
-				window.document.title = $('<div/>').html(titleObj.titles[0]).text();
-			}
-		}
-	};
-
-	app.refreshTitle = function (title) {
-		if (!title) {
-			return;
-		}
-
-		title = config.titleLayout.replace(/&#123;/g, '{').replace(/&#125;/g, '}')
-			.replace('{pageTitle}', function () { return title; })
-			.replace('{browserTitle}', function () { return config.browserTitle; });
-
-		// Allow translation strings in title on ajaxify (#5927)
-		title = translator.unescape(title);
-
-		translator.translate(title, function (translated) {
-			titleObj.titles[0] = translated;
-			app.alternatingTitle('');
 		});
 	};
 

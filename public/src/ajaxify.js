@@ -304,9 +304,26 @@ function renderTemplate(url, tpl_url, data, callback) {
 			$('#content, #footer').removeClass('ajaxifying');
 
 			// Only executed on ajaxify. Otherwise these'd be in ajaxify.end()
-			app.refreshTitle(data.title);
+			updateTitle(data.title);
 			updateTags();
 		});
+	});
+}
+
+function updateTitle(title) {
+	if (!title) {
+		return;
+	}
+
+	title = config.titleLayout.replace(/&#123;/g, '{').replace(/&#125;/g, '}')
+		.replace('{pageTitle}', function () { return title; })
+		.replace('{browserTitle}', function () { return config.browserTitle; });
+
+	// Allow translation strings in title on ajaxify (#5927)
+	title = translator.unescape(title);
+
+	translator.translate(title, function (translated) {
+		window.document.title = $('<div/>').html(translated).text();
 	});
 }
 
