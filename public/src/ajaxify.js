@@ -430,7 +430,7 @@ ajaxify.loadScript = async function (tpl_url, callback) {
 			pageScript = await import(/* webpackChunkName: "forum/[request]" */ 'forum/' + tpl_url);
 		}
 	} catch (err) {
-		console.warn('error loading script' + err.message);
+		console.warn('error loading script' + err.stack);
 	}
 
 	if (pageScript && pageScript.init) {
