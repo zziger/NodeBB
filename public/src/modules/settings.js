@@ -1,5 +1,5 @@
 
-define('settings', function () {
+define('settings', ['jquery-deserialize'], function () {
 	var Settings;
 	var onReady = [];
 	var waitingJobs = 0;

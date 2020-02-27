@@ -1,5 +1,5 @@
 
-define('settings/sorted-list', ['benchpress', 'jquery-ui'], function (benchpress) {
+define('settings/sorted-list', ['benchpress', 'jquery-ui', 'jquery-deserialize'], function (benchpress) {
 	var SortedList;
 	var Settings;
 

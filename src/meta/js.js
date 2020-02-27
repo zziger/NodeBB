@@ -34,8 +34,8 @@ JS.scripts = {
 		// 'public/vendor/colorpicker/colorpicker.js', // done
 		// 'public/src/admin/admin.js', // done
 		// 'public/vendor/semver/semver.browser.js', // done
-		'public/vendor/jquery/serializeObject/jquery.ba-serializeobject.min.js',
-		'public/vendor/jquery/deserialize/jquery.deserialize.min.js',
+		// 'public/vendor/jquery/serializeObject/jquery.ba-serializeobject.min.js',
+		// 'public/vendor/jquery/deserialize/jquery.deserialize.min.js',
 		// 'public/vendor/slideout/slideout.min.js', // done
 		// 'public/vendor/nprogress.min.js', // done
 	],

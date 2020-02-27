@@ -1,11 +1,10 @@
 import Sortable from 'sortablejs';
 
 define('admin/manage/categories', [
-	'vendor/jquery/serializeObject/jquery.ba-serializeobject.min',
 	'translator',
 	'benchpress',
 	'categorySelector',
-], function (serialize, translator, Benchpress, categorySelector) {
+], function (translator, Benchpress, categorySelector) {
 	var	Categories = {};
 	var newCategoryId = -1;
 	var sortables;

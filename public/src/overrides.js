@@ -13,6 +13,36 @@ function translate(elements, type, str) {
 }
 
 if (typeof window !== 'undefined') {
+	// TODO: no npm module?
+	// this is probably a better alternative but behaviour is not the same
+	// so it might break ACP forms
+	// https://www.npmjs.com/package/jquery-serializejson
+
+	/*!
+	* jQuery serializeObject - v0.2 - 1/20/2010
+	* http://benalman.com/projects/jquery-misc-plugins/
+	*
+	* Copyright (c) 2010 "Cowboy" Ben Alman
+	* Dual licensed under the MIT and GPL licenses.
+	* http://benalman.com/about/license/
+	*/
+
+	// Whereas .serializeArray() serializes a form into an array, .serializeObject()
+	// serializes a form into an (arguably more useful) object.
+	$.fn.serializeObject = function () {
+		var obj = {};
+		$.each(this.serializeArray(), function (i, o) {
+			var n = o.name;
+			var v = o.value;
+			if (obj[n] === undefined) {
+				obj[n] = v;
+			} else {
+				obj[n] = $.isArray(obj[n]) ? obj[n].concat(v) : [obj[n], v];
+			}
+		});
+		return obj;
+	};
+
 	$.fn.getCursorPosition = function () {
 		var el = $(this).get(0);
 		var pos = 0;

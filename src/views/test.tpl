@@ -18,3 +18,21 @@
         <li>Item 3</li>
     </ul>
 </div>
+<hr/>
+
+<label>Form Serialize</label>
+<form id="form-serialize">
+    <input name="a" value="1">
+    <input name="a" value="2">
+    <input name="bar" value="test">
+</form>
+<pre id="json-form-data"></pre>
+<hr/>
+
+<label>Form Deserialize</label>
+<form id="form-deserialize">
+    <input name="foo" value="">
+    <input name="foo" value="">
+    <input name="moo" value="">
+</form>
+<hr/>
