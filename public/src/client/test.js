@@ -1,9 +1,13 @@
 import 'jquery-ui/ui/widgets/datepicker';
 import Sortable from 'sortablejs';
+import semver from 'semver';
 import autocomplete from '../modules/autocomplete';
-import colorpicker from '../admin/modules/colorpicker';
+import { enable as colorpickerEnable } from '../admin/modules/colorpicker';
+
 
 export function init() {
+	console.log('should be true', semver.gt('1.1.1', '1.0.0'));
+
 	$('#inputBirthday').datepicker({
 		changeMonth: true,
 		changeYear: true,
@@ -11,7 +15,7 @@ export function init() {
 		defaultDate: '-13y',
 	});
 
-	colorpicker.enable($('#colorpicker'));
+	colorpickerEnable($('#colorpicker'));
 
 	autocomplete.user($('#autocomplete'));
 

@@ -1,5 +1,9 @@
-
-define('admin/extend/plugins', ['translator', 'benchpress', 'jquery-ui'], function (translator, Benchpress) {
+define('admin/extend/plugins', [
+	'translator',
+	'benchpress',
+	'semver',
+	'jquery-ui',
+], function (translator, Benchpress, semver) {
 	var Plugins = {};
 	Plugins.init = function () {
 		var pluginsList = $('.plugins');
@@ -125,18 +129,15 @@ define('admin/extend/plugins', ['translator', 'benchpress', 'jquery-ui'], functi
 				if (err) {
 					return bootbox.alert('[[admin/extend/plugins:alert.package-manager-unreachable]]');
 				}
-
-				require(['semver'], function (semver) {
-					if (payload.version !== 'latest' && semver.gt(payload.version, parent.find('.currentVersion').text())) {
+				if (payload.version !== 'latest' && semver.gt(payload.version, parent.find('.currentVersion').text())) {
+					upgrade(pluginID, btn, payload.version);
+				} else if (payload.version === 'latest') {
+					confirmInstall(pluginID, function () {
 						upgrade(pluginID, btn, payload.version);
-					} else if (payload.version === 'latest') {
-						confirmInstall(pluginID, function () {
-							upgrade(pluginID, btn, payload.version);
-						});
-					} else {
-						bootbox.alert(translator.compile('admin/extend/plugins:alert.incompatible', app.config.version, payload.version));
-					}
-				});
+					});
+				} else {
+					bootbox.alert(translator.compile('admin/extend/plugins:alert.incompatible', app.config.version, payload.version));
+				}
 			});
 		});
 
