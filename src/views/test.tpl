@@ -1,11 +1,13 @@
 <label>Birthday</label>
 <input id="inputBirthday" class="form-control" value="" placeholder="mm/dd/yyyy">
-
 <hr/>
 
 <label>Auto complete</label>
 <input id="autocomplete" class="form-control">
+<hr/>
 
+<label>Color Picker</label>
+<input id="colorpicker" type="text" class="form-control">
 <hr/>
 
 <label>Sortable</label>

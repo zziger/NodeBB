@@ -22,11 +22,11 @@ define('admin/manage/category', [
 			var $inputEl = $(inputEl);
 			var previewEl = $inputEl.parents('[data-cid]').find('.category-preview');
 
-			colorpicker.enable($inputEl, function (hsb, hex) {
+			colorpicker.enable($inputEl, function (hex) {
 				if ($inputEl.attr('data-name') === 'bgColor') {
-					previewEl.css('background-color', '#' + hex);
+					previewEl.css('background-color', hex);
 				} else if ($inputEl.attr('data-name') === 'color') {
-					previewEl.css('color', '#' + hex);
+					previewEl.css('color', hex);
 				}
 
 				modified($inputEl[0]);

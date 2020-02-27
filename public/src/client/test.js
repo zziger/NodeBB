@@ -1,6 +1,7 @@
 import 'jquery-ui/ui/widgets/datepicker';
 import Sortable from 'sortablejs';
 import autocomplete from '../modules/autocomplete';
+import colorpicker from '../admin/modules/colorpicker';
 
 export function init() {
 	$('#inputBirthday').datepicker({
@@ -9,6 +10,8 @@ export function init() {
 		yearRange: '1900:-5y',
 		defaultDate: '-13y',
 	});
+
+	colorpicker.enable($('#colorpicker'));
 
 	autocomplete.user($('#autocomplete'));
 

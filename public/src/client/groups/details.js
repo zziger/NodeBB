@@ -5,8 +5,8 @@ define('forum/groups/details', [
 	'coverPhoto',
 	'pictureCropper',
 	'translator',
-	'vendor/colorpicker/colorpicker',
-], function (memberList, iconSelect, components, coverPhoto, pictureCropper, translator) {
+	'admin/modules/colorpicker',
+], function (memberList, iconSelect, components, coverPhoto, pictureCropper, translator, colorpicker) {
 	var Details = {};
 	var groupName;
 
@@ -131,8 +131,6 @@ define('forum/groups/details', [
 		var settingsFormEl = components.get('groups/settings');
 		var labelColorBtn = settingsFormEl.find('[data-action="label-color-select"]');
 		var textColorBtn = settingsFormEl.find('[data-action="text-color-select"]');
-		var labelColorValueEl = settingsFormEl.find('[name="labelColor"]');
-		var textColorValueEl = settingsFormEl.find('[name="textColor"]');
 		var iconBtn = settingsFormEl.find('[data-action="icon-select"]');
 		var previewEl = settingsFormEl.find('.label');
 		var previewIcon = previewEl.find('i');
@@ -141,26 +139,12 @@ define('forum/groups/details', [
 		var iconValueEl = settingsFormEl.find('[name="icon"]');
 
 		// Add color picker to settings form
-		labelColorBtn.ColorPicker({
-			color: labelColorValueEl.val() || '#000',
-			onChange: function (hsb, hex) {
-				labelColorValueEl.val('#' + hex);
-				previewEl.css('background-color', '#' + hex);
-			},
-			onShow: function (colpkr) {
-				$(colpkr).css('z-index', 1051);
-			},
+		colorpicker.enable(labelColorBtn, function (hex) {
+			previewEl.css('background-color', hex);
 		});
 
-		textColorBtn.ColorPicker({
-			color: textColorValueEl.val() || '#fff',
-			onChange: function (hsb, hex) {
-				textColorValueEl.val('#' + hex);
-				previewEl.css('color', '#' + hex);
-			},
-			onShow: function (colpkr) {
-				$(colpkr).css('z-index', 1051);
-			},
+		colorpicker.enable(textColorBtn, function (hex) {
+			previewEl.css('color', hex);
 		});
 
 		// Add icon selection interface

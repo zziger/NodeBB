@@ -85,12 +85,12 @@ define('admin/manage/group', [
 			});
 		});
 
-		colorpicker.enable(changeGroupLabelColor, function (hsb, hex) {
-			groupLabelPreview.css('background-color', '#' + hex);
+		colorpicker.enable(changeGroupLabelColor, function (hex) {
+			groupLabelPreview.css('background-color', hex);
 		});
 
-		colorpicker.enable(changeGroupTextColor, function (hsb, hex) {
-			groupLabelPreview.css('color', '#' + hex);
+		colorpicker.enable(changeGroupTextColor, function (hex) {
+			groupLabelPreview.css('color', hex);
 		});
 
 		$('#save').on('click', function () {
