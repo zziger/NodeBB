@@ -12,15 +12,6 @@ Benchpress.setGlobal('config', config);
 
 const translator = require('./modules/translator');
 
-// temp for testing
-require('jquery-ui/ui/widgets/datepicker');
-$('#inputBirthday').datepicker({
-	changeMonth: true,
-	changeYear: true,
-	yearRange: '1900:-5y',
-	defaultDate: '-13y',
-});
-
 require('./sockets');
 require('./overrides');
 require('./ajaxify');

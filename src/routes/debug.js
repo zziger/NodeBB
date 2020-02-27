@@ -1,14 +1,12 @@
 'use strict';
 
-var express = require('express');
-var nconf = require('nconf');
+const helpers = require('./helpers');
 
-module.exports = function (app) {
-	var router = express.Router();
+const setupPageRoute = helpers.setupPageRoute;
 
-	router.get('/test', function (req, res) {
-		res.redirect(404);
+module.exports = function (app, middleware) {
+	setupPageRoute(app, '/debug/test', middleware, [], async function (req, res) {
+		// res.redirect(404);
+		res.render('test', {});
 	});
-
-	app.use(nconf.get('relative_path') + '/debug', router);
 };
