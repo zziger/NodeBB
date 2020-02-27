@@ -1,3 +1,5 @@
+import Sortable from 'sortablejs';
+
 define('admin/manage/categories', [
 	'vendor/jquery/serializeObject/jquery.ba-serializeobject.min',
 	'translator',
