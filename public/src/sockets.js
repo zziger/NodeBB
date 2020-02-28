@@ -12,6 +12,25 @@ window.socket = io(config.websocketAddress, {
 	path: config.relative_path + '/socket.io',
 });
 
+var oEmit = socket.emit;
+socket.emit = function (event, data, callback) {
+	if (typeof data === 'function') {
+		callback = data;
+		data = null;
+	}
+	if (typeof callback === 'function') {
+		oEmit.apply(socket, [event, data, callback]);
+		return;
+	}
+
+	return new Promise(function (resolve, reject) {
+		oEmit.apply(socket, [event, data, function (err, result) {
+			if (err) reject(err);
+			else resolve(result);
+		}]);
+	});
+};
+
 if (parseInt(app.user.uid, 10) >= 0) {
 	addHandlers();
 }
