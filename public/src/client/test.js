@@ -15,6 +15,15 @@ export function init() {
 		defaultDate: '-13y',
 	});
 
+	$('#change-language').on('click', function () {
+		config.userLang = 'tr';
+		var languageCode = utils.userLangToTimeagoCode(config.userLang);
+		import(/* webpackChunkName: "timeago/[request]" */ 'timeago/locales/jquery.timeago.' + languageCode).then(function () {
+			overrides.overrideTimeago();
+			ajaxify.refresh();
+		});
+	});
+
 	colorpickerEnable($('#colorpicker'));
 
 	autocomplete.user($('#autocomplete'));

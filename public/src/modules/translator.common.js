@@ -556,7 +556,7 @@ module.exports = function (utils, load, warn) {
 				}
 
 				var originalSettings = assign({}, jQuery.timeago.settings.strings);
-				jQuery.getScript(config.relative_path + '/assets/vendor/jquery/timeago/locales/jquery.timeago.' + languageCode + '-short.js').done(function () {
+				import(/* webpackChunkName: "timeago/[request]" */ 'timeago/locales/jquery.timeago.' + languageCode + '-short').then(function () {
 					adaptor.timeagoShort = assign({}, jQuery.timeago.settings.strings);
 					jQuery.timeago.settings.strings = assign({}, originalSettings);
 					toggle();
@@ -571,7 +571,7 @@ module.exports = function (utils, load, warn) {
 			delete adaptor.timeagoShort;
 
 			var languageCode = utils.userLangToTimeagoCode(config.userLang);
-			jQuery.getScript(config.relative_path + '/assets/vendor/jquery/timeago/locales/jquery.timeago.' + languageCode + '.js').done(callback);
+			import(/* webpackChunkName: "timeago/[request]" */ 'timeago/locales/jquery.timeago.' + languageCode).then(callback);
 		},
 
 		prepareDOM: function prepareDOM() {

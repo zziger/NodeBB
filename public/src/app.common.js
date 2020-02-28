@@ -5,6 +5,7 @@ window.jQuery = window.$;
 window.bootbox = require('bootbox');
 require('jquery-form');
 window.utils = require('./utils');
+require('timeago');
 
 const Visibility = require('visibilityjs');
 const Benchpress = require('benchpressjs');
@@ -23,7 +24,8 @@ app.currentRoom = null;
 app.widgets = {};
 app.cacheBuster = config['cache-buster'];
 
-window.addEventListener('DOMContentLoaded', function () {
+window.addEventListener('DOMContentLoaded', async function () {
+	await import(/* webpackChunkName: "timeago/[request]" */ 'timeago/locales/jquery.timeago.' + utils.userLangToTimeagoCode(config.userLang));
 	ajaxify.init();
 	app.load();
 });

@@ -10,6 +10,14 @@
 <input id="colorpicker" type="text" class="form-control">
 <hr/>
 
+<label>Timeago</label>
+<div>
+<span id="timeago" class="timeago" title="{now}"></span>
+<button id="change-language" type="button" class="btn btn-primary">Change Language</button>
+</div>
+
+<hr/>
+
 <label>Sortable</label>
 <div>
     <ul id="sortable-list">

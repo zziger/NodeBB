@@ -9,7 +9,7 @@ const readFileAsync = util.promisify(fs.readFile);
 const Languages = module.exports;
 const languagesPath = path.join(__dirname, '../build/public/language');
 
-const files = fs.readdirSync(path.join(__dirname, '../public/vendor/jquery/timeago/locales'));
+const files = fs.readdirSync(path.join(__dirname, '../node_modules/timeago/locales'));
 Languages.timeagoCodes = files.filter(f => f.startsWith('jquery.timeago')).map(f => f.split('.')[2]);
 
 Languages.get = async function (language, namespace) {

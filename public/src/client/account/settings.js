@@ -88,7 +88,7 @@ define('forum/account/settings', ['forum/account/header', 'components', 'transla
 					htmlEl.attr('data-dir', translated);
 					htmlEl.css('direction', translated);
 				});
-				$.getScript(config.relative_path + '/assets/vendor/jquery/timeago/locales/jquery.timeago.' + utils.userLangToTimeagoCode(config.userLang) + '.js', function () {
+				import(/* webpackChunkName: "timeago/[request]" */ 'timeago/locales/jquery.timeago.' + utils.userLangToTimeagoCode(config.userLang)).then(function () {
 					overrides.overrideTimeago();
 					ajaxify.refresh();
 				});

@@ -14,8 +14,6 @@ var plugins = require('../plugins');
 var navigation = require('../navigation');
 var translator = require('../translator');
 var privileges = require('../privileges');
-var languages = require('../languages');
-var utils = require('../utils');
 
 var controllers = {
 	api: require('../controllers/api'),
@@ -248,36 +246,12 @@ module.exports = function (middleware) {
 				}, next);
 			},
 			function (data, next) {
-				async.parallel({
-					scripts: async.apply(plugins.fireHook, 'filter:scripts.get', []),
-					timeagoLocale: (next) => {
-						async.waterfall([
-							async.apply(languages.listCodes),
-							(languageCodes, next) => {
-								const userLang = res.locals.config.userLang;
-								const timeagoCode = utils.userLangToTimeagoCode(userLang);
-
-								if (languageCodes.includes(userLang) && languages.timeagoCodes.includes(timeagoCode)) {
-									const pathToLocaleFile = '/vendor/jquery/timeago/locales/jquery.timeago.' + timeagoCode + '.js';
-									next(null, (nconf.get('relative_path') + '/assets' + pathToLocaleFile));
-								} else {
-									next(null, false);
-								}
-							},
-						], next);
-					},
-				}, function (err, results) {
-					next(err, data, results);
+				plugins.fireHook('filter:scripts.get', [], function (err, scripts) {
+					next(err, data, scripts);
 				});
 			},
-			function (data, results, next) {
-				if (results.timeagoLocale) {
-					results.scripts.push(results.timeagoLocale);
-				}
-				data.templateValues.scripts = results.scripts.map(function (script) {
-					return { src: script };
-				});
-
+			function (data, scripts, next) {
+				data.templateValues.scripts = scripts.map(script => ({ src: script }));
 				data.templateValues.useCustomJS = meta.config.useCustomJS;
 				data.templateValues.customJS = data.templateValues.useCustomJS ? meta.config.customJS : '';
 				data.templateValues.isSpider = req.uid === -1;
