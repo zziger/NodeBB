@@ -15,7 +15,14 @@
 <span id="timeago" class="timeago" title="{now}"></span>
 <button id="change-language" type="button" class="btn btn-primary">Change Language</button>
 </div>
+<hr/>
 
+<label>Change Skin</label>
+<select id="change-skin" class="form-control">
+    {{{each skins}}}
+    <option value="{skins.value}">{skins.name}</option>
+    {{{end}}}
+</select>
 <hr/>
 
 <label>Sortable</label>

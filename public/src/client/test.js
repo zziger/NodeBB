@@ -37,4 +37,40 @@ export function init() {
 		foo: [1, 2],
 		moo: 'it works',
 	});
+
+	$('#change-skin').change(async function () {
+		reskin($(this).val());
+	});
+
+	async function reskin(skinName) {
+		var currentSkinClassName = $('body').attr('class').split(/\s+/).filter(function (className) {
+			return className.startsWith('skin-');
+		});
+		if (!currentSkinClassName[0]) {
+			return;
+		}
+		var currentSkin = currentSkinClassName[0].slice(5);
+		currentSkin = currentSkin !== 'noskin' ? currentSkin : '';
+
+		console.log('currentSking ' + currentSkin);
+		console.log('loading ' + skinName);
+		if (skinName === currentSkin) {
+			return;
+		}
+		if (skinName) {
+			console.log('import', skinName);
+			var a = await import(/* webpackChunkName: "css/[request]" */ 'bootswatch/dist/' + skinName + '/bootstrap.css');
+
+			a.default();
+			console.log(a);
+		}
+		if (currentSkin) {
+			console.log('remove', currentSkin);
+			$('link[rel="stylesheet"][href*="' + currentSkin + '-bootstrap-css"]').remove();
+			// $('script[src*="' + currentSkin + '-bootstrap-css"]').remove();
+		}
+		// Update body class with proper skin name
+		$('body').removeClass(currentSkinClassName.join(' '))
+			.addClass('skin-' + (skinName || 'noskin'));
+	}
 }
