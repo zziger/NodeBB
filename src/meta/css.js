@@ -26,7 +26,7 @@ var buildImports = {
 			// '@import "font-awesome";', done
 			// '@import (inline) "../public/vendor/jquery/css/smoothness/jquery-ui.css";', // done
 			// '@import (inline) "../public/vendor/jquery/bootstrap-tagsinput/bootstrap-tagsinput.css";', // done
-			'@import (inline) "../public/vendor/colorpicker/colorpicker.css";',
+			// '@import (inline) "../public/vendor/colorpicker/colorpicker.css";', // done
 			'@import (inline) "../node_modules/cropperjs/dist/cropper.css";',
 			'@import "../../public/less/flags.less";',
 			'@import "../../public/less/post-queue.less";',
@@ -43,10 +43,9 @@ var buildImports = {
 			// '@import "font-awesome";', // done
 			'@import "../public/less/admin/admin";',
 			'@import "../public/less/generics.less";',
-			'@import (inline) "../public/vendor/colorpicker/colorpicker.css";',
+			// '@import (inline) "../public/vendor/colorpicker/colorpicker.css";', // done
 			// '@import (inline) "../public/vendor/jquery/css/smoothness/jquery-ui.css";', // done
 			// '@import (inline) "../public/vendor/jquery/bootstrap-tagsinput/bootstrap-tagsinput.css";', // done
-			'@import (inline) "../public/vendor/mdl/material.css";',
 		].map(function (str) {
 			return str.replace(/\//g, path.sep);
 		}).join('\n');

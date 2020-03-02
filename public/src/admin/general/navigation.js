@@ -80,8 +80,6 @@ define('admin/general/navigation', ['translator', 'iconSelect', 'benchpress', 'j
 			translator.translate(li, function (li) {
 				li = $(translator.unescape(li));
 				$('#enabled').append(li);
-				console.warn('TODO: componentHandler.upgradeDom disabled');
-				// componentHandler.upgradeDom();
 			});
 		});
 	}

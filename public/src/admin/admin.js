@@ -57,8 +57,6 @@ var Slideout = require('slideout');
 	$(window).on('action:ajaxify.contentLoaded', function (ev, data) {
 		selectMenuItem(data.url);
 		setupRestartLinks();
-		console.warn('TODO: componentHandler.upgradeDom disabled');
-		// componentHandler.upgradeDom();
 	});
 
 	function setupNProgress() {

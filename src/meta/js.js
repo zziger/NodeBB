@@ -27,10 +27,6 @@ JS.scripts = {
 		'public/vendor/jquery/bootstrap-tagsinput/bootstrap-tagsinput.min.js',
 	],
 
-	admin: [
-		'node_modules/material-design-lite/material.js',
-	],
-
 	// plugins add entries into this object,
 	// they get linked into /build/public/src/modules
 	modules: { },
