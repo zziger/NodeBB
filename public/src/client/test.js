@@ -51,23 +51,15 @@ export function init() {
 		}
 		var currentSkin = currentSkinClassName[0].slice(5);
 		currentSkin = currentSkin !== 'noskin' ? currentSkin : '';
-
-		console.log('currentSking ' + currentSkin);
-		console.log('loading ' + skinName);
 		if (skinName === currentSkin) {
 			return;
 		}
 		if (skinName) {
-			console.log('import', skinName);
-			var a = await import(/* webpackChunkName: "css/[request]" */ 'bootswatch/dist/' + skinName + '/bootstrap.css');
-
-			a.default();
-			console.log(a);
+			await import(/* webpackChunkName: "css/[request]" */ 'bootswatch/dist/' + skinName + '/bootstrap.css');
+			$('link[rel="stylesheet"][href*="' + skinName + '-bootstrap-css"]').attr('disabled', false);
 		}
 		if (currentSkin) {
-			console.log('remove', currentSkin);
-			$('link[rel="stylesheet"][href*="' + currentSkin + '-bootstrap-css"]').remove();
-			// $('script[src*="' + currentSkin + '-bootstrap-css"]').remove();
+			$('link[rel="stylesheet"][href*="' + currentSkin + '-bootstrap-css"]').attr('disabled', true);
 		}
 		// Update body class with proper skin name
 		$('body').removeClass(currentSkinClassName.join(' '))
