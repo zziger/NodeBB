@@ -105,14 +105,7 @@ define('forum/account/settings', ['forum/account/header', 'components', 'transla
 		}
 	}
 
-	function reskin(skinName) {
-		var clientEl = Array.prototype.filter.call(document.querySelectorAll('link[rel="stylesheet"]'), function (el) {
-			return el.href.indexOf(config.relative_path + '/assets/client') !== -1;
-		})[0] || null;
-		if (!clientEl) {
-			return;
-		}
-
+	async function reskin(skinName) {
 		var currentSkinClassName = $('body').attr('class').split(/\s+/).filter(function (className) {
 			return className.startsWith('skin-');
 		});
@@ -121,25 +114,19 @@ define('forum/account/settings', ['forum/account/header', 'components', 'transla
 		}
 		var currentSkin = currentSkinClassName[0].slice(5);
 		currentSkin = currentSkin !== 'noskin' ? currentSkin : '';
-
-		// Stop execution if skin didn't change
 		if (skinName === currentSkin) {
 			return;
 		}
-
-		var linkEl = document.createElement('link');
-		linkEl.rel = 'stylesheet';
-		linkEl.type = 'text/css';
-		linkEl.href = config.relative_path + '/assets/client' + (skinName ? '-' + skinName : '') + '.css';
-		linkEl.onload = function () {
-			clientEl.parentNode.removeChild(clientEl);
-
-			// Update body class with proper skin name
-			$('body').removeClass(currentSkinClassName.join(' '));
-			$('body').addClass('skin-' + (skinName || 'noskin'));
-		};
-
-		document.head.appendChild(linkEl);
+		if (skinName) {
+			await import(/* webpackChunkName: "css/[request]" */ 'bootswatch/dist/' + skinName + '/bootstrap.css');
+			$('link[rel="stylesheet"][href*="' + skinName + '-bootstrap-css"]').attr('disabled', false);
+		}
+		if (currentSkin) {
+			$('link[rel="stylesheet"][href*="' + currentSkin + '-bootstrap-css"]').attr('disabled', true);
+		}
+		// Update body class with proper skin name
+		$('body').removeClass(currentSkinClassName.join(' '))
+			.addClass('skin-' + (skinName || 'noskin'));
 	}
 
 	return AccountSettings;
