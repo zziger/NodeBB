@@ -58,6 +58,7 @@ export function init() {
 			if (err) {
 				return console.log(err);
 			}
+			config.bootswatchSkin = newSkin;
 			reskin(newSkin);
 		});
 	});
