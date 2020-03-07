@@ -49,31 +49,42 @@ module.exports = function (grunt) {
 			}
 		}
 
-		// const lessUpdated_Client = plugins.map(p => 'node_modules/' + p + '/**/*.less');
-		// const lessUpdated_Admin = plugins.map(p => 'node_modules/' + p + '/**/*.less');
+		const styleUpdated_Client = plugins.map(p => 'node_modules/' + p + '/*.scss')
+			.concat(plugins.map(p => 'node_modules/' + p + '/*.css'))
+			.concat(plugins.map(p => 'node_modules/' + p + '/+(public|static)/**/*.scss'))
+			.concat(plugins.map(p => 'node_modules/' + p + '/+(public|static)/**/*.css'));
+
+		const styleUpdated_Admin = plugins.map(p => 'node_modules/' + p + '/*.scss')
+			.concat(plugins.map(p => 'node_modules/' + p + '/*.css'))
+			.concat(plugins.map(p => 'node_modules/' + p + '/+(public|static)/**/*.scss'))
+			.concat(plugins.map(p => 'node_modules/' + p + '/+(public|static)/**/*.css'));
+
 		const clientUpdated = plugins.map(p => 'node_modules/' + p + '/+(public|static)/**/*.js');
 		const serverUpdated = plugins.map(p => 'node_modules/' + p + '/*.js')
 			.concat(plugins.map(p => 'node_modules/' + p + '/+(lib|src)/**/*.js'));
+
 		const templatesUpdated = plugins.map(p => 'node_modules/' + p + '/+(public|static|templates)/**/*.tpl');
 		const langUpdated = plugins.map(p => 'node_modules/' + p + '/+(public|static|languages)/**/*.json');
 
 		grunt.config(['watch'], {
-			// lessUpdated_Client: {
-			// 	files: [
-			// 		...lessUpdated_Client,
-			// 	],
-			// 	options: {
-			// 		interval: 1000,
-			// 	},
-			// },
-			// lessUpdated_Admin: {
-			// 	files: [
-			// 		...lessUpdated_Admin,
-			// 	],
-			// 	options: {
-			// 		interval: 1000,
-			// 	},
-			// },
+			styleUpdated_Client: {
+				files: [
+					'public/scss/**/*.scss',
+					...styleUpdated_Client,
+				],
+				options: {
+					interval: 1000,
+				},
+			},
+			styleUpdated_Admin: {
+				files: [
+					'public/scss/**/*.scss',
+					...styleUpdated_Admin,
+				],
+				options: {
+					interval: 1000,
+				},
+			},
 			clientUpdated: {
 				files: [
 					...clientUpdated,
@@ -145,9 +156,9 @@ module.exports = function (grunt) {
 	grunt.event.removeAllListeners('watch');
 	grunt.event.on('watch', function update(action, filepath, target) {
 		var compiling;
-		if (target === 'lessUpdated_Client') {
+		if (target === 'styleUpdated_Client') {
 			compiling = 'clientCSS';
-		} else if (target === 'lessUpdated_Admin') {
+		} else if (target === 'styleUpdated_Admin') {
 			compiling = 'acpCSS';
 		} else if (target === 'clientUpdated') {
 			compiling = 'js';

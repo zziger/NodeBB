@@ -154,8 +154,8 @@ function getBundleScriptList(target, callback) {
 
 JS.buildBundle = function (target, fork, callback) {
 	var fileNames = {
-		client: 'clientScripts.min.js',
-		admin: 'acpScripts.min.js',
+		client: 'client-scripts.min.js',
+		admin: 'acp-scripts.min.js',
 	};
 
 	async.waterfall([

@@ -1,5 +1,4 @@
 import 'bootstrap-colorpicker';
-import 'bootstrap-colorpicker/dist/css/bootstrap-colorpicker.css';
 
 function enable(inputEl, callback) {
 	(inputEl instanceof jQuery ? inputEl : $(inputEl)).each(function () {

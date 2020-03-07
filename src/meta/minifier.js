@@ -5,7 +5,7 @@ var os = require('os');
 var uglify = require('uglify-es');
 var async = require('async');
 var winston = require('winston');
-var less = require('less');
+const sass = require('node-sass');
 var postcss = require('postcss');
 var autoprefixer = require('autoprefixer');
 var clean = require('postcss-clean');
@@ -266,10 +266,10 @@ Minifier.js.minifyBatch = function (scripts, fork, callback) {
 };
 
 function buildCSS(data, callback) {
-	less.render(data.source, {
-		paths: data.paths,
-		javascriptEnabled: true,
-	}, function (err, lessOutput) {
+	sass.render({
+		data: data.source,
+		includePaths: data.paths,
+	}, function (err, sassOutput) {
 		if (err) {
 			return callback(err);
 		}
@@ -279,7 +279,7 @@ function buildCSS(data, callback) {
 			clean({
 				processImportFrom: ['local'],
 			}),
-		] : [autoprefixer]).process(lessOutput.css, {
+		] : [autoprefixer]).process(sassOutput.css.toString(), {
 			from: undefined,
 		}).then(function (result) {
 			process.nextTick(callback, null, { code: result.css });

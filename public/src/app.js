@@ -1,5 +1,5 @@
 import './app.common';
-import '../../build/public/clientScripts.min';
+import '../../build/public/client-scripts.min';
 
 import notifications from './client/header/notifications';
 import chat from './client/header/chat';

@@ -1,3 +1,7 @@
+<label>Tags Input</label>
+<input id="inputTags" class="form-control" value="" placeholder="">
+<hr/>
+
 <label>Birthday</label>
 <input id="inputBirthday" class="form-control" value="" placeholder="mm/dd/yyyy">
 <hr/>

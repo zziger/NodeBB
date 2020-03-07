@@ -53,8 +53,7 @@ var targetHandlers = {
 		meta.css.buildBundle('client', parallel, callback);
 	},
 	'admin control panel styles': function (parallel, callback) {
-		return callback();
-		// meta.css.buildBundle('admin', parallel, callback);
+		meta.css.buildBundle('admin', parallel, callback);
 	},
 	styles: [
 		'client side styles',

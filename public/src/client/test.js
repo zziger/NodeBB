@@ -10,6 +10,11 @@ export function init() {
 
 	$('#change-skin').val(config.bootswatchSkin);
 
+	$('#inputTags').tagsinput({
+		confirmKeys: [13, 44],
+		trimValue: true,
+	});
+
 	$('#inputBirthday').datepicker({
 		changeMonth: true,
 		changeYear: true,
@@ -70,7 +75,7 @@ export function init() {
 			return;
 		}
 		$('link[rel="stylesheet"][href*="' + currentSkin + '.css"]')
-			.attr('href', config.relative_path + '/dist/css/' + (skinName || 'no-skin') + '.css');
+			.attr('href', config.relative_path + '/assets/client' + (skinName ? '-' + skinName : '') + '.css');
 
 		// Update body class with proper skin name
 		$('body').removeClass(currentSkinClassName.join(' '))

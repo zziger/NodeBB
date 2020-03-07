@@ -1,6 +1,5 @@
 'use strict';
 
-var winston = require('winston');
 var nconf = require('nconf');
 var fs = require('fs');
 var path = require('path');
@@ -10,7 +9,7 @@ var rimraf = require('rimraf');
 var plugins = require('../plugins');
 var db = require('../database');
 var file = require('../file');
-// var minifier = require('./minifier');
+var minifier = require('./minifier');
 
 var CSS = module.exports;
 
@@ -22,56 +21,60 @@ CSS.supportedSkins = [
 ];
 
 var buildImports = {
-	client: function (source) {
-		return '@import "./theme";\n' + source + '\n' + [
-			// '@import "font-awesome";', done
-			// '@import (inline) "../public/vendor/jquery/css/smoothness/jquery-ui.css";', // done
-			// '@import (inline) "../public/vendor/jquery/bootstrap-tagsinput/bootstrap-tagsinput.css";', // done
-			// '@import (inline) "../public/vendor/colorpicker/colorpicker.css";', // done
-			'@import (inline) "../node_modules/cropperjs/dist/cropper.css";',
-			'@import "../../public/less/flags.less";',
-			'@import "../../public/less/post-queue.less";',
-			'@import "../../public/less/admin/manage/ip-blacklist.less";',
-			'@import "../../public/less/generics.less";',
-			'@import "../../public/less/mixins.less";',
-			'@import "../../public/less/global.less";',
-		].map(function (str) {
-			return str.replace(/\//g, path.sep);
-		}).join('\n');
+	client: function (source, themeData) {
+		return [
+			themeData.bootswatchSkin ? '@import "bootswatch/dist/' + themeData.bootswatchSkin + '/variables";' : '',
+			'@import "bootstrap/scss/bootstrap";',
+			themeData.bootswatchSkin ? '@import "bootswatch/dist/' + themeData.bootswatchSkin + '/bootswatch";' : '',
+			'@import "app.scss";',
+			'@import "' + themeData['theme:id'] + '/theme.scss";',
+			source,
+		].join('\n');
+
+
+		// return '@import "./theme";\n' + source + '\n' + [
+		// 	// '@import "font-awesome";', done
+		// 	// '@import (inline) "../public/vendor/jquery/css/smoothness/jquery-ui.css";', // done
+		// 	// '@import (inline) "../public/vendor/jquery/bootstrap-tagsinput/bootstrap-tagsinput.css";', // done
+		// 	// '@import (inline) "../public/vendor/colorpicker/colorpicker.css";', // done
+		// 	'@import (inline) "../node_modules/cropperjs/dist/cropper.css";',
+		// 	'@import "../../public/less/flags.less";',
+		// 	'@import "../../public/less/post-queue.less";',
+		// 	'@import "../../public/less/admin/manage/ip-blacklist.less";',
+		// 	'@import "../../public/less/generics.less";',
+		// 	'@import "../../public/less/mixins.less";',
+		// 	'@import "../../public/less/global.less";',
+		// ].map(function (str) {
+		// 	return str.replace(/\//g, path.sep);
+		// }).join('\n');
 	},
 	admin: function (source) {
 		return source + '\n' + [
 			// '@import "font-awesome";', // done
-			'@import "../public/less/admin/admin";',
-			'@import "../public/less/generics.less";',
+			'@import "admin.scss";',
+			// '@import "../public/less/generics.less";',
 			// '@import (inline) "../public/vendor/colorpicker/colorpicker.css";', // done
 			// '@import (inline) "../public/vendor/jquery/css/smoothness/jquery-ui.css";', // done
 			// '@import (inline) "../public/vendor/jquery/bootstrap-tagsinput/bootstrap-tagsinput.css";', // done
-		].map(function (str) {
-			return str.replace(/\//g, path.sep);
-		}).join('\n');
+		].join('\n');
 	},
 };
-
-function filterMissingFiles(filepaths, callback) {
-	async.filter(filepaths, function (filepath, next) {
-		file.exists(path.join(__dirname, '../../node_modules', filepath), function (err, exists) {
-			if (!exists) {
-				winston.warn('[meta/css] File not found! ' + filepath);
-			}
-
-			next(err, exists);
-		});
-	}, callback);
-}
 
 function getImports(files, prefix, extension, callback) {
 	var pluginDirectories = [];
 	var source = '';
+	function fixPath(file) {
+		if (!file) {
+			return;
+		}
+		var parsed = path.parse(file);
+		var newFile = path.join(parsed.dir, parsed.name);
+		return newFile.replace(/\\/g, '/');
+	}
 
 	files.forEach(function (styleFile) {
 		if (styleFile.endsWith(extension)) {
-			source += prefix + path.sep + styleFile + '";';
+			source += prefix + fixPath(styleFile) + '";';
 		} else {
 			pluginDirectories.push(styleFile);
 		}
@@ -84,7 +87,7 @@ function getImports(files, prefix, extension, callback) {
 			}
 
 			styleFiles.forEach(function (styleFile) {
-				source += prefix + path.sep + styleFile + '";';
+				source += prefix + fixPath(styleFile) + '";';
 			});
 
 			next();
@@ -97,8 +100,7 @@ function getImports(files, prefix, extension, callback) {
 function getBundleMetadata(target, callback) {
 	var paths = [
 		path.join(__dirname, '../../node_modules'),
-		path.join(__dirname, '../../public/less'),
-		path.join(__dirname, '../../public/vendor/fontawesome/less'),
+		path.join(__dirname, '../../public/scss'),
 	];
 
 	// Skin support
@@ -131,58 +133,28 @@ function getBundleMetadata(target, callback) {
 
 			async.parallel({
 				less: function (cb) {
-					async.waterfall([
-						function (next) {
-							filterMissingFiles(plugins.lessFiles, next);
-						},
-						function (lessFiles, next) {
-							getImports(lessFiles, '\n@import ".', '.less', next);
-						},
-					], cb);
+					getImports(plugins.lessFiles, '\n@import "', '.less', cb);
 				},
 				acpLess: function (cb) {
 					if (target === 'client') {
 						return cb(null, '');
 					}
 
-					async.waterfall([
-						function (next) {
-							filterMissingFiles(plugins.acpLessFiles, next);
-						},
-						function (acpLessFiles, next) {
-							getImports(acpLessFiles, '\n@import ".', '.less', next);
-						},
-					], cb);
+					getImports(plugins.acpLessFiles, '\n@import "', '.less', cb);
 				},
 				css: function (cb) {
-					async.waterfall([
-						function (next) {
-							filterMissingFiles(plugins.cssFiles, next);
-						},
-						function (cssFiles, next) {
-							getImports(cssFiles, '\n@import (inline) ".', '.css', next);
-						},
-					], cb);
-				},
-				skin: function (cb) {
-					const skinImport = [];
-					if (themeData && themeData.bootswatchSkin) {
-						skinImport.push('\n@import "./bootswatch/' + themeData.bootswatchSkin + '/variables.less";');
-						skinImport.push('\n@import "./bootswatch/' + themeData.bootswatchSkin + '/bootswatch.less";');
-					}
-
-					cb(null, skinImport.join(''));
+					getImports(plugins.cssFiles, '\n@import "', '.css', cb);
 				},
 			}, next);
 		},
 		function (result, next) {
-			var skinImport = result.skin;
 			var cssImports = result.css;
 			var lessImports = result.less;
 			var acpLessImports = result.acpLess;
 
-			var imports = skinImport + '\n' + cssImports + '\n' + lessImports + '\n' + acpLessImports;
-			imports = buildImports[target](imports);
+			var imports = cssImports + '\n' + lessImports + '\n' + acpLessImports;
+			imports = cssImports; // TODO: add less as scss
+			imports = buildImports[target](imports, themeData);
 
 			next(null, { paths: paths, imports: imports, themeData: themeData });
 		},
@@ -193,7 +165,7 @@ CSS.buildBundle = function (target, fork, callback) {
 	async.waterfall([
 		function (next) {
 			if (target === 'client') {
-				rimraf(path.join(__dirname, '../../build/public/client*'), next);
+				rimraf(path.join(__dirname, '../../build/public/client*css'), next);
 			} else {
 				setImmediate(next);
 			}
@@ -202,18 +174,15 @@ CSS.buildBundle = function (target, fork, callback) {
 			getBundleMetadata(target, next);
 		},
 		function (data, next) {
-			// console.log(data);
-			// TODO: add scss from plugins into this as well, aka data.imports
-			const filename = target + '.scss';
-			const code = '@import "~' + data.themeData['theme:id'] + '";';
-			fs.writeFile(path.join(__dirname, '../../build/public', filename), code, next);
+			var minify = process.env.NODE_ENV !== 'development';
+			minifier.css.bundle(data.imports, data.paths, minify, fork, next);
 		},
-		// function (bundle, next) {
-		// 	var filename = target + '.css';
+		function (bundle, next) {
+			var filename = target + '.css';
 
-		// 	fs.writeFile(path.join(__dirname, '../../build/public', filename), bundle.code, function (err) {
-		// 		next(err, bundle.code);
-		// 	});
-		// },
+			fs.writeFile(path.join(__dirname, '../../build/public', filename), bundle.code, function (err) {
+				next(err, bundle.code);
+			});
+		},
 	], callback);
 };

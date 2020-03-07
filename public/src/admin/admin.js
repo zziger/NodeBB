@@ -1,6 +1,5 @@
 require('../app.common');
-require('../../scss/admin.scss');
-require('../../../build/public/acpScripts.min.js');
+require('../../../build/public/acp-scripts.min.js');
 
 var Slideout = require('slideout');
 
