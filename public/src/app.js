@@ -1,4 +1,3 @@
-import '../scss/app.scss';
 import './app.common';
 import '../../build/public/clientScripts.min';
 

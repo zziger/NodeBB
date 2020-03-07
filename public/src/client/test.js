@@ -8,6 +8,8 @@ import 'jquery-deserialize';
 export function init() {
 	console.log('should be true', semver.gt('1.1.1', '1.0.0'));
 
+	$('#change-skin').val(config.bootswatchSkin);
+
 	$('#inputBirthday').datepicker({
 		changeMonth: true,
 		changeYear: true,
@@ -39,7 +41,20 @@ export function init() {
 	});
 
 	$('#change-skin').change(async function () {
-		reskin($(this).val());
+		var newSkin = $(this).val();
+		socket.emit('user.saveSettings', {
+			uid: app.user.uid,
+			settings: {
+				postsPerPage: 20,
+				topicsPerPage: 20,
+				bootswatchSkin: newSkin,
+			},
+		}, function (err) {
+			if (err) {
+				return console.log(err);
+			}
+			reskin(newSkin);
+		});
 	});
 
 	async function reskin(skinName) {
@@ -54,13 +69,9 @@ export function init() {
 		if (skinName === currentSkin) {
 			return;
 		}
-		if (skinName) {
-			await import(/* webpackChunkName: "css/[request]" */ 'bootswatch/dist/' + skinName + '/bootstrap.css');
-			$('link[rel="stylesheet"][href*="' + skinName + '-bootstrap-css"]').attr('disabled', false);
-		}
-		if (currentSkin) {
-			$('link[rel="stylesheet"][href*="' + currentSkin + '-bootstrap-css"]').attr('disabled', true);
-		}
+		$('link[rel="stylesheet"][href*="' + currentSkin + '.css"]')
+			.attr('href', config.relative_path + '/dist/css/' + (skinName || 'no-skin') + '.css');
+
 		// Update body class with proper skin name
 		$('body').removeClass(currentSkinClassName.join(' '))
 			.addClass('skin-' + (skinName || 'noskin'));

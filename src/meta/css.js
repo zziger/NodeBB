@@ -10,7 +10,7 @@ var rimraf = require('rimraf');
 var plugins = require('../plugins');
 var db = require('../database');
 var file = require('../file');
-var minifier = require('./minifier');
+// var minifier = require('./minifier');
 
 var CSS = module.exports;
 
@@ -110,7 +110,7 @@ function getBundleMetadata(target, callback) {
 			target = 'client';
 		}
 	}
-
+	let themeData;
 	async.waterfall([
 		function (next) {
 			if (target !== 'client') {
@@ -119,7 +119,8 @@ function getBundleMetadata(target, callback) {
 
 			db.getObjectFields('config', ['theme:type', 'theme:id', 'bootswatchSkin'], next);
 		},
-		function (themeData, next) {
+		function (_themeData, next) {
+			themeData = _themeData;
 			if (target === 'client') {
 				var themeId = (themeData['theme:id'] || 'nodebb-theme-palette');
 				var baseThemePath = path.join(nconf.get('themes_path'), (themeData['theme:type'] && themeData['theme:type'] === 'local' ? themeId : 'nodebb-theme-vanilla'));
@@ -183,7 +184,7 @@ function getBundleMetadata(target, callback) {
 			var imports = skinImport + '\n' + cssImports + '\n' + lessImports + '\n' + acpLessImports;
 			imports = buildImports[target](imports);
 
-			next(null, { paths: paths, imports: imports });
+			next(null, { paths: paths, imports: imports, themeData: themeData });
 		},
 	], callback);
 }
@@ -201,15 +202,18 @@ CSS.buildBundle = function (target, fork, callback) {
 			getBundleMetadata(target, next);
 		},
 		function (data, next) {
-			var minify = global.env !== 'development';
-			minifier.css.bundle(data.imports, data.paths, minify, fork, next);
+			// console.log(data);
+			// TODO: add scss from plugins into this as well, aka data.imports
+			const filename = target + '.scss';
+			const code = '@import "~' + data.themeData['theme:id'] + '";';
+			fs.writeFile(path.join(__dirname, '../../build/public', filename), code, next);
 		},
-		function (bundle, next) {
-			var filename = target + '.css';
+		// function (bundle, next) {
+		// 	var filename = target + '.css';
 
-			fs.writeFile(path.join(__dirname, '../../build/public', filename), bundle.code, function (err) {
-				next(err, bundle.code);
-			});
-		},
+		// 	fs.writeFile(path.join(__dirname, '../../build/public', filename), bundle.code, function (err) {
+		// 		next(err, bundle.code);
+		// 	});
+		// },
 	], callback);
 };

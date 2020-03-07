@@ -117,13 +117,9 @@ define('forum/account/settings', ['forum/account/header', 'components', 'transla
 		if (skinName === currentSkin) {
 			return;
 		}
-		if (skinName) {
-			await import(/* webpackChunkName: "css/[request]" */ 'bootswatch/dist/' + skinName + '/bootstrap.css');
-			$('link[rel="stylesheet"][href*="' + skinName + '-bootstrap-css"]').attr('disabled', false);
-		}
-		if (currentSkin) {
-			$('link[rel="stylesheet"][href*="' + currentSkin + '-bootstrap-css"]').attr('disabled', true);
-		}
+		$('link[rel="stylesheet"][href*="' + currentSkin + '.css"]')
+			.attr('href', config.relative_path + '/dist/css/' + (skinName || 'no-skin') + '.css');
+
 		// Update body class with proper skin name
 		$('body').removeClass(currentSkinClassName.join(' '))
 			.addClass('skin-' + (skinName || 'noskin'));
