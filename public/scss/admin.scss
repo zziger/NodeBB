@@ -1,7 +1,7 @@
 @import "bootstrap/scss/bootstrap";
 $fa-font-path: "./vendor/forkawesome/fonts" !default;
 @import "../vendor/forkawesome/scss/fork-awesome";
-@import "../vendor/jquery/bootstrap-tagsinput/bootstrap-tagsinput.css";
+@import "../vendor/jquery/bootstrap-tagsinput/bootstrap-tagsinput";
 @import "bootstrap-colorpicker/dist/css/bootstrap-colorpicker";
 
 // nodebb only uses datepicker, autocomplete, sortable
