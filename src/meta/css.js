@@ -132,6 +132,15 @@ function getBundleMetadata(target, callback) {
 			}
 
 			async.parallel({
+				scss: function (cb) {
+					getImports(plugins.scssFiles, '\n@import "', '.scss', cb);
+				},
+				acpScss: function (cb) {
+					if (target === 'client') {
+						return cb(null, '');
+					}
+					getImports(plugins.acpScssFiles, '\n@import "', '.scss', cb);
+				},
 				less: function (cb) {
 					getImports(plugins.lessFiles, '\n@import "', '.less', cb);
 				},
@@ -148,12 +157,7 @@ function getBundleMetadata(target, callback) {
 			}, next);
 		},
 		function (result, next) {
-			var cssImports = result.css;
-			var lessImports = result.less;
-			var acpLessImports = result.acpLess;
-
-			var imports = cssImports + '\n' + lessImports + '\n' + acpLessImports;
-			imports = cssImports; // TODO: add less as scss
+			var imports = result.css + '\n' + result.scss + '\n' + result.acpScss;
 			imports = buildImports[target](imports, themeData);
 
 			next(null, { paths: paths, imports: imports, themeData: themeData });
