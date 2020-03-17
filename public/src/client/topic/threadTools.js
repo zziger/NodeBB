@@ -150,7 +150,9 @@ define('forum/topic/threadTools', [
 				}
 				app.parseAndTranslate('partials/topic/topic-menu-list', data, function (html) {
 					dropdownMenu.html(html);
-					$(window).trigger('action:topic.tools.load');
+					$(window).trigger('action:topic.tools.load', {
+						element: dropdownMenu,
+					});
 				});
 			});
 		});
