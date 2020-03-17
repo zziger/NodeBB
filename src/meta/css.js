@@ -30,32 +30,10 @@ var buildImports = {
 			'@import "' + themeData['theme:id'] + '/theme.scss";',
 			source,
 		].join('\n');
-
-
-		// return '@import "./theme";\n' + source + '\n' + [
-		// 	// '@import "font-awesome";', done
-		// 	// '@import (inline) "../public/vendor/jquery/css/smoothness/jquery-ui.css";', // done
-		// 	// '@import (inline) "../public/vendor/jquery/bootstrap-tagsinput/bootstrap-tagsinput.css";', // done
-		// 	// '@import (inline) "../public/vendor/colorpicker/colorpicker.css";', // done
-		// 	'@import (inline) "../node_modules/cropperjs/dist/cropper.css";',
-		// 	'@import "../../public/less/flags.less";',
-		// 	'@import "../../public/less/post-queue.less";',
-		// 	'@import "../../public/less/admin/manage/ip-blacklist.less";',
-		// 	'@import "../../public/less/generics.less";',
-		// 	'@import "../../public/less/mixins.less";',
-		// 	'@import "../../public/less/global.less";',
-		// ].map(function (str) {
-		// 	return str.replace(/\//g, path.sep);
-		// }).join('\n');
 	},
 	admin: function (source) {
 		return source + '\n' + [
-			// '@import "font-awesome";', // done
 			'@import "admin.scss";',
-			// '@import "../public/less/generics.less";',
-			// '@import (inline) "../public/vendor/colorpicker/colorpicker.css";', // done
-			// '@import (inline) "../public/vendor/jquery/css/smoothness/jquery-ui.css";', // done
-			// '@import (inline) "../public/vendor/jquery/bootstrap-tagsinput/bootstrap-tagsinput.css";', // done
 		].join('\n');
 	},
 };
@@ -160,7 +138,9 @@ function getBundleMetadata(target, callback) {
 			var imports = result.css + '\n' + result.scss + '\n' + result.acpScss;
 			imports = buildImports[target](imports, themeData);
 
-			next(null, { paths: paths, imports: imports, themeData: themeData });
+			var lessImports = result.less + '\n' + result.acpLess;
+
+			next(null, { paths: paths, imports: imports, lessImports: lessImports, themeData: themeData });
 		},
 	], callback);
 }
@@ -179,13 +159,20 @@ CSS.buildBundle = function (target, fork, callback) {
 		},
 		function (data, next) {
 			var minify = process.env.NODE_ENV !== 'development';
-			minifier.css.bundle(data.imports, data.paths, minify, fork, next);
+			async.parallel({
+				scss: function (next) {
+					minifier.css.bundle(data.imports, data.paths, 'scss', minify, fork, next);
+				},
+				less: function (next) {
+					minifier.css.bundle(data.lessImports, data.paths, 'less', minify, fork, next);
+				},
+			}, next);
 		},
-		function (bundle, next) {
+		function (result, next) {
 			var filename = target + '.css';
-
-			fs.writeFile(path.join(__dirname, '../../build/public', filename), bundle.code, function (err) {
-				next(err, bundle.code);
+			const code = result.scss.code + result.less.code;
+			fs.writeFile(path.join(__dirname, '../../build/public', filename), code, function (err) {
+				next(err, code);
 			});
 		},
 	], callback);

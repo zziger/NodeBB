@@ -176,7 +176,7 @@ async function setupMockDefaults() {
 
 	await meta.themes.set({
 		type: 'local',
-		id: 'nodebb-theme-persona',
+		id: 'nodebb-theme-palette',
 	});
 
 	const rimraf = util.promisify(require('rimraf'));

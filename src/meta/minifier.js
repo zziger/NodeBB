@@ -6,6 +6,7 @@ var uglify = require('uglify-es');
 var async = require('async');
 var winston = require('winston');
 const sass = require('node-sass');
+const less = require('less');
 var postcss = require('postcss');
 var autoprefixer = require('autoprefixer');
 var clean = require('postcss-clean');
@@ -265,11 +266,34 @@ Minifier.js.minifyBatch = function (scripts, fork, callback) {
 	}, fork, callback);
 };
 
+function preprocessStyles(data, callback) {
+	if (data.type === 'scss') {
+		sass.render({
+			data: data.source,
+			includePaths: data.paths,
+		}, function (err, sassOutput) {
+			if (err) {
+				console.log(err.message, err.file, err.line);
+			}
+			callback(err, sassOutput && sassOutput.css.toString());
+		});
+	} else if (data.type === 'less') {
+		less.render(data.source, {
+			paths: data.paths,
+			javascriptEnabled: true,
+		}, function (err, lessOutput) {
+			if (err) {
+				console.log(err.message, err.filename, err.line);
+			}
+			callback(err, lessOutput && lessOutput.css);
+		});
+	} else {
+		callback(new Error('[[error:unknown-type]]'));
+	}
+}
+
 function buildCSS(data, callback) {
-	sass.render({
-		data: data.source,
-		includePaths: data.paths,
-	}, function (err, sassOutput) {
+	preprocessStyles(data, function (err, resultCss) {
 		if (err) {
 			return callback(err);
 		}
@@ -279,7 +303,7 @@ function buildCSS(data, callback) {
 			clean({
 				processImportFrom: ['local'],
 			}),
-		] : [autoprefixer]).process(sassOutput.css.toString(), {
+		] : [autoprefixer]).process(resultCss, {
 			from: undefined,
 		}).then(function (result) {
 			process.nextTick(callback, null, { code: result.css });
@@ -291,11 +315,12 @@ function buildCSS(data, callback) {
 actions.buildCSS = buildCSS;
 
 Minifier.css = {};
-Minifier.css.bundle = function (source, paths, minify, fork, callback) {
+Minifier.css.bundle = function (source, paths, type, minify, fork, callback) {
 	executeAction({
 		act: 'buildCSS',
 		source: source,
 		paths: paths,
+		type: type,
 		minify: minify,
 	}, fork, callback);
 };

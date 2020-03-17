@@ -5,7 +5,7 @@ const userDigest = require('../../user/digest');
 const userEmail = require('../../user/email');
 const notifications = require('../../notifications');
 const emailer = require('../../emailer');
-const utils = require('../../../public/src/utils');
+const utils = require('../../utils');
 
 const Email = module.exports;
 

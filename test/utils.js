@@ -14,7 +14,7 @@ describe('Utility Methods', function () {
 	global.jQuery = require('jquery');
 	global.$ = global.jQuery;
 	var $ = global.jQuery;
-	var utils = require('./../public/src/utils.js');
+	var utils = require('../public/src/utils');
 
 	// https://github.com/jprichardson/string.js/blob/master/test/string.test.js
 	it('should decode HTML entities', function (done) {

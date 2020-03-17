@@ -103,7 +103,7 @@ describe('minifier', function () {
 		path.resolve(__dirname, './files'),
 	];
 	it('.css.bundle() should concat styles', function (done) {
-		minifier.css.bundle(styles, paths, false, false, function (err, bundle) {
+		minifier.css.bundle(styles, paths, 'less', false, false, function (err, bundle) {
 			assert.ifError(err);
 			assert.strictEqual(bundle.code, '.help { margin: 10px; } .yellow { background: yellow; }\n.help {\n  display: block;\n}\n.help .blue {\n  background: blue;\n}\n');
 			done();
@@ -111,7 +111,7 @@ describe('minifier', function () {
 	});
 
 	it('.css.bundle() should minify styles', function (done) {
-		minifier.css.bundle(styles, paths, true, false, function (err, bundle) {
+		minifier.css.bundle(styles, paths, 'less', true, false, function (err, bundle) {
 			assert.ifError(err);
 			assert.strictEqual(bundle.code, '.help{margin:10px}.yellow{background:#ff0}.help{display:block}.help .blue{background:#00f}');
 			done();
@@ -148,7 +148,6 @@ describe('Build', function (done) {
 		build.build(['client js bundle'], function (err) {
 			assert.ifError(err);
 			assert(file.existsSync(path.join(__dirname, '../dist/app.bundle.js')));
-			assert(file.existsSync(path.join(__dirname, '../dist/app.css')));
 			done();
 		});
 	});
@@ -157,7 +156,24 @@ describe('Build', function (done) {
 		build.build(['admin js bundle'], function (err) {
 			assert.ifError(err);
 			assert(file.existsSync(path.join(__dirname, '../dist/admin.bundle.js')));
-			assert(file.existsSync(path.join(__dirname, '../dist/admin.css')));
+			done();
+		});
+	});
+
+	it('should build client side styles', function (done) {
+		build.build(['client side styles'], function (err) {
+			assert.ifError(err);
+			var filename = path.join(__dirname, '../build/public/client.css');
+			assert(file.existsSync(filename));
+			done();
+		});
+	});
+
+	it('should build admin control panel styles', function (done) {
+		build.build(['admin control panel styles'], function (err) {
+			assert.ifError(err);
+			var filename = path.join(__dirname, '../build/public/admin.css');
+			assert(file.existsSync(filename));
 			done();
 		});
 	});

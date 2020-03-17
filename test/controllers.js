@@ -551,8 +551,8 @@ describe('Controllers', function () {
 		});
 	});
 
-	it('should load app.css', function (done) {
-		request(nconf.get('url') + '/dist/app.css', function (err, res, body) {
+	it('should load client.css', function (done) {
+		request(nconf.get('url') + '/assets/client.css', function (err, res, body) {
 			assert.ifError(err);
 			assert.equal(res.statusCode, 200);
 			assert(body);
@@ -561,7 +561,7 @@ describe('Controllers', function () {
 	});
 
 	it('should load admin.css', function (done) {
-		request(nconf.get('url') + '/dist/admin.css', function (err, res, body) {
+		request(nconf.get('url') + '/assets/admin.css', function (err, res, body) {
 			assert.ifError(err);
 			assert.equal(res.statusCode, 200);
 			assert(body);
