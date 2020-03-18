@@ -1,3 +1,18 @@
+<label>ACE Editor</label>
+<pre id="ace-editor">
+	<div style="color:black; padding: 10px">
+		console.log('should be true', semver.gt('1.1.1', '1.0.0'));
+
+		$('#change-skin').val(config.bootswatchSkin);
+
+		$('#inputTags').tagsinput({
+			confirmKeys: [13, 44],
+			trimValue: true,
+		});
+	<div>
+</pre>
+<hr/>
+
 <label>Tags Input</label>
 <input id="inputTags" class="form-control" value="" placeholder="">
 <hr/>
@@ -23,35 +38,35 @@
 
 <label>Change Skin</label>
 <select id="change-skin" class="form-control">
-    {{{each skins}}}
-    <option value="{skins.value}">{skins.name}</option>
-    {{{end}}}
+	{{{each skins}}}
+	<option value="{skins.value}">{skins.name}</option>
+	{{{end}}}
 </select>
 <hr/>
 
 <label>Sortable</label>
 <div>
-    <ul id="sortable-list">
-        <li>Item 1</li>
-        <li>Item 2</li>
-        <li>Item 3</li>
-    </ul>
+	<ul id="sortable-list">
+		<li>Item 1</li>
+		<li>Item 2</li>
+		<li>Item 3</li>
+	</ul>
 </div>
 <hr/>
 
 <label>Form Serialize</label>
 <form id="form-serialize">
-    <input name="a" value="1">
-    <input name="a" value="2">
-    <input name="bar" value="test">
+	<input name="a" value="1">
+	<input name="a" value="2">
+	<input name="bar" value="test">
 </form>
 <pre id="json-form-data"></pre>
 <hr/>
 
 <label>Form Deserialize</label>
 <form id="form-deserialize">
-    <input name="foo" value="">
-    <input name="foo" value="">
-    <input name="moo" value="">
+	<input name="foo" value="">
+	<input name="foo" value="">
+	<input name="moo" value="">
 </form>
 <hr/>
