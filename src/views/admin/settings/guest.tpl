@@ -10,9 +10,7 @@
 					<span class="mdl-switch__label"><strong>[[admin/settings/guest:handles.enabled]]</strong></span>
 				</label>
 			</div>
-			<p class="help-block">
-				[[admin/settings/guest:handles.enabled-help]]
-			</p>
+			<small class="form-text text-muted">[[admin/settings/guest:handles.enabled-help]]</small>
 		</form>
 	</div>
 </div>

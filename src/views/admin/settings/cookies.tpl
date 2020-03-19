@@ -15,23 +15,17 @@
 			<div class="form-group">
 				<label for="cookieConsentMessage">[[admin/settings/cookies:consent.message]]</label>
 				<input class="form-control" id="cookieConsentMessage" type="text" data-field="cookieConsentMessage" />
-				<p class="help-block">
-					[[admin/settings/cookies:consent.blank-localised-default]]
-				</p>
+				<small class="form-text text-muted">[[admin/settings/cookies:consent.blank-localised-default]]</small>
 			</div>
 			<div class="form-group">
 				<label for="cookieConsentDismiss">[[admin/settings/cookies:consent.acceptance]]</label>
 				<input class="form-control" id="cookieConsentDismiss" type="text" data-field="cookieConsentDismiss" />
-				<p class="help-block">
-					[[admin/settings/cookies:consent.blank-localised-default]]
-				</p>
+				<small class="form-text text-muted">[[admin/settings/cookies:consent.blank-localised-default]]</small>
 			</div>
 			<div class="form-group">
 				<label for="cookieConsentLink">[[admin/settings/cookies:consent.link-text]]</label>
 				<input class="form-control" id="cookieConsentLink" type="text" data-field="cookieConsentLink" />
-				<p class="help-block">
-					[[admin/settings/cookies:consent.blank-localised-default]]
-				</p>
+				<small class="form-text text-muted">[[admin/settings/cookies:consent.blank-localised-default]]</small>
 			</div>
 			<div class="form-group">
 				<label for="cookieConsentLinkUrl">[[admin/settings/cookies:consent.link-url]]</label>
@@ -48,16 +42,12 @@
 			<div class="form-group">
 				<label for="cookieDomain">[[admin/settings/cookies:cookie-domain]]</label>
 				<input class="form-control" id="cookieDomain" type="text" placeholder=".domain.tld" data-field="cookieDomain" /><br />
-				<p class="help-block">
-					[[admin/settings/cookies:blank-default]]
-				</p>
+				<small class="form-text text-muted">[[admin/settings/cookies:blank-default]]</small>
 			</div>
 
 			<div class="form-group">
 				<button id="delete-all-sessions" class="btn btn-danger">Revoke All Sessions</button>
-				<p class="help-block">
-					This will delete all sessions, you will be logged out and will have to login again!
-				</p>
+				<small class="form-text text-muted">This will delete all sessions, you will be logged out and will have to login again!</small>
 			</div>
 		</form>
 	</div>

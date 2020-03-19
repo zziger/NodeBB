@@ -30,9 +30,7 @@
 			<div class="form-group">
 				<label for="privateUploadsExtensions">[[admin/settings/uploads:private-extensions]]</label>
 				<input type="text" class="form-control" value="" data-field="privateUploadsExtensions" placeholder="">
-				<p class="help-block">
-					[[admin/settings/uploads:private-uploads-extensions-help]]
-				</p>
+				<small class="form-text text-muted">[[admin/settings/uploads:private-uploads-extensions-help]]</small>
 			</div>
 
 			<div class="row">
@@ -40,9 +38,7 @@
 					<div class="form-group">
 						<label for="resizeImageWidthThreshold">[[admin/settings/uploads:resize-image-width-threshold]]</label>
 						<input type="text" class="form-control" value="2000" data-field="resizeImageWidthThreshold" placeholder="2000">
-						<p class="help-block">
-							[[admin/settings/uploads:resize-image-width-threshold-help]]
-						</p>
+						<small class="form-text text-muted">[[admin/settings/uploads:resize-image-width-threshold-help]]</small>
 					</div>
 				</div>
 
@@ -50,9 +46,7 @@
 					<div class="form-group">
 						<label for="resizeImageWidth">[[admin/settings/uploads:resize-image-width]]</label>
 						<input type="text" class="form-control" value="760" data-field="resizeImageWidth" placeholder="760">
-						<p class="help-block">
-							[[admin/settings/uploads:resize-image-width-help]]
-						</p>
+						<small class="form-text text-muted">[[admin/settings/uploads:resize-image-width-help]]</small>
 					</div>
 				</div>
 			</div>
@@ -60,33 +54,25 @@
 			<div class="form-group">
 				<label for="resizeImageQuality">[[admin/settings/uploads:resize-image-quality]]</label>
 				<input type="text" class="form-control" value="60" data-field="resizeImageQuality" placeholder="60">
-				<p class="help-block">
-					[[admin/settings/uploads:resize-image-quality-help]]
-				</p>
+				<small class="form-text text-muted">[[admin/settings/uploads:resize-image-quality-help]]</small>
 			</div>
 
 			<div class="form-group">
 				<label for="maximumFileSize">[[admin/settings/uploads:max-file-size]]</label>
 				<input type="text" class="form-control" value="2048" data-field="maximumFileSize">
-				<p class="help-block">
-					[[admin/settings/uploads:max-file-size-help]]
-				</p>
+				<small class="form-text text-muted">[[admin/settings/uploads:max-file-size-help]]</small>
 			</div>
 
 			<div class="form-group">
 				<label for="rejectImageWidth">[[admin/settings/uploads:reject-image-width]]</label>
 				<input type="text" class="form-control" value="5000" data-field="rejectImageWidth" placeholder="5000">
-				<p class="help-block">
-					[[admin/settings/uploads:reject-image-width-help]]
-				</p>
+				<small class="form-text text-muted">[[admin/settings/uploads:reject-image-width-help]]</small>
 			</div>
 
 			<div class="form-group">
 				<label for="rejectImageHeight">[[admin/settings/uploads:reject-image-height]]</label>
 				<input type="text" class="form-control" value="5000" data-field="rejectImageHeight" placeholder="5000">
-				<p class="help-block">
-					[[admin/settings/uploads:reject-image-height-help]]
-				</p>
+				<small class="form-text text-muted">[[admin/settings/uploads:reject-image-height-help]]</small>
 			</div>
 
 			<div class="checkbox">
@@ -104,9 +90,7 @@
 			<div class="form-group">
 				<label for="allowedFileExtensions">[[admin/settings/uploads:allowed-file-extensions]]</label>
 				<input type="text" class="form-control" value="" data-field="allowedFileExtensions" data-field-type="tagsinput" />
-				<p class="help-block">
-					[[admin/settings/uploads:allowed-file-extensions-help]]
-				</p>
+				<small class="form-text text-muted">[[admin/settings/uploads:allowed-file-extensions-help]]</small>
 			</div>
 		</form>
 	</div>
@@ -146,25 +130,19 @@
 			<div class="form-group">
 				<label for="profileImageDimension">[[admin/settings/uploads:profile-image-dimension]]</label>
 				<input id="profileImageDimension" type="text" class="form-control" data-field="profileImageDimension" placeholder="200" />
-				<p class="help-block">
-					[[admin/settings/uploads:profile-image-dimension-help]]
-				</p>
+				<small class="form-text text-muted">[[admin/settings/uploads:profile-image-dimension-help]]</small>
 			</div>
 
 			<div class="form-group">
 				<label>[[admin/settings/uploads:max-profile-image-size]]</label>
 				<input type="text" class="form-control" placeholder="Maximum size of uploaded user images in kibibytes" data-field="maximumProfileImageSize" />
-				<p class="help-block">
-					[[admin/settings/uploads:max-profile-image-size-help]]
-				</p>
+				<small class="form-text text-muted">[[admin/settings/uploads:max-profile-image-size-help]]</small>
 			</div>
 
 			<div class="form-group">
 				<label>[[admin/settings/uploads:max-cover-image-size]]</label>
 				<input type="text" class="form-control" placeholder="Maximum size of uploaded cover images in kibibytes" data-field="maximumCoverImageSize" />
-				<p class="help-block">
-					[[admin/settings/uploads:max-cover-image-size-help]]
-				</p>
+				<small class="form-text text-muted">[[admin/settings/uploads:max-cover-image-size-help]]</small>
 			</div>
 
 			<div class="checkbox">
@@ -182,9 +160,7 @@
 	<div class="col-sm-10 col-xs-12">
 		<form>
 			<label for="profile:defaultCovers"><strong>[[admin/settings/uploads:default-covers]]</strong></label>
-			<p class="help-block">
-				[[admin/settings/uploads:default-covers-help]]
-			</p>
+			<small class="form-text text-muted">[[admin/settings/uploads:default-covers-help]]</small>
 			<input type="text" class="form-control input-lg" id="profile:defaultCovers" data-field="profile:defaultCovers" data-field-type="tagsinput" value="/assets/images/cover-default.png" placeholder="https://example.com/group1.png, https://example.com/group2.png" />
 		</form>
 	</div>

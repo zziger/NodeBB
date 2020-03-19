@@ -78,9 +78,7 @@
 			<div class="form-group">
 				<label for="topicStaleDays">[[admin/settings/post:restrictions.days-until-stale]]</label>
 				<input id="topicStaleDays" type="text" class="form-control" value="60" data-field="topicStaleDays">
-				<p class="help-block">
-					[[admin/settings/post:restrictions.stale-help]]
-				</p>
+				<small class="form-text text-muted">[[admin/settings/post:restrictions.stale-help]]</small>
 			</div>
 		</form>
 	</div>
@@ -126,9 +124,7 @@
 								<span class="mdl-switch__label"><strong>[[admin/settings/post:restrictions.post-queue]]</strong></span>
 							</label>
 						</div>
-						<p class="help-block">
-							[[admin/settings/post:restrictions.post-queue-help]]
-						</p>
+						<small class="form-text text-muted">[[admin/settings/post:restrictions.post-queue-help]]</small>
 					</div>
 				</div>
 				<div class="col-sm-6">
@@ -159,16 +155,12 @@
 			<div class="form-group">
 				<label for="timeagoCutoff">[[admin/settings/post:timestamp.cut-off]]</label>
 				<input type="number" class="form-control" id="timeagoCutoff" data-field="timeagoCutoff"  />
-				<p class="help-block">
-					[[admin/settings/post:timestamp.cut-off-help]]
-				</p>
+				<small class="form-text text-muted">[[admin/settings/post:timestamp.cut-off-help]]</small>
 			</div>
 			<div class="form-group">
 				<label for="necroThreshold">[[admin/settings/post:timestamp.necro-threshold]]</label>
 				<input type="number" class="form-control" id="necroThreshold" data-field="necroThreshold"  />
-				<p class="help-block">
-					[[admin/settings/post:timestamp.necro-threshold-help]]
-				</p>
+				<small class="form-text text-muted">[[admin/settings/post:timestamp.necro-threshold-help]]</small>
 			</div>
 		</form>
 	</div>

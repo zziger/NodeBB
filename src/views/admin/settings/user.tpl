@@ -102,16 +102,12 @@
 			<div class="form-group">
 				<label for="adminReloginDuration">[[admin/settings/user:admin-relogin-duration]]</label>
 				<input id="adminReloginDuration" type="text" class="form-control" data-field="adminReloginDuration" placeholder="60" />
-				<p class="help-block">
-					[[admin/settings/user:admin-relogin-duration-help]]
-				</p>
+				<small class="form-text text-muted">[[admin/settings/user:admin-relogin-duration-help]]</small>
 			</div>
 			<div class="form-group">
 				<label for="loginAttempts">[[admin/settings/user:login-attempts]]</label>
 				<input id="loginAttempts" type="text" class="form-control" data-field="loginAttempts" placeholder="5" />
-				<p class="help-block">
-					[[admin/settings/user:login-attempts-help]]
-				</p>
+				<small class="form-text text-muted">[[admin/settings/user:login-attempts-help]]</small>
 			</div>
 			<div class="form-group">
 				<label for="lockoutDuration">[[admin/settings/user:lockout-duration]]</label>
@@ -145,9 +141,7 @@
 					</div>
 				</div>
 				<div class="col-xs-12">
-					<p class="help-block">
-						[[admin/settings/user:session-time-help]]
-					</p>
+					<small class="form-text text-muted">[[admin/settings/user:session-time-help]]</small>
 				</div>
 			</div>
 			<div class="form-group">
@@ -171,9 +165,7 @@
 					<option value="admin-invite-only">[[admin/settings/user:registration-type.admin-invite-only]]</option>
 					<option value="disabled">[[admin/settings/user:registration-type.disabled]]</option>
 				</select>
-				<p class="help-block">
-					[[admin/settings/user:registration-type.help, {config.relative_path}]]
-				</p>
+				<small class="form-text text-muted">[[admin/settings/user:registration-type.help, {config.relative_path}]]</small>
 			</div>
 			<div class="form-group">
 				<label>[[admin/settings/user:registration-approval-type]]</label>
@@ -182,23 +174,17 @@
 					<option value="admin-approval">[[admin/settings/user:registration-type.admin-approval]]</option>
 					<option value="admin-approval-ip">[[admin/settings/user:registration-type.admin-approval-ip]]</option>
 				</select>
-				<p class="help-block">
-					[[admin/settings/user:registration-approval-type.help, {config.relative_path}]]
-				</p>
+				<small class="form-text text-muted">[[admin/settings/user:registration-approval-type.help, {config.relative_path}]]</small>
 			</div>
 			<div class="form-group">
 				<label>[[admin/settings/user:max-invites]]</label>
 				<input type="number" class="form-control" data-field="maximumInvites" placeholder="0">
-				<p class="help-block">
-					[[admin/settings/user:max-invites-help]]
-				</p>
+				<small class="form-text text-muted">[[admin/settings/user:max-invites-help]]</small>
 			</div>
 			<div class="form-group">
 				<label>[[admin/settings/user:invite-expiration]]</label>
 				<input type="number" class="form-control" data-field="inviteExpiration" placeholder="7">
-				<p class="help-block">
-					[[admin/settings/user:invite-expiration-help]]
-				</p>
+				<small class="form-text text-muted">[[admin/settings/user:invite-expiration-help]]</small>
 			</div>
 			<div class="form-group">
 				<label>[[admin/settings/user:min-username-length]]</label>

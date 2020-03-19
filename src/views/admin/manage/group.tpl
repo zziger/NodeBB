@@ -53,13 +53,9 @@
 						<label>
 							<input id="group-private" name="private" type="checkbox"<!-- IF group.private --> checked<!-- ENDIF group.private -->>
 							<strong>[[groups:details.private]]</strong>
-							<p class="help-block">
-								[[admin/manage/groups:edit.private-details]]
-							</p>
+							<small class="form-text text-muted">[[admin/manage/groups:edit.private-details]]</small>
 							<!-- IF !allowPrivateGroups -->
-							<p class="help-block">
-								[[admin/manage/groups:edit.private-override]]
-							</p>
+							<small class="form-text text-muted">[[admin/manage/groups:edit.private-override]]</small>
 							<!-- ENDIF !allowPrivateGroups -->
 						</label>
 					</div>
@@ -88,9 +84,7 @@
 						<label>
 							<input id="group-hidden" name="hidden" type="checkbox"<!-- IF group.hidden --> checked<!-- ENDIF group.hidden -->>
 							<strong>[[admin/manage/groups:edit.hidden]]</strong>
-							<p class="help-block">
-								[[admin/manage/groups:edit.hidden-details]]
-							</p>
+							<small class="form-text text-muted">[[admin/manage/groups:edit.hidden-details]]</small>
 						</label>
 					</div>
 				</fieldset>

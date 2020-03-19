@@ -6,16 +6,12 @@
 		<form>
 			<div class="form-group">
 				<label for="email:from"><strong>[[admin/settings/email:address]]</strong></label>
-				<p class="help-block">
-					[[admin/settings/email:address-help]]
-				</p>
+				<small class="form-text text-muted">[[admin/settings/email:address-help]]</small>
 				<input type="text" class="form-control input-lg" id="email:from" data-field="email:from" placeholder="info@example.org" /><br />
 			</div>
 			<div class="form-group">
 				<label for="email:from_name"><strong>From Name</strong></label>
-				<p class="help-block">
-					[[admin/settings/email:from-help]]
-				</p>
+				<small class="form-text text-muted">[[admin/settings/email:from-help]]</small>
 				<input type="text" class="form-control input-lg" id="email:from_name" data-field="email:from_name" placeholder="NodeBB" /><br />
 			</div>
 			<div class="row">
@@ -87,9 +83,7 @@
 			<div class="form-group">
 				<label for="email:smtpTransport:user"><strong>[[admin/settings/email:smtp-transport.username]]</strong></label>
 				<input type="text" class="form-control input-lg" data-field="email:smtpTransport:user" placeholder="admin@example.org" />
-				<p class="help-block">
-					[[admin/settings/email:smtp-transport.username-help]]
-				</p>
+				<small class="form-text text-muted">[[admin/settings/email:smtp-transport.username-help]]</small>
 			</div>
 			<div class="form-group">
 				<label for="email:smtpTransport:pass"><strong>[[admin/settings/email:smtp-transport.password]]</strong></label>
@@ -128,9 +122,7 @@
 			</select>
 		</div>
 		<button class="btn btn-primary" type="button" data-action="email.test">[[admin/settings/email:testing.send]]</button>
-		<p class="help-block">
-			[[admin/settings/email:testing.send-help]]
-		</p>
+		<small class="form-text text-muted">[[admin/settings/email:testing.send-help]]</small>
 	</div>
 </div>
 
@@ -148,9 +140,7 @@
 			<div class="form-group">
 				<label for="digestHour"><strong>[[admin/settings/email:subscriptions.hour]]</strong></label>
 				<input type="number" class="form-control input-lg" id="digestHour" data-field="digestHour" placeholder="17" min="0" max="24" />
-				<p class="help-block">
-					[[admin/settings/email:subscriptions.hour-help]]
-				</p>
+				<small class="form-text text-muted">[[admin/settings/email:subscriptions.hour-help]]</small>
 			</div>
 		</form>
 	</div>

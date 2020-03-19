@@ -10,9 +10,7 @@
 					<span class="mdl-switch__label"><strong>[[admin/settings/advanced:maintenance-mode]]</strong></span>
 				</label>
 			</div>
-			<p class="help-block">
-				[[admin/settings/advanced:maintenance-mode.help]]
-			</p>
+			<small class="form-text text-muted">[[admin/settings/advanced:maintenance-mode.help]]</small>
 			<div class="form-group">
 				<label for="maintenanceModeStatus">[[admin/settings/advanced:maintenance-mode.status]]</label>
 				<input class="form-control" type="text" data-field="maintenanceModeStatus">
@@ -40,16 +38,12 @@
 			<div class="form-group">
 				<label for="access-control-allow-origin">[[admin/settings/advanced:headers.acao]]</label>
 				<input class="form-control" id="access-control-allow-origin" type="text" placeholder="" value="" data-field="access-control-allow-origin" /><br />
-				<p class="help-block">
-					[[admin/settings/advanced:headers.acao-help]]
-				</p>
+				<small class="form-text text-muted">[[admin/settings/advanced:headers.acao-help]]</small>
 			</div>
 			<div class="form-group">
 				<label for="access-control-allow-origin-regex">[[admin/settings/advanced:headers.acao-regex]]</label>
 				<input class="form-control" id="access-control-allow-origin-regex" type="text" placeholder="" value="" data-field="access-control-allow-origin-regex" /><br />
-				<p class="help-block">
-					[[admin/settings/advanced:headers.acao-regex-help]]
-				</p>
+				<small class="form-text text-muted">[[admin/settings/advanced:headers.acao-regex-help]]</small>
 			</div>
 			<div class="form-group">
 				<label for="access-control-allow-credentials">[[admin/settings/advanced:headers.acac]]</label>
@@ -93,9 +87,7 @@
 					<span class="mdl-switch__label"><strong>[[admin/settings/advanced:hsts.preload]]</strong></span>
 				</label>
 			</div>
-			<p class="help-block">
-				[[admin/settings/advanced:hsts.help, https:\/\/hstspreload.org\/]]
-			</p>
+			<small class="form-text text-muted">[[admin/settings/advanced:hsts.help, https:\/\/hstspreload.org\/]]</small>
 		</form>
 	</div>
 </div>
@@ -103,9 +95,7 @@
 <div class="row">
 	<div class="col-sm-2 col-xs-12 settings-header">[[admin/settings/advanced:traffic-management]]</div>
 	<div class="col-sm-10 col-xs-12">
-		<p class="help-block">
-			[[admin/settings/advanced:traffic.help]]
-		</p>
+		<small class="form-text text-muted">[[admin/settings/advanced:traffic.help]]</small>
 		<form>
 			<div class="form-group">
 				<label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="eventLoopCheckEnabled">
@@ -116,16 +106,12 @@
 			<div class="form-group">
 				<label for="eventLoopLagThreshold">[[admin/settings/advanced:traffic.event-lag]]</label>
 				<input class="form-control" id="eventLoopLagThreshold" type="number" data-field="eventLoopLagThreshold" placeholder="Default: 70" step="10" min="10" value="70" />
-				<p class="help-block">
-					[[admin/settings/advanced:traffic.event-lag-help]]
-				</p>
+				<small class="form-text text-muted">[[admin/settings/advanced:traffic.event-lag-help]]</small>
 			</div>
 			<div class="form-group">
 				<label for="eventLoopInterval">[[admin/settings/advanced:traffic.lag-check-interval]]</label>
 				<input class="form-control" id="eventLoopInterval" type="number" data-field="eventLoopInterval" placeholder="Default: 500" value="500" step="50" />
-				<p class="help-block">
-					[[admin/settings/advanced:traffic.lag-check-interval-help]]
-				</p>
+				<small class="form-text text-muted">[[admin/settings/advanced:traffic.lag-check-interval-help]]</small>
 			</div>
 		</form>
 	</div>

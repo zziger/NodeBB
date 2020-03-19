@@ -11,12 +11,8 @@
 				</label>
 			</div>
 
-			<p class="help-block">
-				[[admin/settings/group:private-groups.help]]
-			</p>
-			<p class="help-block">
-				[[admin/settings/group:private-groups.warning]]
-			</p>
+			<small class="form-text text-muted">[[admin/settings/group:private-groups.help]]</small>
+			<small class="form-text text-muted">[[admin/settings/group:private-groups.warning]]</small>
 
 			<div class="checkbox">
 				<label class="mdl-switch mdl-js-switch mdl-js-ripple-effect">
@@ -25,9 +21,7 @@
 				</label>
 			</div>
 
-			<p class="help-block">
-				[[admin/settings/group:allow-multiple-badges-help]]
-			</p>
+			<small class="form-text text-muted">[[admin/settings/group:allow-multiple-badges-help]]</small>
 
 			<label>[[admin/settings/group:max-name-length]]</label>
 			<input class="form-control" type="text" placeholder="255" data-field="maximumGroupNameLength" />
@@ -43,9 +37,7 @@
 	<div class="col-sm-10 col-xs-12">
 		<form role="form">
 			<label for="groups:defaultCovers"><strong>[[admin/settings/group:default-cover]]</strong></label>
-			<p class="help-block">
-				[[admin/settings/group:default-cover-help]]
-			</p>
+			<small class="form-text text-muted">[[admin/settings/group:default-cover-help]]</small>
 			<input type="text" class="form-control input-lg" id="groups:defaultCovers" data-field="groups:defaultCovers" data-field-type="tagsinput" value="/assets/images/cover-default.png" placeholder="https://example.com/group1.png, https://example.com/group2.png" /><br />
 		</form>
 	</div>
