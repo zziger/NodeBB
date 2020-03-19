@@ -130,12 +130,12 @@ function addCoreRoutes(app, router, middleware) {
 	userRoutes(router, middleware, controllers);
 	groupRoutes(router, middleware, controllers);
 
+	if (process.env.NODE_ENV === 'development') {
+		require('./debug')(router, middleware, controllers);
+	}
+
 	var relativePath = nconf.get('relative_path');
 	app.use(relativePath || '/', router);
-
-	if (process.env.NODE_ENV === 'development') {
-		require('./debug')(app, middleware, controllers);
-	}
 
 	app.use(middleware.privateUploads);
 

@@ -1,11 +1,21 @@
 'use strict';
 
 const path = require('path');
+const url = require('url');
+const nconf = require('nconf');
 
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const activePlugins = require('./build/active_plugins');
+
+nconf.file({
+	file: path.resolve(__dirname, nconf.any(['config', 'CONFIG']) || 'config.json'),
+});
+
+const urlObject = url.parse(nconf.get('url'));
+const relativePath = urlObject.pathname !== '/' ? urlObject.pathname.replace(/\/+$/, '') : '';
+
 module.exports = {
 	plugins: [
 		new CleanWebpackPlugin(), // cleans dist folder
@@ -19,7 +29,7 @@ module.exports = {
 		filename: '[name].bundle.js',
 		chunkFilename: '[name].bundle.js',
 		path: path.resolve(__dirname, 'dist'),
-		publicPath: '/dist/',
+		publicPath: relativePath + '/dist/',
 	},
 	watchOptions: {
 		poll: 500,
