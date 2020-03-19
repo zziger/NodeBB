@@ -9,12 +9,15 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const activePlugins = require('./build/active_plugins');
 
-nconf.file({
-	file: path.resolve(__dirname, nconf.any(['config', 'CONFIG']) || 'config.json'),
-});
+let relativePath = nconf.get('relative_path');
+if (relativePath === undefined) {
+	nconf.file({
+		file: path.resolve(__dirname, nconf.any(['config', 'CONFIG']) || 'config.json'),
+	});
 
-const urlObject = url.parse(nconf.get('url'));
-const relativePath = urlObject.pathname !== '/' ? urlObject.pathname.replace(/\/+$/, '') : '';
+	const urlObject = url.parse(nconf.get('url'));
+	relativePath = urlObject.pathname !== '/' ? urlObject.pathname.replace(/\/+$/, '') : '';
+}
 
 module.exports = {
 	plugins: [
