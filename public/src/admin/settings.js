@@ -58,8 +58,13 @@ define('admin/settings', ['uploader', 'settings'], function (uploader, settings)
 		if (formEl.length) {
 			const inputs = formEl.find('input[name], select[name], textarea[name]');
 			inputs.each(function (idx, el) {
+				const type = el.getAttribute('type');
 				const attr = el.getAttribute('name');
-				el.value = app.config[fieldset][attr];
+				if (type !== 'checkbox') {
+					el.value = app.config[fieldset][attr];
+				} else {
+					el.checked = app.config[fieldset][attr] === 'on';
+				}
 			});
 		}
 
