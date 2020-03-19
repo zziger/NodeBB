@@ -1,4 +1,4 @@
-define('admin/settings', ['uploader'], function (uploader) {
+define('admin/settings', ['uploader', 'settings'], function (uploader, settings) {
 	var Settings = {};
 
 	Settings.init = function () {
@@ -12,7 +12,7 @@ define('admin/settings', ['uploader'], function (uploader) {
 			var anchor = header.toLowerCase().replace(/ /g, '-').trim();
 
 			$(this).prepend('<a name="' + anchor + '"></a>');
-			$('.section-content ul').append('<li><a href="#' + anchor + '">' + header + '</a></li>');
+			$('.section-content ul').append('<li  class="list-group-item list-group-item-action"><a class="stretched-link" href="#' + anchor + '">' + header + '</a></li>');
 		});
 
 		var scrollTo = $('a[name="' + window.location.hash.replace('#', '') + '"]');
@@ -34,26 +34,40 @@ define('admin/settings', ['uploader'], function (uploader) {
 		var inputType;
 		var field;
 
-		// Handle unsaved changes
-		$(fields).on('change', function () {
-			app.flags = app.flags || {};
-			app.flags._unsaved = true;
-		});
+		// Old config style
 		var defaultInputs = ['text', 'hidden', 'password', 'textarea', 'number'];
 		for (x = 0; x < numFields; x += 1) {
 			field = fields.eq(x);
 			key = field.attr('data-field');
 			inputType = field.attr('type');
 			if (app.config.hasOwnProperty(key)) {
+				/*  not using mdl checkboxes anymore, remove?
 				if (field.is('input') && inputType === 'checkbox') {
 					var checked = parseInt(app.config[key], 10) === 1;
 					field.prop('checked', checked);
 					field.parents('.mdl-switch').toggleClass('is-checked', checked);
-				} else if (field.is('textarea') || field.is('select') || (field.is('input') && defaultInputs.indexOf(inputType) !== -1)) {
+				} else */if (field.is('textarea') || field.is('select') || (field.is('input') && defaultInputs.indexOf(inputType) !== -1)) {
 					field.val(app.config[key]);
 				}
 			}
 		}
+
+		// New config style
+		const formEl = $('form[data-settings]');
+		const fieldset = formEl.attr('data-settings');
+		if (formEl.length) {
+			const inputs = formEl.find('input[name], select[name], textarea[name]');
+			inputs.each(function (idx, el) {
+				const attr = el.getAttribute('name');
+				el.value = app.config[fieldset][attr];
+			});
+		}
+
+		// Handle unsaved changes
+		$(fields).on('change', function () {
+			app.flags = app.flags || {};
+			app.flags._unsaved = true;
+		});
 
 		revertBtn.off('click').on('click', function () {
 			ajaxify.refresh();
@@ -137,49 +151,59 @@ define('admin/settings', ['uploader'], function (uploader) {
 	};
 
 	function saveFields(fields, callback) {
-		var data = {};
+		var formEl = $('form[data-settings]');
+		console.log(formEl, formEl.length);
+		if (formEl.length) {
+			console.log('saving new form');
+			var hash = formEl.attr('data-settings');
+			settings.save(hash, formEl, callback);
+		} else {
+			console.log('saving old form');
+			// Old behaviour
+			var data = {};
 
-		fields.each(function () {
-			var field = $(this);
-			var key = field.attr('data-field');
-			var value;
-			var inputType;
+			fields.each(function () {
+				var field = $(this);
+				var key = field.attr('data-field');
+				var value;
+				var inputType;
 
-			if (field.is('input')) {
-				inputType = field.attr('type');
-				switch (inputType) {
-				case 'text':
-				case 'password':
-				case 'hidden':
-				case 'textarea':
-				case 'number':
+				if (field.is('input')) {
+					inputType = field.attr('type');
+					switch (inputType) {
+					case 'text':
+					case 'password':
+					case 'hidden':
+					case 'textarea':
+					case 'number':
+						value = field.val();
+						break;
+
+					case 'checkbox':
+						value = field.prop('checked') ? '1' : '0';
+						break;
+					}
+				} else if (field.is('textarea') || field.is('select')) {
 					value = field.val();
-					break;
-
-				case 'checkbox':
-					value = field.prop('checked') ? '1' : '0';
-					break;
 				}
-			} else if (field.is('textarea') || field.is('select')) {
-				value = field.val();
-			}
 
-			data[key] = value;
-		});
+				data[key] = value;
+			});
 
-		socket.emit('admin.config.setMultiple', data, function (err) {
-			if (err) {
-				return callback(err);
-			}
-
-			for (var field in data) {
-				if (data.hasOwnProperty(field)) {
-					app.config[field] = data[field];
+			socket.emit('admin.config.setMultiple', data, function (err) {
+				if (err) {
+					return callback(err);
 				}
-			}
 
-			callback();
-		});
+				for (var field in data) {
+					if (data.hasOwnProperty(field)) {
+						app.config[field] = data[field];
+					}
+				}
+
+				callback();
+			});
+		}
 	}
 
 	return Settings;

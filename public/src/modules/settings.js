@@ -504,6 +504,7 @@ define('settings', ['jquery-deserialize'], function () {
 
 			if (formEl.length) {
 				var values = helper.serializeForm(formEl);
+				console.log(values);
 
 				helper.whenReady(function () {
 					var list = formEl.find('[data-sorted-list]');
