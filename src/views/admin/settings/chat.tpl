@@ -20,7 +20,7 @@
 					<span class="mdl-switch__label"><strong>[[admin/settings/chat:disable-editing]]</strong></span>
 				</label>
 			</div>
-			<p class="help-block">[[admin/settings/chat:disable-editing-help]]</p>
+			<small class="form-text text-muted">[[admin/settings/chat:disable-editing-help]]</small>
 		</div>
 
 		<div class="form-group">

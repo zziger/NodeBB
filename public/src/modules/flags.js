@@ -26,7 +26,7 @@ define('flags', function () {
 				// Custom reason has text, confirm submission
 				bootbox.confirm({
 					title: '[[flags:modal-submit-confirm]]',
-					message: '<p>[[flags:modal-submit-confirm-text]]</p><p class="help-block">[[flags:modal-submit-confirm-text-help]]</p>',
+					message: '<p>[[flags:modal-submit-confirm-text]]</p><small class="form-text text-muted">[[flags:modal-submit-confirm-text-help]]</small>',
 					callback: function (result) {
 						if (result) {
 							createFlag(data.type, data.id, reportText);

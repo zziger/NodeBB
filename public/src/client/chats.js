@@ -242,7 +242,7 @@ define('forum/chats', [
 			bootbox.confirm({
 				size: 'small',
 				title: '[[modules:chat.leave]]',
-				message: '<p>[[modules:chat.leave-prompt]]</p><p class="help-block">[[modules:chat.leave-help]]</p>',
+				message: '<p>[[modules:chat.leave-prompt]]</p><small class="form-text text-muted">[[modules:chat.leave-help]]</small>',
 				callback: function (ok) {
 					if (ok) {
 						socket.emit('modules.chats.leave', roomId, function (err) {

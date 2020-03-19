@@ -15,6 +15,6 @@
 				</div>
 			</div>
 		</div>
-		<p class="help-block">[[admin/general/dashboard:page-views-custom-help]]</p>
+		<small class="form-text text-muted">[[admin/general/dashboard:page-views-custom-help]]</small>
 	</fieldset>
 </form>

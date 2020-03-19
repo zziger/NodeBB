@@ -39,7 +39,7 @@
 					<input class="mdl-switch__input" type="checkbox" data-field="gdpr_enabled">
 					<span class="mdl-switch__label"><strong>[[admin/settings/user:gdpr_enabled]]</strong></span>
 				</label>
-				<p class="help-block">[[admin/settings/user:gdpr_enabled_help]]</p>
+				<small class="form-text text-muted">[[admin/settings/user:gdpr_enabled_help]]</small>
 			</div>
 			<div class="checkbox">
 				<label class="mdl-switch mdl-js-switch mdl-js-ripple-effect">
@@ -147,7 +147,7 @@
 			<div class="form-group">
 				<label>[[admin/settings/user:online-cutoff]]</label>
 				<input type="text" class="form-control" data-field="onlineCutoff">
-				<p class="help-block">[[admin/settings/user:online-cutoff-help]]</p>
+				<small class="form-text text-muted">[[admin/settings/user:online-cutoff-help]]</small>
 			</div>
 		</form>
 	</div>
