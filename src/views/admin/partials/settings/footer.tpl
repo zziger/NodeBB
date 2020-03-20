@@ -1,5 +1,2 @@
+	<button class="btn btn-primary position-fixed mb-4 mr-4 p-3 rounded shadow" style="bottom: 0; right: 0;" id="save"><i class="fa fa-fw fa-save"></i></button>
 </div>
-
-<button id="save" class="floating-button mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored">
-	<i class="material-icons">save</i>
-</button>

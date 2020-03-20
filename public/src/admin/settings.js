@@ -12,7 +12,7 @@ define('admin/settings', ['uploader'], function (uploader) {
 			var anchor = header.toLowerCase().replace(/ /g, '-').trim();
 
 			$(this).prepend('<a name="' + anchor + '"></a>');
-			$('.section-content ul').append('<li><a href="#' + anchor + '">' + header + '</a></li>');
+			$('.section-content ul').append('<li  class="list-group-item list-group-item-action"><a class="stretched-link" href="#' + anchor + '">' + header + '</a></li>');
 		});
 
 		var scrollTo = $('a[name="' + window.location.hash.replace('#', '') + '"]');
