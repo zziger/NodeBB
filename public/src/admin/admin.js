@@ -1,7 +1,7 @@
 require('../app.common');
 require('../../../build/public/acp-scripts.min.js');
 
-var Slideout = require('slideout');
+// var Slideout = require('slideout');
 
 
 (function () {
@@ -49,7 +49,7 @@ var Slideout = require('slideout');
 
 		$('[component="logout"]').on('click', app.logout);
 
-		configureSlidemenu();
+		// configureSlidemenu();
 		setupNProgress();
 	});
 
@@ -150,60 +150,60 @@ var Slideout = require('slideout');
 		});
 	}
 
-	function configureSlidemenu() {
-		var env = utils.findBootstrapEnvironment();
+	// function configureSlidemenu() {
+	// 	var env = utils.findBootstrapEnvironment();
 
-		var slideout = new Slideout({
-			panel: document.getElementById('panel'),
-			menu: document.getElementById('menu'),
-			padding: 256,
-			tolerance: 70,
-		});
+	// 	var slideout = new Slideout({
+	// 		panel: document.getElementById('panel'),
+	// 		menu: document.getElementById('menu'),
+	// 		padding: 256,
+	// 		tolerance: 70,
+	// 	});
 
-		if (env === 'md' || env === 'lg') {
-			slideout.disableTouch();
-		}
+	// 	if (env === 'md' || env === 'lg') {
+	// 		slideout.disableTouch();
+	// 	}
 
-		$('#mobile-menu').on('click', function () {
-			slideout.toggle();
-		});
+	// 	$('#mobile-menu').on('click', function () {
+	// 		slideout.toggle();
+	// 	});
 
-		$('#menu a').on('click', function () {
-			slideout.close();
-		});
+	// 	$('#menu a').on('click', function () {
+	// 		slideout.close();
+	// 	});
 
-		$(window).on('resize', function () {
-			slideout.close();
+	// 	$(window).on('resize', function () {
+	// 		slideout.close();
 
-			env = utils.findBootstrapEnvironment();
+	// 		env = utils.findBootstrapEnvironment();
 
-			if (env === 'md' || env === 'lg') {
-				slideout.disableTouch();
-				$('#header').css({
-					position: 'relative',
-				});
-			} else {
-				slideout.enableTouch();
-				$('#header').css({
-					position: 'fixed',
-				});
-			}
-		});
+	// 		if (env === 'md' || env === 'lg') {
+	// 			slideout.disableTouch();
+	// 			$('#header').css({
+	// 				position: 'relative',
+	// 			});
+	// 		} else {
+	// 			slideout.enableTouch();
+	// 			$('#header').css({
+	// 				position: 'fixed',
+	// 			});
+	// 		}
+	// 	});
 
-		function onOpeningMenu() {
-			$('#header').css({
-				top: ($('#panel').position().top * -1) + 'px',
-				position: 'absolute',
-			});
-		}
+	// 	function onOpeningMenu() {
+	// 		$('#header').css({
+	// 			top: ($('#panel').position().top * -1) + 'px',
+	// 			position: 'absolute',
+	// 		});
+	// 	}
 
-		slideout.on('open', onOpeningMenu);
+	// 	slideout.on('open', onOpeningMenu);
 
-		slideout.on('close', function () {
-			$('#header').css({
-				top: '0px',
-				position: 'fixed',
-			});
-		});
-	}
+	// 	slideout.on('close', function () {
+	// 		$('#header').css({
+	// 			top: '0px',
+	// 			position: 'fixed',
+	// 		});
+	// 	});
+	// }
 }());

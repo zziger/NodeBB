@@ -1,8 +1,3 @@
-/* globals ace */
-
-import 'ace-builds';
-import 'ace-builds/webpack-resolver';
-
 import 'jquery-ui/ui/widgets/datepicker';
 import Sortable from 'sortablejs';
 import semver from 'semver';
@@ -11,14 +6,6 @@ import { enable as colorpickerEnable } from '../admin/modules/colorpicker';
 import 'jquery-deserialize';
 
 export function init() {
-	ace.edit('ace-editor', {
-		mode: 'ace/mode/javascript',
-		theme: 'ace/theme/dracula',
-		maxLines: 50,
-		minLines: 10,
-		fontSize: 18,
-	});
-
 	console.log('should be true', semver.gt('1.1.1', '1.0.0'));
 
 	$('#change-skin').val(config.bootswatchSkin);

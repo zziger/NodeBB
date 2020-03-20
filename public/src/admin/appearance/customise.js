@@ -1,5 +1,6 @@
 
-define('admin/appearance/customise', ['admin/settings'], function (Settings) {
+/* globals ace */
+define('admin/appearance/customise', ['admin/settings', 'ace-builds', 'ace-builds/webpack-resolver'], function (Settings) {
 	var Customise = {};
 
 	Customise.init = function () {
@@ -7,37 +8,10 @@ define('admin/appearance/customise', ['admin/settings'], function (Settings) {
 			$('#customCSS').text($('#customCSS-holder').val());
 			$('#customJS').text($('#customJS-holder').val());
 			$('#customHTML').text($('#customHTML-holder').val());
-			console.warn('TODO: Customize.settings.prepare ace disabled');
-			// var customCSS = ace.edit('customCSS');
-			// var customJS = ace.edit('customJS');
-			// var customHTML = ace.edit('customHTML');
 
-			// customCSS.setTheme('ace/theme/twilight');
-			// customCSS.getSession().setMode('ace/mode/less');
-
-			// customCSS.on('change', function () {
-			// 	app.flags = app.flags || {};
-			// 	app.flags._unsaved = true;
-			// 	$('#customCSS-holder').val(customCSS.getValue());
-			// });
-
-			// customJS.setTheme('ace/theme/twilight');
-			// customJS.getSession().setMode('ace/mode/javascript');
-
-			// customJS.on('change', function () {
-			// 	app.flags = app.flags || {};
-			// 	app.flags._unsaved = true;
-			// 	$('#customJS-holder').val(customJS.getValue());
-			// });
-
-			// customHTML.setTheme('ace/theme/twilight');
-			// customHTML.getSession().setMode('ace/mode/html');
-
-			// customHTML.on('change', function () {
-			// 	app.flags = app.flags || {};
-			// 	app.flags._unsaved = true;
-			// 	$('#customHTML-holder').val(customHTML.getValue());
-			// });
+			initACE('customCSS', 'less', '#customCSS-holder');
+			initACE('customJS', 'javascript', '#customJS-holder');
+			initACE('customHTML', 'html', '#customHTML-holder');
 
 			$('#save').on('click', function () {
 				if ($('#enableLiveReload').is(':checked')) {
@@ -45,6 +19,21 @@ define('admin/appearance/customise', ['admin/settings'], function (Settings) {
 				}
 			});
 		});
+
+		function initACE(aceElementId, mode, holder) {
+			var editorEl = ace.edit(aceElementId, {
+				mode: 'ace/mode/' + mode,
+				theme: 'ace/theme/dracula',
+				maxLines: 30,
+				minLines: 10,
+				fontSize: 16,
+			});
+			editorEl.on('change', function () {
+				app.flags = app.flags || {};
+				app.flags._unsaved = true;
+				$(holder).val(editorEl.getValue());
+			});
+		}
 	};
 
 	return Customise;

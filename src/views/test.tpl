@@ -1,18 +1,3 @@
-<label>ACE Editor</label>
-<pre id="ace-editor">
-	<div style="color:black; padding: 10px">
-		console.log('should be true', semver.gt('1.1.1', '1.0.0'));
-
-		$('#change-skin').val(config.bootswatchSkin);
-
-		$('#inputTags').tagsinput({
-			confirmKeys: [13, 44],
-			trimValue: true,
-		});
-	<div>
-</pre>
-<hr/>
-
 <label>Tags Input</label>
 <input id="inputTags" class="form-control" value="" placeholder="">
 <hr/>
