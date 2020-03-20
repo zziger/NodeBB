@@ -94,15 +94,7 @@ Configs.init = async function () {
 };
 
 Configs.list = async function () {
-	const hash = await Configs.getFields([]);
-
-	const sets = ['core.settings.general'];
-	const configSets = await Promise.all(sets.map(set => Meta.settings.get(set)));
-	configSets.forEach((set, idx) => {
-		hash[sets[idx]] = set;
-	});
-
-	return hash;
+	return await Configs.getFields([]);
 };
 
 Configs.get = async function (field) {

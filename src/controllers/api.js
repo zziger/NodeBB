@@ -16,22 +16,13 @@ const languages = require('../languages');
 const apiController = module.exports;
 
 apiController.loadConfig = async function (req) {
-	// Load new config sections from database for merging
-	const sections = ['core.settings.general'];
-	let hashes = await Promise.all(sections.map(section => meta.settings.get(section)));
-	hashes = hashes.reduce((hashes, hash, idx) => {
-		hashes[sections[idx]] = hash;
-		return hashes;
-	}, {});
-
-	console.log(hashes[sections.pop()]);
 	let config = {
 		relative_path: nconf.get('relative_path'),
 		upload_url: nconf.get('upload_url'),
-		siteTitle: validator.escape(String(hashes['core.settings.general'].title || hashes['core.settings.general'].browserTitle || 'NodeBB')),
+		siteTitle: validator.escape(String(meta.config.title || meta.config.browserTitle || 'NodeBB')),
 		browserTitle: validator.escape(String(meta.config.browserTitle || meta.config.title || 'NodeBB')),
-		titleLayout: (hashes['core.settings.general'].titleLayout || '{pageTitle} | {browserTitle}').replace(/{/g, '&#123;').replace(/}/g, '&#125;'),
-		showSiteTitle: hashes['core.settings.general'].showSiteTitle === 'on',
+		titleLayout: (meta.config.titleLayout || '{pageTitle} | {browserTitle}').replace(/{/g, '&#123;').replace(/}/g, '&#125;'),
+		showSiteTitle: meta.config.showSiteTitle === 1,
 		minimumTitleLength: meta.config.minimumTitleLength,
 		maximumTitleLength: meta.config.maximumTitleLength,
 		minimumPostLength: meta.config.minimumPostLength,
@@ -40,8 +31,8 @@ apiController.loadConfig = async function (req) {
 		maximumTagsPerTopic: meta.config.maximumTagsPerTopic || 5,
 		minimumTagLength: meta.config.minimumTagLength || 3,
 		maximumTagLength: meta.config.maximumTagLength || 15,
-		useOutgoingLinksPage: hashes['core.settings.general'].useOutgoingLinksPage === 'on',
-		outgoingLinksWhitelist: hashes['core.settings.general'].useOutgoingLinksPage === 'on' ? hashes['core.settings.general']['outgoingLinks:whitelist'] : undefined,
+		useOutgoingLinksPage: meta.config.useOutgoingLinksPage === 1,
+		outgoingLinksWhitelist: meta.config.useOutgoingLinksPage === 1 ? meta.config['outgoingLinks:whitelist'] : undefined,
 		allowGuestHandles: meta.config.allowGuestHandles === 1,
 		allowFileUploads: meta.config.allowFileUploads === 1,
 		allowTopicsThumbnail: meta.config.allowTopicsThumbnail === 1,

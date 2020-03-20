@@ -1,4 +1,4 @@
-define('admin/settings', ['uploader', 'settings'], function (uploader, settings) {
+define('admin/settings', ['uploader'], function (uploader) {
 	var Settings = {};
 
 	Settings.init = function () {
@@ -12,7 +12,7 @@ define('admin/settings', ['uploader', 'settings'], function (uploader, settings)
 			var anchor = header.toLowerCase().replace(/ /g, '-').trim();
 
 			$(this).prepend('<a name="' + anchor + '"></a>');
-			$('.section-content ul').append('<li  class="list-group-item list-group-item-action"><a class="stretched-link" href="#' + anchor + '">' + header + '</a></li>');
+			$('.section-content ul').append('<li><a href="#' + anchor + '">' + header + '</a></li>');
 		});
 
 		var scrollTo = $('a[name="' + window.location.hash.replace('#', '') + '"]');
@@ -34,45 +34,26 @@ define('admin/settings', ['uploader', 'settings'], function (uploader, settings)
 		var inputType;
 		var field;
 
-		// Old config style
+		// Handle unsaved changes
+		$(fields).on('change', function () {
+			app.flags = app.flags || {};
+			app.flags._unsaved = true;
+		});
 		var defaultInputs = ['text', 'hidden', 'password', 'textarea', 'number'];
 		for (x = 0; x < numFields; x += 1) {
 			field = fields.eq(x);
 			key = field.attr('data-field');
 			inputType = field.attr('type');
 			if (app.config.hasOwnProperty(key)) {
-				/*  not using mdl checkboxes anymore, remove?
 				if (field.is('input') && inputType === 'checkbox') {
 					var checked = parseInt(app.config[key], 10) === 1;
 					field.prop('checked', checked);
 					field.parents('.mdl-switch').toggleClass('is-checked', checked);
-				} else */if (field.is('textarea') || field.is('select') || (field.is('input') && defaultInputs.indexOf(inputType) !== -1)) {
+				} else if (field.is('textarea') || field.is('select') || (field.is('input') && defaultInputs.indexOf(inputType) !== -1)) {
 					field.val(app.config[key]);
 				}
 			}
 		}
-
-		// New config style
-		const formEl = $('form[data-settings]');
-		const fieldset = formEl.attr('data-settings');
-		if (formEl.length) {
-			const inputs = formEl.find('input[name], select[name], textarea[name]');
-			inputs.each(function (idx, el) {
-				const type = el.getAttribute('type');
-				const attr = el.getAttribute('name');
-				if (type !== 'checkbox') {
-					el.value = app.config[fieldset][attr];
-				} else {
-					el.checked = app.config[fieldset][attr] === 'on';
-				}
-			});
-		}
-
-		// Handle unsaved changes
-		$(fields).on('change', function () {
-			app.flags = app.flags || {};
-			app.flags._unsaved = true;
-		});
 
 		revertBtn.off('click').on('click', function () {
 			ajaxify.refresh();
@@ -156,59 +137,49 @@ define('admin/settings', ['uploader', 'settings'], function (uploader, settings)
 	};
 
 	function saveFields(fields, callback) {
-		var formEl = $('form[data-settings]');
-		console.log(formEl, formEl.length);
-		if (formEl.length) {
-			console.log('saving new form');
-			var hash = formEl.attr('data-settings');
-			settings.save(hash, formEl, callback);
-		} else {
-			console.log('saving old form');
-			// Old behaviour
-			var data = {};
+		var data = {};
 
-			fields.each(function () {
-				var field = $(this);
-				var key = field.attr('data-field');
-				var value;
-				var inputType;
+		fields.each(function () {
+			var field = $(this);
+			var key = field.attr('data-field');
+			var value;
+			var inputType;
 
-				if (field.is('input')) {
-					inputType = field.attr('type');
-					switch (inputType) {
-					case 'text':
-					case 'password':
-					case 'hidden':
-					case 'textarea':
-					case 'number':
-						value = field.val();
-						break;
-
-					case 'checkbox':
-						value = field.prop('checked') ? '1' : '0';
-						break;
-					}
-				} else if (field.is('textarea') || field.is('select')) {
+			if (field.is('input')) {
+				inputType = field.attr('type');
+				switch (inputType) {
+				case 'text':
+				case 'password':
+				case 'hidden':
+				case 'textarea':
+				case 'number':
 					value = field.val();
+					break;
+
+				case 'checkbox':
+					value = field.prop('checked') ? '1' : '0';
+					break;
 				}
+			} else if (field.is('textarea') || field.is('select')) {
+				value = field.val();
+			}
 
-				data[key] = value;
-			});
+			data[key] = value;
+		});
 
-			socket.emit('admin.config.setMultiple', data, function (err) {
-				if (err) {
-					return callback(err);
+		socket.emit('admin.config.setMultiple', data, function (err) {
+			if (err) {
+				return callback(err);
+			}
+
+			for (var field in data) {
+				if (data.hasOwnProperty(field)) {
+					app.config[field] = data[field];
 				}
+			}
 
-				for (var field in data) {
-					if (data.hasOwnProperty(field)) {
-						app.config[field] = data[field];
-					}
-				}
-
-				callback();
-			});
-		}
+			callback();
+		});
 	}
 
 	return Settings;
