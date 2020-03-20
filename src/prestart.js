@@ -71,9 +71,6 @@ function loadConfig(configFile) {
 	nconf.set('upload_path', path.resolve(nconf.get('base_dir'), nconf.get('upload_path')));
 	nconf.set('upload_url', '/assets/uploads');
 
-	if (nconf.get('url')) {
-		nconf.set('url_parsed', url.parse(nconf.get('url')));
-	}
 
 	// Explicitly cast 'jobsDisabled' as Bool
 	var castAsBool = ['jobsDisabled'];
@@ -92,13 +89,16 @@ function loadConfig(configFile) {
 		nconf.set('sessionKey', 'express.sid');
 	}
 	// Parse out the relative_path and other goodies from the configured URL
-	const urlObject = url.parse(nconf.get('url'));
-	const relativePath = urlObject.pathname !== '/' ? urlObject.pathname.replace(/\/+$/, '') : '';
-	nconf.set('base_url', urlObject.protocol + '//' + urlObject.host);
-	nconf.set('secure', urlObject.protocol === 'https:');
-	nconf.set('use_port', !!urlObject.port);
-	nconf.set('relative_path', relativePath);
-	nconf.set('port', nconf.get('PORT') || nconf.get('port') || urlObject.port || (nconf.get('PORT_ENV_VAR') ? nconf.get(nconf.get('PORT_ENV_VAR')) : false) || 4567);
+	if (nconf.get('url')) {
+		nconf.set('url_parsed', url.parse(nconf.get('url')));
+		const urlObject = url.parse(nconf.get('url'));
+		const relativePath = urlObject.pathname !== '/' ? urlObject.pathname.replace(/\/+$/, '') : '';
+		nconf.set('base_url', urlObject.protocol + '//' + urlObject.host);
+		nconf.set('secure', urlObject.protocol === 'https:');
+		nconf.set('use_port', !!urlObject.port);
+		nconf.set('relative_path', relativePath);
+		nconf.set('port', nconf.get('PORT') || nconf.get('port') || urlObject.port || (nconf.get('PORT_ENV_VAR') ? nconf.get(nconf.get('PORT_ENV_VAR')) : false) || 4567);
+	}
 }
 
 function versionCheck() {

@@ -1,4 +1,6 @@
-/* global zxcvbn */
+const $ = require('jquery');
+const zxcvbn = require('zxcvbn');
+const utils = require('../utils');
 
 $('document').ready(function () {
 	setupInputs();
@@ -50,7 +52,7 @@ $('document').ready(function () {
 
 			return false;
 		}
-		$('#submit .working').removeClass('hide');
+		$('#submit .working').removeClass('d-none');
 	}
 
 	function activate(type, el) {
@@ -119,7 +121,7 @@ $('document').ready(function () {
 	}
 
 	function launchForum() {
-		$('#launch .working').removeClass('hide');
+		$('#launch .working').removeClass('d-none');
 		$.post('/launch', function () {
 			var successCount = 0;
 			var url = $('#launch').attr('data-url');

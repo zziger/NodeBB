@@ -6,9 +6,9 @@ var bodyParser = require('body-parser');
 var fs = require('fs');
 var path = require('path');
 var childProcess = require('child_process');
-var less = require('less');
+const sass = require('node-sass');
 var async = require('async');
-var uglify = require('uglify-es');
+const webpack = require('webpack');
 var nconf = require('nconf');
 var Benchpress = require('benchpressjs');
 
@@ -43,16 +43,6 @@ winston.configure({
 });
 
 var web = module.exports;
-
-var scripts = [
-	'node_modules/jquery/dist/jquery.js',
-	'public/vendor/xregexp/xregexp.js',
-	'public/vendor/xregexp/unicode/unicode-base.js',
-	'public/src/utils.js',
-	'public/src/installer/install.js',
-	'node_modules/zxcvbn/dist/zxcvbn.js',
-];
-
 var installing = false;
 var success = false;
 var error = false;
@@ -63,6 +53,8 @@ web.install = function (port) {
 	winston.info('Launching web installer on port ' + port);
 
 	app.use(express.static('public', {}));
+	app.use('/dist', express.static(path.join(__dirname, '../dist'), {}));
+
 	app.engine('tpl', function (filepath, options, callback) {
 		async.waterfall([
 			function (next) {
@@ -79,7 +71,7 @@ web.install = function (port) {
 		extended: true,
 	}));
 
-	async.parallel([compileLess, compileJS, copyCSS, loadDefaults], function (err) {
+	async.parallel([compileSass, copyCSS, loadDefaults, runWebpack], function (err) {
 		if (err) {
 			winston.error(err);
 		}
@@ -88,6 +80,12 @@ web.install = function (port) {
 	});
 };
 
+function runWebpack(callback) {
+	const webpackCfg = require('../webpack.installer');
+	webpack(webpackCfg, function (err) {
+		callback(err);
+	});
+}
 
 function launchExpress(port) {
 	server = app.listen(port, function () {
@@ -110,7 +108,7 @@ function ping(req, res) {
 function welcome(req, res) {
 	var dbs = ['redis', 'mongo', 'postgres'];
 	var databases = dbs.map(function (databaseName) {
-		var questions = require('../src/database/' + databaseName).questions.filter(function (question) {
+		var questions = require('../src/database/' + databaseName + '/questions').filter(function (question) {
 			return question && !question.hideOnWebInstall;
 		});
 
@@ -222,48 +220,21 @@ function launch(req, res) {
 	});
 }
 
-function compileLess(callback) {
-	fs.readFile(path.join(__dirname, '../public/less/install.less'), function (err, style) {
+function compileSass(callback) {
+	fs.readFile(path.join(__dirname, '../public/scss/install.scss'), function (err, style) {
 		if (err) {
-			return winston.error('Unable to read LESS install file: ', err);
+			return winston.error('Unable to read SASS install file: ', err);
 		}
 
-		less.render(style.toString(), function (err, css) {
+		sass.render({
+			data: style.toString(),
+		}, function (err, css) {
 			if (err) {
-				return winston.error('Unable to compile LESS: ', err);
+				return winston.error('Unable to compile SASS: ', err);
 			}
 
 			fs.writeFile(path.join(__dirname, '../public/installer.css'), css.css, callback);
 		});
-	});
-}
-
-function compileJS(callback) {
-	var code = '';
-	async.eachSeries(scripts, function (srcPath, next) {
-		fs.readFile(path.join(__dirname, '..', srcPath), function (err, buffer) {
-			if (err) {
-				return next(err);
-			}
-
-			code += buffer.toString();
-			next();
-		});
-	}, function (err) {
-		if (err) {
-			return callback(err);
-		}
-		try {
-			var minified = uglify.minify(code, {
-				compress: false,
-			});
-			if (!minified.code) {
-				return callback(new Error('[[error:failed-to-minify]]'));
-			}
-			fs.writeFile(path.join(__dirname, '../public/installer.min.js'), minified.code, callback);
-		} catch (e) {
-			callback(e);
-		}
 	});
 }
 

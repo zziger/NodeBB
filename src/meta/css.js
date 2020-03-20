@@ -139,7 +139,6 @@ function getBundleMetadata(target, callback) {
 			imports = buildImports[target](imports, themeData);
 
 			var lessImports = result.less + '\n' + result.acpLess;
-
 			next(null, { paths: paths, imports: imports, lessImports: lessImports, themeData: themeData });
 		},
 	], callback);
