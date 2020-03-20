@@ -1,8 +1,8 @@
 <!-- IMPORT admin/partials/settings/header.tpl -->
 
 <div class="row">
-	<div class="col-sm-2 col-xs-12 settings-header">[[admin/settings/web-crawler:crawlability-settings]]</div>
-	<div class="col-sm-10 col-xs-12">
+	<div class="col-sm-2 col-12 settings-header">[[admin/settings/web-crawler:crawlability-settings]]</div>
+	<div class="col-sm-10 col-12">
 		<form>
 			<strong>[[admin/settings/web-crawler:robots-txt]]</strong><br />
 			<textarea class="form-control" data-field="robots:txt"></textarea>
@@ -11,8 +11,8 @@
 </div>
 
 <div class="row">
-	<div class="col-sm-2 col-xs-12 settings-header">[[admin/settings/web-crawler:sitemap-feed-settings]]</div>
-	<div class="col-sm-10 col-xs-12">
+	<div class="col-sm-2 col-12 settings-header">[[admin/settings/web-crawler:sitemap-feed-settings]]</div>
+	<div class="col-sm-10 col-12">
 		<form>
 			<div class="checkbox">
 				<label class="mdl-switch mdl-js-switch mdl-js-ripple-effect">

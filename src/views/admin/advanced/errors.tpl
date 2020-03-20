@@ -7,7 +7,7 @@
 						<div><canvas id="not-found" height="250"></canvas></div>
 					</div>
 					<div class="panel-footer"><small>
-						<strong>[[admin/advanced/errors:figure-x, 1]]</strong> &ndash; 
+						<strong>[[admin/advanced/errors:figure-x, 1]]</strong> &ndash;
 						[[admin/advanced/errors:error-events-per-day, [[admin/advanced/errors:error.404]]]]
 					</small></div>
 				</div>
@@ -18,7 +18,7 @@
 						<div><canvas id="toobusy" height="250"></canvas></div>
 					</div>
 					<div class="panel-footer"><small>
-						<strong>[[admin/advanced/errors:figure-x, 2]]</strong> &ndash; 
+						<strong>[[admin/advanced/errors:figure-x, 2]]</strong> &ndash;
 						[[admin/advanced/errors:error-events-per-day, [[admin/advanced/errors:error.503]]]]
 					</small></div>
 				</div>
@@ -43,7 +43,7 @@
 </div>
 
 <div class="row">
-	<div class="col-xs-12">
+	<div class="col-12">
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				<i class="fa fa-exclamation-triangle"></i> [[admin/advanced/errors:error.404]]

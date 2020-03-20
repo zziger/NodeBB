@@ -1,8 +1,8 @@
 <!-- IMPORT admin/partials/settings/header.tpl -->
 
 <div class="row">
-	<div class="col-sm-2 col-xs-12 settings-header">[[admin/settings/advanced:maintenance-mode]]</div>
-	<div class="col-sm-10 col-xs-12">
+	<div class="col-sm-2 col-12 settings-header">[[admin/settings/advanced:maintenance-mode]]</div>
+	<div class="col-sm-10 col-12">
 		<form>
 			<div class="checkbox">
 				<label class="mdl-switch mdl-js-switch mdl-js-ripple-effect">
@@ -24,8 +24,8 @@
 </div>
 
 <div class="row">
-	<div class="col-sm-2 col-xs-12 settings-header">[[admin/settings/advanced:headers]]</div>
-	<div class="col-sm-10 col-xs-12">
+	<div class="col-sm-2 col-12 settings-header">[[admin/settings/advanced:headers]]</div>
+	<div class="col-sm-10 col-12">
 		<form>
 			<div class="form-group">
 				<label for="allow-from-uri">[[admin/settings/advanced:headers.allow-from]]</label>
@@ -62,8 +62,8 @@
 </div>
 
 <div class="row">
-	<div class="col-sm-2 col-xs-12 settings-header">[[admin/settings/advanced:hsts]]</div>
-	<div class="col-sm-10 col-xs-12">
+	<div class="col-sm-2 col-12 settings-header">[[admin/settings/advanced:hsts]]</div>
+	<div class="col-sm-10 col-12">
 		<form>
 			<div class="checkbox">
 				<label class="mdl-switch mdl-js-switch mdl-js-ripple-effect">
@@ -93,8 +93,8 @@
 </div>
 
 <div class="row">
-	<div class="col-sm-2 col-xs-12 settings-header">[[admin/settings/advanced:traffic-management]]</div>
-	<div class="col-sm-10 col-xs-12">
+	<div class="col-sm-2 col-12 settings-header">[[admin/settings/advanced:traffic-management]]</div>
+	<div class="col-sm-10 col-12">
 		<small class="form-text text-muted">[[admin/settings/advanced:traffic.help]]</small>
 		<form>
 			<div class="form-group">

@@ -1,8 +1,8 @@
 <!-- IMPORT admin/partials/settings/header.tpl -->
 
 <div class="row">
-	<div class="col-sm-2 col-xs-12 settings-header">[[admin/settings/cookies:eu-consent]]</div>
-	<div class="col-sm-10 col-xs-12">
+	<div class="col-sm-2 col-12 settings-header">[[admin/settings/cookies:eu-consent]]</div>
+	<div class="col-sm-10 col-12">
 		<form>
 			<div class="form-group">
 				<div class="checkbox">
@@ -36,8 +36,8 @@
 </div>
 
 <div class="row">
-	<div class="col-sm-2 col-xs-12 settings-header">Settings</div>
-	<div class="col-sm-10 col-xs-12">
+	<div class="col-sm-2 col-12 settings-header">Settings</div>
+	<div class="col-sm-10 col-12">
 		<form>
 			<div class="form-group">
 				<label for="cookieDomain">[[admin/settings/cookies:cookie-domain]]</label>

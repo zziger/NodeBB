@@ -1,8 +1,8 @@
 <!-- IMPORT admin/partials/settings/header.tpl -->
 
 <div class="row">
-	<div class="col-sm-2 col-xs-12 settings-header">[[admin/settings/post:sorting]]</div>
-	<div class="col-sm-10 col-xs-12">
+	<div class="col-sm-2 col-12 settings-header">[[admin/settings/post:sorting]]</div>
+	<div class="col-sm-10 col-12">
 		<form>
 			<div class="form-group">
 				<label>[[admin/settings/post:sorting.post-default]]</label>
@@ -25,11 +25,11 @@
 </div>
 
 <div class="row">
-	<div class="col-sm-2 col-xs-12 settings-header">[[admin/settings/post:length]]</div>
-	<div class="col-sm-10 col-xs-12">
+	<div class="col-sm-2 col-12 settings-header">[[admin/settings/post:length]]</div>
+	<div class="col-sm-10 col-12">
 		<form>
 			<div class="row">
-				<div class="col-xs-6">
+				<div class="col-6">
 					<div class="form-group">
 						<label for="minimumTitleLength">[[admin/settings/post:restrictions.min-title-length]]</label>
 						<input id="minimumTitleLength" type="text" class="form-control" value="3" data-field="minimumTitleLength">
@@ -39,7 +39,7 @@
 						<input id="maximumTitleLength" type="text" class="form-control" value="255" data-field="maximumTitleLength">
 					</div>
 				</div>
-				<div class="col-xs-6">
+				<div class="col-6">
 					<div class="form-group">
 						<label for="minimumPostLength">[[admin/settings/post:restrictions.min-post-length]]</label>
 						<input id="minimumPostLength" type="text" class="form-control" value="8" data-field="minimumPostLength">
@@ -55,8 +55,8 @@
 </div>
 
 <div class="row">
-	<div class="col-sm-2 col-xs-12 settings-header">[[admin/settings/post:restrictions]]</div>
-	<div class="col-sm-10 col-xs-12">
+	<div class="col-sm-2 col-12 settings-header">[[admin/settings/post:restrictions]]</div>
+	<div class="col-sm-10 col-12">
 		<form>
 			<div class="form-group">
 				<label for="postDelay">[[admin/settings/post:restrictions.seconds-between]]</label>
@@ -85,8 +85,8 @@
 </div>
 
 <div class="row">
-	<div class="col-sm-2 col-xs-12 settings-header">[[admin/settings/post:restrictions-new]]</div>
-	<div class="col-sm-10 col-xs-12">
+	<div class="col-sm-2 col-12 settings-header">[[admin/settings/post:restrictions-new]]</div>
+	<div class="col-sm-10 col-12">
 		<form>
 			<div class="form-group">
 				<label for="newbiePostDelayThreshold">[[admin/settings/post:restrictions.rep-threshold]]</label>
@@ -112,8 +112,8 @@
 </div>
 
 <div class="row">
-	<div class="col-sm-2 col-xs-12 settings-header">[[admin/settings/post:post-queue]]</div>
-	<div class="col-sm-10 col-xs-12">
+	<div class="col-sm-2 col-12 settings-header">[[admin/settings/post:post-queue]]</div>
+	<div class="col-sm-10 col-12">
 		<form>
 			<div class="row">
 				<div class="col-sm-6">
@@ -149,8 +149,8 @@
 </div>
 
 <div class="row">
-	<div class="col-sm-2 col-xs-12 settings-header">[[admin/settings/post:timestamp]]</div>
-	<div class="col-sm-10 col-xs-12">
+	<div class="col-sm-2 col-12 settings-header">[[admin/settings/post:timestamp]]</div>
+	<div class="col-sm-10 col-12">
 		<form>
 			<div class="form-group">
 				<label for="timeagoCutoff">[[admin/settings/post:timestamp.cut-off]]</label>
@@ -167,8 +167,8 @@
 </div>
 
 <div class="row">
-	<div class="col-sm-2 col-xs-12 settings-header">Teaser</div>
-	<div class="col-sm-10 col-xs-12">
+	<div class="col-sm-2 col-12 settings-header">Teaser</div>
+	<div class="col-sm-10 col-12">
 		<form>
 			<div class="form-group">
 				<label>[[admin/settings/post:teaser]]</label>
@@ -183,8 +183,8 @@
 </div>
 
 <div class="row">
-	<div class="col-sm-2 col-xs-12 settings-header">[[admin/settings/post:unread]]</div>
-	<div class="col-sm-10 col-xs-12">
+	<div class="col-sm-2 col-12 settings-header">[[admin/settings/post:unread]]</div>
+	<div class="col-sm-10 col-12">
 		<form>
 			<div class="form-group">
 				<label for="unreadCutoff">[[admin/settings/post:unread.cutoff]]</label>
@@ -199,8 +199,8 @@
 </div>
 
 <div class="row">
-	<div class="col-sm-2 col-xs-12 settings-header">[[admin/settings/post:recent]]</div>
-	<div class="col-sm-10 col-xs-12">
+	<div class="col-sm-2 col-12 settings-header">[[admin/settings/post:recent]]</div>
+	<div class="col-sm-10 col-12">
 		<form>
 			<div class="checkbox">
 				<label class="mdl-switch mdl-js-switch mdl-js-ripple-effect">
@@ -213,8 +213,8 @@
 </div>
 
 <div class="row">
-	<div class="col-sm-2 col-xs-12 settings-header">[[admin/settings/post:signature]]</div>
-	<div class="col-sm-10 col-xs-12">
+	<div class="col-sm-2 col-12 settings-header">[[admin/settings/post:signature]]</div>
+	<div class="col-sm-10 col-12">
 		<form>
 			<div class="checkbox">
 				<label class="mdl-switch mdl-js-switch mdl-js-ripple-effect">
@@ -243,8 +243,8 @@
 </div>
 
 <div class="row">
-	<div class="col-sm-2 col-xs-12 settings-header">[[admin/settings/post:composer]]</div>
-	<div class="col-sm-10 col-xs-12">
+	<div class="col-sm-2 col-12 settings-header">[[admin/settings/post:composer]]</div>
+	<div class="col-sm-10 col-12">
 		<form>
 			<p>
 				[[admin/settings/post:composer-help]]
@@ -276,8 +276,8 @@
 </div>
 
 <div class="row">
-	<div class="col-sm-2 col-xs-12 settings-header">[[admin/settings/post:ip-tracking]]</div>
-	<div class="col-sm-10 col-xs-12">
+	<div class="col-sm-2 col-12 settings-header">[[admin/settings/post:ip-tracking]]</div>
+	<div class="col-sm-10 col-12">
 		<form>
 			<div class="checkbox">
 				<label class="mdl-switch mdl-js-switch mdl-js-ripple-effect">

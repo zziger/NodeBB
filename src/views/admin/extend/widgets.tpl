@@ -7,7 +7,7 @@
 		</ul>
 
 		<div class="row">
-			<div class="col-xs-12">
+			<div class="col-12">
 				<div class="tab-content">
 				<!-- BEGIN templates -->
 					<div class="tab-pane <!-- IF @first -->active<!-- ENDIF @first -->" data-template="{../template}">
@@ -44,7 +44,7 @@
 					</p>
 					<div class="row">
 						<!-- BEGIN availableWidgets -->
-						<div class="col-xs-12">
+						<div class="col-12">
 							<div data-widget="{availableWidgets.widget}" class="panel widget-panel panel-default pointer hide">
 								<div class="panel-heading">
 									<strong>{availableWidgets.name}</strong>

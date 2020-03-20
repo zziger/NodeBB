@@ -1,5 +1,5 @@
 <div class="row groups">
-	<div class="col-xs-12">
+	<div class="col-12">
 		<div>
 			<input id="group-search" type="text" class="form-control" placeholder="[[admin/manage/groups:search-placeholder]]" />
 		</div>

@@ -1,10 +1,10 @@
 <!-- IMPORT admin/partials/settings/header.tpl -->
 
 <div class="row">
-	<div class="col-sm-2 col-xs-12 settings-header">
+	<div class="col-sm-2 col-12 settings-header">
 		[[admin/settings/uploads:posts]]
 	</div>
-	<div class="col-sm-10 col-xs-12">
+	<div class="col-sm-10 col-12">
 		<form>
 			<div class="checkbox">
 				<label class="mdl-switch mdl-js-switch mdl-js-ripple-effect">
@@ -34,7 +34,7 @@
 			</div>
 
 			<div class="row">
-				<div class="col-xs-6">
+				<div class="col-6">
 					<div class="form-group">
 						<label for="resizeImageWidthThreshold">[[admin/settings/uploads:resize-image-width-threshold]]</label>
 						<input type="text" class="form-control" value="2000" data-field="resizeImageWidthThreshold" placeholder="2000">
@@ -42,7 +42,7 @@
 					</div>
 				</div>
 
-				<div class="col-xs-6">
+				<div class="col-6">
 					<div class="form-group">
 						<label for="resizeImageWidth">[[admin/settings/uploads:resize-image-width]]</label>
 						<input type="text" class="form-control" value="760" data-field="resizeImageWidth" placeholder="760">
@@ -98,10 +98,10 @@
 </div>
 
 <div class="row">
-	<div class="col-sm-2 col-xs-12 settings-header">
+	<div class="col-sm-2 col-12 settings-header">
 		[[admin/settings/uploads:profile-avatars]]
 	</div>
-	<div class="col-sm-10 col-xs-12">
+	<div class="col-sm-10 col-12">
 		<form>
 			<div class="checkbox">
 				<label class="mdl-switch mdl-js-switch mdl-js-ripple-effect">
@@ -156,8 +156,8 @@
 </div>
 
 <div class="row">
-	<div class="col-sm-2 col-xs-12 settings-header">[[admin/settings/uploads:profile-covers]]</div>
-	<div class="col-sm-10 col-xs-12">
+	<div class="col-sm-2 col-12 settings-header">[[admin/settings/uploads:profile-covers]]</div>
+	<div class="col-sm-10 col-12">
 		<form>
 			<label for="profile:defaultCovers"><strong>[[admin/settings/uploads:default-covers]]</strong></label>
 			<small class="form-text text-muted">[[admin/settings/uploads:default-covers-help]]</small>

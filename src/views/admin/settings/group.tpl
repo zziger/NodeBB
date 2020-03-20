@@ -1,8 +1,8 @@
 <!-- IMPORT admin/partials/settings/header.tpl -->
 
 <div class="row">
-	<div class="col-sm-2 col-xs-12 settings-header">[[admin/settings/group:general]]</div>
-	<div class="col-sm-10 col-xs-12">
+	<div class="col-sm-2 col-12 settings-header">[[admin/settings/group:general]]</div>
+	<div class="col-sm-10 col-12">
 		<form role="form">
 			<div class="checkbox">
 				<label class="mdl-switch mdl-js-switch mdl-js-ripple-effect">
@@ -33,8 +33,8 @@
 </div>
 
 <div class="row">
-	<div class="col-sm-2 col-xs-12 settings-header">[[admin/settings/group:cover-image]]</div>
-	<div class="col-sm-10 col-xs-12">
+	<div class="col-sm-2 col-12 settings-header">[[admin/settings/group:cover-image]]</div>
+	<div class="col-sm-10 col-12">
 		<form role="form">
 			<label for="groups:defaultCovers"><strong>[[admin/settings/group:default-cover]]</strong></label>
 			<small class="form-text text-muted">[[admin/settings/group:default-cover-help]]</small>

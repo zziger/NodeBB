@@ -1,8 +1,8 @@
 <!-- IMPORT admin/partials/settings/header.tpl -->
 
 <div class="row">
-	<div class="col-sm-2 col-xs-12 settings-header">[[admin/settings/email:email-settings]]</div>
-	<div class="col-sm-10 col-xs-12">
+	<div class="col-sm-2 col-12 settings-header">[[admin/settings/email:email-settings]]</div>
+	<div class="col-sm-10 col-12">
 		<form>
 			<div class="form-group">
 				<label for="email:from"><strong>[[admin/settings/email:address]]</strong></label>
@@ -23,7 +23,7 @@
 					<label for="email:sendmail:rateDelta">[[admin/settings/email:sendmail-rate-delta]]</label>
 					<input type="number" data-field="email:sendmail:rateDelta" id="email:sendmail:rateDelta" class="form-control" placeholder="1000" />
 				</div>
-				<p class="col-xs-12 help-block">
+				<p class="col-12 help-block">
 					[[admin/settings/email:sendmail-rate-help]]
 				</p>
 			</div>
@@ -32,8 +32,8 @@
 </div>
 
 <div class="row">
-	<div class="col-sm-2 col-xs-12 settings-header">[[admin/settings/email:smtp-transport]]</div>
-	<div class="col-sm-10 col-xs-12">
+	<div class="col-sm-2 col-12 settings-header">[[admin/settings/email:smtp-transport]]</div>
+	<div class="col-sm-10 col-12">
 		<div class="alert alert-warning">
 			<p>
 				[[admin/settings/email:smtp-transport-help]]
@@ -94,8 +94,8 @@
 </div>
 
 <div class="row">
-	<div class="col-sm-2 col-xs-12 settings-header">[[admin/settings/email:template]]</div>
-	<div class="col-sm-10 col-xs-12">
+	<div class="col-sm-2 col-12 settings-header">[[admin/settings/email:template]]</div>
+	<div class="col-sm-10 col-12">
 		<label>[[admin/settings/email:template.select]]</label><br />
 		<select id="email-editor-selector" class="form-control">
 			<!-- BEGIN emails -->
@@ -111,8 +111,8 @@
 </div>
 
 <div class="row">
-	<div class="col-sm-2 col-xs-12 settings-header">[[admin/settings/email:testing]]</div>
-	<div class="col-sm-10 col-xs-12">
+	<div class="col-sm-2 col-12 settings-header">[[admin/settings/email:testing]]</div>
+	<div class="col-sm-10 col-12">
 		<div class="form-group">
 			<label>[[admin/settings/email:testing.select]]</label>
 			<select id="test-email" class="form-control">
@@ -127,8 +127,8 @@
 </div>
 
 <div class="row">
-	<div class="col-sm-2 col-xs-12 settings-header">[[admin/settings/email:subscriptions]]</div>
-	<div class="col-sm-10 col-xs-12">
+	<div class="col-sm-2 col-12 settings-header">[[admin/settings/email:subscriptions]]</div>
+	<div class="col-sm-10 col-12">
 		<form>
 			<div class="checkbox">
 				<label for="disableEmailSubscriptions" class="mdl-switch mdl-js-switch mdl-js-ripple-effect">

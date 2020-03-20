@@ -1,5 +1,5 @@
 <div class="row">
-	<div class="col-xs-12">
+	<div class="col-12">
 		<div class="registration panel panel-primary">
 			<div class="panel-heading">
 				[[admin/manage/registration:queue]]

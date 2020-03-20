@@ -1,9 +1,9 @@
 <!-- IMPORT admin/partials/settings/header.tpl -->
 
-<div class="row">
-	<div class="col-sm-2 col-xs-12 settings-header">[[admin/settings/user:authentication]]</div>
-	<div class="col-sm-10 col-xs-12">
-		<form role="form">
+<form role="form">
+	<div class="row mb-4">
+		<div class="col-sm-2 col-12 settings-header">[[admin/settings/user:authentication]]</div>
+		<div class="col-sm-10 col-12">
 			<div class="checkbox">
 				<label class="mdl-switch mdl-js-switch mdl-js-ripple-effect">
 					<input class="mdl-switch__input" type="checkbox" data-field="requireEmailConfirmation">
@@ -26,14 +26,12 @@
 					<option value="email">[[admin/settings/user:allow-login-with.email]]</option>
 				</select>
 			</div>
-		</form>
+		</div>
 	</div>
-</div>
 
-<div class="row">
-	<div class="col-sm-2 col-xs-12 settings-header">[[admin/settings/user:account-settings]]</div>
-	<div class="col-sm-10 col-xs-12">
-		<form>
+	<div class="row mb-4">
+		<div class="col-sm-2 col-12 settings-header">[[admin/settings/user:account-settings]]</div>
+		<div class="col-sm-10 col-12">
 			<div class="checkbox">
 				<label class="mdl-switch mdl-js-switch mdl-js-ripple-effect">
 					<input class="mdl-switch__input" type="checkbox" data-field="gdpr_enabled">
@@ -77,28 +75,24 @@
 					<span class="mdl-switch__label"><strong>[[admin/settings/user:hide-email]]</strong></span>
 				</label>
 			</div>
-		</form>
+		</div>
 	</div>
-</div>
 
-<div class="row">
-	<div class="col-sm-2 col-xs-12 settings-header">[[admin/settings/user:themes]]</div>
-	<div class="col-sm-10 col-xs-12">
-		<form>
+	<div class="row mb-4">
+		<div class="col-sm-2 col-12 settings-header">[[admin/settings/user:themes]]</div>
+		<div class="col-sm-10 col-12">
 			<div class="checkbox">
 				<label class="mdl-switch mdl-js-switch mdl-js-ripple-effect">
 					<input class="mdl-switch__input" type="checkbox" data-field="disableCustomUserSkins">
 					<span class="mdl-switch__label"><strong>[[admin/settings/user:disable-user-skins]]</strong></span>
 				</label>
 			</div>
-		</form>
+		</div>
 	</div>
-</div>
 
-<div class="row">
-	<div class="col-sm-2 col-xs-12 settings-header">[[admin/settings/user:account-protection]]</div>
-	<div class="col-sm-10 col-xs-12">
-		<form>
+	<div class="row mb-4">
+		<div class="col-sm-2 col-12 settings-header">[[admin/settings/user:account-protection]]</div>
+		<div class="col-sm-10 col-12">
 			<div class="form-group">
 				<label for="adminReloginDuration">[[admin/settings/user:admin-relogin-duration]]</label>
 				<input id="adminReloginDuration" type="text" class="form-control" data-field="adminReloginDuration" placeholder="60" />
@@ -117,17 +111,15 @@
 				<label>[[admin/settings/user:password-expiry-days]]</label>
 				<input type="text" class="form-control" data-field="passwordExpiryDays" placeholder="0" />
 			</div>
-		</form>
+		</div>
 	</div>
-</div>
 
-<div class="row">
-	<div class="col-sm-2 col-xs-12 settings-header">
-		[[admin/settings/user:session-time]]
-	</div>
-	<div class="col-sm-10 col-xs-12">
-		<form>
-			<div class="row">
+	<div class="row mb-4">
+		<div class="col-sm-2 col-12 settings-header">
+			[[admin/settings/user:session-time]]
+		</div>
+		<div class="col-sm-10 col-12">
+			<div class="row mb-4">
 				<div class="col-sm-6">
 					<div class="form-group">
 						<label>[[admin/settings/user:session-time-days]]</label>
@@ -140,7 +132,7 @@
 						<input type="text" class="form-control" data-field="loginSeconds" placeholder="[[admin/settings/user:session-time-seconds]]" />
 					</div>
 				</div>
-				<div class="col-xs-12">
+				<div class="col-12">
 					<small class="form-text text-muted">[[admin/settings/user:session-time-help]]</small>
 				</div>
 			</div>
@@ -149,14 +141,12 @@
 				<input type="text" class="form-control" data-field="onlineCutoff">
 				<small class="form-text text-muted">[[admin/settings/user:online-cutoff-help]]</small>
 			</div>
-		</form>
+		</div>
 	</div>
-</div>
 
-<div class="row">
-	<div class="col-sm-2 col-xs-12 settings-header">[[admin/settings/user:registration]]</div>
-	<div class="col-sm-10 col-xs-12">
-		<form>
+	<div class="row mb-4">
+		<div class="col-sm-2 col-12 settings-header">[[admin/settings/user:registration]]</div>
+		<div class="col-sm-10 col-12">
 			<div class="form-group">
 				<label>[[admin/settings/user:registration-type]]</label>
 				<select class="form-control" data-field="registrationType">
@@ -216,27 +206,22 @@
 				<label>[[admin/settings/user:terms-of-use]]</label>
 				<textarea class="form-control" data-field="termsOfUse"></textarea>
 			</div>
-		</form>
+		</div>
 	</div>
-</div>
 
-<div class="row">
-	<div class="col-sm-2 col-xs-12 settings-header">[[admin/settings/user:user-search]]</div>
-	<div class="col-sm-10 col-xs-12">
-		<form>
+	<div class="row mb-4">
+		<div class="col-sm-2 col-12 settings-header">[[admin/settings/user:user-search]]</div>
+		<div class="col-sm-10 col-12">
 			<div class="form-group">
 				<label>[[admin/settings/user:user-search-results-per-page]]</label>
 				<input type="text" class="form-control" value="24" data-field="userSearchResultsPerPage">
 			</div>
-
-		</form>
+		</div>
 	</div>
-</div>
 
-<div class="row">
-	<div class="col-sm-2 col-xs-12 settings-header">[[admin/settings/user:default-user-settings]]</div>
-	<div class="col-sm-10 col-xs-12">
-		<form>
+	<div class="row mb-4">
+		<div class="col-sm-2 col-12 settings-header">[[admin/settings/user:default-user-settings]]</div>
+		<div class="col-sm-10 col-12">
 			<div class="checkbox">
 				<label class="mdl-switch mdl-js-switch mdl-js-ripple-effect">
 					<input class="mdl-switch__input" type="checkbox" data-field="showemail">
@@ -309,10 +294,10 @@
 
 			<!-- BEGIN notificationSettings -->
 			<div class="row">
-				<div class="form-group col-xs-7">
+				<div class="form-group col-7 col-md-9">
 					<label>{notificationSettings.label}</label>
 				</div>
-				<div class="form-group col-xs-5">
+				<div class="form-group col-5 col-md-3">
 					<select class="form-control" data-field="{notificationSettings.name}">
 						<option value="none">[[notifications:none]]</option>
 						<option value="notification">[[notifications:notification_only]]</option>
@@ -322,9 +307,8 @@
 				</div>
 			</div>
 			<!-- END notificationSettings -->
-
-		</form>
+		</div>
 	</div>
-</div>
+</form>
 
 <!-- IMPORT admin/partials/settings/footer.tpl -->

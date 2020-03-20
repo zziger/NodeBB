@@ -2,8 +2,8 @@
 
 
 <div class="row">
-	<div class="col-sm-2 col-xs-12 settings-header">[[admin/settings/chat:chat-settings]]</div>
-	<div class="col-sm-10 col-xs-12">
+	<div class="col-sm-2 col-12 settings-header">[[admin/settings/chat:chat-settings]]</div>
+	<div class="col-sm-10 col-12">
 		<div class="form-group">
 			<div class="checkbox">
 				<label class="mdl-switch mdl-js-switch mdl-js-ripple-effect">

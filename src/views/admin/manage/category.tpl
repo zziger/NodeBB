@@ -27,7 +27,7 @@
 				</fieldset>
 
 				<fieldset class="row">
-					<div class="col-sm-4 col-xs-12">
+					<div class="col-sm-4 col-12">
 						<div class="form-group">
 							<label for="cid-{category.cid}-bgColor">
 								[[admin/manage/categories:bg-color]]
@@ -35,7 +35,7 @@
 							<input id="cid-{category.cid}-bgColor" placeholder="#0059b2" data-name="bgColor" value="{category.bgColor}" class="form-control category_bgColor" />
 						</div>
 					</div>
-					<div class="col-sm-4 col-xs-12">
+					<div class="col-sm-4 col-12">
 						<div class="form-group">
 							<label for="cid-{category.cid}-color">
 								[[admin/manage/categories:text-color]]
@@ -43,7 +43,7 @@
 							<input id="cid-{category.cid}-color" placeholder="#fff" data-name="color" value="{category.color}" class="form-control category_color" />
 						</div>
 					</div>
-					<div class="col-sm-4 col-xs-12">
+					<div class="col-sm-4 col-12">
 						<div class="form-group">
 							<label for="cid-{category.cid}-imageClass">
 								[[admin/manage/categories:bg-image-size]]
@@ -55,12 +55,12 @@
 							</select>
 						</div>
 					</div><br />
-					<div class="col-sm-4 col-xs-12">
+					<div class="col-sm-4 col-12">
 						<div class="form-group">
 							<label for="cid-{category.cid}-class">
 								[[admin/manage/categories:custom-class]]
 							</label>
-							<input list="customClasses" id="cid-{category.cid}-class" type="text" class="form-control" placeholder="<!-- IF customClasses.length --><!-- BEGIN customClasses --><!-- IF @first -->{@value}<!-- ENDIF --><!-- END --><!-- ELSE -->col-md-6 col-xs-6<!-- ENDIF -->" data-name="class" value="{category.class}" />
+							<input list="customClasses" id="cid-{category.cid}-class" type="text" class="form-control" placeholder="<!-- IF customClasses.length --><!-- BEGIN customClasses --><!-- IF @first -->{@value}<!-- ENDIF --><!-- END --><!-- ELSE -->col-md-6 col-6<!-- ENDIF -->" data-name="class" value="{category.class}" />
 							<datalist id="customClasses">
 								<!-- BEGIN customClasses -->
 								<option>{@value}</option>
@@ -68,7 +68,7 @@
 							</datalist>
 						</div>
 					</div>
-					<div class="col-sm-4 col-xs-12">
+					<div class="col-sm-4 col-12">
 						<div class="form-group">
 							<label for="cid-{category.cid}-numRecentReplies">
 								[[admin/manage/categories:num-recent-replies]]
@@ -76,7 +76,7 @@
 							<input id="cid-{category.cid}-numRecentReplies" type="text" class="form-control" placeholder="2" data-name="numRecentReplies" value="{category.numRecentReplies}" />
 						</div>
 					</div>
-					<div class="col-sm-4 col-xs-12">
+					<div class="col-sm-4 col-12">
 						<div class="form-group">
 							<label for="cid-{category.cid}-link">
 								[[admin/manage/categories:ext-link]]
@@ -84,7 +84,7 @@
 							<input id="cid-{category.cid}-link" type="text" class="form-control" placeholder="http://domain.com" data-name="link" value="{category.link}" />
 						</div>
 					</div>
-					<div class="col-sm-6 col-xs-12">
+					<div class="col-sm-6 col-12">
 						<div class="form-group">
 							<div class="checkbox">
 								<label class="mdl-switch mdl-js-switch mdl-js-ripple-effect">
