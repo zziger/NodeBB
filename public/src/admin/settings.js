@@ -38,6 +38,9 @@ define('admin/settings', ['uploader'], function (uploader) {
 		$(fields).on('change', function () {
 			app.flags = app.flags || {};
 			app.flags._unsaved = true;
+
+			// Activate save button
+			$('#save').toggleClass('btn-light text-dark', false).addClass('btn-primary');
 		});
 		var defaultInputs = ['text', 'hidden', 'password', 'textarea', 'number'];
 		for (x = 0; x < numFields; x += 1) {
@@ -74,6 +77,9 @@ define('admin/settings', ['uploader'], function (uploader) {
 				}
 
 				app.flags._unsaved = false;
+
+				// Deactivate save button
+				$('#save').toggleClass('btn-primary', false).addClass('btn-light text-dark');
 
 				app.alert({
 					alert_id: 'config_status',
