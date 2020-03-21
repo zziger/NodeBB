@@ -1,6 +1,6 @@
 
 /* globals ace */
-define('admin/appearance/customise', ['admin/settings', 'ace-builds', 'ace-builds/webpack-resolver'], function (Settings) {
+define('admin/appearance/customise', ['admin/settings', 'ace-editor'], function (Settings) {
 	var Customise = {};
 
 	Customise.init = function () {

@@ -1,7 +1,7 @@
 
 /* globals ace */
 
-define('admin/settings/email', ['admin/settings', 'ace-builds', 'ace-builds/webpack-resolver'], function () {
+define('admin/settings/email', ['admin/settings', 'ace-editor'], function () {
 	var module = {};
 	var emailEditor;
 
