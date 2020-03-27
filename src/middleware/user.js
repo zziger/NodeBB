@@ -3,6 +3,7 @@
 const util = require('util');
 const nconf = require('nconf');
 const winston = require('winston');
+const passport = require('passport');
 
 const meta = require('../meta');
 const user = require('../user');
@@ -13,14 +14,50 @@ const auth = require('../routes/authentication');
 
 const controllers = {
 	helpers: require('../controllers/helpers'),
+	authentication: require('../controllers/authentication'),
 };
 
 module.exports = function (middleware) {
 	function authenticate(req, res, next, callback) {
 		if (req.loggedIn) {
 			return next();
-		}
-		if (plugins.hasListeners('response:middleware.authenticate')) {
+		} else if (req.headers.hasOwnProperty('authorization')) {
+			passport.authenticate('bearer', { session: false }, function (err, user) {
+				if (err) { return next(err); }
+				if (!user) { return callback(); }
+
+				// If the token received was a master token, a _uid must also be present for all calls
+				if (user.hasOwnProperty('uid')) {
+					req.login(user, async function (err) {
+						if (err) { return callback(err); }
+
+						await controllers.authentication.onSuccessfulLogin(req, user.uid);
+						req.uid = user.uid;
+						req.loggedIn = req.uid > 0;
+						next();
+					});
+				} else if (user.hasOwnProperty('master') && user.master === true) {
+					if (req.body.hasOwnProperty('_uid') || req.query.hasOwnProperty('_uid')) {
+						user.uid = req.body._uid || req.query._uid;
+						delete user.master;
+
+						req.login(user, async function (err) {
+							if (err) { return callback(err); }
+
+							await controllers.authentication.onSuccessfulLogin(req, user.uid);
+							req.uid = user.uid;
+							req.loggedIn = req.uid > 0;
+							next();
+						});
+					} else {
+						callback(new Error('A master token was received without a corresponding `_uid` in the request body'));
+					}
+				} else {
+					winston.warn('[api/authenticate] Unable to find user after verifying token');
+					callback();
+				}
+			})(req, res, next);
+		} else if (plugins.hasListeners('response:middleware.authenticate')) {
 			return plugins.fireHook('response:middleware.authenticate', {
 				req: req,
 				res: res,
@@ -38,14 +75,14 @@ module.exports = function (middleware) {
 					});
 				},
 			});
+		} else {
+			callback();
 		}
-
-		callback();
 	}
 
 	middleware.authenticate = function middlewareAuthenticate(req, res, next) {
-		authenticate(req, res, next, function () {
-			controllers.helpers.notAllowed(req, res, next);
+		authenticate(req, res, next, function (err) {
+			controllers.helpers.notAllowed(req, res, err);
 		});
 	};
 
@@ -187,7 +224,7 @@ module.exports = function (middleware) {
 		req.session.returnTo = returnTo;
 		req.session.forceLogin = 1;
 		if (res.locals.isAPI) {
-			res.status(401).json({});
+			controllers.helpers.formatApiResponse(401, res);
 		} else {
 			res.redirect(nconf.get('relative_path') + '/login?local=1');
 		}

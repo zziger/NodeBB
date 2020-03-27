@@ -117,12 +117,7 @@ helpers.notAllowed = function (req, res, error) {
 		}
 		if (req.loggedIn || req.uid === -1) {
 			if (res.locals.isAPI) {
-				res.status(403).json({
-					path: req.path.replace(/^\/api/, ''),
-					loggedIn: req.loggedIn,
-					error: error,
-					title: '[[global:403.title]]',
-				});
+				helpers.formatApiResponse(403, res, error);
 			} else {
 				middleware.buildHeader(req, res, function () {
 					res.status(403).render('403', {
@@ -135,7 +130,7 @@ helpers.notAllowed = function (req, res, error) {
 			}
 		} else if (res.locals.isAPI) {
 			req.session.returnTo = req.url.replace(/^\/api/, '');
-			res.status(401).json('not-authorized');
+			helpers.formatApiResponse(401, res, error);
 		} else {
 			req.session.returnTo = req.url;
 			res.redirect(nconf.get('relative_path') + '/login');
@@ -343,9 +338,6 @@ helpers.formatApiResponse = async (statusCode, res, payload) => {
 			},
 			response: payload || {},
 		});
-	} else if (!payload) {
-		// Non-2xx statusCode, generate predefined error
-		res.status(statusCode).json(helpers.generateError(statusCode));
 	} else if (payload instanceof Error) {
 		if (isLanguageKey.test(payload.message)) {
 			const translated = await translator.translate(payload.message, 'en-GB');
@@ -353,6 +345,9 @@ helpers.formatApiResponse = async (statusCode, res, payload) => {
 		} else {
 			res.status(statusCode).json(helpers.generateError(statusCode, payload.message));
 		}
+	} else if (!payload) {
+		// Non-2xx statusCode, generate predefined error
+		res.status(statusCode).json(helpers.generateError(statusCode));
 	}
 };
 
@@ -374,22 +369,22 @@ helpers.generateError = (statusCode, message) => {
 
 	case 401:
 		payload.status.code = 'not-authorised';
-		payload.status.message = 'A valid login session was not found. Please log in and try again.';
+		payload.status.message = message || 'A valid login session was not found. Please log in and try again.';
 		break;
 
 	case 403:
 		payload.status.code = 'forbidden';
-		payload.status.message = 'You are not authorised to make this call';
+		payload.status.message = message || 'You are not authorised to make this call';
 		break;
 
 	case 404:
 		payload.status.code = 'not-found';
-		payload.status.message = 'Invalid API call';
+		payload.status.message = message || 'Invalid API call';
 		break;
 
 	case 426:
 		payload.status.code = 'upgrade-required';
-		payload.status.message = 'HTTPS is required for requests to the write api, please re-send your request via HTTPS';
+		payload.status.message = message || 'HTTPS is required for requests to the write api, please re-send your request via HTTPS';
 		break;
 
 	case 500:
