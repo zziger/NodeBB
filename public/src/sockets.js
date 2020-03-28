@@ -68,6 +68,9 @@ function addHandlers() {
 	socket.on('event:alert', function (params) {
 		app.alert(params);
 	});
+	socket.on('event:deprecated_call', function (data) {
+		console.warn('[socket.io] ', data.eventName, 'is now deprecated in favour of', data.replacement);
+	});
 }
 
 function onConnect() {

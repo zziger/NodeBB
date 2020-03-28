@@ -10,6 +10,7 @@ const events = require('../../events');
 const meta = require('../../meta');
 const plugins = require('../../plugins');
 const translator = require('../../translator');
+const sockets = require('../');
 
 const User = module.exports;
 
@@ -56,6 +57,8 @@ User.removeAdmins = async function (socket, uids) {
 };
 
 User.createUser = async function (socket, userData) {
+	sockets.warnDeprecated(socket, 'POST /api/v1/users');
+
 	if (!userData) {
 		throw new Error('[[error:invalid-data]]');
 	}
