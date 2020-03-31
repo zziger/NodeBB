@@ -43,18 +43,20 @@ define('forum/account/edit', [
 
 		$(window).trigger('action:profile.update', userData);
 
-		socket.emit('user.updateProfile', userData, function (err, data) {
-			if (err) {
-				return app.alertError(err.message);
-			}
-
+		$.ajax({
+			url: config.relative_path + '/api/v1/users/' + userData.uid,
+			data: userData,
+			method: 'put',
+		}).done(function (res) {
 			app.alertSuccess('[[user:profile_update_success]]');
 
-			if (data.picture) {
-				$('#user-current-picture').attr('src', data.picture);
+			if (res.response.picture) {
+				$('#user-current-picture').attr('src', res.response.picture);
 			}
 
-			updateHeader(data.picture);
+			updateHeader(res.response.picture);
+		}).fail(function (ev) {
+			return app.alertError(ev.responseJSON.status.message);
 		});
 
 		return false;

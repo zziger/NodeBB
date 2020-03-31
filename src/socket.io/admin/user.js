@@ -130,6 +130,8 @@ User.deleteUsers = async function (socket, uids) {
 };
 
 User.deleteUsersAndContent = async function (socket, uids) {
+	sockets.warnDeprecated(socket, 'DELETE /api/v1/users or DELETE /api/v1/users/:uid');
+
 	deleteUsers(socket, uids, async function (uid) {
 		await user.delete(socket.uid, uid);
 	});

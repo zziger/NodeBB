@@ -4,9 +4,12 @@ const user = require('../../user');
 const meta = require('../../meta');
 const events = require('../../events');
 const privileges = require('../../privileges');
+const sockets = require('..');
 
 module.exports = function (SocketUser) {
 	SocketUser.changeUsernameEmail = async function (socket, data) {
+		sockets.warnDeprecated(socket, 'PUT /api/v1/users/:uid');
+
 		if (!data || !data.uid || !socket.uid) {
 			throw new Error('[[error:invalid-data]]');
 		}
@@ -81,6 +84,8 @@ module.exports = function (SocketUser) {
 	};
 
 	SocketUser.updateProfile = async function (socket, data) {
+		sockets.warnDeprecated(socket, 'PUT /api/v1/users/:uid');
+
 		if (!socket.uid) {
 			throw new Error('[[error:invalid-uid]]');
 		}

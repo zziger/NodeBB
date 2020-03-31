@@ -169,12 +169,14 @@ define('forum/account/header', [
 					return;
 				}
 
-				socket.emit('admin.user.deleteUsersAndContent', [ajaxify.data.theirid], function (err) {
-					if (err) {
-						return app.alertError(err.message);
-					}
+				$.ajax({
+					url: config.relative_path + '/api/v1/users/' + ajaxify.data.theirid,
+					method: 'delete',
+				}).done(function () {
 					app.alertSuccess('[[user:account-deleted]]');
-					history.back();
+					ajaxify.go('users');
+				}).fail(function (ev) {
+					app.alertError(ev.responseJSON.status.message);
 				});
 			});
 		});
