@@ -424,8 +424,12 @@ ajaxify.refresh = function (callback) {
 ajaxify.loadScript = async function (tpl_url, callback) {
 	var pageScript;
 	try {
-		if (app.inAdmin) {
+		if (app.inAdmin && tpl_url.startsWith('admin/plugins')) {
+			pageScript = await import(/* webpackChunkName: "admin/plugins/[request]" */ 'admin/plugins/' + tpl_url.replace(/^admin\/plugins\//, ''));
+		} else if (app.inAdmin) {
 			pageScript = await import(/* webpackChunkName: "admin/[request]" */ 'admin/' + tpl_url.replace(/^admin\//, ''));
+		} else if (tpl_url.startsWith('forum/plugins')) {
+			pageScript = await import(/* webpackChunkName: "forum/plugins/[request]" */ 'forum/plugins/' + tpl_url.replace(/^forum\/plugins\//, ''));
 		} else {
 			pageScript = await import(/* webpackChunkName: "forum/[request]" */ 'forum/' + tpl_url);
 		}

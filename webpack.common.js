@@ -50,7 +50,9 @@ module.exports = {
 		],
 		alias: {
 			assets: path.resolve(__dirname, 'build/public'),
+			'forum/plugins': path.resolve(__dirname, 'build/public/src/modules/forum/plugins'),
 			forum: path.resolve(__dirname, 'public/src/client'),
+			'admin/plugins': path.resolve(__dirname, 'build/public/src/modules/admin/plugins'),
 			admin: path.resolve(__dirname, 'public/src/admin'),
 			vendor: path.resolve(__dirname, 'public/vendor'),
 			benchpress: path.resolve(__dirname, 'node_modules/benchpressjs'),
