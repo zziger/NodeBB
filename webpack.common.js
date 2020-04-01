@@ -5,7 +5,6 @@ const url = require('url');
 const nconf = require('nconf');
 
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const activePlugins = require('./build/active_plugins');
 
@@ -22,7 +21,6 @@ if (relativePath === undefined) {
 module.exports = {
 	plugins: [
 		new CleanWebpackPlugin(), // cleans dist folder
-		new MiniCssExtractPlugin(), // extract css to separate file
 	],
 	entry: {
 		app: './public/src/app.js',
@@ -57,54 +55,5 @@ module.exports = {
 			vendor: path.resolve(__dirname, 'public/vendor'),
 			benchpress: path.resolve(__dirname, 'node_modules/benchpressjs'),
 		},
-	},
-	node: { fs: 'empty' },
-	externals: {
-		nconf: 'nconf',
-	},
-	module: {
-		rules: [
-			// {
-			// 	test: /\.js$/,
-			// 	exclude: /(node_modules|bower_components)/,
-			// 	use: {
-			// 		loader: 'babel-loader',
-			// 		options: {
-			// 		  presets: ['@babel/preset-env']
-			// 		}
-			// 	}
-			// },
-			{
-				test: /\.(ttf|eot|svg|png|woff(2)?)(\?[a-z0-9=&.]+)?$/,
-				loader: 'file-loader',
-			},
-			{
-				test: /\.(scss|css)$/,
-				use: [
-					{
-						loader: MiniCssExtractPlugin.loader,
-					},
-					{
-						// Interprets `@import` and `url()` like `import/require()` and will resolve them
-						loader: 'css-loader',
-					},
-					{
-						// Loader for webpack to process CSS with PostCSS
-						loader: 'postcss-loader',
-						options: {
-							plugins: function () {
-								return [
-									require('autoprefixer'),
-								];
-							},
-						},
-					},
-					{
-						// Loads a SASS/SCSS file and compiles it to CSS
-						loader: 'sass-loader',
-					},
-				],
-			},
-		],
 	},
 };
