@@ -17,6 +17,7 @@ const db = require('../database');
 const userController = require('../controllers/user');
 const privileges = require('../privileges');
 const utils = require('../utils');
+const sockets = require('.');
 
 const SocketUser = module.exports;
 
@@ -153,6 +154,8 @@ SocketUser.isFollowing = async function (socket, data) {
 };
 
 SocketUser.follow = async function (socket, data) {
+	sockets.warnDeprecated(socket, 'POST /api/v1/users/follow');
+
 	if (!socket.uid || !data) {
 		throw new Error('[[error:invalid-data]]');
 	}
@@ -175,6 +178,8 @@ SocketUser.follow = async function (socket, data) {
 };
 
 SocketUser.unfollow = async function (socket, data) {
+	sockets.warnDeprecated(socket, 'DELETE /api/v1/users/unfollow');
+
 	if (!socket.uid || !data) {
 		throw new Error('[[error:invalid-data]]');
 	}
