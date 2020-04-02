@@ -127,9 +127,9 @@ async function compile() {
 
 	await _rimraf(viewsPath);
 
-	let files = await db.getSortedSetRange('plugins:active', 0, -1);
-	files = await getTemplateDirs(files);
-	files = await getTemplateFiles(files);
+	const activePlugins = await db.getSortedSetRange('plugins:active', 0, -1);
+	const tplDirs = await getTemplateDirs(activePlugins);
+	const files = await getTemplateFiles(tplDirs);
 
 	const names = Object.keys(files);
 	const paths = {};

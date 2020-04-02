@@ -13,9 +13,6 @@ const posts = require('../posts');
 
 const readdirAsync = util.promisify(fs.readdir);
 
-var app;
-var middleware;
-
 const Plugins = module.exports;
 
 require('./install')(Plugins);
@@ -72,14 +69,9 @@ Plugins.requireLibrary = function (pluginID, libraryPath) {
 	Plugins.libraryPaths.push(libraryPath);
 };
 
-Plugins.init = async function (nbbApp, nbbMiddleware) {
+Plugins.init = async function () {
 	if (Plugins.initialized) {
 		return;
-	}
-
-	if (nbbApp) {
-		app = nbbApp;
-		middleware = nbbMiddleware;
 	}
 
 	if (global.env === 'development') {
@@ -161,8 +153,13 @@ Plugins.reload = async function () {
 };
 
 Plugins.reloadRoutes = async function (params) {
-	var controllers = require('../controllers');
-	await Plugins.fireHook('static:app.load', { app: app, router: params.router, middleware: middleware, controllers: controllers });
+	const controllers = require('../controllers');
+	await Plugins.fireHook('static:app.load', {
+		app: params.app,
+		router: params.router,
+		middleware: params.middleware,
+		controllers: controllers,
+	});
 	winston.verbose('[plugins] All plugins reloaded and rerouted');
 };
 

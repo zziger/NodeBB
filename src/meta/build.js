@@ -95,30 +95,19 @@ aliases = Object.keys(aliases).reduce(function (prev, key) {
 	return prev;
 }, {});
 
-function beforeBuild(targets, callback) {
+async function beforeBuild(targets) {
 	require('colors');
 	process.stdout.write('  started'.green + '\n'.reset);
-
-	async.series([
-		function (next) {
-			db.init(next);
-		},
-		function (next) {
-			meta = require('../meta');
-			meta.themes.setupPaths(next);
-		},
-		function (next)	{
-			var plugins = require('../plugins');
-			plugins.prepareForBuild(targets, next);
-		},
-	], function (err) {
-		if (err) {
-			winston.error('[build] Encountered error preparing for build', err);
-			return callback(err);
-		}
-
-		callback();
-	});
+	try {
+		await db.init();
+		meta = require('../meta');
+		await meta.themes.setupPaths();
+		const plugins = require('../plugins');
+		await plugins.prepareForBuild(targets);
+	} catch (err) {
+		winston.error('[build] Encountered error preparing for build: ', err.stack);
+		throw err;
+	}
 }
 
 var allTargets = Object.keys(targetHandlers).filter(function (name) {
@@ -195,7 +184,9 @@ exports.build = function (targets, options, callback) {
 	var startTime;
 	var totalTime;
 	async.series([
-		async.apply(beforeBuild, targets),
+		async function () {
+			await beforeBuild(targets);
+		},
 		function (next) {
 			var threads = parseInt(nconf.get('threads'), 10);
 			if (threads) {

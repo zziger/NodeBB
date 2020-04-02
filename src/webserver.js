@@ -95,7 +95,7 @@ exports.listen = async function () {
 async function initializeNodeBB() {
 	const middleware = require('./middleware');
 	await meta.themes.setupPaths();
-	await plugins.init(app, middleware);
+	await plugins.init();
 	await plugins.fireHook('static:assets.prepare', {});
 	await plugins.fireHook('static:app.preload', {
 		app: app,

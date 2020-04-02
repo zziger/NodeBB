@@ -109,7 +109,7 @@ module.exports = async function (app, middleware) {
 	// homepage handled by `action:homepage.get:[route]`
 	setupPageRoute(router, '/', middleware, [], controllers.home.pluginHook);
 
-	await plugins.reloadRoutes({ router: router });
+	await plugins.reloadRoutes({ app: app, middleware: middleware, router: router });
 	await authRoutes.reloadRoutes({ router: router });
 	writeRoutes.reload({ router: router });
 	addCoreRoutes(app, router, middleware);
