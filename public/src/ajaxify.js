@@ -28,14 +28,26 @@ ajaxify.init = function () {
 	Benchpress.registerLoader(ajaxify.loadTemplate);
 };
 
-ajaxify.loadTemplate = async function (template, callback) {
-	try {
-		const tplFunction = await import(/* webpackChunkName: "tpl/[request]" */ 'assets/templates/' + template + '.js');
-		callback(tplFunction.default);
-	} catch (err) {
+ajaxify.loadTemplate = function (template, callback) {
+	$.ajax({
+		url: config.relative_path + '/assets/templates/' + template + '.js',
+		dataType: 'text',
+		success: function (script) {
+			var context = {
+				module: {
+					exports: {},
+				},
+			};
+
+			// eslint-disable-next-line no-new-func
+			const renderFunction = new Function('module', script);
+			renderFunction(context.module);
+			callback(context.module.exports);
+		},
+	}).fail(function () {
 		console.error('Unable to load template: ' + template);
-		throw err;
-	}
+		callback(new Error('[[error:unable-to-load-template]]'));
+	});
 };
 
 function ajaxifyAnchors() {
