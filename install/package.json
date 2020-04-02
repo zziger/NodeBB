@@ -142,7 +142,7 @@
         "uglify-es": "^3.3.9",
         "validator": "13.0.0",
         "visibilityjs": "^2.0.2",
-        "webpack": "^5.0.0-beta.14",
+        "webpack": "^4.42.1",
         "winston": "3.2.1",
         "xml": "^1.0.1",
         "xregexp": "^4.1.1",
@@ -168,7 +168,7 @@
         "webpack-merge": "^4.2.2",
         "clean-webpack-plugin": "^3.0.0",
         "node-sass": "^4.13.1",
-        "webpack-cli": "4.0.0-beta.8"
+        "webpack-cli": "^3.3.11"
     },
     "bugs": {
         "url": "https://github.com/NodeBB/NodeBB/issues"
