@@ -101,7 +101,7 @@ define('forum/account/header', [
 
 	function toggleFollow(type) {
 		$.ajax({
-			url: config.relative_path + '/api/v1/users/' + ajaxify.data.uid + '/' + type,
+			url: config.relative_path + '/api/v1/users/' + ajaxify.data.uid + '/follow',
 			method: type === 'follow' ? 'post' : 'delete',
 		}).done(function () {
 			components.get('account/follow').toggleClass('hide', type === 'follow');
@@ -137,15 +137,17 @@ define('forum/account/header', [
 
 							var until = formData.length > 0 ? (Date.now() + (formData.length * 1000 * 60 * 60 * (parseInt(formData.unit, 10) ? 24 : 1))) : 0;
 
-							socket.emit('user.banUsers', {
-								uids: [ajaxify.data.theirid],
-								until: until,
-								reason: formData.reason || '',
-							}, function (err) {
-								if (err) {
-									return app.alertError(err.message);
-								}
+							$.ajax({
+								url: config.relative_path + '/api/v1/users/' + ajaxify.data.theirid + '/ban',
+								method: 'put',
+								data: {
+									until: until,
+									reason: formData.reason || '',
+								},
+							}).done(function () {
 								ajaxify.refresh();
+							}).fail(function (ev) {
+								app.alertError(ev.responseJSON.status.message);
 							});
 						},
 					},
@@ -155,11 +157,13 @@ define('forum/account/header', [
 	}
 
 	function unbanAccount() {
-		socket.emit('user.unbanUsers', [ajaxify.data.theirid], function (err) {
-			if (err) {
-				return app.alertError(err.message);
-			}
+		$.ajax({
+			url: config.relative_path + '/api/v1/users/' + ajaxify.data.theirid + '/ban',
+			method: 'delete',
+		}).done(function () {
 			ajaxify.refresh();
+		}).fail(function (ev) {
+			app.alertError(ev.responseJSON.status.message);
 		});
 	}
 
