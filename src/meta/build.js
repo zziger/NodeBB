@@ -100,7 +100,7 @@ async function beforeBuild(targets) {
 	process.stdout.write('  started'.green + '\n'.reset);
 	try {
 		await db.init();
-		meta = require('../meta');
+		meta = require('./index');
 		await meta.themes.setupPaths();
 		const plugins = require('../plugins');
 		await plugins.prepareForBuild(targets);
