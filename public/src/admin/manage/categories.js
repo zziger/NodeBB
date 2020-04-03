@@ -1,10 +1,10 @@
-import Sortable from 'sortablejs';
-
 define('admin/manage/categories', [
 	'translator',
 	'benchpress',
 	'categorySelector',
-], function (translator, Benchpress, categorySelector) {
+	'sortablejs',
+], function (translator, Benchpress, categorySelector, Sortable) {
+	Sortable = Sortable.default;
 	var	Categories = {};
 	var newCategoryId = -1;
 	var sortables;
