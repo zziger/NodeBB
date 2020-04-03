@@ -27,7 +27,7 @@
 		</div>
 	</nav>
 	<!-- IF !installing -->
-	<div class="container <!-- IF success -->d-none<!-- ENDIF success -->">
+	<div class="container <!-- IF success -->hidden<!-- ENDIF success -->">
 		<p>
 			<h1>Welcome to the NodeBB Installer</h1>
 			You are just a few steps away from launching your own NodeBB forum!
@@ -112,7 +112,7 @@
 			</div>
 			<!-- ENDIF !skipDatabaseSetup -->
 
-			<button id="submit" type="submit" class="btn btn-lg btn-success">Install NodeBB <i class="working d-none"></i></button>
+			<button id="submit" type="submit" class="btn btn-lg btn-success">Install NodeBB <i class="working hidden"></i></button>
 		</form>
 	</div>
 	<!-- ENDIF !installing -->
@@ -125,15 +125,15 @@
 	</div>
 	<!-- ENDIF installing -->
 
-	<div class="container <!-- IF !success -->d-none<!-- ENDIF !success -->">
+	<div class="container <!-- IF !success -->hidden<!-- ENDIF !success -->">
 		<p>
 			<h1>Congratulations! Your NodeBB has been set-up.</h1>
 
-			<button id="launch" data-url="{launchUrl}" class="btn btn-lg btn-success">Launch NodeBB <i class="working d-none"></i></button>
+			<button id="launch" data-url="{launchUrl}" class="btn btn-lg btn-success">Launch NodeBB <i class="working hidden"></i></button>
 		</p>
 	</div>
 
-	<div class="d-none">
+	<div class="hidden">
 		<!-- BEGIN databases -->
 		<div data-database="{databases.name}">
 			<!-- BEGIN questions -->

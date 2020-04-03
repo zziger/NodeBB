@@ -391,7 +391,7 @@ define('admin/manage/users', ['translator', 'benchpress', 'autocomplete'], funct
 				});
 				app.alertSuccess('[[admin/manage/users:alerts.create-success]]');
 			}).fail(function (ev) {
-				return errorEl.translateHtml('[[admin/manage/users:alerts.error-x, ' + ev.responseJSON.status.message + ']]').removeClass('d-none').addClass('d-block');
+				return errorEl.translateHtml('[[admin/manage/users:alerts.error-x, ' + ev.responseJSON.status.message + ']]').removeClass('hidden');
 			});
 		}
 

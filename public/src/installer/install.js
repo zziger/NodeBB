@@ -52,7 +52,7 @@ $('document').ready(function () {
 
 			return false;
 		}
-		$('#submit .working').removeClass('d-none');
+		$('#submit .working').removeClass('hidden');
 	}
 
 	function activate(type, el) {
@@ -121,7 +121,7 @@ $('document').ready(function () {
 	}
 
 	function launchForum() {
-		$('#launch .working').removeClass('d-none');
+		$('#launch .working').removeClass('hidden');
 		$.post('/launch', function () {
 			var successCount = 0;
 			var url = $('#launch').attr('data-url');
