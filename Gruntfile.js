@@ -51,12 +51,12 @@ module.exports = function (grunt) {
 
 		const styleUpdated_Client = plugins.map(p => 'node_modules/' + p + '/*.scss')
 			.concat(plugins.map(p => 'node_modules/' + p + '/*.css'))
-			.concat(plugins.map(p => 'node_modules/' + p + '/+(public|static)/**/*.scss'))
+			.concat(plugins.map(p => 'node_modules/' + p + '/+(public|static|scss)/**/*.scss'))
 			.concat(plugins.map(p => 'node_modules/' + p + '/+(public|static)/**/*.css'));
 
 		const styleUpdated_Admin = plugins.map(p => 'node_modules/' + p + '/*.scss')
 			.concat(plugins.map(p => 'node_modules/' + p + '/*.css'))
-			.concat(plugins.map(p => 'node_modules/' + p + '/+(public|static)/**/*.scss'))
+			.concat(plugins.map(p => 'node_modules/' + p + '/+(public|static|scss)/**/*.scss'))
 			.concat(plugins.map(p => 'node_modules/' + p + '/+(public|static)/**/*.css'));
 
 		const clientUpdated = plugins.map(p => 'node_modules/' + p + '/+(public|static)/**/*.js');
