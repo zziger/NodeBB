@@ -592,7 +592,7 @@ window.addEventListener('DOMContentLoaded', async function () {
 
 	app.parseAndTranslate = function (template, blockName, data, callback) {
 		var args = [template];
-		if (blockName === 'string') {
+		if (typeof blockName === 'string') {
 			args.push(blockName);
 		} else {
 			callback = data;
