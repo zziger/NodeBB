@@ -134,10 +134,6 @@ module.exports = function (grunt) {
 			await build.build(true, { webpack: false });
 		}
 		run();
-		// the build step writes a lot of tpl/js files,
-		// wait a second before stating webpack watch,
-		// this prevents unnessary watch triggers
-		await sleep(1000);
 		await build.webpack({ watch: true });
 		done();
 	});

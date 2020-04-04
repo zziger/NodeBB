@@ -252,8 +252,10 @@ exports.webpack = async function (options) {
 		}
 
 		if (stats.hasErrors() || stats.hasWarnings()) {
-			const info = stats.toString('minimal');
-			console.log(info);
+			console.log(stats.toString('minimal'));
+		} else {
+			const statsJson = stats.toJson();
+			winston.info('[build] ' + (options.watch ? 'Watching' : 'Bundling') + ' took ' + statsJson.time + ' ms');
 		}
 	} catch (err) {
 		console.error(err.stack || err);
