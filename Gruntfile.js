@@ -1,14 +1,12 @@
 'use strict';
 
 const path = require('path');
-const util = require('util');
 const nconf = require('nconf');
 nconf.argv().env({
 	separator: '__',
 });
 const winston = require('winston');
 const fork = require('child_process').fork;
-const sleep = util.promisify(setTimeout);
 const env = process.env;
 var worker;
 
