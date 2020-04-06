@@ -1,5 +1,5 @@
-import * as topicList from '../modules/topicList';
-import * as infiniteScroll from '../modules/infinitescroll';
+import * as topicList from 'topicList';
+import * as infiniteScroll from 'infinitescroll';
 
 export function init() {
 	app.enterRoom('tags');
