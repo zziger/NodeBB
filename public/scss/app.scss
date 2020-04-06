@@ -11,5 +11,6 @@ $fa-font-path: "./vendor/forkawesome/fonts" !default;
 @import "jquery-ui/themes/base/sortable";
 @import "jquery-ui/themes/base/theme";
 
+@import "./mixins.scss";
 @import "./components/generics";
 @import "./components/avatars";
