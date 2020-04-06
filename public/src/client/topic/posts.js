@@ -1,6 +1,6 @@
 define('forum/topic/posts', [
-	'forum/pagination',
-	'forum/infinitescroll',
+	'pagination',
+	'infinitescroll',
 	'forum/topic/postTools',
 	'forum/topic/images',
 	'navigator',

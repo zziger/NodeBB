@@ -1,6 +1,6 @@
 
 define('admin/manage/tags', [
-	'forum/infinitescroll',
+	'infinitescroll',
 	'admin/modules/selectable',
 	'admin/modules/colorpicker',
 ], function (infinitescroll, selectable, colorpicker) {

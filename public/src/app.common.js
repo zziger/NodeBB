@@ -99,7 +99,7 @@ window.addEventListener('DOMContentLoaded', async function () {
 			}
 		});
 
-		require(['helpers', 'forum/pagination'], function (helpers, pagination) {
+		require(['helpers', 'pagination'], function (helpers, pagination) {
 			helpers.register();
 
 			pagination.init();

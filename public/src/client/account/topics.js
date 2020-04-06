@@ -1,4 +1,4 @@
-define('forum/account/topics', ['forum/account/header', 'forum/infinitescroll'], function (header, infinitescroll) {
+define('forum/account/topics', ['forum/account/header', 'infinitescroll'], function (header, infinitescroll) {
 	var AccountTopics = {};
 	var method;
 	var template;

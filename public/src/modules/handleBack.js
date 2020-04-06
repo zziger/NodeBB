@@ -2,7 +2,7 @@ define('handleBack', [
 	'components',
 	'storage',
 	'navigator',
-	'forum/pagination',
+	'pagination',
 ], function (components, storage, navigator, pagination) {
 	var handleBack = {};
 	var loadTopicsMethod;

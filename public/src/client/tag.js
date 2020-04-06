@@ -1,20 +1,18 @@
-define('forum/tag', ['topicList', 'forum/infinitescroll'], function (topicList, infinitescroll) {
-	var Tag = {};
+import * as topicList from '../modules/topicList';
+import * as infiniteScroll from '../modules/infinitescroll';
 
-	Tag.init = function () {
-		app.enterRoom('tags');
+export function init() {
+	app.enterRoom('tags');
 
-		topicList.init('tag', loadMoreTopics);
+	topicList.init('tag', loadMoreTopics);
 
-		function loadMoreTopics(after, direction, callback) {
-			infinitescroll.loadMore('topics.loadMoreFromSet', {
-				set: 'tag:' + ajaxify.data.tag + ':topics',
-				after: after,
-				direction: direction,
-				count: config.topicsPerPage,
-			}, callback);
-		}
-	};
-
-	return Tag;
-});
+	function loadMoreTopics(after, direction, callback) {
+		console.log('fail');
+		infiniteScroll.loadMore('topics.loadMoreFromSet', {
+			set: 'tag:' + ajaxify.data.tag + ':topics',
+			after: after,
+			direction: direction,
+			count: config.topicsPerPage,
+		}, callback);
+	}
+}

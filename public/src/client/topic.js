@@ -1,5 +1,5 @@
 define('forum/topic', [
-	'forum/infinitescroll',
+	'infinitescroll',
 	'forum/topic/threadTools',
 	'forum/topic/postTools',
 	'forum/topic/events',

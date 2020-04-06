@@ -1,5 +1,5 @@
 define('topicList', [
-	'forum/infinitescroll',
+	'infinitescroll',
 	'handleBack',
 	'topicSelect',
 	'categorySearch',
@@ -59,8 +59,8 @@ define('topicList', [
 	};
 
 	function findTopicListElement() {
-		return $('[component="category"]').filter(function (i, e) {
-			return !$(e).parents('[widget-area],[data-widget-area]').length;
+		return $('[data-component="category"]').filter(function (i, e) {
+			return !$(e).parents('[data-widget-area]').length;
 		});
 	}
 
@@ -156,7 +156,7 @@ define('topicList', [
 	TopicList.handleCategorySelection = function () {
 		function getSelectedCids() {
 			var cids = [];
-			$('[component="category/list"] [data-cid]').each(function (index, el) {
+			$('[data-component="category/list"] [data-cid]').each(function (index, el) {
 				if ($(el).find('i.fa-check').length) {
 					cids.push(parseInt($(el).attr('data-cid'), 10));
 				}
@@ -167,9 +167,9 @@ define('topicList', [
 			return cids;
 		}
 
-		categorySearch.init($('[component="category/dropdown"]'));
+		categorySearch.init($('[data-component="category/dropdown"]'));
 
-		$('[component="category/dropdown"]').on('hidden.bs.dropdown', function () {
+		$('[data-component="category/dropdown"]').on('hidden.bs.dropdown', function () {
 			var cids = getSelectedCids();
 			var changed = ajaxify.data.selectedCids.length !== cids.length;
 			ajaxify.data.selectedCids.forEach(function (cid, index) {
@@ -189,20 +189,20 @@ define('topicList', [
 			}
 		});
 
-		$('[component="category/list"]').on('click', '[data-cid]', function (ev) {
+		$('[data-component="category/list"]').on('click', '[data-cid]', function (ev) {
 			function selectChildren(parentCid, flag) {
-				$('[component="category/list"] [data-parent-cid="' + parentCid + '"] [component="category/select/icon"]').toggleClass('fa-check', flag);
-				$('[component="category/list"] [data-parent-cid="' + parentCid + '"]').each(function (index, el) {
+				$('[data-component="category/list"] [data-parent-cid="' + parentCid + '"] [data-component="category/select/icon"]').toggleClass('fa-check', flag);
+				$('[data-component="category/list"] [data-parent-cid="' + parentCid + '"]').each(function (index, el) {
 					selectChildren($(el).attr('data-cid'), flag);
 				});
 			}
 			var categoryEl = $(this);
 			var cid = $(this).attr('data-cid');
 			if (ev.ctrlKey) {
-				selectChildren(cid, !categoryEl.find('[component="category/select/icon"]').hasClass('fa-check'));
+				selectChildren(cid, !categoryEl.find('[data-component="category/select/icon"]').hasClass('fa-check'));
 			}
-			categoryEl.find('[component="category/select/icon"]').toggleClass('fa-check');
-			$('[component="category/list"] li').first().find('i').toggleClass('fa-check', !getSelectedCids().length);
+			categoryEl.find('[data-component="category/select/icon"]').toggleClass('fa-check');
+			$('[data-component="category/list"] li').first().find('i').toggleClass('fa-check', !getSelectedCids().length);
 			return false;
 		});
 	};
@@ -211,11 +211,11 @@ define('topicList', [
 		if (!topicListEl.length || !topicListEl.children().length) {
 			return;
 		}
-		var topics = topicListEl.find('[component="category/topic"]');
+		var topics = topicListEl.find('[data-component="category/topic"]');
 		var afterEl = direction > 0 ? topics.last() : topics.first();
 		var after = (parseInt(afterEl.attr('data-index'), 10) || 0) + (direction > 0 ? 1 : 0);
 
-		if (!utils.isNumber(after) || (after === 0 && topicListEl.find('[component="category/topic"][data-index="0"]').length)) {
+		if (!utils.isNumber(after) || (after === 0 && topicListEl.find('[data-component="category/topic"][data-index="0"]').length)) {
 			return;
 		}
 
@@ -242,7 +242,7 @@ define('topicList', [
 
 	function filterTopicsOnDom(topics) {
 		return topics.filter(function (topic) {
-			return !topicListEl.find('[component="category/topic"][data-tid="' + topic.tid + '"]').length;
+			return !topicListEl.find('[data-component="category/topic"][data-tid="' + topic.tid + '"]').length;
 		});
 	}
 
@@ -260,7 +260,7 @@ define('topicList', [
 
 		var after;
 		var before;
-		var topicEls = topicListEl.find('[component="category/topic"]');
+		var topicEls = topicListEl.find('[data-component="category/topic"]');
 
 		if (direction > 0 && topics.length) {
 			after = topicEls.last();
@@ -295,7 +295,7 @@ define('topicList', [
 			}
 
 			if (!topicSelect.getSelectedTids().length) {
-				infinitescroll.removeExtra(topicListEl.find('[component="category/topic"]'), direction, config.topicsPerPage * 3);
+				infinitescroll.removeExtra(topicListEl.find('[data-component="category/topic"]'), direction, config.topicsPerPage * 3);
 			}
 
 			html.find('.timeago').timeago();

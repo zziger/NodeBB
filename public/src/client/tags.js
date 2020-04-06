@@ -1,4 +1,4 @@
-define('forum/tags', ['forum/infinitescroll'], function (infinitescroll) {
+define('forum/tags', ['infinitescroll'], function (infinitescroll) {
 	var Tags = {};
 	var timeoutId = 0;
 

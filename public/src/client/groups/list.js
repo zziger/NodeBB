@@ -1,4 +1,4 @@
-define('forum/groups/list', ['forum/infinitescroll', 'benchpress'], function (infinitescroll, Benchpress) {
+define('forum/groups/list', ['infinitescroll', 'benchpress'], function (infinitescroll, Benchpress) {
 	var Groups = {};
 
 	Groups.init = function () {

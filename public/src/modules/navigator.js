@@ -1,4 +1,4 @@
-define('navigator', ['forum/pagination', 'components'], function (pagination, components) {
+define('navigator', ['pagination', 'components'], function (pagination, components) {
 	var navigator = {};
 	var index = 1;
 	var count = 0;

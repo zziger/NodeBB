@@ -1,4 +1,4 @@
-define('forum/infinitescroll', function () {
+define('infinitescroll', function () {
 	var scroll = {};
 	var callback;
 	var previousScrollTop = 0;

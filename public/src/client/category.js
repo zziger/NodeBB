@@ -1,5 +1,5 @@
 define('forum/category', [
-	'forum/infinitescroll',
+	'infinitescroll',
 	'share',
 	'navigator',
 	'forum/category/tools',

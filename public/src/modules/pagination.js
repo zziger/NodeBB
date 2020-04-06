@@ -1,4 +1,4 @@
-define('forum/pagination', ['jquery'], function ($) {
+define('pagination', ['jquery'], function ($) {
 	var pagination = {};
 
 	pagination.init = function () {
