@@ -1,7 +1,7 @@
 import 'jquery-ui/ui/widgets/datepicker';
 import Sortable from 'sortablejs';
 import semver from 'semver';
-import autocomplete from '../modules/autocomplete';
+import * as autocomplete from 'autocomplete';
 import { enable as colorpickerEnable } from '../admin/modules/colorpicker';
 import 'jquery-deserialize';
 
