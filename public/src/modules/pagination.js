@@ -2,7 +2,7 @@ define('pagination', ['jquery'], function ($) {
 	var pagination = {};
 
 	pagination.init = function () {
-		$('body').on('click', '[component="pagination/select-page"]', function () {
+		$('body').on('click', '[data-component="pagination/select-page"]', function () {
 			bootbox.prompt('[[global:enter_page_number]]', function (pageNum) {
 				pagination.loadPage(pageNum);
 			});
