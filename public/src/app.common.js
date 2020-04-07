@@ -50,7 +50,7 @@ window.addEventListener('DOMContentLoaded', async function () {
 		var url = ajaxify.start(window.location.pathname.slice(1) + window.location.search + window.location.hash);
 		ajaxify.updateHistory(url, true);
 		ajaxify.parseData();
-		ajaxify.end(url, app.template);
+		ajaxify.end(url, ajaxify.data.template.name);
 
 		handleStatusChange();
 

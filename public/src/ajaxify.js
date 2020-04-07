@@ -196,7 +196,11 @@ ajaxify.go = function (url, callback, quiet) {
 
 	// If any listeners alter url and set it to an empty string, abort the ajaxification
 	if (url === null) {
-		$(window).trigger('action:ajaxify.end', { url: url, tpl_url: ajaxify.data.template.name, title: ajaxify.data.title });
+		$(window).trigger('action:ajaxify.end', {
+			url: url,
+			template: ajaxify.data.template.name,
+			title: ajaxify.data.title,
+		});
 		return false;
 	}
 
@@ -213,8 +217,6 @@ ajaxify.go = function (url, callback, quiet) {
 		}
 
 		retry = true;
-		app.template = data.template.name;
-
 		renderTemplate(url, data.templateToRender || data.template.name, data, callback);
 	});
 
@@ -298,16 +300,16 @@ function onAjaxError(err, url, callback, quiet) {
 	}
 }
 
-function renderTemplate(url, tpl_url, data, callback) {
+function renderTemplate(url, template, data, callback) {
 	$(window).trigger('action:ajaxify.loadingTemplates', {});
 
-	Benchpress.parse(tpl_url, data, function (template) {
+	Benchpress.parse(template, data, function (template) {
 		translator.translate(template, function (translatedTemplate) {
 			translatedTemplate = translator.unescape(translatedTemplate);
 			$('body').removeClass(previousBodyClass).addClass(data.bodyClass);
 			$('#content').html(translatedTemplate);
 
-			ajaxify.end(url, tpl_url);
+			ajaxify.end(url, template);
 
 			if (typeof callback === 'function') {
 				callback();
@@ -403,13 +405,13 @@ function updateTags() {
 		});
 }
 
-ajaxify.end = function (url, tpl_url) {
-	ajaxify.loadScript(tpl_url, function done() {
-		$(window).trigger('action:ajaxify.end', { url: url, tpl_url: tpl_url, title: ajaxify.data.title });
+ajaxify.end = function (url, template) {
+	ajaxify.loadScript(template, function done() {
+		$(window).trigger('action:ajaxify.end', { url: url, template: template, title: ajaxify.data.title });
 	});
-	ajaxify.widgets.render(tpl_url);
+	ajaxify.widgets.render(template);
 
-	$(window).trigger('action:ajaxify.contentLoaded', { url: url, tpl: tpl_url });
+	$(window).trigger('action:ajaxify.contentLoaded', { url: url, template: template });
 
 	app.processPage();
 };
@@ -433,10 +435,10 @@ ajaxify.refresh = function (callback) {
 	ajaxify.go(ajaxify.currentPage + window.location.search + window.location.hash, callback, true);
 };
 
-ajaxify.loadScript = async function (tpl_url, callback) {
+ajaxify.loadScript = async function (template, callback) {
 	var data = {
-		tpl_url: tpl_url,
-		scripts: [tpl_url],
+		template: template,
+		scripts: [template],
 	};
 
 	$(window).trigger('action:script.load', data);
