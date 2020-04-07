@@ -256,7 +256,7 @@ define('forum/category/tools', [
 		}
 
 		var topicListEl = $('[component="category"]').filter(function (i, e) {
-			return !$(e).parents('[widget-area],[data-widget-area]').length;
+			return !$(e).parents('[data-widget-area]').length;
 		});
 
 		topicListEl.sortable({
