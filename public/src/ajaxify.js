@@ -434,70 +434,59 @@ ajaxify.refresh = function (callback) {
 };
 
 ajaxify.loadScript = async function (tpl_url, callback) {
+	var data = {
+		tpl_url: tpl_url,
+		scripts: [tpl_url],
+	};
+
+	$(window).trigger('action:script.load', data);
+
+	// import scripts
+	var outstanding = data.scripts.length;
+	data.scripts.map(function (script) {
+		if (typeof script === 'function') {
+			return function (next) {
+				script();
+				next();
+			};
+		}
+		if (typeof script === 'string') {
+			return async function (next) {
+				var loadedScript = await importScript(script);
+				if (loadedScript && loadedScript.init) {
+					loadedScript.init();
+				}
+				next();
+			};
+		}
+		return null;
+	}).filter(Boolean).forEach(function (fn) {
+		fn(function () {
+			outstanding -= 1;
+			if (outstanding === 0) {
+				callback();
+			}
+		});
+	});
+};
+
+async function importScript(scriptName) {
 	var pageScript;
 	try {
-		if (app.inAdmin && tpl_url.startsWith('admin/plugins')) {
-			pageScript = await import(/* webpackChunkName: "admin/plugins/[request]" */ 'admin/plugins/' + tpl_url.replace(/^admin\/plugins\//, ''));
-		} else if (app.inAdmin) {
-			pageScript = await import(/* webpackChunkName: "admin/[request]" */ 'admin/' + tpl_url.replace(/^admin\//, ''));
-		} else if (tpl_url.startsWith('forum/plugins')) {
-			pageScript = await import(/* webpackChunkName: "forum/plugins/[request]" */ 'forum/plugins/' + tpl_url.replace(/^forum\/plugins\//, ''));
+		if (scriptName.startsWith('admin/plugins')) {
+			pageScript = await import(/* webpackChunkName: "admin/plugins/[request]" */ 'admin/plugins/' + scriptName.replace(/^admin\/plugins\//, ''));
+		} else if (scriptName.startsWith('admin')) {
+			pageScript = await import(/* webpackChunkName: "admin/[request]" */ 'admin/' + scriptName.replace(/^admin\//, ''));
+		} else if (scriptName.startsWith('forum/plugins')) {
+			pageScript = await import(/* webpackChunkName: "forum/plugins/[request]" */ 'forum/plugins/' + scriptName.replace(/^forum\/plugins\//, ''));
 		} else {
-			pageScript = await import(/* webpackChunkName: "forum/[request]" */ 'forum/' + tpl_url);
+			pageScript = await import(/* webpackChunkName: "forum/[request]" */ 'forum/' + scriptName);
 		}
 	} catch (err) {
 		console.warn('error loading script' + err.stack);
 	}
-
-	if (pageScript && pageScript.init) {
-		pageScript.init();
-	}
-	callback();
-	// var location = !app.inAdmin ? 'forum/' : '';
-	// console.log('tpl', tpl_url, 'location', location);
-	// if (tpl_url.startsWith('admin')) {
-	// 	location = '';
-	// }
-	// var data = {
-	// 	tpl_url: tpl_url,
-	// 	scripts: [location + tpl_url],
-	// };
-
-	// $(window).trigger('action:script.load', data);
-
-	// // Require and parse modules
-	// var outstanding = data.scripts.length;
-
-	// data.scripts.map(function (script) {
-	// 	if (typeof script === 'function') {
-	// 		return function (next) {
-	// 			script();
-	// 			next();
-	// 		};
-	// 	}
-	// 	if (typeof script === 'string') {
-	// 		return function (next) {
-	// 			require([script], function (script) {
-	// 				if (script && script.init) {
-	// 					script.init();
-	// 				}
-	// 				next();
-	// 			}, function () {
-	// 				// ignore 404 error
-	// 				next();
-	// 			});
-	// 		};
-	// 	}
-	// 	return null;
-	// }).filter(Boolean).forEach(function (fn) {
-	// 	fn(function () {
-	// 		outstanding -= 1;
-	// 		if (outstanding === 0) {
-	// 			callback();
-	// 		}
-	// 	});
-	// });
-};
+	return pageScript;
+}
 
 ajaxify.loadData = function (url, callback) {
 	url = ajaxify.removeRelativePath(url);
