@@ -303,8 +303,8 @@ function onAjaxError(err, url, callback, quiet) {
 function renderTemplate(url, template, data, callback) {
 	$(window).trigger('action:ajaxify.loadingTemplates', {});
 
-	Benchpress.parse(template, data, function (template) {
-		translator.translate(template, function (translatedTemplate) {
+	Benchpress.parse(template, data, function (parsedTemplate) {
+		translator.translate(parsedTemplate, function (translatedTemplate) {
 			translatedTemplate = translator.unescape(translatedTemplate);
 			$('body').removeClass(previousBodyClass).addClass(data.bodyClass);
 			$('#content').html(translatedTemplate);
