@@ -69,10 +69,10 @@ define('forum/account/edit', [
 		if (!picture && ajaxify.data.defaultAvatar) {
 			picture = ajaxify.data.defaultAvatar;
 		}
-		$('#header [component="avatar/picture"]')[picture ? 'show' : 'hide']();
-		$('#header [component="avatar/icon"]')[!picture ? 'show' : 'hide']();
+		$('#header [data-component="avatar/picture"]')[picture ? 'show' : 'hide']();
+		$('#header [data-component="avatar/icon"]')[!picture ? 'show' : 'hide']();
 		if (picture) {
-			$('#header [component="avatar/picture"]').attr('src', picture);
+			$('#header [data-component="avatar/picture"]').attr('src', picture);
 		}
 	}
 
@@ -349,10 +349,10 @@ define('forum/account/edit', [
 				}
 			}
 		}
-		$('[component="group/order/up"]').on('click', function () {
+		$('[data-component="group/order/up"]').on('click', function () {
 			move(-1);
 		});
-		$('[component="group/order/down"]').on('click', function () {
+		$('[data-component="group/order/down"]').on('click', function () {
 			move(1);
 		});
 	}

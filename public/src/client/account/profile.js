@@ -16,7 +16,7 @@ define('forum/account/profile', [
 	};
 
 	function processPage() {
-		$('[component="posts"] img:not(.not-responsive), [component="aboutme"] img:not(.not-responsive)').addClass('img-responsive');
+		$('[data-component="posts"] img:not(.not-responsive), [data-component="aboutme"] img:not(.not-responsive)').addClass('img-responsive');
 	}
 
 	function onUserStatusChange(data) {
@@ -24,7 +24,7 @@ define('forum/account/profile', [
 			return;
 		}
 
-		app.updateUserStatus($('.account [data-uid="' + data.uid + '"] [component="user/status"]'), data.status);
+		app.updateUserStatus($('.account [data-uid="' + data.uid + '"] [data-component="user/status"]'), data.status);
 	}
 
 	return Account;

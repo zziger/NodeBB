@@ -38,7 +38,7 @@ define('forum/groups/list', ['infinitescroll', 'benchpress'], function (infinite
 
 		infinitescroll.loadMore('groups.loadMore', {
 			sort: $('#search-sort').val(),
-			after: $('[component="groups/container"]').attr('data-nextstart'),
+			after: $('[data-component="groups/container"]').attr('data-nextstart'),
 		}, function (data, done) {
 			if (data && data.groups.length) {
 				Benchpress.parse('partials/groups/list', {
@@ -52,7 +52,7 @@ define('forum/groups/list', ['infinitescroll', 'benchpress'], function (infinite
 			}
 
 			if (data && data.nextStart) {
-				$('[component="groups/container"]').attr('data-nextstart', data.nextStart);
+				$('[data-component="groups/container"]').attr('data-nextstart', data.nextStart);
 			}
 		});
 	};

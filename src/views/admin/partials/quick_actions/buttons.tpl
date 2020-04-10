@@ -1,4 +1,4 @@
-<li component="logout">
+<li data-component="logout">
 	<a href="#" title="[[admin/menu:logout]]" data-placement="bottom" data-toggle="tooltip">
 		<i class="fa fw-fw fa-sign-out"></i>
 	</a>

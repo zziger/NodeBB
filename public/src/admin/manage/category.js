@@ -158,7 +158,7 @@ define('admin/manage/category', [
 					},
 				});
 				modal.find('.modal-footer button').prop('disabled', true);
-				categorySelector.init(modal.find('[component="category-selector"]'), function (selectedCategory) {
+				categorySelector.init(modal.find('[data-component="category-selector"]'), function (selectedCategory) {
 					selectedCid = selectedCategory && selectedCategory.cid;
 					if (selectedCid) {
 						modal.find('.modal-footer button').prop('disabled', false);

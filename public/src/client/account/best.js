@@ -4,7 +4,7 @@ define('forum/account/best', ['forum/account/header', 'forum/account/posts'], fu
 	Best.init = function () {
 		header.init();
 
-		$('[component="post/content"] img:not(.not-responsive)').addClass('img-responsive');
+		$('[data-component="post/content"] img:not(.not-responsive)').addClass('img-responsive');
 
 		posts.handleInfiniteScroll('posts.loadMoreBestPosts', 'account/best');
 	};

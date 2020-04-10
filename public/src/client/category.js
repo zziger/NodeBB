@@ -35,7 +35,7 @@ define('forum/category', [
 		sort.handleSort('categoryTopicSort', 'user.setCategorySort', 'category/' + ajaxify.data.slug);
 
 		if (!config.usePagination) {
-			navigator.init('[component="category/topic"]', ajaxify.data.topic_count, Category.toTop, Category.toBottom, Category.navigatorCallback);
+			navigator.init('[data-component="category/topic"]', ajaxify.data.topic_count, Category.toTop, Category.toBottom, Category.navigatorCallback);
 		} else {
 			navigator.disable();
 		}
@@ -54,13 +54,13 @@ define('forum/category', [
 		if (topicIndex && utils.isNumber(topicIndex)) {
 			topicIndex = Math.max(0, parseInt(topicIndex, 10) - 1);
 			if (topicIndex && window.location.search.indexOf('page=') === -1) {
-				navigator.scrollToElement($('[component="category/topic"][data-index="' + topicIndex + '"]'), true, 0);
+				navigator.scrollToElement($('[data-component="category/topic"][data-index="' + topicIndex + '"]'), true, 0);
 			}
 		}
 	}
 
 	function handleIgnoreWatch(cid) {
-		$('[component="category/watching"], [component="category/ignoring"], [component="category/notwatching"]').on('click', function () {
+		$('[data-component="category/watching"], [data-component="category/ignoring"], [data-component="category/notwatching"]').on('click', function () {
 			var $this = $(this);
 			var state = $this.attr('data-state');
 
@@ -69,14 +69,14 @@ define('forum/category', [
 					return app.alertError(err.message);
 				}
 
-				$('[component="category/watching/menu"]').toggleClass('hidden', state !== 'watching');
-				$('[component="category/watching/check"]').toggleClass('fa-check', state === 'watching');
+				$('[data-component="category/watching/menu"]').toggleClass('hidden', state !== 'watching');
+				$('[data-component="category/watching/check"]').toggleClass('fa-check', state === 'watching');
 
-				$('[component="category/notwatching/menu"]').toggleClass('hidden', state !== 'notwatching');
-				$('[component="category/notwatching/check"]').toggleClass('fa-check', state === 'notwatching');
+				$('[data-component="category/notwatching/menu"]').toggleClass('hidden', state !== 'notwatching');
+				$('[data-component="category/notwatching/check"]').toggleClass('fa-check', state === 'notwatching');
 
-				$('[component="category/ignoring/menu"]').toggleClass('hidden', state !== 'ignoring');
-				$('[component="category/ignoring/check"]').toggleClass('fa-check', state === 'ignoring');
+				$('[data-component="category/ignoring/menu"]').toggleClass('hidden', state !== 'ignoring');
+				$('[data-component="category/ignoring/check"]').toggleClass('fa-check', state === 'ignoring');
 
 				app.alertSuccess('[[category:' + state + '.message]]');
 			});

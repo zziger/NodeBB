@@ -11,7 +11,7 @@ define('admin/manage/privileges', [
 	Privileges.init = function () {
 		cid = ajaxify.data.cid || 0;
 
-		categorySelector.init($('[component="category-selector"]'), function (category) {
+		categorySelector.init($('[data-component="category-selector"]'), function (category) {
 			var cid = parseInt(category.cid, 10);
 			ajaxify.go('admin/manage/privileges/' + (cid || ''));
 		});

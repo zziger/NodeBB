@@ -33,7 +33,7 @@ define('admin/manage/group', [
 			groupLabelPreview.css('color', changeGroupTextColor.val() || '#ffffff');
 		});
 
-		$('[component="groups/members"]').on('click', '[data-action]', function () {
+		$('[data-component="groups/members"]').on('click', '[data-action]', function () {
 			var btnEl = $(this);
 			var userRow = btnEl.parents('[data-uid]');
 			var ownerFlagEl = userRow.find('.member-name .user-owner-icon');

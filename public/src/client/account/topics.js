@@ -28,7 +28,7 @@ define('forum/account/topics', ['forum/account/header', 'infinitescroll'], funct
 		infinitescroll.loadMore(method, {
 			set: set,
 			uid: ajaxify.data.theirid,
-			after: $('[component="category"]').attr('data-nextstart'),
+			after: $('[data-component="category"]').attr('data-nextstart'),
 			count: config.topicsPerPage,
 		}, function (data, done) {
 			if (data.topics && data.topics.length) {
@@ -37,13 +37,13 @@ define('forum/account/topics', ['forum/account/header', 'infinitescroll'], funct
 				done();
 			}
 
-			$('[component="category"]').attr('data-nextstart', data.nextStart);
+			$('[data-component="category"]').attr('data-nextstart', data.nextStart);
 		});
 	}
 
 	function onTopicsLoaded(topics, callback) {
 		app.parseAndTranslate(template, 'topics', { topics: topics }, function (html) {
-			$('[component="category"]').append(html);
+			$('[data-component="category"]').append(html);
 			html.find('.timeago').timeago();
 			app.createUserTooltips();
 			utils.makeNumbersHumanReadable(html.find('.human-readable-number'));

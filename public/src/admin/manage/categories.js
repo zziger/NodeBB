@@ -90,8 +90,8 @@ define('admin/manage/categories', [
 					},
 				});
 
-				var parentSelector = categorySelector.init(modal.find('#parentCidGroup [component="category-selector"]'));
-				var cloneFromSelector = categorySelector.init(modal.find('#cloneFromCidGroup [component="category-selector"]'));
+				var parentSelector = categorySelector.init(modal.find('#parentCidGroup [data-component="category-selector"]'));
+				var cloneFromSelector = categorySelector.init(modal.find('#cloneFromCidGroup [data-component="category-selector"]'));
 				function submit() {
 					var formData = modal.find('form').serializeObject();
 					formData.description = '';
@@ -107,7 +107,7 @@ define('admin/manage/categories', [
 
 				$('#cloneChildren').on('change', function () {
 					var check = $(this);
-					var parentSelect = modal.find('#parentCidGroup [component="category-selector"] .dropdown-toggle');
+					var parentSelect = modal.find('#parentCidGroup [data-component="category-selector"] .dropdown-toggle');
 
 					if (check.prop('checked')) {
 						parentSelect.attr('disabled', 'disabled');

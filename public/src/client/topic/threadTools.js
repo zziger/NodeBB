@@ -9,42 +9,42 @@ define('forum/topic/threadTools', [
 
 		var topicContainer = $('.topic');
 
-		topicContainer.on('click', '[component="topic/delete"]', function () {
+		topicContainer.on('click', '[data-component="topic/delete"]', function () {
 			topicCommand('delete', tid);
 			return false;
 		});
 
-		topicContainer.on('click', '[component="topic/restore"]', function () {
+		topicContainer.on('click', '[data-component="topic/restore"]', function () {
 			topicCommand('restore', tid);
 			return false;
 		});
 
-		topicContainer.on('click', '[component="topic/purge"]', function () {
+		topicContainer.on('click', '[data-component="topic/purge"]', function () {
 			topicCommand('purge', tid);
 			return false;
 		});
 
-		topicContainer.on('click', '[component="topic/lock"]', function () {
+		topicContainer.on('click', '[data-component="topic/lock"]', function () {
 			socket.emit('topics.lock', { tids: [tid], cid: ajaxify.data.cid });
 			return false;
 		});
 
-		topicContainer.on('click', '[component="topic/unlock"]', function () {
+		topicContainer.on('click', '[data-component="topic/unlock"]', function () {
 			socket.emit('topics.unlock', { tids: [tid], cid: ajaxify.data.cid });
 			return false;
 		});
 
-		topicContainer.on('click', '[component="topic/pin"]', function () {
+		topicContainer.on('click', '[data-component="topic/pin"]', function () {
 			socket.emit('topics.pin', { tids: [tid], cid: ajaxify.data.cid });
 			return false;
 		});
 
-		topicContainer.on('click', '[component="topic/unpin"]', function () {
+		topicContainer.on('click', '[data-component="topic/unpin"]', function () {
 			socket.emit('topics.unpin', { tids: [tid], cid: ajaxify.data.cid });
 			return false;
 		});
 
-		topicContainer.on('click', '[component="topic/mark-unread"]', function () {
+		topicContainer.on('click', '[data-component="topic/mark-unread"]', function () {
 			socket.emit('topics.markUnread', tid, function (err) {
 				if (err) {
 					return app.alertError(err);
@@ -54,7 +54,7 @@ define('forum/topic/threadTools', [
 			return false;
 		});
 
-		topicContainer.on('click', '[component="topic/mark-unread-for-all"]', function () {
+		topicContainer.on('click', '[data-component="topic/mark-unread-for-all"]', function () {
 			var btn = $(this);
 			socket.emit('topics.markAsUnreadForAll', [tid], function (err) {
 				if (err) {
@@ -66,38 +66,38 @@ define('forum/topic/threadTools', [
 			return false;
 		});
 
-		topicContainer.on('click', '[component="topic/move"]', function () {
+		topicContainer.on('click', '[data-component="topic/move"]', function () {
 			require(['forum/topic/move'], function (move) {
 				move.init([tid], ajaxify.data.cid);
 			});
 			return false;
 		});
 
-		topicContainer.on('click', '[component="topic/delete/posts"]', function () {
+		topicContainer.on('click', '[data-component="topic/delete/posts"]', function () {
 			require(['forum/topic/delete-posts'], function (deletePosts) {
 				deletePosts.init();
 			});
 		});
 
-		topicContainer.on('click', '[component="topic/fork"]', function () {
+		topicContainer.on('click', '[data-component="topic/fork"]', function () {
 			require(['forum/topic/fork'], function (fork) {
 				fork.init();
 			});
 		});
 
-		topicContainer.on('click', '[component="topic/move-posts"]', function () {
+		topicContainer.on('click', '[data-component="topic/move-posts"]', function () {
 			require(['forum/topic/move-post'], function (movePosts) {
 				movePosts.init();
 			});
 		});
 
-		topicContainer.on('click', '[component="topic/following"]', function () {
+		topicContainer.on('click', '[data-component="topic/following"]', function () {
 			changeWatching('follow');
 		});
-		topicContainer.on('click', '[component="topic/not-following"]', function () {
+		topicContainer.on('click', '[data-component="topic/not-following"]', function () {
 			changeWatching('unfollow');
 		});
-		topicContainer.on('click', '[component="topic/ignoring"]', function () {
+		topicContainer.on('click', '[data-component="topic/ignoring"]', function () {
 			changeWatching('ignore');
 		});
 
@@ -190,13 +190,13 @@ define('forum/topic/threadTools', [
 		components.get('topic/reply/container').toggleClass('hidden', hideReply);
 		components.get('topic/reply/locked').toggleClass('hidden', ajaxify.data.privileges.isAdminOrMod || !data.isLocked || ajaxify.data.deleted);
 
-		threadEl.find('[component="post"]:not(.deleted) [component="post/reply"], [component="post"]:not(.deleted) [component="post/quote"]').toggleClass('hidden', hideReply);
-		threadEl.find('[component="post/edit"], [component="post/delete"]').toggleClass('hidden', isLocked);
+		threadEl.find('[data-component="post"]:not(.deleted) [data-component="post/reply"], [data-component="post"]:not(.deleted) [data-component="post/quote"]').toggleClass('hidden', hideReply);
+		threadEl.find('[data-component="post/edit"], [data-component="post/delete"]').toggleClass('hidden', isLocked);
 
-		threadEl.find('[component="post"][data-uid="' + app.user.uid + '"].deleted [component="post/tools"]').toggleClass('hidden', isLocked);
+		threadEl.find('[data-component="post"][data-uid="' + app.user.uid + '"].deleted [data-component="post/tools"]').toggleClass('hidden', isLocked);
 
-		$('[component="post/header"] i.fa-lock').toggleClass('hidden', !data.isLocked);
-		$('[component="post/tools"] .dropdown-menu').html('');
+		$('[data-component="post/header"] i.fa-lock').toggleClass('hidden', !data.isLocked);
+		$('[data-component="post/tools"] .dropdown-menu').html('');
 		ajaxify.data.locked = data.isLocked;
 	};
 
@@ -225,7 +225,7 @@ define('forum/topic/threadTools', [
 
 		components.get('topic/reply/container').toggleClass('hidden', hideReply);
 		components.get('topic/reply/locked').toggleClass('hidden', ajaxify.data.privileges.isAdminOrMod || !ajaxify.data.locked || data.isDelete);
-		threadEl.find('[component="post"]:not(.deleted) [component="post/reply"], [component="post"]:not(.deleted) [component="post/quote"]').toggleClass('hidden', hideReply);
+		threadEl.find('[data-component="post"]:not(.deleted) [data-component="post/reply"], [data-component="post"]:not(.deleted) [data-component="post/quote"]').toggleClass('hidden', hideReply);
 
 		threadEl.toggleClass('deleted', data.isDelete);
 		ajaxify.data.deleted = data.isDelete;
@@ -240,7 +240,7 @@ define('forum/topic/threadTools', [
 
 		components.get('topic/pin').toggleClass('hidden', data.isPinned).parent().attr('hidden', data.isPinned ? '' : null);
 		components.get('topic/unpin').toggleClass('hidden', !data.isPinned).parent().attr('hidden', !data.isPinned ? '' : null);
-		$('[component="post/header"] i.fa-thumb-tack').toggleClass('hidden', !data.isPinned);
+		$('[data-component="post/header"] i.fa-thumb-tack').toggleClass('hidden', !data.isPinned);
 		ajaxify.data.pinned = data.isPinned;
 	};
 

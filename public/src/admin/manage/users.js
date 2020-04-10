@@ -18,7 +18,7 @@ define('admin/manage/users', ['translator', 'benchpress', 'autocomplete'], funct
 		function getSelectedUids() {
 			var uids = [];
 
-			$('.users-table [component="user/select/single"]').each(function () {
+			$('.users-table [data-component="user/select/single"]').each(function () {
 				if ($(this).is(':checked')) {
 					uids.push($(this).attr('data-uid'));
 				}
@@ -28,18 +28,18 @@ define('admin/manage/users', ['translator', 'benchpress', 'autocomplete'], funct
 		}
 
 		function update(className, state) {
-			$('.users-table [component="user/select/single"]:checked').parents('.user-row').find(className).each(function () {
+			$('.users-table [data-component="user/select/single"]:checked').parents('.user-row').find(className).each(function () {
 				$(this).toggleClass('hidden', !state);
 			});
 		}
 
 		function unselectAll() {
-			$('.users-table [component="user/select/single"]').prop('checked', false);
-			$('.users-table [component="user/select/all"]').prop('checked', false);
+			$('.users-table [data-component="user/select/single"]').prop('checked', false);
+			$('.users-table [data-component="user/select/all"]').prop('checked', false);
 		}
 
 		function removeSelected() {
-			$('.users-table [component="user/select/single"]:checked').parents('.user-row').remove();
+			$('.users-table [data-component="user/select/single"]:checked').parents('.user-row').remove();
 		}
 
 		// use onSuccess/onFail instead
@@ -68,8 +68,8 @@ define('admin/manage/users', ['translator', 'benchpress', 'autocomplete'], funct
 			app.alertError(err.message);
 		}
 
-		$('[component="user/select/all"]').on('click', function () {
-			$('.users-table [component="user/select/single"]').prop('checked', $(this).is(':checked'));
+		$('[data-component="user/select/all"]').on('click', function () {
+			$('.users-table [data-component="user/select/single"]').prop('checked', $(this).is(':checked'));
 		});
 
 		$('.manage-groups').on('click', function () {
@@ -307,7 +307,7 @@ define('admin/manage/users', ['translator', 'benchpress', 'autocomplete'], funct
 						app.alertSuccess('[[admin/manage/users:alerts.delete-success]]');
 						removeSelected();
 						unselectAll();
-						if (!$('.users-table [component="user/select/single"]').length) {
+						if (!$('.users-table [data-component="user/select/single"]').length) {
 							ajaxify.refresh();
 						}
 					});
@@ -330,7 +330,7 @@ define('admin/manage/users', ['translator', 'benchpress', 'autocomplete'], funct
 						app.alertSuccess('[[admin/manage/users:alerts.delete-success]]');
 						removeSelected();
 						unselectAll();
-						if (!$('.users-table [component="user/select/single"]').length) {
+						if (!$('.users-table [data-component="user/select/single"]').length) {
 							ajaxify.refresh();
 						}
 					});
@@ -445,7 +445,7 @@ define('admin/manage/users', ['translator', 'benchpress', 'autocomplete'], funct
 	};
 
 	function handleInvite() {
-		$('[component="user/invite"]').on('click', function () {
+		$('[data-component="user/invite"]').on('click', function () {
 			bootbox.prompt('[[admin/manage/users:alerts.prompt-email]]', function (email) {
 				if (!email) {
 					return;

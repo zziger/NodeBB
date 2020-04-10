@@ -239,7 +239,7 @@ define('forum/register', ['translator'], function (translator) {
 
 	function handleLanguageOverride() {
 		if (!app.user.uid && config.defaultLang !== config.userLang) {
-			var formEl = $('[component="register/local"]');
+			var formEl = $('[data-component="register/local"]');
 			var langEl = $('<input type="hidden" name="userLang" value="' + config.userLang + '" />');
 
 			formEl.append(langEl);

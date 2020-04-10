@@ -37,8 +37,8 @@ define('forum/unread', ['topicSelect', 'components', 'topicList'], function (top
 
 				app.alertSuccess('[[unread:topics_marked_as_read.success]]');
 
-				$('[component="category"]').empty();
-				$('[component="pagination"]').addClass('hidden');
+				$('[data-component="category"]').empty();
+				$('[data-component="pagination"]').addClass('hidden');
 				$('#category-no-topics').removeClass('hidden');
 				$('.markread').addClass('hidden');
 			});
@@ -70,7 +70,7 @@ define('forum/unread', ['topicSelect', 'components', 'topicList'], function (top
 
 		app.alertSuccess('[[unread:topics_marked_as_read.success]]');
 
-		if (!$('[component="category"]').children().length) {
+		if (!$('[data-component="category"]').children().length) {
 			$('#category-no-topics').removeClass('hidden');
 			$('.markread').addClass('hidden');
 		}

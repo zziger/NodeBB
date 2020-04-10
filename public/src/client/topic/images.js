@@ -2,7 +2,7 @@ define('forum/topic/images', [], function () {
 	var Images = {};
 
 	Images.wrapImagesInLinks = function (posts) {
-		posts.find('[component="post/content"] img:not(.emoji)').each(function () {
+		posts.find('[data-component="post/content"] img:not(.emoji)').each(function () {
 			var $this = $(this);
 			var src = $this.attr('src') || '';
 			var alt = $this.attr('alt') || '';

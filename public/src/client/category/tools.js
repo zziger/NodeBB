@@ -75,7 +75,7 @@ define('forum/category/tools', [
 				}
 				app.alertSuccess('[[topic:markAsUnreadForAll.success]]');
 				tids.forEach(function (tid) {
-					$('[component="category/topic"][data-tid="' + tid + '"]').addClass('unread');
+					$('[data-component="category/topic"][data-tid="' + tid + '"]').addClass('unread');
 				});
 				onCommandComplete();
 			});
@@ -107,7 +107,7 @@ define('forum/category/tools', [
 			});
 		});
 
-		$('.category').on('click', '[component="topic/merge"]', function () {
+		$('.category').on('click', '[data-component="topic/merge"]', function () {
 			require(['forum/topic/merge'], function (merge) {
 				merge.init();
 			});
@@ -226,20 +226,20 @@ define('forum/category/tools', [
 	function setDeleteState(data) {
 		var topic = getTopicEl(data.tid);
 		topic.toggleClass('deleted', data.isDeleted);
-		topic.find('[component="topic/locked"]').toggleClass('hide', !data.isDeleted);
+		topic.find('[data-component="topic/locked"]').toggleClass('hide', !data.isDeleted);
 	}
 
 	function setPinnedState(data) {
 		var topic = getTopicEl(data.tid);
 		topic.toggleClass('pinned', data.isPinned);
-		topic.find('[component="topic/pinned"]').toggleClass('hide', !data.isPinned);
+		topic.find('[data-component="topic/pinned"]').toggleClass('hide', !data.isPinned);
 		ajaxify.refresh();
 	}
 
 	function setLockedState(data) {
 		var topic = getTopicEl(data.tid);
 		topic.toggleClass('locked', data.isLocked);
-		topic.find('[component="topic/locked"]').toggleClass('hide', !data.isLocked);
+		topic.find('[data-component="topic/locked"]').toggleClass('hide', !data.isLocked);
 	}
 
 	function onTopicMoved(data) {
@@ -255,17 +255,17 @@ define('forum/category/tools', [
 			return;
 		}
 
-		var topicListEl = $('[component="category"]').filter(function (i, e) {
+		var topicListEl = $('[data-component="category"]').filter(function (i, e) {
 			return !$(e).parents('[data-widget-area]').length;
 		});
 
 		topicListEl.sortable({
-			handle: '[component="topic/pinned"]',
-			items: '[component="category/topic"].pinned',
+			handle: '[data-component="topic/pinned"]',
+			items: '[data-component="category/topic"].pinned',
 			update: function () {
 				var data = [];
 
-				var pinnedTopics = topicListEl.find('[component="category/topic"].pinned');
+				var pinnedTopics = topicListEl.find('[data-component="category/topic"].pinned');
 				pinnedTopics.each(function (index, element) {
 					data.push({ tid: $(element).attr('data-tid'), order: pinnedTopics.length - index - 1 });
 				});

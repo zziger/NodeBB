@@ -27,9 +27,9 @@ define('categorySelector', ['benchpress', 'translator', 'categorySearch'], funct
 			};
 
 			if (categoryEl.length) {
-				selector.el.find('[component="category-selector-selected"]').html(categoryEl.find('[component="category-markup"]').html());
+				selector.el.find('[data-component="category-selector-selected"]').html(categoryEl.find('[data-component="category-markup"]').html());
 			} else {
-				selector.el.find('[component="category-selector-selected"]').translateHtml('[[topic:thread_tools.select_category]]');
+				selector.el.find('[data-component="category-selector-selected"]').translateHtml('[[topic:thread_tools.select_category]]');
 			}
 		};
 		selector.getSelectedCategory = function () {
@@ -61,7 +61,7 @@ define('categorySelector', ['benchpress', 'translator', 'categorySearch'], funct
 						},
 					},
 				});
-				var selector = categorySelector.init(modal.find('[component="category-selector"]'));
+				var selector = categorySelector.init(modal.find('[data-component="category-selector"]'));
 				function submit(ev) {
 					ev.preventDefault();
 					if (selector.selectedCategory) {

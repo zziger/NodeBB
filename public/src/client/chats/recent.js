@@ -3,11 +3,11 @@ define('forum/chats/recent', function () {
 
 	recent.init = function () {
 		require(['forum/chats'], function (Chats) {
-			$('[component="chat/recent"]').on('click', '[component="chat/recent/room"]', function () {
+			$('[data-component="chat/recent"]').on('click', '[data-component="chat/recent/room"]', function () {
 				Chats.switchChat($(this).attr('data-roomid'));
 			});
 
-			$('[component="chat/recent"]').on('scroll', function () {
+			$('[data-component="chat/recent"]').on('scroll', function () {
 				var $this = $(this);
 				var bottom = ($this[0].scrollHeight - $this.height()) * 0.9;
 				if ($this.scrollTop() > bottom) {
@@ -18,7 +18,7 @@ define('forum/chats/recent', function () {
 	};
 
 	function loadMoreRecentChats() {
-		var recentChats = $('[component="chat/recent"]');
+		var recentChats = $('[data-component="chat/recent"]');
 		if (recentChats.attr('loading')) {
 			return;
 		}
@@ -48,7 +48,7 @@ define('forum/chats/recent', function () {
 		}
 
 		app.parseAndTranslate('chats', 'rooms', data, function (html) {
-			$('[component="chat/recent"]').append(html);
+			$('[data-component="chat/recent"]').append(html);
 			html.find('.timeago').timeago();
 			callback();
 		});

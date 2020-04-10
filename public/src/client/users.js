@@ -45,7 +45,7 @@ define('forum/users', ['translator', 'benchpress'], function (translator, Benchp
 	};
 
 	function doSearch() {
-		$('[component="user/search/icon"]').removeClass('fa-search').addClass('fa-spinner fa-spin');
+		$('[data-component="user/search/icon"]').removeClass('fa-search').addClass('fa-spinner fa-spin');
 		var username = $('#search-user').val();
 		var activeSection = getActiveSection();
 
@@ -111,7 +111,7 @@ define('forum/users', ['translator', 'benchpress'], function (translator, Benchp
 				translated = $(translated);
 				$('#users-container').html(translated);
 				translated.find('span.timeago').timeago();
-				$('[component="user/search/icon"]').addClass('fa-search').removeClass('fa-spinner fa-spin');
+				$('[data-component="user/search/icon"]').addClass('fa-search').removeClass('fa-spinner fa-spin');
 			});
 		});
 	}
@@ -125,7 +125,7 @@ define('forum/users', ['translator', 'benchpress'], function (translator, Benchp
 	}
 
 	function updateUser(data) {
-		app.updateUserStatus($('#users-container [data-uid="' + data.uid + '"] [component="user/status"]'), data.status);
+		app.updateUserStatus($('#users-container [data-uid="' + data.uid + '"] [data-component="user/status"]'), data.status);
 	}
 
 	function getActiveSection() {
@@ -133,7 +133,7 @@ define('forum/users', ['translator', 'benchpress'], function (translator, Benchp
 	}
 
 	function handleInvite() {
-		$('[component="user/invite"]').on('click', function () {
+		$('[data-component="user/invite"]').on('click', function () {
 			bootbox.prompt('[[users:prompt-email]]', function (email) {
 				if (!email) {
 					return;

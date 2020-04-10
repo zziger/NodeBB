@@ -4,7 +4,7 @@
 			<form class="form-inline pull-right">
 				<button id="createUser" class="btn btn-primary">[[admin/manage/users:new]]</button>
 				<!-- IF inviteOnly -->
-				<button component="user/invite" class="btn btn-success"><i class="fa fa-users"></i> [[admin/manage/users:invite]]</button>
+				<button data-component="user/invite" class="btn btn-success"><i class="fa fa-users"></i> [[admin/manage/users:invite]]</button>
 				<!-- ENDIF inviteOnly -->
 				<a target="_blank" href="{config.relative_path}/api/admin/users/csv" class="btn btn-primary">[[admin/manage/users:download-csv]]</a>
 				<div class="btn-group">
@@ -85,7 +85,7 @@
 			<table class="table table-striped users-table">
 				<thead>
 					<tr>
-						<th><input component="user/select/all" type="checkbox"/></th>
+						<th><input data-component="user/select/all" type="checkbox"/></th>
 						<th class="text-right">[[admin/manage/users:users.uid]]</th>
 						<th>[[admin/manage/users:users.username]]</th>
 						<th>[[admin/manage/users:users.email]]</th>
@@ -100,7 +100,7 @@
 				<tbody>
 					<!-- BEGIN users -->
 					<tr class="user-row">
-						<th><input component="user/select/single" data-uid="{users.uid}" type="checkbox"/></th>
+						<th><input data-component="user/select/single" data-uid="{users.uid}" type="checkbox"/></th>
 						<td class="text-right">{users.uid}</td>
 						<td><i class="administrator fa fa-shield text-success<!-- IF !users.administrator --> hidden<!-- ENDIF !users.administrator -->"></i><a href="{config.relative_path}/user/{users.userslug}"> {users.username}</a></td>
 

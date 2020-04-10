@@ -30,11 +30,11 @@ define('forum/categories', ['components'], function (components) {
 		if (!numRecentReplies || !parseInt(numRecentReplies, 10)) {
 			return;
 		}
-		if (!category.find('[component="topic/teaser"]').length) {
+		if (!category.find('[data-component="topic/teaser"]').length) {
 			return;
 		}
 
-		var recentPosts = category.find('[component="category/posts"]');
+		var recentPosts = category.find('[data-component="category/posts"]');
 
 		app.parseAndTranslate('partials/categories/lastpost', 'posts', { posts: [post] }, function (html) {
 			html.find('.post-content img:not(.not-responsive)').addClass('img-responsive');
@@ -50,7 +50,7 @@ define('forum/categories', ['components'], function (components) {
 			app.createUserTooltips();
 			html.find('.timeago').timeago();
 
-			if (category.find('[component="category/posts"]').length > parseInt(numRecentReplies, 10)) {
+			if (category.find('[data-component="category/posts"]').length > parseInt(numRecentReplies, 10)) {
 				recentPosts.last().remove();
 			}
 

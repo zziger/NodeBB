@@ -14,10 +14,10 @@ define('handleBack', [
 	};
 
 	function saveClickedIndex() {
-		$('[component="category"]').on('click', '[component="topic/header"]', function () {
+		$('[data-component="category"]').on('click', '[data-component="topic/header"]', function () {
 			var clickedIndex = $(this).parents('[data-index]').attr('data-index');
 			var windowScrollTop = $(window).scrollTop();
-			$('[component="category/topic"]').each(function (index, el) {
+			$('[data-component="category/topic"]').each(function (index, el) {
 				if ($(el).offset().top - windowScrollTop > 0) {
 					storage.setItem('category:bookmark', $(el).attr('data-index'));
 					storage.setItem('category:bookmark:clicked', clickedIndex);
@@ -57,7 +57,7 @@ define('handleBack', [
 					return;
 				}
 
-				$('[component="category"]').empty();
+				$('[data-component="category"]').empty();
 				loadTopicsMethod(Math.max(0, bookmarkIndex - 1) + 1, function () {
 					handleBack.scrollToTopic(bookmarkIndex, clickedIndex);
 				});

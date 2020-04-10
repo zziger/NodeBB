@@ -56,9 +56,9 @@ define('forum/chats/messages', ['components', 'translator', 'benchpress'], funct
 	};
 
 	messages.updateRemainingLength = function (parent) {
-		var element = parent.find('[component="chat/input"]');
-		parent.find('[component="chat/message/length"]').text(element.val().length);
-		parent.find('[component="chat/message/remaining"]').text(config.maximumChatMessageLength - element.val().length);
+		var element = parent.find('[data-component="chat/input"]');
+		parent.find('[data-component="chat/message/length"]').text(element.val().length);
+		parent.find('[data-component="chat/message/remaining"]').text(config.maximumChatMessageLength - element.val().length);
 		$(window).trigger('action:chat.updateRemainingLength', {
 			parent: parent,
 		});
@@ -157,13 +157,13 @@ define('forum/chats/messages', ['components', 'translator', 'benchpress'], funct
 	function onChatMessageDeleted(messageId) {
 		components.get('chat/message', messageId)
 			.toggleClass('deleted', true)
-			.find('[component="chat/message/body"]').translateHtml('[[modules:chat.message-deleted]]');
+			.find('[data-component="chat/message/body"]').translateHtml('[[modules:chat.message-deleted]]');
 	}
 
 	function onChatMessageRestored(message) {
 		components.get('chat/message', message.messageId)
 			.toggleClass('deleted', false)
-			.find('[component="chat/message/body"]').html(message.content);
+			.find('[data-component="chat/message/body"]').html(message.content);
 	}
 
 	messages.delete = function (messageId, roomId) {

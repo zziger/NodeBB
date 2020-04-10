@@ -20,7 +20,7 @@ define('forum/header/chat', ['components'], function (components) {
 		socket.on('event:chats.roomRename', onRoomRename);
 
 		socket.on('event:unread.updateChatCount', function (count) {
-			$('[component="chat/icon"]')
+			$('[data-component="chat/icon"]')
 				.toggleClass('unread-count', count > 0)
 				.attr('data-content', count > 99 ? '99+' : count);
 		});
@@ -55,7 +55,7 @@ define('forum/header/chat', ['components'], function (components) {
 					}
 				});
 
-				$('[component="chats/mark-all-read"]').off('click').on('click', function () {
+				$('[data-component="chats/mark-all-read"]').off('click').on('click', function () {
 					socket.emit('modules.chats.markAllRead', function (err) {
 						if (err) {
 							return app.alertError(err);

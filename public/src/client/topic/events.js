@@ -61,11 +61,11 @@ define('forum/topic/events', [
 	};
 
 	function onUserStatusChange(data) {
-		app.updateUserStatus($('[data-uid="' + data.uid + '"] [component="user/status"]'), data.status);
+		app.updateUserStatus($('[data-uid="' + data.uid + '"] [data-component="user/status"]'), data.status);
 	}
 
 	function updatePostVotesAndUserReputation(data) {
-		var votes = $('[data-pid="' + data.post.pid + '"] [component="post/vote-count"]').filter(function (index, el) {
+		var votes = $('[data-pid="' + data.post.pid + '"] [data-component="post/vote-count"]').filter(function (index, el) {
 			return parseInt($(el).closest('[data-pid]').attr('data-pid'), 10) === parseInt(data.post.pid, 10);
 		});
 		var reputationElements = $('.reputation[data-uid="' + data.post.uid + '"]');
@@ -99,7 +99,7 @@ define('forum/topic/events', [
 			return parseInt($(el).closest('[data-pid]').attr('data-pid'), 10) === parseInt(data.post.pid, 10);
 		});
 
-		var editorEl = $('[data-pid="' + data.post.pid + '"] [component="post/editor"]').filter(function (index, el) {
+		var editorEl = $('[data-pid="' + data.post.pid + '"] [data-component="post/editor"]').filter(function (index, el) {
 			return parseInt($(el).closest('[data-pid]').attr('data-pid'), 10) === parseInt(data.post.pid, 10);
 		});
 		var topicTitle = components.get('topic/title');
@@ -138,7 +138,7 @@ define('forum/topic/events', [
 				translator.translate(html, function (translated) {
 					html = $(translated);
 					editorEl.replaceWith(html);
-					$('[data-pid="' + data.post.pid + '"] [component="post/editor"] .timeago').timeago();
+					$('[data-pid="' + data.post.pid + '"] [data-component="post/editor"] .timeago').timeago();
 					$(window).trigger('action:posts.edited', data);
 				});
 			});
@@ -194,17 +194,17 @@ define('forum/topic/events', [
 		postTools.toggle(data.pid, isDeleted);
 
 		if (!ajaxify.data.privileges.isAdminOrMod && parseInt(data.uid, 10) !== parseInt(app.user.uid, 10)) {
-			postEl.find('[component="post/tools"]').toggleClass('hidden', isDeleted);
+			postEl.find('[data-component="post/tools"]').toggleClass('hidden', isDeleted);
 			if (isDeleted) {
-				postEl.find('[component="post/content"]').translateHtml('[[topic:post_is_deleted]]');
+				postEl.find('[data-component="post/content"]').translateHtml('[[topic:post_is_deleted]]');
 			} else {
-				postEl.find('[component="post/content"]').html(translator.unescape(data.content));
+				postEl.find('[data-component="post/content"]').html(translator.unescape(data.content));
 			}
 		}
 	}
 
 	function togglePostBookmark(data) {
-		var el = $('[data-pid="' + data.post.pid + '"] [component="post/bookmark"]').filter(function (index, el) {
+		var el = $('[data-pid="' + data.post.pid + '"] [data-component="post/bookmark"]').filter(function (index, el) {
 			return parseInt($(el).closest('[data-pid]').attr('data-pid'), 10) === parseInt(data.post.pid, 10);
 		});
 		if (!el.length) {
@@ -213,16 +213,16 @@ define('forum/topic/events', [
 
 		el.attr('data-bookmarked', data.isBookmarked);
 
-		el.find('[component="post/bookmark/on"]').toggleClass('hidden', !data.isBookmarked);
-		el.find('[component="post/bookmark/off"]').toggleClass('hidden', data.isBookmarked);
+		el.find('[data-component="post/bookmark/on"]').toggleClass('hidden', !data.isBookmarked);
+		el.find('[data-component="post/bookmark/off"]').toggleClass('hidden', data.isBookmarked);
 	}
 
 	function togglePostVote(data) {
 		var post = $('[data-pid="' + data.post.pid + '"]');
-		post.find('[component="post/upvote"]').filter(function (index, el) {
+		post.find('[data-component="post/upvote"]').filter(function (index, el) {
 			return parseInt($(el).closest('[data-pid]').attr('data-pid'), 10) === parseInt(data.post.pid, 10);
 		}).toggleClass('upvoted', data.upvote);
-		post.find('[component="post/downvote"]').filter(function (index, el) {
+		post.find('[data-component="post/downvote"]').filter(function (index, el) {
 			return parseInt($(el).closest('[data-pid]').attr('data-pid'), 10) === parseInt(data.post.pid, 10);
 		}).toggleClass('downvoted', data.downvote);
 	}

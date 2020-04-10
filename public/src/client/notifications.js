@@ -3,7 +3,7 @@ define('forum/notifications', ['components'], function (components) {
 
 	Notifications.init = function () {
 		var listEl = $('.notifications-list');
-		listEl.on('click', '[component="notifications/item/link"]', function () {
+		listEl.on('click', '[data-component="notifications/item/link"]', function () {
 			var nid = $(this).parents('[data-nid]').attr('data-nid');
 			socket.emit('notifications.markRead', nid, function (err) {
 				if (err) {

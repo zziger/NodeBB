@@ -16,7 +16,7 @@ define('forum/chats/search', ['components'], function (components) {
 
 	function doSearch() {
 		var username = components.get('chat/search').val();
-		var chatsListEl = $('[component="chat/search/list"]');
+		var chatsListEl = $('[data-component="chat/search/list"]');
 
 		if (!username) {
 			return chatsListEl.empty();
@@ -61,7 +61,7 @@ define('forum/chats/search', ['components'], function (components) {
 				'<i class="fa fa-circle status ' + userObj.status + '"></i> ' + userObj.username;
 		}
 
-		var chatEl = $('<li component="chat/search/user" />')
+		var chatEl = $('<li data-component="chat/search/user" />')
 			.attr('data-uid', userObj.uid)
 			.appendTo(chatsListEl);
 

@@ -225,8 +225,8 @@ define('admin/extend/widgets', ['jquery-ui'], function () {
 	}
 
 	function setupCloneButton() {
-		var clone = $('[component="clone"]');
-		var cloneBtn = $('[component="clone/button"]');
+		var clone = $('[data-component="clone"]');
+		var cloneBtn = $('[data-component="clone/button"]');
 
 		clone.find('.dropdown-menu li').on('click', function () {
 			var template = $(this).find('a').text();

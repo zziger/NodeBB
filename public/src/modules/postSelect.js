@@ -11,14 +11,14 @@ define('postSelect', ['components'], function (components) {
 		onSelect = _onSelect;
 		options = options || {};
 		allowMainPostSelect = options.allowMainPostSelect || false;
-		$('#content').on('click', '[component="topic"] [component="post"]', onPostClicked);
+		$('#content').on('click', '[data-component="topic"] [data-component="post"]', onPostClicked);
 		disableClicksOnPosts();
 	};
 
 	function onPostClicked(ev) {
 		ev.stopPropagation();
 		var pidClicked = $(this).attr('data-pid');
-		var postEls = $('[component="topic"] [data-pid="' + pidClicked + '"]');
+		var postEls = $('[data-component="topic"] [data-pid="' + pidClicked + '"]');
 		if (!allowMainPostSelect && parseInt($(this).attr('data-index'), 10) === 0) {
 			return;
 		}
@@ -30,7 +30,7 @@ define('postSelect', ['components'], function (components) {
 			components.get('post', 'pid', pid).toggleClass('bg-success', false);
 		});
 
-		$('#content').off('click', '[component="topic"] [component="post"]', onPostClicked);
+		$('#content').off('click', '[data-component="topic"] [data-component="post"]', onPostClicked);
 		enableClicksOnPosts();
 	};
 
@@ -59,11 +59,11 @@ define('postSelect', ['components'], function (components) {
 	}
 
 	function disableClicksOnPosts() {
-		$('#content').on('click', '[component="post"] button, [component="post"] a', disableClicks);
+		$('#content').on('click', '[data-component="post"] button, [data-component="post"] a', disableClicks);
 	}
 
 	function enableClicksOnPosts() {
-		$('#content').off('click', '[component="post"] button, [component="post"] a', disableClicks);
+		$('#content').off('click', '[data-component="post"] button, [data-component="post"] a', disableClicks);
 	}
 
 	return PostSelect;

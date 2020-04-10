@@ -98,7 +98,7 @@ define('forum/topic/posts', [
 	function updatePagination() {
 		$.get(config.relative_path + '/api/topic/pagination/' + ajaxify.data.tid, { page: ajaxify.data.pagination.currentPage }, function (paginationData) {
 			app.parseAndTranslate('partials/paginator', { pagination: paginationData }, function (html) {
-				$('[component="pagination"]').after(html).remove();
+				$('[data-component="pagination"]').after(html).remove();
 			});
 		});
 	}
@@ -106,7 +106,7 @@ define('forum/topic/posts', [
 	function onNewPostInfiniteScroll(data) {
 		var direction = config.topicPostSort === 'oldest_to_newest' || config.topicPostSort === 'most_votes' ? 1 : -1;
 
-		var isPreviousPostAdded = $('[component="post"][data-index="' + (data.posts[0].index - 1) + '"]').length;
+		var isPreviousPostAdded = $('[data-component="post"][data-index="' + (data.posts[0].index - 1) + '"]').length;
 		if (!isPreviousPostAdded && (!data.posts[0].selfPost || !ajaxify.data.scrollToMyPost)) {
 			return;
 		}
@@ -136,7 +136,7 @@ define('forum/topic/posts', [
 		}
 
 		function removeAlreadyAddedPosts() {
-			var newPosts = $('[component="post"].new');
+			var newPosts = $('[data-component="post"].new');
 
 			if (newPosts.length === data.posts.length) {
 				var allSamePids = true;
@@ -165,7 +165,7 @@ define('forum/topic/posts', [
 			}
 
 			data.posts = data.posts.filter(function (post) {
-				return $('[component="post"][data-pid="' + post.pid + '"]').length === 0;
+				return $('[data-component="post"][data-pid="' + post.pid + '"]').length === 0;
 			});
 		}
 
@@ -191,7 +191,7 @@ define('forum/topic/posts', [
 		app.parseAndTranslate('topic', 'posts', data, function (html) {
 			html = html.filter(function () {
 				var pid = $(this).attr('data-pid');
-				return pid && $('[component="post"][data-pid="' + pid + '"]').length === 0;
+				return pid && $('[data-component="post"][data-pid="' + pid + '"]').length === 0;
 			});
 
 			if (after) {
@@ -209,7 +209,7 @@ define('forum/topic/posts', [
 				components.get('topic').append(html);
 			}
 
-			infinitescroll.removeExtra($('[component="post"]'), direction, Math.max(20, config.postsPerPage * 2));
+			infinitescroll.removeExtra($('[data-component="post"]'), direction, Math.max(20, config.postsPerPage * 2));
 
 			$(window).trigger('action:posts.loaded', { posts: data.posts });
 
@@ -263,7 +263,7 @@ define('forum/topic/posts', [
 		handlePrivateUploads(posts);
 		images.wrapImagesInLinks(posts);
 		Posts.showBottomPostBar();
-		posts.find('[component="post/content"] img:not(.not-responsive)').addClass('img-responsive');
+		posts.find('[data-component="post/content"] img:not(.not-responsive)').addClass('img-responsive');
 		Posts.addBlockquoteEllipses(posts);
 		hidePostToolsForDeletedPosts(posts);
 		addNecroPostMessage();
@@ -275,9 +275,9 @@ define('forum/topic/posts', [
 			return;
 		}
 
-		$('[component="post"]').each(function () {
+		$('[data-component="post"]').each(function () {
 			var post = $(this);
-			var prev = post.prev('[component="post"]');
+			var prev = post.prev('[data-component="post"]');
 			if (post.is(':has(.necro-post)') || !prev.length) {
 				return;
 			}
@@ -323,7 +323,7 @@ define('forum/topic/posts', [
 		translator.translate('[[topic:login-to-view]]', function (translated) {
 			loginEl.appendChild(document.createTextNode(translated));
 			posts.each(function (idx, postEl) {
-				$(postEl).find('[component="post/content"] img').each(function (idx, imgEl) {
+				$(postEl).find('[data-component="post/content"] img').each(function (idx, imgEl) {
 					imgEl = $(imgEl);
 					if (imgEl.attr('src').startsWith(config.relative_path + config.upload_url)) {
 						imgEl.replaceWith(loginEl.cloneNode(true));
@@ -346,7 +346,7 @@ define('forum/topic/posts', [
 	Posts.showBottomPostBar = function () {
 		var mainPost = components.get('post', 'index', 0);
 		var placeHolder = $('.post-bar-placeholder');
-		var posts = $('[component="post"]');
+		var posts = $('[data-component="post"]');
 		if (!!mainPost.length && posts.length > 1 && $('.post-bar').length < 2 && placeHolder.length) {
 			$('.post-bar').clone().insertAfter(placeHolder);
 			placeHolder.remove();
@@ -364,7 +364,7 @@ define('forum/topic/posts', [
 	}
 
 	Posts.addBlockquoteEllipses = function (posts) {
-		var blockquotes = posts.find('[component="post/content"] > blockquote > blockquote');
+		var blockquotes = posts.find('[data-component="post/content"] > blockquote > blockquote');
 		blockquotes.each(function () {
 			var $this = $(this);
 			if ($this.find(':hidden:not(br)').length && !$this.find('.toggle').length) {

@@ -25,7 +25,7 @@ define('forum/topic/postTools', [
 	};
 
 	function renderMenu() {
-		$('[component="topic"]').on('show.bs.dropdown', '.moderator-tools', function () {
+		$('[data-component="topic"]').on('show.bs.dropdown', '.moderator-tools', function () {
 			var $this = $(this);
 			var dropdownMenu = $this.find('.dropdown-menu');
 			if (dropdownMenu.html()) {
@@ -55,18 +55,18 @@ define('forum/topic/postTools', [
 	PostTools.toggle = function (pid, isDeleted) {
 		var postEl = components.get('post', 'pid', pid);
 
-		postEl.find('[component="post/quote"], [component="post/bookmark"], [component="post/reply"], [component="post/flag"], [component="user/chat"]')
+		postEl.find('[data-component="post/quote"], [data-component="post/bookmark"], [data-component="post/reply"], [data-component="post/flag"], [data-component="user/chat"]')
 			.toggleClass('hidden', isDeleted);
 
-		postEl.find('[component="post/delete"]').toggleClass('hidden', isDeleted).parent().attr('hidden', isDeleted ? '' : null);
-		postEl.find('[component="post/restore"]').toggleClass('hidden', !isDeleted).parent().attr('hidden', !isDeleted ? '' : null);
-		postEl.find('[component="post/purge"]').toggleClass('hidden', !isDeleted).parent().attr('hidden', !isDeleted ? '' : null);
+		postEl.find('[data-component="post/delete"]').toggleClass('hidden', isDeleted).parent().attr('hidden', isDeleted ? '' : null);
+		postEl.find('[data-component="post/restore"]').toggleClass('hidden', !isDeleted).parent().attr('hidden', !isDeleted ? '' : null);
+		postEl.find('[data-component="post/purge"]').toggleClass('hidden', !isDeleted).parent().attr('hidden', !isDeleted ? '' : null);
 
 		PostTools.removeMenu(postEl);
 	};
 
 	PostTools.removeMenu = function (postEl) {
-		postEl.find('[component="post/tools"] .dropdown-menu').html('');
+		postEl.find('[data-component="post/tools"] .dropdown-menu').html('');
 	};
 
 	PostTools.updatePostCount = function (postCount) {
@@ -79,20 +79,20 @@ define('forum/topic/postTools', [
 	function addPostHandlers(tid) {
 		var postContainer = components.get('topic');
 
-		postContainer.on('click', '[component="post/quote"]', function () {
+		postContainer.on('click', '[data-component="post/quote"]', function () {
 			onQuoteClicked($(this), tid);
 		});
 
-		postContainer.on('click', '[component="post/reply"]', function () {
+		postContainer.on('click', '[data-component="post/reply"]', function () {
 			onReplyClicked($(this), tid);
 		});
 
-		$('.topic').on('click', '[component="topic/reply"]', function (e) {
+		$('.topic').on('click', '[data-component="topic/reply"]', function (e) {
 			e.preventDefault();
 			onReplyClicked($(this), tid);
 		});
 
-		$('.topic').on('click', '[component="topic/reply-as-topic"]', function () {
+		$('.topic').on('click', '[data-component="topic/reply-as-topic"]', function () {
 			translator.translate('[[topic:link_back, ' + ajaxify.data.titleRaw + ', ' + config.relative_path + '/topic/' + ajaxify.data.slug + ']]', function (body) {
 				$(window).trigger('action:composer.topic.new', {
 					cid: ajaxify.data.cid,
@@ -101,23 +101,23 @@ define('forum/topic/postTools', [
 			});
 		});
 
-		postContainer.on('click', '[component="post/bookmark"]', function () {
+		postContainer.on('click', '[data-component="post/bookmark"]', function () {
 			return bookmarkPost($(this), getData($(this), 'data-pid'));
 		});
 
-		postContainer.on('click', '[component="post/upvote"]', function () {
+		postContainer.on('click', '[data-component="post/upvote"]', function () {
 			return votes.toggleVote($(this), '.upvoted', 'posts.upvote');
 		});
 
-		postContainer.on('click', '[component="post/downvote"]', function () {
+		postContainer.on('click', '[data-component="post/downvote"]', function () {
 			return votes.toggleVote($(this), '.downvoted', 'posts.downvote');
 		});
 
-		postContainer.on('click', '[component="post/vote-count"]', function () {
+		postContainer.on('click', '[data-component="post/vote-count"]', function () {
 			votes.showVotes(getData($(this), 'data-pid'));
 		});
 
-		postContainer.on('click', '[component="post/flag"]', function () {
+		postContainer.on('click', '[data-component="post/flag"]', function () {
 			var pid = getData($(this), 'data-pid');
 			require(['flags'], function (flags) {
 				flags.showFlagModal({
@@ -127,7 +127,7 @@ define('forum/topic/postTools', [
 			});
 		});
 
-		postContainer.on('click', '[component="post/edit"]', function () {
+		postContainer.on('click', '[data-component="post/edit"]', function () {
 			var btn = $(this);
 
 			var timestamp = parseInt(getData(btn, 'data-timestamp'), 10);
@@ -141,7 +141,7 @@ define('forum/topic/postTools', [
 		});
 
 		if (config.enablePostHistory && ajaxify.data.privileges['posts:history']) {
-			postContainer.on('click', '[component="post/view-history"], [component="post/edit-indicator"]', function () {
+			postContainer.on('click', '[data-component="post/view-history"], [data-component="post/edit-indicator"]', function () {
 				var btn = $(this);
 				require(['forum/topic/diffs'], function (diffs) {
 					diffs.open(getData(btn, 'data-pid'));
@@ -149,7 +149,7 @@ define('forum/topic/postTools', [
 			});
 		}
 
-		postContainer.on('click', '[component="post/delete"]', function () {
+		postContainer.on('click', '[data-component="post/delete"]', function () {
 			var btn = $(this);
 			var timestamp = parseInt(getData(btn, 'data-timestamp'), 10);
 			var postDeleteDuration = parseInt(ajaxify.data.postDeleteDuration, 10);
@@ -190,29 +190,29 @@ define('forum/topic/postTools', [
 			return true;
 		}
 
-		postContainer.on('click', '[component="post/restore"]', function () {
+		postContainer.on('click', '[data-component="post/restore"]', function () {
 			togglePostDelete($(this), tid);
 		});
 
-		postContainer.on('click', '[component="post/purge"]', function () {
+		postContainer.on('click', '[data-component="post/purge"]', function () {
 			purgePost($(this), tid);
 		});
 
-		postContainer.on('click', '[component="post/move"]', function () {
+		postContainer.on('click', '[data-component="post/move"]', function () {
 			var btn = $(this);
 			require(['forum/topic/move-post'], function (movePost) {
 				movePost.init(btn.parents('[data-pid]'));
 			});
 		});
 
-		postContainer.on('click', '[component="post/change-owner"]', function () {
+		postContainer.on('click', '[data-component="post/change-owner"]', function () {
 			var btn = $(this);
 			require(['forum/topic/change-owner'], function (changeOwner) {
 				changeOwner.init(btn.parents('[data-pid]'));
 			});
 		});
 
-		postContainer.on('click', '[component="post/ban-ip"]', function () {
+		postContainer.on('click', '[data-component="post/ban-ip"]', function () {
 			var ip = $(this).attr('data-ip');
 			socket.emit('blacklist.addRule', ip, function (err) {
 				if (err) {
@@ -222,7 +222,7 @@ define('forum/topic/postTools', [
 			});
 		});
 
-		postContainer.on('click', '[component="post/chat"]', function () {
+		postContainer.on('click', '[data-component="post/chat"]', function () {
 			openChat($(this));
 		});
 	}
@@ -236,7 +236,7 @@ define('forum/topic/postTools', [
 				username = '';
 			}
 
-			var toPid = button.is('[component="post/reply"]') ? getData(button, 'data-pid') : null;
+			var toPid = button.is('[data-component="post/reply"]') ? getData(button, 'data-pid') : null;
 
 			if (selectedNode.text && (!toPid || !selectedNode.pid || toPid === selectedNode.pid)) {
 				username = username || selectedNode.username;
@@ -253,7 +253,7 @@ define('forum/topic/postTools', [
 					tid: tid,
 					pid: toPid,
 					topicName: ajaxify.data.titleRaw,
-					text: username ? username + ' ' : ($('[component="topic/quickreply/text"]').val() || ''),
+					text: username ? username + ' ' : ($('[data-component="topic/quickreply/text"]').val() || ''),
 				});
 			}
 		});
@@ -294,7 +294,7 @@ define('forum/topic/postTools', [
 		var selectedPid;
 		var username = '';
 		var selection = window.getSelection ? window.getSelection() : document.selection.createRange();
-		var postContents = $('[component="post"] [component="post/content"]');
+		var postContents = $('[data-component="post"] [data-component="post/content"]');
 		var content;
 		postContents.each(function (index, el) {
 			if (selection && selection.containsNode && el && selection.containsNode(el, true)) {
@@ -314,7 +314,7 @@ define('forum/topic/postTools', [
 			}
 			bounds.detach();
 			selectedText = range.toString();
-			var postEl = $(content).parents('[component="post"]');
+			var postEl = $(content).parents('[data-component="post"]');
 			selectedPid = postEl.attr('data-pid');
 			username = getUserSlug($(content));
 			range.detach();

@@ -2,8 +2,8 @@ define('forum/topic/votes', ['components', 'translator', 'benchpress'], function
 	var Votes = {};
 
 	Votes.addVoteHandler = function () {
-		components.get('topic').on('mouseenter', '[data-pid] [component="post/vote-count"]', loadDataAndCreateTooltip);
-		components.get('topic').on('mouseout', '[data-pid] [component="post/vote-count"]', function () {
+		components.get('topic').on('mouseenter', '[data-pid] [data-component="post/vote-count"]', loadDataAndCreateTooltip);
+		components.get('topic').on('mouseout', '[data-pid] [data-component="post/vote-count"]', function () {
 			var el = $(this).parent();
 			el.on('shown.bs.tooltip', function () {
 				$('.tooltip').tooltip('destroy');

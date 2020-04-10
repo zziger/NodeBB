@@ -30,11 +30,11 @@ define('forum/account/edit/username', ['forum/account/header'], function (header
 				btn.removeClass('disabled').find('i').addClass('hide');
 				var userslug = utils.slugify(userData.username);
 				if (userData.username && userslug && parseInt(userData.uid, 10) === parseInt(app.user.uid, 10)) {
-					$('[component="header/profilelink"]').attr('href', config.relative_path + '/user/' + userslug);
-					$('[component="header/profilelink/edit"]').attr('href', config.relative_path + '/user/' + userslug + '/edit');
-					$('[component="header/profilelink/settings"]').attr('href', config.relative_path + '/user/' + userslug + '/settings');
-					$('[component="header/username"]').text(userData.username);
-					$('[component="header/usericon"]').css('background-color', res.response['icon:bgColor']).text(res.response['icon:text']);
+					$('[data-component="header/profilelink"]').attr('href', config.relative_path + '/user/' + userslug);
+					$('[data-component="header/profilelink/edit"]').attr('href', config.relative_path + '/user/' + userslug + '/edit');
+					$('[data-component="header/profilelink/settings"]').attr('href', config.relative_path + '/user/' + userslug + '/settings');
+					$('[data-component="header/username"]').text(userData.username);
+					$('[data-component="header/usericon"]').css('background-color', res.response['icon:bgColor']).text(res.response['icon:text']);
 				}
 
 				ajaxify.go('user/' + userslug + '/edit');

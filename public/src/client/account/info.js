@@ -8,13 +8,13 @@ define('forum/account/info', ['forum/account/header', 'components', 'forum/accou
 	};
 
 	function handleModerationNote() {
-		$('[component="account/save-moderation-note"]').on('click', function () {
-			var note = $('[component="account/moderation-note"]').val();
+		$('[data-component="account/save-moderation-note"]').on('click', function () {
+			var note = $('[data-component="account/moderation-note"]').val();
 			socket.emit('user.setModerationNote', { uid: ajaxify.data.uid, note: note }, function (err) {
 				if (err) {
 					return app.alertError(err.message);
 				}
-				$('[component="account/moderation-note"]').val('');
+				$('[data-component="account/moderation-note"]').val('');
 				app.alertSuccess('[[user:info.moderation-note.success]]');
 				var timestamp = Date.now();
 				var data = [{
@@ -24,7 +24,7 @@ define('forum/account/info', ['forum/account/header', 'components', 'forum/accou
 					timestampISO: utils.toISOString(timestamp),
 				}];
 				app.parseAndTranslate('account/info', 'moderationNotes', { moderationNotes: data }, function (html) {
-					$('[component="account/moderation-note/list"]').prepend(html);
+					$('[data-component="account/moderation-note/list"]').prepend(html);
 					html.find('.timeago').timeago();
 				});
 			});

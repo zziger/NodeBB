@@ -63,7 +63,7 @@ window.addEventListener('DOMContentLoaded', async function () {
 			app.newTopic();
 		});
 
-		$('#header-menu .container').on('click', '[component="user/logout"]', app.logout);
+		$('#header-menu .container').on('click', '[data-component="user/logout"]', app.logout);
 
 		Visibility.change(function (event, state) {
 			if (state === 'visible') {
@@ -516,16 +516,16 @@ window.addEventListener('DOMContentLoaded', async function () {
 	};
 
 	function handleStatusChange() {
-		$('[component="header/usercontrol"] [data-status]').off('click').on('click', function (e) {
+		$('[data-component="header/usercontrol"] [data-status]').off('click').on('click', function (e) {
 			var status = $(this).attr('data-status');
 			socket.emit('user.setStatus', status, function (err) {
 				if (err) {
 					return app.alertError(err.message);
 				}
-				$('[data-uid="' + app.user.uid + '"] [component="user/status"], [component="header/profilelink"] [component="user/status"]')
+				$('[data-uid="' + app.user.uid + '"] [data-component="user/status"], [data-component="header/profilelink"] [data-component="user/status"]')
 					.removeClass('away online dnd offline')
 					.addClass(status);
-				$('[component="header/usercontrol"] [data-status]').each(function () {
+				$('[data-component="header/usercontrol"] [data-status]').each(function () {
 					$(this).find('span').toggleClass('bold', $(this).attr('data-status') === status);
 				});
 				app.user.status = status;

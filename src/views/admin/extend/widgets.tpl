@@ -60,8 +60,8 @@
 						<!-- END availableWidgets -->
 					</div>
 
-					<div class="btn-group" component="clone">
-						<button type="button" class="btn btn-primary" component="clone/button">[[admin/extend/widgets:clone-from]] ...</button>
+					<div class="btn-group" data-component="clone">
+						<button type="button" class="btn btn-primary" data-component="clone/button">[[admin/extend/widgets:clone-from]] ...</button>
 						<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
 							<span class="caret"></span>
 						</button>

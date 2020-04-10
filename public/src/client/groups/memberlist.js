@@ -14,7 +14,7 @@ define('forum/groups/memberlist', ['autocomplete'], function (autocomplete) {
 	};
 
 	function handleMemberAdd() {
-		$('[component="groups/members/add"]').on('click', function () {
+		$('[data-component="groups/members/add"]').on('click', function () {
 			var modal = bootbox.dialog({
 				title: '[[groups:details.add-member]]',
 				message: '<input class="form-control" type="text" placeholder="[[global:search]]"/>',
@@ -36,7 +36,7 @@ define('forum/groups/memberlist', ['autocomplete'], function (autocomplete) {
 				return app.alertError(err);
 			}
 			parseAndTranslate([user], function (html) {
-				$('[component="groups/members"] tbody').prepend(html);
+				$('[data-component="groups/members"] tbody').prepend(html);
 			});
 			callback();
 		}
@@ -48,7 +48,7 @@ define('forum/groups/memberlist', ['autocomplete'], function (autocomplete) {
 	}
 
 	function handleMemberSearch() {
-		$('[component="groups/members/search"]').on('keyup', function () {
+		$('[data-component="groups/members/search"]').on('keyup', function () {
 			var query = $(this).val();
 			if (searchInterval) {
 				clearInterval(searchInterval);
@@ -61,8 +61,8 @@ define('forum/groups/memberlist', ['autocomplete'], function (autocomplete) {
 						return app.alertError(err.message);
 					}
 					parseAndTranslate(results.users, function (html) {
-						$('[component="groups/members"] tbody').html(html);
-						$('[component="groups/members"]').attr('data-nextstart', 20);
+						$('[data-component="groups/members"] tbody').html(html);
+						$('[data-component="groups/members"]').attr('data-nextstart', 20);
 					});
 				});
 			}, 250);
@@ -70,18 +70,18 @@ define('forum/groups/memberlist', ['autocomplete'], function (autocomplete) {
 	}
 
 	function handleMemberInfiniteScroll() {
-		$('[component="groups/members"] tbody').on('scroll', function () {
+		$('[data-component="groups/members"] tbody').on('scroll', function () {
 			var $this = $(this);
 			var bottom = ($this[0].scrollHeight - $this.innerHeight()) * 0.9;
 
-			if ($this.scrollTop() > bottom && !$('[component="groups/members/search"]').val()) {
+			if ($this.scrollTop() > bottom && !$('[data-component="groups/members/search"]').val()) {
 				loadMoreMembers();
 			}
 		});
 	}
 
 	function loadMoreMembers() {
-		var members = $('[component="groups/members"]');
+		var members = $('[data-component="groups/members"]');
 		if (members.attr('loading')) {
 			return;
 		}
@@ -108,11 +108,11 @@ define('forum/groups/memberlist', ['autocomplete'], function (autocomplete) {
 
 	function onMembersLoaded(users, callback) {
 		users = users.filter(function (user) {
-			return !$('[component="groups/members"] [data-uid="' + user.uid + '"]').length;
+			return !$('[data-component="groups/members"] [data-uid="' + user.uid + '"]').length;
 		});
 
 		parseAndTranslate(users, function (html) {
-			$('[component="groups/members"] tbody').append(html);
+			$('[data-component="groups/members"] tbody').append(html);
 			callback();
 		});
 	}

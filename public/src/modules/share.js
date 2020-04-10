@@ -24,15 +24,15 @@ define('share', function () {
 			return false;
 		});
 
-		addHandler('[component="share/twitter"]', function () {
+		addHandler('[data-component="share/twitter"]', function () {
 			return openShare('https://twitter.com/intent/tweet?text=' + encodeURIComponent(name) + '&url=', getPostUrl($(this)), 550, 420);
 		});
 
-		addHandler('[component="share/facebook"]', function () {
+		addHandler('[data-component="share/facebook"]', function () {
 			return openShare('https://www.facebook.com/sharer/sharer.php?u=', getPostUrl($(this)), 626, 436);
 		});
 
-		addHandler('[component="share/google"]', function () {
+		addHandler('[data-component="share/google"]', function () {
 			return openShare('https://plus.google.com/share?url=', getPostUrl($(this)), 500, 570);
 		});
 

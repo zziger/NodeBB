@@ -50,7 +50,7 @@ define('forum/topic', [
 		sort.handleSort('topicPostSort', 'user.setTopicSort', 'topic/' + ajaxify.data.slug);
 
 		if (!config.usePagination) {
-			infinitescroll.init($('[component="topic"]'), posts.loadMorePosts);
+			infinitescroll.init($('[data-component="topic"]'), posts.loadMorePosts);
 		}
 
 		addBlockQuoteHandler();
@@ -58,7 +58,7 @@ define('forum/topic', [
 		addDropupHandler();
 		addRepliesHandler();
 
-		navigator.init('[component="post"]', ajaxify.data.postcount, Topic.toTop, Topic.toBottom, Topic.navigatorCallback);
+		navigator.init('[data-component="post"]', ajaxify.data.postcount, Topic.toTop, Topic.toBottom, Topic.navigatorCallback);
 
 		handleBookmark(tid);
 
@@ -151,10 +151,10 @@ define('forum/topic', [
 	}
 
 	function addParentHandler() {
-		components.get('topic').on('click', '[component="post/parent"]', function (e) {
+		components.get('topic').on('click', '[data-component="post/parent"]', function (e) {
 			var toPid = $(this).attr('data-topid');
 
-			var toPost = $('[component="topic"]>[component="post"][data-pid="' + toPid + '"]');
+			var toPost = $('[data-component="topic"]>[data-component="post"][data-pid="' + toPid + '"]');
 			if (toPost.length) {
 				e.preventDefault();
 				navigator.scrollToIndex(toPost.attr('data-index'), true);
@@ -175,7 +175,7 @@ define('forum/topic', [
 	}
 
 	function addRepliesHandler() {
-		$('[component="topic"]').on('click', '[component="post/reply-count"]', function () {
+		$('[data-component="topic"]').on('click', '[data-component="post/reply-count"]', function () {
 			var btn = $(this);
 			require(['forum/topic/replies'], function (replies) {
 				replies.init(btn);

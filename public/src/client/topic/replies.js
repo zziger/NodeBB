@@ -4,9 +4,9 @@ define('forum/topic/replies', ['navigator', 'components', 'forum/topic/posts'], 
 	Replies.init = function (button) {
 		var post = button.closest('[data-pid]');
 		var pid = post.data('pid');
-		var open = button.find('[component="post/replies/open"]');
-		var loading = button.find('[component="post/replies/loading"]');
-		var close = button.find('[component="post/replies/close"]');
+		var open = button.find('[data-component="post/replies/open"]');
+		var loading = button.find('[data-component="post/replies/loading"]');
+		var close = button.find('[data-component="post/replies/close"]');
 
 		if (open.is(':not(.hidden)') && loading.is('.hidden')) {
 			open.addClass('hidden');
@@ -41,7 +41,7 @@ define('forum/topic/replies', ['navigator', 'components', 'forum/topic/posts'], 
 			close.addClass('hidden');
 			open.removeClass('hidden');
 			loading.addClass('hidden');
-			post.find('[component="post/replies"]').slideUp('fast', function () {
+			post.find('[data-component="post/replies"]').slideUp('fast', function () {
 				$(this).remove();
 			});
 		}
@@ -55,7 +55,7 @@ define('forum/topic/replies', ['navigator', 'components', 'forum/topic/posts'], 
 		incrementCount(post, 1);
 		data.hideReplies = config.hasOwnProperty('showNestedReplies') ? !config.showNestedReplies : true;
 		app.parseAndTranslate('topic', 'posts', data, function (html) {
-			var replies = $('[component="post"][data-pid="' + post.toPid + '"] [component="post/replies"]').first();
+			var replies = $('[data-component="post"][data-pid="' + post.toPid + '"] [data-component="post/replies"]').first();
 			if (replies.length) {
 				replies.append(html);
 				posts.onNewPostsAddedToDom(html);
@@ -68,9 +68,9 @@ define('forum/topic/replies', ['navigator', 'components', 'forum/topic/posts'], 
 	};
 
 	function incrementCount(post, inc) {
-		var replyCount = $('[component="post"][data-pid="' + post.toPid + '"]').find('[component="post/reply-count"]').first();
-		var countEl = replyCount.find('[component="post/reply-count/text"]');
-		var avatars = replyCount.find('[component="post/reply-count/avatars"]');
+		var replyCount = $('[data-component="post"][data-pid="' + post.toPid + '"]').find('[data-component="post/reply-count"]').first();
+		var countEl = replyCount.find('[data-component="post/reply-count/text"]');
+		var avatars = replyCount.find('[data-component="post/reply-count/avatars"]');
 		var count = Math.max(0, parseInt(countEl.attr('data-replies'), 10) + inc);
 		var timestamp = replyCount.find('.timeago').attr('title', post.timestampISO);
 
@@ -84,7 +84,7 @@ define('forum/topic/replies', ['navigator', 'components', 'forum/topic/posts'], 
 
 		if (!avatars.find('[data-uid="' + post.uid + '"]').length && count < 7) {
 			app.parseAndTranslate('topic', 'posts', { posts: [{ replies: { users: [post.user] } }] }, function (html) {
-				avatars.prepend(html.find('[component="post/reply-count/avatars"] [component="user/picture"]'));
+				avatars.prepend(html.find('[data-component="post/reply-count/avatars"] [data-component="user/picture"]'));
 			});
 		}
 

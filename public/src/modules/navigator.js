@@ -344,7 +344,7 @@ define('navigator', ['pagination', 'components'], function (pagination, componen
 		}
 
 		// if in category and item alreay on page
-		if (inCategory && $('[component="category/topic"][data-index="' + index + '"]').length) {
+		if (inCategory && $('[data-component="category/topic"][data-index="' + index + '"]').length) {
 			return navigator.scrollToTopicIndex(index, highlight, duration);
 		}
 
@@ -373,7 +373,7 @@ define('navigator', ['pagination', 'components'], function (pagination, componen
 	};
 
 	navigator.scrollToTopicIndex = function (topicIndex, highlight, duration) {
-		var scrollTo = $('[component="category/topic"][data-index="' + topicIndex + '"]');
+		var scrollTo = $('[data-component="category/topic"][data-index="' + topicIndex + '"]');
 		navigator.scrollToElement(scrollTo, highlight, duration);
 	};
 

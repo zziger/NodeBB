@@ -237,7 +237,7 @@ define('forum/groups/details', [
 			return;
 		}
 
-		var searchInput = $('[component="groups/members/invite"]');
+		var searchInput = $('[data-component="groups/members/invite"]');
 		require(['autocomplete'], function (autocomplete) {
 			autocomplete.user(searchInput, function (event, selected) {
 				socket.emit('groups.issueInvite', {
@@ -252,8 +252,8 @@ define('forum/groups/details', [
 			});
 		});
 
-		$('[component="groups/members/bulk-invite-button"]').on('click', function () {
-			var usernames = $('[component="groups/members/bulk-invite"]').val();
+		$('[data-component="groups/members/bulk-invite-button"]').on('click', function () {
+			var usernames = $('[data-component="groups/members/bulk-invite"]').val();
 			if (!usernames) {
 				return false;
 			}

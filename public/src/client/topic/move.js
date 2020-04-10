@@ -28,7 +28,7 @@ define('forum/topic/move', ['categorySelector'], function (categorySelector) {
 				modal.find('.modal-header h3').translateText('[[topic:move_topics]]');
 			}
 
-			categorySelector.init(modal.find('[component="category-selector"]'), onCategorySelected);
+			categorySelector.init(modal.find('[data-component="category-selector"]'), onCategorySelected);
 
 			modal.find('#move_thread_commit').on('click', onCommitClicked);
 
