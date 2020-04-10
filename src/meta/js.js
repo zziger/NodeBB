@@ -1,11 +1,11 @@
 'use strict';
 
-var path = require('path');
-var async = require('async');
-var fs = require('fs');
+const path = require('path');
+const async = require('async');
+const fs = require('fs');
 const util = require('util');
-var mkdirp = require('mkdirp');
-var mkdirpCallback;
+let mkdirp = require('mkdirp');
+let mkdirpCallback;
 if (mkdirp.hasOwnProperty('native')) {
 	mkdirpCallback = util.callbackify(mkdirp);
 } else {
@@ -13,13 +13,13 @@ if (mkdirp.hasOwnProperty('native')) {
 	mkdirp = util.promisify(mkdirp);
 }
 
-var rimraf = require('rimraf');
+const rimraf = require('rimraf');
 
-var file = require('../file');
-var plugins = require('../plugins');
-var minifier = require('./minifier');
+const file = require('../file');
+const plugins = require('../plugins');
+const minifier = require('./minifier');
 
-var JS = module.exports;
+const JS = module.exports;
 
 JS.scripts = {
 	base: [
@@ -32,41 +32,38 @@ JS.scripts = {
 	modules: { },
 };
 
-function linkIfLinux(srcPath, destPath, next) {
+async function linkIfLinux(srcPath, destPath) {
 	if (process.platform === 'win32') {
-		fs.copyFile(srcPath, destPath, next);
+		await fs.promises.copyFile(srcPath, destPath);
 	} else {
-		file.link(srcPath, destPath, true, next);
+		await file.link(srcPath, destPath, true);
 	}
 }
 
-var basePath = path.resolve(__dirname, '../..');
+const basePath = path.resolve(__dirname, '../..');
 
-function linkModules(callback) {
-	var modules = JS.scripts.modules;
+async function linkModules() {
+	const modules = JS.scripts.modules;
 
-	async.each(Object.keys(modules), function (relPath, next) {
-		var srcPath = path.join(__dirname, '../../', modules[relPath]);
-		var destPath = path.join(__dirname, '../../build/public/src/modules', relPath);
+	await Promise.all([
+		mkdirp(path.join(__dirname, '../../build/public/src/modules/admin/plugins')),
+		mkdirp(path.join(__dirname, '../../build/public/src/modules/forum/plugins')),
+	]);
+	await Promise.all(Object.keys(modules).map(async function (relPath) {
+		const srcPath = path.join(__dirname, '../../', modules[relPath]);
+		const destPath = path.join(__dirname, '../../build/public/src/modules', relPath);
 
-		async.parallel({
-			dir: function (cb) {
-				mkdirpCallback(path.dirname(destPath), cb);
-			},
-			stats: function (cb) {
-				fs.stat(srcPath, cb);
-			},
-		}, function (err, res) {
-			if (err) {
-				return next(err);
-			}
-			if (res.stats.isDirectory()) {
-				return file.linkDirs(srcPath, destPath, true, next);
-			}
+		const [stats] = await Promise.all([
+			fs.promises.stat(srcPath),
+			mkdirp(path.dirname(destPath)),
+		]);
 
-			linkIfLinux(srcPath, destPath, next);
-		});
-	}, callback);
+		if (stats.isDirectory()) {
+			await file.linkDirs(srcPath, destPath, true);
+		} else {
+			await linkIfLinux(srcPath, destPath);
+		}
+	}));
 }
 
 var moduleDirs = ['modules', 'admin', 'client'];
@@ -85,8 +82,8 @@ function clearModules(callback) {
 JS.buildModules = function (callback) {
 	async.waterfall([
 		clearModules,
-		function (next) {
-			linkModules(next);
+		async function () {
+			await linkModules();
 		},
 	], callback);
 };
