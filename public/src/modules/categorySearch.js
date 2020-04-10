@@ -7,6 +7,9 @@ export function init(el) {
 		return;
 	}
 	var categoryEls = el.find('[data-component="category/list"] [data-cid]');
+	el.on('shown.bs.dropdown', function () {
+		searchEl.focus();
+	});
 	el.on('show.bs.dropdown', function () {
 		function revealParents(cid) {
 			var parentCid = el.find('[data-component="category/list"] [data-cid="' + cid + '"]').attr('data-parent-cid');
@@ -26,7 +29,7 @@ export function init(el) {
 		}
 
 		function updateList() {
-			var val = searchEl.find('input').val().toLowerCase();
+			var val = searchEl.val().toLowerCase();
 			var noMatch = true;
 			var cids = [];
 			categoryEls.each(function () {
@@ -48,18 +51,18 @@ export function init(el) {
 
 			el.find('[data-component="category/list"] [data-component="category/no-matches"]').toggleClass('hidden', !noMatch);
 		}
-		el.find('.dropdown-toggle').addClass('hidden');
+		el.find('[data-component="category/dropdown/selected"]').addClass('hidden');
 		searchEl.removeClass('hidden').on('click', function (ev) {
 			ev.preventDefault();
 			ev.stopPropagation();
 		});
-		searchEl.find('input').val('').focus().on('keyup', updateList);
+		searchEl.val('').on('keyup', updateList);
 		updateList();
 	});
 
 	el.on('hide.bs.dropdown', function () {
-		el.find('.dropdown-toggle').removeClass('hidden');
+		el.find('[data-component="category/dropdown/selected"]').removeClass('hidden');
 		searchEl.addClass('hidden').off('click');
-		searchEl.find('input').off('keyup');
+		searchEl.off('keyup');
 	});
 }

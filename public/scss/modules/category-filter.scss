@@ -1,0 +1,10 @@
+[component="category-selector"], .category-dropdown-container {
+	.fa-stack {
+		font-size: 65%;
+		border-radius: 50%;
+	}
+	.category-dropdown-menu {
+		max-height: 500px;
+		overflow-y: auto;
+	}
+}
