@@ -48,7 +48,7 @@ define('topicList', [
 		});
 
 		if ($('body').height() <= $(window).height() && topicListEl.children().length >= 20) {
-			$('#load-more-btn').show();
+			$('#load-more-btn').removeClass('hidden');
 		}
 
 		$('#load-more-btn').on('click', function () {
@@ -66,7 +66,7 @@ define('topicList', [
 
 	TopicList.watchForNewPosts = function () {
 		$('#new-topics-alert').on('click', function () {
-			$(this).addClass('hide');
+			$(this).addClass('hidden');
 		});
 		newPostCount = 0;
 		newTopicCount = 0;
@@ -149,8 +149,8 @@ define('topicList', [
 
 		text += ' [[recent:click-here-to-reload]]';
 
-		$('#new-topics-alert').translateText(text).removeClass('hide').fadeIn('slow');
-		$('#category-no-topics').addClass('hide');
+		$('#new-topics-alert').translateText(text).removeClass('hidden').fadeIn('slow');
+		$('#category-no-topics').addClass('hidden');
 	}
 
 	TopicList.handleCategorySelection = function () {
@@ -248,13 +248,13 @@ define('topicList', [
 
 	TopicList.onTopicsLoaded = function (templateName, topics, showSelect, direction, callback) {
 		if (!topics || !topics.length) {
-			$('#load-more-btn').hide();
+			$('#load-more-btn').addClass('hidden');
 			return callback();
 		}
 		topics = filterTopicsOnDom(topics);
 
 		if (!topics.length) {
-			$('#load-more-btn').hide();
+			$('#load-more-btn').addClass('hidden');
 			return callback();
 		}
 
