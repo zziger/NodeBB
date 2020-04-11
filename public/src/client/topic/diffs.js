@@ -13,7 +13,7 @@ define('forum/topic/diffs', ['forum/topic/images', 'benchpress', 'translator'], 
 				return app.alertError(err.message);
 			}
 
-			Benchpress.parse('partials/modals/post-history', {
+			Benchpress.parse('modals/post-history', {
 				diffs: timestamps.map(function (timestamp) {
 					timestamp = parseInt(timestamp, 10);
 

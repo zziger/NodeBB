@@ -340,7 +340,7 @@ define('admin/manage/users', ['translator', 'benchpress', 'autocomplete'], funct
 
 		function handleUserCreate() {
 			$('#createUser').on('click', function () {
-				Benchpress.parse('admin/partials/modals/create-user-modal', {}, function (html) {
+				Benchpress.parse('admin/modals/create-user-modal', {}, function (html) {
 					bootbox.dialog({
 						message: html,
 						title: '[[admin/manage/users:alerts.create]]',

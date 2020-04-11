@@ -13,7 +13,7 @@ define('forum/topic/fork', ['components', 'postSelect'], function (components, p
 			return;
 		}
 
-		app.parseAndTranslate('partials/modals/fork-topic', {}, function (html) {
+		app.parseAndTranslate('modals/fork-topic', {}, function (html) {
 			forkModal = html;
 
 			forkCommit = forkModal.find('#fork_thread_commit');

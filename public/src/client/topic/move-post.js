@@ -8,7 +8,7 @@ define('forum/topic/move-post', ['components', 'postSelect'], function (componen
 		if (moveModal) {
 			return;
 		}
-		app.parseAndTranslate('partials/modals/move-post', {}, function (html) {
+		app.parseAndTranslate('modals/move-post', {}, function (html) {
 			moveModal = html;
 
 			moveCommit = moveModal.find('#move_posts_confirm');

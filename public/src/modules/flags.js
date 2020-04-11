@@ -5,7 +5,7 @@ define('flags', function () {
 	var flagReason;
 
 	Flag.showFlagModal = function (data) {
-		app.parseAndTranslate('partials/modals/flag', data, function (html) {
+		app.parseAndTranslate('modals/flag', data, function (html) {
 			flagModal = $(html);
 
 			flagModal.on('hidden.bs.modal', function () {

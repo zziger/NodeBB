@@ -4,7 +4,7 @@ define('pictureCropper', function () {
 
 	module.show = function (data, callback) {
 		var fileSize = data.hasOwnProperty('fileSize') && data.fileSize !== undefined ? parseInt(data.fileSize, 10) : false;
-		app.parseAndTranslate('partials/modals/upload-file', {
+		app.parseAndTranslate('modals/upload-file', {
 			showHelp: data.hasOwnProperty('showHelp') && data.showHelp !== undefined ? data.showHelp : true,
 			fileSize: fileSize,
 			title: data.title || '[[global:upload_file]]',
