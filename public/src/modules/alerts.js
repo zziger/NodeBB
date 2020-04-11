@@ -21,7 +21,7 @@ export function remove(id) {
 }
 
 function createNew(params) {
-	benchpress.parse('alert', params, function (alertTpl) {
+	benchpress.parse('partials/alert', params, function (alertTpl) {
 		translator.translate(alertTpl, function (translatedHTML) {
 			var alert = $('#' + params.alert_id);
 			if (alert.length) {
@@ -30,7 +30,6 @@ function createNew(params) {
 			alert = $(translatedHTML);
 
 			components.get('toaster/tray').prepend(alert);
-			console.log(params, alert, components.get('toaster/tray').length);
 			if (typeof params.closefn === 'function') {
 				alert.find('button').on('click', function () {
 					params.closefn();
