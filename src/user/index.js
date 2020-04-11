@@ -240,7 +240,7 @@ User.addInterstitials = function (callback) {
 				}
 				const add = function () {
 					data.interstitials.push({
-						template: 'partials/gdpr_consent',
+						template: 'partials/gdpr-consent',
 						data: {
 							digestFrequency: meta.config.dailyDigestFreq,
 							digestEnabled: meta.config.dailyDigestFreq !== 'off',
@@ -284,7 +284,7 @@ User.addInterstitials = function (callback) {
 
 				const add = function () {
 					data.interstitials.push({
-						template: 'partials/acceptTos',
+						template: 'partials/accept-tos',
 						data: {
 							termsOfUse: meta.config.termsOfUse,
 						},

@@ -183,7 +183,7 @@ define('forum/chats', [
 		var modal;
 
 		buttonEl.on('click', function () {
-			Benchpress.parse('partials/modals/manage_room', {}, function (html) {
+			Benchpress.parse('partials/modals/manage-room', {}, function (html) {
 				translator.translate(html, function (html) {
 					modal = bootbox.dialog({
 						title: '[[modules:chat.manage-room]]',
@@ -269,7 +269,7 @@ define('forum/chats', [
 				});
 			}
 
-			app.parseAndTranslate('partials/modals/manage_room_users', {
+			app.parseAndTranslate('partials/modals/manage-room-users', {
 				users: users,
 			}, function (html) {
 				listEl.html(html);
@@ -281,7 +281,7 @@ define('forum/chats', [
 		var modal;
 
 		buttonEl.on('click', function () {
-			Benchpress.parse('partials/modals/rename_room', {
+			Benchpress.parse('partials/modals/rename-room', {
 				name: roomName || ajaxify.data.roomName,
 			}, function (html) {
 				translator.translate(html, function (html) {
@@ -415,7 +415,7 @@ define('forum/chats', [
 					roomEl.addClass('unread');
 				} else {
 					var recentEl = components.get('chat/recent');
-					Benchpress.parse('partials/chats/recent_room', {
+					Benchpress.parse('partials/chats/recent-room', {
 						rooms: {
 							roomId: data.roomId,
 							lastUser: data.message.fromUser,

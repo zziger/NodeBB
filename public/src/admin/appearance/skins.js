@@ -49,7 +49,7 @@ define('admin/appearance/skins', ['translator', 'benchpress'], function (transla
 	Skins.render = function (bootswatch) {
 		var themeContainer = $('#bootstrap_themes');
 
-		Benchpress.parse('admin/partials/theme_list', {
+		Benchpress.parse('admin/partials/theme-list', {
 			themes: bootswatch.themes.map(function (theme) {
 				return {
 					type: 'bootswatch',

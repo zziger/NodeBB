@@ -64,10 +64,10 @@ module.exports = function (User) {
 		await removeFromQueue(username);
 		await markNotificationRead(username);
 		await plugins.fireHook('filter:register.complete', { uid: uid });
-		await emailer.send('registration_accepted', uid, {
+		await emailer.send('registration-accepted', uid, {
 			username: username,
 			subject: '[[email:welcome-to, ' + (meta.config.title || meta.config.browserTitle || 'NodeBB') + ']]',
-			template: 'registration_accepted',
+			template: 'registration-accepted',
 			uid: uid,
 		});
 		return uid;

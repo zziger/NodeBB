@@ -1,9 +1,9 @@
 <nav>
 	<ul class="nav nav-tabs mb-2">
 		<div class="btn-group">
-			<!-- IMPORT admin/partials/quick_actions/buttons.tpl -->
+			<!-- IMPORT admin/partials/quick-actions/buttons.tpl -->
 		</div>
-		<!-- IMPORT admin/partials/quick_actions/alerts.tpl -->
+		<!-- IMPORT admin/partials/quick-actions/alerts.tpl -->
 		<li class="nav-item dropdown">
 			<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">[[admin/menu:section-general]]</a>
 			<div class="dropdown-menu">

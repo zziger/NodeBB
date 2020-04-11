@@ -82,7 +82,7 @@ define('admin/manage/users', ['translator', 'benchpress', 'autocomplete'], funct
 				if (err) {
 					return app.alertError(err);
 				}
-				Benchpress.parse('admin/partials/manage_user_groups', data, function (html) {
+				Benchpress.parse('admin/partials/manage-user-groups', data, function (html) {
 					var modal = bootbox.dialog({
 						message: utils.escapeHTML(html),
 						title: '[[admin/manage/users:manage-groups]]',
@@ -96,7 +96,7 @@ define('admin/manage/users', ['translator', 'benchpress', 'autocomplete'], funct
 									return app.alertError(err);
 								}
 								ui.item.group.nameEscaped = translator.escape(ui.item.group.displayName);
-								app.parseAndTranslate('admin/partials/manage_user_groups', { users: [{ groups: [ui.item.group] }] }, function (html) {
+								app.parseAndTranslate('admin/partials/manage-user-groups', { users: [{ groups: [ui.item.group] }] }, function (html) {
 									$('[data-uid=' + uid + '] .group-area').append(html.find('.group-area').html());
 								});
 							});
@@ -340,7 +340,7 @@ define('admin/manage/users', ['translator', 'benchpress', 'autocomplete'], funct
 
 		function handleUserCreate() {
 			$('#createUser').on('click', function () {
-				Benchpress.parse('admin/partials/create_user_modal', {}, function (html) {
+				Benchpress.parse('admin/partials/modals/create-user-modal', {}, function (html) {
 					bootbox.dialog({
 						message: html,
 						title: '[[admin/manage/users:alerts.create]]',

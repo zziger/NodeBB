@@ -52,7 +52,7 @@ Controllers.reset = function (req, res, next) {
 	};
 
 	const renderReset = function (code, valid) {
-		res.render('reset_code', {
+		res.render('reset-code', {
 			valid: valid,
 			displayExpiryNotice: req.session.passwordExpired,
 			code: code,
@@ -213,7 +213,7 @@ Controllers.registerInterstitial = async function (req, res, next) {
 		const renders = data.interstitials.map(interstitial => req.app.renderAsync(interstitial.template, interstitial.data || {}));
 		const sections = await Promise.all(renders);
 
-		res.render('registerComplete', {
+		res.render('register-complete', {
 			title: '[[pages:registration-complete]]',
 			errors: req.flash('errors'),
 			sections: sections,

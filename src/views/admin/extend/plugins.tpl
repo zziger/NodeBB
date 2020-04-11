@@ -61,7 +61,7 @@
 			<div class="tab-pane fade active in" id="installed">
 				<ul class="installed">
 					<!-- BEGIN installed -->
-					<!-- IMPORT admin/partials/installed_plugin_item.tpl -->
+					<!-- IMPORT admin/partials/installed-plugin-item.tpl -->
 					<!-- END installed -->
 				</ul>
 			</div>
@@ -77,7 +77,7 @@
 			<div class="tab-pane fade" id="download">
 				<ul class="download">
 					<!-- BEGIN download -->
-					<!-- IMPORT admin/partials/download_plugin_item.tpl -->
+					<!-- IMPORT admin/partials/download-plugin-item.tpl -->
 					<!-- END download -->
 				</ul>
 			</div>

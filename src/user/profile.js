@@ -223,7 +223,7 @@ module.exports = function (User) {
 			await User.email.sendValidationEmail(uid, {
 				email: newEmail,
 				subject: '[[email:email.verify-your-email.subject]]',
-				template: 'verify_email',
+				template: 'verify-email',
 			});
 		}
 	}

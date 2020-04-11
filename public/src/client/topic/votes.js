@@ -89,7 +89,7 @@ define('forum/topic/votes', ['components', 'translator', 'benchpress'], function
 				return app.alertError(err.message);
 			}
 
-			Benchpress.parse('partials/modals/votes_modal', data, function (html) {
+			Benchpress.parse('partials/modals/votes', data, function (html) {
 				translator.translate(html, function (translated) {
 					var dialog = bootbox.dialog({
 						title: 'Voters',

@@ -72,7 +72,7 @@ define('admin/appearance/themes', ['translator', 'benchpress'], function (transl
 			if (!themes.length) {
 				instListEl.append($('<li/ >').addClass('no-themes').translateHtml('[[admin/appearance/themes:no-themes]]'));
 			} else {
-				Benchpress.parse('admin/partials/theme_list', {
+				Benchpress.parse('admin/partials/theme-list', {
 					themes: themes,
 				}, function (html) {
 					translator.translate(html, function (html) {

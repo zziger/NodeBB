@@ -94,7 +94,7 @@ define('uploader', ['translator', 'benchpress'], function (translator, Benchpres
 	};
 
 	function parseModal(tplVals, callback) {
-		Benchpress.parse('partials/modals/upload_file_modal', tplVals, function (html) {
+		Benchpress.parse('partials/modals/upload-file', tplVals, function (html) {
 			translator.translate(html, callback);
 		});
 	}

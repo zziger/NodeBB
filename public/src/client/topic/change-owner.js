@@ -12,7 +12,7 @@ define('forum/topic/change-owner', [
 		if (modal) {
 			return;
 		}
-		app.parseAndTranslate('partials/change_owner_modal', {}, function (html) {
+		app.parseAndTranslate('partials/modals/change-post-owner', {}, function (html) {
 			modal = html;
 
 			commit = modal.find('#change_owner_commit');

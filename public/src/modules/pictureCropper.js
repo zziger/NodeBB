@@ -4,7 +4,7 @@ define('pictureCropper', function () {
 
 	module.show = function (data, callback) {
 		var fileSize = data.hasOwnProperty('fileSize') && data.fileSize !== undefined ? parseInt(data.fileSize, 10) : false;
-		app.parseAndTranslate('partials/modals/upload_file_modal', {
+		app.parseAndTranslate('partials/modals/upload-file', {
 			showHelp: data.hasOwnProperty('showHelp') && data.showHelp !== undefined ? data.showHelp : true,
 			fileSize: fileSize,
 			title: data.title || '[[global:upload_file]]',
@@ -33,7 +33,7 @@ define('pictureCropper', function () {
 
 	module.handleImageCrop = function (data, callback) {
 		$('#crop-picture-modal').remove();
-		app.parseAndTranslate('modals/crop_picture', {
+		app.parseAndTranslate('modals/crop-picture', {
 			url: utils.escapeHTML(data.url),
 		}, async function (cropperModal) {
 			cropperModal.modal({

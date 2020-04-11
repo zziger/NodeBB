@@ -37,7 +37,7 @@ define('forum/topic/move', ['categorySelector'], function (categorySelector) {
 	}
 
 	function parseModal(categories, callback) {
-		app.parseAndTranslate('partials/move_thread_modal', { categories: categories }, function (html) {
+		app.parseAndTranslate('partials/modals/move-topic', { categories: categories }, function (html) {
 			modal = $(html);
 
 			callback();

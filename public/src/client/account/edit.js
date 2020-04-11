@@ -90,7 +90,7 @@ define('forum/account/edit', [
 					return memo || cur.type === 'uploaded';
 				}, false);
 
-				Benchpress.parse('partials/modals/change_picture_modal', {
+				Benchpress.parse('partials/modals/change-picture', {
 					pictures: pictures,
 					uploaded: uploaded,
 					icon: { text: ajaxify.data['icon:text'], bgColor: ajaxify.data['icon:bgColor'] },
@@ -249,7 +249,7 @@ define('forum/account/edit', [
 
 		modal.find('[data-action="upload-url"]').on('click', function () {
 			modal.modal('hide');
-			Benchpress.parse('partials/modals/upload_picture_from_url_modal', {}, function (html) {
+			Benchpress.parse('partials/modals/upload-picture-from-url', {}, function (html) {
 				translator.translate(html, function (html) {
 					var uploadModal = $(html);
 					uploadModal.modal('show');

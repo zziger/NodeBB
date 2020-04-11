@@ -9,7 +9,7 @@ define('forum/topic/merge', function () {
 		if (modal) {
 			return;
 		}
-		app.parseAndTranslate('partials/merge_topics_modal', {}, function (html) {
+		app.parseAndTranslate('partials/modals/merge-topics', {}, function (html) {
 			modal = html;
 
 			$('body').append(modal);
@@ -72,7 +72,7 @@ define('forum/topic/merge', function () {
 		});
 
 		if (tids.length) {
-			app.parseAndTranslate('partials/merge_topics_modal', 'topics', { topics: topics }, function (html) {
+			app.parseAndTranslate('partials/modals/merge-topics', 'topics', { topics: topics }, function (html) {
 				modal.find('.topics-section').html(html);
 			});
 		} else {

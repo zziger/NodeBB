@@ -1,5 +1,5 @@
 
-define('forum/reset_code', function () {
+define('forum/reset-code', function () {
 	var	ResetCode = {};
 
 	ResetCode.init = function () {
