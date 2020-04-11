@@ -25,6 +25,8 @@ app.widgets = {};
 app.cacheBuster = config['cache-buster'];
 
 window.addEventListener('DOMContentLoaded', async function () {
+	// fix padding-top on body element based on the height of navbar
+	$('body').css({ 'padding-top': $('.navbar').outerHeight(true) });
 	await import(/* webpackChunkName: "timeago/[request]" */ 'timeago/locales/jquery.timeago.' + utils.userLangToTimeagoCode(config.userLang));
 	ajaxify.init();
 	app.load();
