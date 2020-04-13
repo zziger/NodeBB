@@ -69,7 +69,7 @@
         "helmet": "^3.11.0",
         "html-to-text": "^5.0.0",
         "ipaddr.js": "^1.5.4",
-        "jquery": "3.4.1",
+        "jquery": "^3.4.1",
         "jquery-deserialize": "^2.0.0-rc1",
         "jquery-form": "4.2.2",
         "jquery-ui": "1.12.1",
