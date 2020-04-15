@@ -192,6 +192,7 @@ authenticationController.registerComplete = function (req, res, next) {
 authenticationController.registerAbort = function (req, res) {
 	// End the session and redirect to home
 	req.session.destroy(function () {
+		res.clearCookie(nconf.get('sessionKey'), meta.configs.cookie.get());
 		res.redirect(nconf.get('relative_path') + '/');
 	});
 };

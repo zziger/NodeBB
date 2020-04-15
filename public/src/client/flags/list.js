@@ -73,6 +73,7 @@ define('forum/flags/list', ['components', 'chart.js'], function (components, Cha
 					yAxes: [{
 						ticks: {
 							beginAtZero: true,
+							precision: 0,
 						},
 					}],
 				},
