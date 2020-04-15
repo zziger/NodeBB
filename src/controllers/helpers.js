@@ -14,7 +14,7 @@ const meta = require('../meta');
 const middleware = require('../middleware');
 const translator = require('../translator');
 
-const isLanguageKey = /^\[\[[\w.\-_:]+]]$/;
+const isLanguageKey = /^\[\[[\w.,\s\-_:]+]]$/;
 const helpers = module.exports;
 
 helpers.noScriptErrors = function (req, res, error, httpStatus) {
