@@ -276,6 +276,7 @@ module.exports = function (utils, Benchpress, relative_path) {
 			'alt="' + userObj.username + '"',
 			'title="' + userObj.username + '"',
 			'data-uid="' + userObj.uid + '"',
+			'loading="lazy"',
 		];
 		var styles = [];
 		classNames = classNames || '';
