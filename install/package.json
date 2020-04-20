@@ -65,6 +65,7 @@
         "express": "^4.17.1",
         "express-session": "^1.17.0",
         "express-useragent": "^1.0.13",
+        "file-loader": "6.0.0",
         "graceful-fs": "^4.2.3",
         "helmet": "^3.22.0",
         "html-to-text": "^5.1.1",
