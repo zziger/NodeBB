@@ -1,14 +1,26 @@
 <!-- IMPORT admin/partials/settings/header.tpl -->
 
-<form role="form" data-settings="core.settings.general">
-	<div class="row mb-4">
-		<div class="col-12 col-sm-2 settings-header">
-			[[admin/settings/general:site-settings]]
-		</div>
-		<div class="col-12 col-sm-10">
-			<div class="form-group">
-				<label for="title">[[admin/settings/general:title]]</label>
-				<input id="title" data-field="title" class="form-control" type="text" placeholder="[[admin/settings/general:title.name]]" />
+<div class="row">
+	<div class="col-sm-2 col-xs-12 settings-header">
+		[[admin/settings/general:site-settings]]
+	</div>
+	<div class="col-sm-10 col-xs-12">
+		<form>
+			<label>[[admin/settings/general:title]]</label>
+			<input class="form-control" type="text" placeholder="[[admin/settings/general:title.name]]" data-field="title" />
+			<label for="title:short">[[admin/settings/general:title.short]]</label>
+			<input id="title:short" type="text" class="form-control" placeholder="[[admin/settings/general:title.short-placeholder]]" data-field="title:short" />
+			<label for="title:url">[[admin/settings/general:title.url]]</label>
+			<input id ="title:url" type="text" class="form-control" placeholder="[[admin/settings/general:title.url-placeholder]]" data-field="title:url" />
+			<p class="help-block">
+				[[admin/settings/general:title.url-help]]
+			</p>
+
+			<div class="checkbox">
+				<label for="showSiteTitle" class="mdl-switch mdl-js-switch mdl-js-ripple-effect">
+					<input type="checkbox" class="mdl-switch__input" id="showSiteTitle" data-field="showSiteTitle" name="showSiteTitle" />
+					<span class="mdl-switch__label">[[admin/settings/general:title.show-in-header]]</span>
+				</label>
 			</div>
 
 			<div class="form-group">
@@ -147,5 +159,21 @@
 		</div>
 	</div>
 </form>
+
+<div class="row">
+	<div class="col-sm-2 col-xs-12 settings-header">[[admin/settings/general:site-colors]]</div>
+	<div class="col-sm-10 col-xs-12">
+		<form>
+			<label>[[admin/settings/general:theme-color]]</label>
+			<input type="text" class="form-control" placeholder="#ffffff" data-field="themeColor" />
+
+			<label>[[admin/settings/general:background-color]]</label>
+			<input type="text" class="form-control" placeholder="#ffffff" data-field="backgroundColor" />
+			<p class="help-block">
+				[[admin/settings/general:background-color-help]]
+			</p>
+		</form>
+	</div>
+</div>
 
 <!-- IMPORT admin/partials/settings/footer.tpl -->
