@@ -148,7 +148,7 @@ define('forum/topic/threadTools', [
 				if (err) {
 					return app.alertError(err);
 				}
-				app.parseAndTranslate('partials/topic/topic-menu-list', data, function (html) {
+				app.parseAndTranslate('partials/topic/tools-menu-list', data, function (html) {
 					dropdownMenu.html(html);
 					$(window).trigger('action:topic.tools.load', {
 						element: dropdownMenu,

@@ -41,7 +41,7 @@ define('forum/topic/postTools', [
 				}
 				data.posts.display_move_tools = data.posts.display_move_tools && index !== 0;
 
-				app.parseAndTranslate('partials/topic/post-menu-list', data, function (html) {
+				app.parseAndTranslate('partials/post/tools-menu-list', data, function (html) {
 					dropdownMenu.html(html);
 					require(['clipboard'], function (clipboard) {
 						new clipboard('[data-clipboard-text]');
