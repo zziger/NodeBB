@@ -26,10 +26,11 @@ tagsController.getTag = async function (req, res) {
 	const start = Math.max(0, (page - 1) * settings.topicsPerPage);
 	const stop = start + settings.topicsPerPage - 1;
 	const states = [categories.watchStates.watching, categories.watchStates.notwatching, categories.watchStates.ignoring];
-	const [topicCount, tids, categoriesData] = await Promise.all([
+	const [topicCount, tids, categoriesData, canPost] = await Promise.all([
 		topics.getTagTopicCount(req.params.tag),
 		topics.getTagTids(req.params.tag, start, stop),
 		helpers.getCategoriesByStates(req.uid, '', states),
+		helpers.canPostTopic(req.uid),
 	]);
 
 	if (Array.isArray(tids) && !tids.length) {
@@ -37,7 +38,7 @@ tagsController.getTag = async function (req, res) {
 	}
 
 	templateData.categories = categoriesData.categories;
-
+	templateData.canPost = canPost;
 	templateData.topics = await topics.getTopics(tids, req.uid);
 	topics.calculateTopicIndices(templateData.topics, start);
 	res.locals.metaTags = [
