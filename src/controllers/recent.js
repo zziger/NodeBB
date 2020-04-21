@@ -41,7 +41,7 @@ recentController.getData = async function (req, url, sort) {
 		user.getSettings(req.uid),
 		helpers.getCategoriesByStates(req.uid, cid, states),
 		user.auth.getFeedToken(req.uid),
-		canPostTopic(req.uid),
+		helpers.canPostTopic(req.uid),
 	]);
 
 	const start = Math.max(0, (page - 1) * settings.topicsPerPage);
@@ -86,11 +86,5 @@ recentController.getData = async function (req, url, sort) {
 
 	return data;
 };
-
-async function canPostTopic(uid) {
-	let cids = await categories.getAllCidsFromSet('categories:cid');
-	cids = await privileges.categories.filterCids('topics:create', cids, uid);
-	return cids.length > 0;
-}
 
 require('../promisify')(recentController, ['get']);

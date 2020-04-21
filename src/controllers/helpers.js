@@ -205,6 +205,12 @@ helpers.buildTitle = function (pageTitle) {
 	return title;
 };
 
+helpers.canPostTopic = async function (uid) {
+	let cids = await categories.getAllCidsFromSet('categories:cid');
+	cids = await privileges.categories.filterCids('topics:create', cids, uid);
+	return cids.length > 0;
+};
+
 helpers.getCategories = async function (set, uid, privilege, selectedCid) {
 	const cids = await categories.getCidsByPrivilege(set, uid, privilege);
 	return await getCategoryData(cids, uid, selectedCid);

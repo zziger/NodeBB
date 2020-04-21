@@ -1,5 +1,5 @@
-<div class="dropdown float-right bottom-sheet <!-- IF !filters.length -->hidden<!-- ENDIF !filters.length -->">
-    <button type="button" class="btn btn-default" data-toggle="dropdown">
+<div class="dropdown d-inline-block bottom-sheet <!-- IF !filters.length -->hidden<!-- ENDIF !filters.length -->">
+    <button type="button" class="btn btn-light" data-toggle="dropdown">
     {selectedFilter.name} <i class="fa fa-chevron-down"></i>
     </button>
     <div class="dropdown-menu dropdown-menu-right" role="menu">

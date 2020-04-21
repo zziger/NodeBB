@@ -22,9 +22,10 @@ unreadController.get = async function (req, res, next) {
 	if (!filterData.filters[filter]) {
 		return next();
 	}
-	const [watchedCategories, userSettings] = await Promise.all([
+	const [watchedCategories, userSettings, canPost] = await Promise.all([
 		getWatchedCategories(req.uid, cid, filter),
 		user.getSettings(req.uid),
+		helpers.canPostTopic(req.uid),
 	]);
 
 	const page = parseInt(req.query.page, 10) || 1;
@@ -39,6 +40,7 @@ unreadController.get = async function (req, res, next) {
 		query: req.query,
 	});
 
+	data.canPost = canPost;
 	data.title = meta.config.homePageTitle || '[[pages:home]]';
 	data.pageCount = Math.max(1, Math.ceil(data.topicCount / userSettings.topicsPerPage));
 	data.pagination = pagination.create(page, data.pageCount, req.query);

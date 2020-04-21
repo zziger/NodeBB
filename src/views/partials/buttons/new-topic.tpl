@@ -1,3 +1,4 @@
+{{{if canPost}}}
 <noscript><div class="dropdown" data-component="category-selector"></noscript>
 <label data-component="category/post" for="category-dropdown-check" class="btn btn-primary" id="new_topic">
 	[[category:new_topic_button]]
@@ -13,3 +14,6 @@
 	</ul>
 </div>
 </noscript>
+{{{else}}}
+<a data-component="category/post/guest" href="{config.relative_path}/login" class="btn btn-primary">[[category:guest-login-post]]</a>
+{{{end}}}
