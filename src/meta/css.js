@@ -102,7 +102,7 @@ function getBundleMetadata(target, callback) {
 		function (_themeData, next) {
 			themeData = _themeData;
 			if (target === 'client') {
-				var themeId = (themeData['theme:id'] || 'nodebb-theme-palette');
+				var themeId = (themeData['theme:id'] || 'nodebb-theme-persona');
 				var baseThemePath = path.join(nconf.get('themes_path'), (themeData['theme:type'] && themeData['theme:type'] === 'local' ? themeId : 'nodebb-theme-vanilla'));
 				paths.unshift(baseThemePath);
 

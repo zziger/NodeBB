@@ -71,8 +71,8 @@ exports.reset = async function (options) {
 			'    -a\tall of the above',
 			'',
 			'Plugin and theme reset flags (-p & -t) can take a single argument',
-			'    e.g. ./nodebb reset -p nodebb-plugin-mentions, ./nodebb reset -t nodebb-theme-palette',
-			'         Prefix is optional, e.g. ./nodebb reset -p markdown, ./nodebb reset -t palette',
+			'    e.g. ./nodebb reset -p nodebb-plugin-mentions, ./nodebb reset -t nodebb-theme-persona',
+			'         Prefix is optional, e.g. ./nodebb reset -p markdown, ./nodebb reset -t persona',
 		].join('\n'));
 
 		process.exit(0);
@@ -109,7 +109,7 @@ async function resetTheme(themeId) {
 }
 
 async function resetThemes() {
-	await resetThemeTo('nodebb-theme-palette');
+	await resetThemeTo('nodebb-theme-persona');
 }
 
 async function resetThemeTo(themeId) {

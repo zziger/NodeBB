@@ -240,7 +240,7 @@ function enableDefaultTheme(next) {
 			console.log('Previous theme detected, skipping enabling default theme');
 			return next(err);
 		}
-		var defaultTheme = nconf.get('defaultTheme') || 'nodebb-theme-palette';
+		var defaultTheme = nconf.get('defaultTheme') || 'nodebb-theme-persona';
 		console.log('Enabling default theme: ' + defaultTheme);
 		meta.themes.set({
 			type: 'local',
