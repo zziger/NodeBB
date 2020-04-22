@@ -1,4 +1,9 @@
-@mixin opacity($opacity: 1){
+@mixin pointer {
+	cursor: pointer;
+	*cursor: hand;
+}
+
+@mixin opacity($opacity: 1) {
 	-moz-opacity: $opacity;
 	opacity: $opacity;
 	// -ms-filter: ~`"progid:DXImageTransform.Microsoft.Alpha(opacity=(" + "${opacity}" * 100 + "))"`;
