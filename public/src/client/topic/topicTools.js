@@ -103,13 +103,7 @@ define('forum/topic/topicTools', [
 		function changeWatching(type) {
 			socket.emit('topics.changeWatching', { tid: tid, type: type }, function (err) {
 				if (err) {
-					return app.alert({
-						type: 'danger',
-						alert_id: 'topic_follow',
-						title: '[[global:please_log_in]]',
-						message: '[[topic:login_to_subscribe]]',
-						timeout: 5000,
-					});
+					return app.alertError(err.message);
 				}
 				var message = '';
 				if (type === 'follow') {

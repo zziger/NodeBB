@@ -15,7 +15,7 @@ privileges.privilegeLabels = [
 	{ name: '[[admin/manage/privileges:upvote-posts]]' },
 	{ name: '[[admin/manage/privileges:downvote-posts]]' },
 	{ name: '[[admin/manage/privileges:delete-topics]]' },
-	{ name: '[[admin/manage/privileges:view_deleted]]' },
+	{ name: '[[admin/manage/privileges:view-deleted]]' },
 	{ name: '[[admin/manage/privileges:purge]]' },
 	{ name: '[[admin/manage/privileges:moderate]]' },
 ];

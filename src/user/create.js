@@ -135,7 +135,7 @@ module.exports = function (User) {
 		}
 
 		if (password.length < meta.config.minimumPasswordLength) {
-			throw new Error('[[reset_password:password_too_short]]');
+			throw new Error('[[reset-password:password-too-short]]');
 		}
 
 		if (password.length > 512) {

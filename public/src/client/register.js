@@ -181,17 +181,17 @@ define('forum/register', ['translator'], function (translator) {
 		var passwordStrength = zxcvbn(password);
 
 		if (password.length < ajaxify.data.minimumPasswordLength) {
-			showError(password_notify, '[[reset_password:password_too_short]]');
+			showError(password_notify, '[[reset-password:password-too-short]]');
 		} else if (password.length > 512) {
 			showError(password_notify, '[[error:password-too-long]]');
 		} else if (!utils.isPasswordValid(password)) {
-			showError(password_notify, '[[user:change_password_error]]');
+			showError(password_notify, '[[user:change-password-error]]');
 		} else if (password === $('#username').val()) {
-			showError(password_notify, '[[user:password_same_as_username]]');
+			showError(password_notify, '[[user:password-same-as-username]]');
 		} else if (password === $('#email').val()) {
-			showError(password_notify, '[[user:password_same_as_email]]');
+			showError(password_notify, '[[user:password-same-as-email]]');
 		} else if (passwordStrength.score < ajaxify.data.minimumPasswordStrength) {
-			showError(password_notify, '[[user:weak_password]]');
+			showError(password_notify, '[[user:weak-password]]');
 		} else {
 			showSuccess(password_notify, successIcon);
 		}

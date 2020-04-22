@@ -3,7 +3,7 @@ define('pagination', ['jquery'], function ($) {
 
 	pagination.init = function () {
 		$('body').on('click', '[data-component="pagination/select-page"]', function () {
-			bootbox.prompt('[[global:enter_page_number]]', function (pageNum) {
+			bootbox.prompt('[[global:enter-page-number]]', function (pageNum) {
 				pagination.loadPage(pageNum);
 			});
 			return false;

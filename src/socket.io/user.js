@@ -138,7 +138,7 @@ SocketUser.reset.commit = async function (socket, data) {
 	const username = await user.getUserField(uid, 'username');
 	const now = new Date();
 	const parsedDate = now.getFullYear() + '/' + (now.getMonth() + 1) + '/' + now.getDate();
-	emailer.send('reset_notify', uid, {
+	emailer.send('reset-notify', uid, {
 		username: username,
 		date: parsedDate,
 		subject: '[[email:reset.notify.subject]]',

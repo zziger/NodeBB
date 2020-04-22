@@ -9,7 +9,7 @@ const db = require('./mocks/databasemock');
 describe('Translator shim', function () {
 	describe('.translate()', function () {
 		it('should translate correctly', function (done) {
-			shim.translate('[[global:pagination.out_of, (foobar), [[global:home]]]]', function (translated) {
+			shim.translate('[[global:pagination.out-of, (foobar), [[global:home]]]]', function (translated) {
 				assert.strictEqual(translated, '(foobar) out of Home');
 				done();
 			});
@@ -72,7 +72,7 @@ describe('new Translator(language)', function () {
 		it('should handle language keys with parameters', function () {
 			var translator = Translator.create('en-GB');
 
-			return translator.translate('[[global:pagination.out_of, 1, 5]]').then(function (translated) {
+			return translator.translate('[[global:pagination.out-of, 1, 5]]').then(function (translated) {
 				assert.strictEqual(translated, '1 out of 5');
 			});
 		});
@@ -104,7 +104,7 @@ describe('new Translator(language)', function () {
 		it('should properly handle parameters that contain square brackets', function () {
 			var translator = Translator.create('en-GB');
 
-			return translator.translate('[[global:pagination.out_of, [guest], [[global:home]]]]').then(function (translated) {
+			return translator.translate('[[global:pagination.out-of, [guest], [[global:home]]]]').then(function (translated) {
 				assert.strictEqual(translated, '[guest] out of Home');
 			});
 		});
@@ -112,7 +112,7 @@ describe('new Translator(language)', function () {
 		it('should properly handle parameters that contain parentheses', function () {
 			var translator = Translator.create('en-GB');
 
-			return translator.translate('[[global:pagination.out_of, (foobar), [[global:home]]]]').then(function (translated) {
+			return translator.translate('[[global:pagination.out-of, (foobar), [[global:home]]]]').then(function (translated) {
 				assert.strictEqual(translated, '(foobar) out of Home');
 			});
 		});

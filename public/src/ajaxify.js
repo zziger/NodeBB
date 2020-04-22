@@ -284,7 +284,7 @@ function onAjaxError(err, url, callback, quiet) {
 			$('#footer, #content').removeClass('hide').addClass('ajaxifying');
 			return renderTemplate(url, status.toString(), data.responseJSON || {}, callback);
 		} else if (status === 401) {
-			app.alertError('[[global:please_log_in]]');
+			app.alertError('[[global:please-log-in]]');
 			app.previousUrl = url;
 			window.location.href = config.relative_path + '/login';
 		} else if (status === 302 || status === 308) {

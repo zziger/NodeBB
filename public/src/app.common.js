@@ -282,8 +282,8 @@ window.addEventListener('DOMContentLoaded', async function () {
 		var messages = {
 			login: {
 				format: 'alert',
-				title: '[[global:welcome_back]] ' + app.user.username + '!',
-				message: '[[global:you_have_successfully_logged_in]]',
+				title: '[[global:welcome-back]] ' + app.user.username + '!',
+				message: '[[global:you-have-successfully-logged-in]]',
 			},
 			register: {
 				format: 'modal',

@@ -60,11 +60,11 @@ Controllers.reset = function (req, res, next) {
 			minimumPasswordStrength: meta.config.minimumPasswordStrength,
 			breadcrumbs: helpers.buildBreadcrumbs([
 				{
-					text: '[[reset_password:reset_password]]',
+					text: '[[reset-password:reset-password]]',
 					url: '/reset',
 				},
 				{
-					text: '[[reset_password:update_password]]',
+					text: '[[reset-password:update-password]]',
 				},
 			]),
 			title: '[[pages:reset]]',
@@ -90,7 +90,7 @@ Controllers.reset = function (req, res, next) {
 		res.render('reset', {
 			code: null,
 			breadcrumbs: helpers.buildBreadcrumbs([{
-				text: '[[reset_password:reset_password]]',
+				text: '[[reset-password:reset-password]]',
 			}]),
 			title: '[[pages:reset]]',
 		});

@@ -77,7 +77,7 @@ describe('User', function () {
 
 		it('should error with invalid password', function (done) {
 			User.create({ username: 'test', password: '1' }, function (err) {
-				assert.equal(err.message, '[[reset_password:password_too_short]]');
+				assert.equal(err.message, '[[reset-password:password-too-short]]');
 				done();
 			});
 		});

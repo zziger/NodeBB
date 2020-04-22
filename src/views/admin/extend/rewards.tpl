@@ -69,7 +69,7 @@
 			<div class="panel-heading">[[admin/extend/rewards:control-panel]]</div>
 			<div class="panel-body">
 				<button class="btn btn-success btn-md" id="new">[[admin/extend/rewards:new-reward]]</button>
-				<button class="btn btn-primary btn-md" id="save">[[global:save_changes]]</button>
+				<button class="btn btn-primary btn-md" id="save">[[global:save-changes]]</button>
 			</div>
 		</div>
 	</div>

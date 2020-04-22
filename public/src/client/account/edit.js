@@ -110,7 +110,7 @@ define('forum/account/edit', [
 									className: 'btn-link',
 								},
 								update: {
-									label: '[[global:save_changes]]',
+									label: '[[global:save-changes]]',
 									callback: saveSelection,
 								},
 							},

@@ -32,8 +32,8 @@
 		<div class="col-sm-10 col-12">
 			<div class="form-group form-check">
 				<input type="checkbox" class="form-check-input" data-field="gdpr_enabled" id="gdpr_enabled">
-				<label class="form-check-label" for="gdpr_enabled">[[admin/settings/user:gdpr_enabled]]</label>
-				<small class="form-text text-muted">[[admin/settings/user:gdpr_enabled_help]]</small>
+				<label class="form-check-label" for="gdpr_enabled">[[admin/settings/user:gdpr-enabled]]</label>
+				<small class="form-text text-muted">[[admin/settings/user:gdpr-enabled-help]]</small>
 			</div>
 
 			<div class="form-group form-check">

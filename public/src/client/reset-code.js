@@ -14,16 +14,16 @@ define('forum/reset-code', function () {
 			var strength = zxcvbn(password.val());
 			if (password.val().length < ajaxify.data.minimumPasswordLength) {
 				$('#notice').removeClass('hidden');
-				$('#notice strong').translateText('[[reset_password:password_too_short]]');
+				$('#notice strong').translateText('[[reset-password:password-too-short]]');
 			} else if (password.val().length > 512) {
 				$('#notice').removeClass('hidden');
 				$('#notice strong').translateText('[[error:password-too-long]]');
 			} else if (password.val() !== repeat.val()) {
 				$('#notice').removeClass('hidden');
-				$('#notice strong').translateText('[[reset_password:passwords_do_not_match]]');
+				$('#notice strong').translateText('[[reset-password:passwords-do-not-match]]');
 			} else if (strength.score < ajaxify.data.minimumPasswordStrength) {
 				$('#notice').removeClass('hidden');
-				$('#notice strong').translateText('[[user:weak_password]]');
+				$('#notice strong').translateText('[[user:weak-password]]');
 			} else {
 				resetEl.prop('disabled', true).html('<i class="fa fa-spin fa-refresh"></i> Changing Password');
 				socket.emit('user.reset.commit', {

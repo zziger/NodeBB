@@ -1,7 +1,7 @@
 {{{if canPost}}}
 <noscript><div class="dropdown" data-component="category-selector"></noscript>
 <label data-component="category/post" for="category-dropdown-check" class="btn btn-primary" id="new_topic">
-	[[category:new_topic_button]]
+	[[category:new-topic-button]]
 </label>
 <noscript>
 	<input type="checkbox" class="hidden" id="category-dropdown-check" aria-hidden="true">

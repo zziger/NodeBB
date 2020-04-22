@@ -131,7 +131,7 @@ define('navigator', ['pagination', 'components'], function (pagination, componen
 
 			var date = new Date(timestamp);
 			var ds = date.toLocaleString(config.userLang, { month: 'long' });
-			touchTooltipEl.find('.text').translateText('[[global:pagination.out_of, ' + index + ', ' + count + ']]');
+			touchTooltipEl.find('.text').translateText('[[global:pagination.out-of, ' + index + ', ' + count + ']]');
 			if (timestamp > Date.now() - (30 * 24 * 60 * 60 * 1000)) {
 				touchTooltipEl.find('.time').text(ds + ' ' + date.getDate());
 			} else {
@@ -270,7 +270,7 @@ define('navigator', ['pagination', 'components'], function (pagination, componen
 			return;
 		}
 		index = index > count ? count : index;
-		paginationTextEl.translateHtml('[[global:pagination.out_of, ' + index + ', ' + count + ']]');
+		paginationTextEl.translateHtml('[[global:pagination.out-of, ' + index + ', ' + count + ']]');
 		var fraction = (index - 1) / (count - 1 || 1);
 		paginationBlockMeterEl.val(fraction);
 		paginationBlockProgressEl.width((fraction * 100) + '%');

@@ -5,8 +5,8 @@
 
 	"invite": "Invitation from %1",
 
-	"greeting_no_name": "Hello",
-	"greeting_with_name": "Hello %1",
+	"greeting-no-name": "Hello",
+	"greeting-with-name": "Hello %1",
 
 	"email.verify-your-email.subject": "Please verify your email",
 	"email.verify.text1": "Your email address has changed!",
@@ -28,7 +28,7 @@
 	"reset.notify.text1": "We are notifying you that on %1, your password was changed successfully.",
 	"reset.notify.text2": "If you did not authorise this, please notify an administrator immediately.",
 
-	"digest.latest_topics": "Latest topics from %1",
+	"digest.latest-topics": "Latest topics from %1",
 	"digest.cta": "Click here to visit %1",
 	"digest.unsub.info": "This digest was sent to you due to your subscription settings.",
 	"digest.day": "day",

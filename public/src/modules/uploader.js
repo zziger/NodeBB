@@ -6,7 +6,7 @@ define('uploader', ['translator', 'benchpress'], function (translator, Benchpres
 		parseModal({
 			showHelp: data.hasOwnProperty('showHelp') && data.showHelp !== undefined ? data.showHelp : true,
 			fileSize: fileSize,
-			title: data.title || '[[global:upload_file]]',
+			title: data.title || '[[global:upload-file]]',
 			description: data.description || '',
 			button: data.button || '[[global:upload]]',
 			accept: data.accept ? data.accept.replace(/,/g, '&#44; ') : '',
