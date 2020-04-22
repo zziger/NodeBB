@@ -123,7 +123,7 @@ define('forum/topic', [
 		} else if (bookmark && (!config.usePagination || (config.usePagination && ajaxify.data.pagination.currentPage === 1)) && ajaxify.data.postcount > ajaxify.data.bookmarkThreshold) {
 			app.alert({
 				alert_id: 'bookmark',
-				message: '[[topic:bookmark_instructions]]',
+				message: '[[topic:bookmark-instructions]]',
 				timeout: 0,
 				type: 'info',
 				clickfn: function () {
