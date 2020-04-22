@@ -129,7 +129,7 @@ define('forum/category/tools', [
 			return app.alertError('[[error:no-topics-selected]]');
 		}
 
-		translator.translate('[[topic:thread_tools.' + command + '_confirm]]', function (msg) {
+		translator.translate('[[topic:tools.' + command + '-confirm]]', function (msg) {
 			bootbox.confirm(msg, function (confirm) {
 				if (!confirm) {
 					return;
@@ -152,7 +152,7 @@ define('forum/category/tools', [
 	};
 
 	function closeDropDown() {
-		$('.thread-tools.open').find('.dropdown-toggle').trigger('click');
+		$('.topic-tools.open').find('.dropdown-toggle').trigger('click');
 	}
 
 	function onCommandComplete(err) {

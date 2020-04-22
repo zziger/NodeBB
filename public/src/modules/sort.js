@@ -2,12 +2,12 @@ define('sort', ['components'], function (components) {
 	var module = {};
 
 	module.handleSort = function (field, method, gotoOnSave) {
-		var threadSort = components.get('thread/sort');
-		threadSort.find('i').removeClass('fa-check');
-		var currentSetting = threadSort.find('a[data-sort="' + config[field] + '"]');
+		var topicSort = components.get('topic/sort');
+		topicSort.find('i').removeClass('fa-check');
+		var currentSetting = topicSort.find('a[data-sort="' + config[field] + '"]');
 		currentSetting.find('i').addClass('fa-check');
 
-		$('.category, .topic').on('click', '[data-component="thread/sort"] a', function () {
+		$('.category, .topic').on('click', '[data-component="topic/sort"] a', function () {
 			var newSetting = $(this).attr('data-sort');
 			socket.emit(method, newSetting, function (err) {
 				if (err) {

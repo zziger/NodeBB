@@ -1,12 +1,12 @@
 define('forum/topic/events', [
 	'forum/topic/postTools',
-	'forum/topic/threadTools',
+	'forum/topic/topicTools',
 	'forum/topic/posts',
 	'forum/topic/images',
 	'components',
 	'translator',
 	'benchpress',
-], function (postTools, threadTools, posts, images, components, translator, Benchpress) {
+], function (postTools, topicTools, posts, images, components, translator, Benchpress) {
 	var Events = {};
 
 	var events = {
@@ -14,15 +14,15 @@ define('forum/topic/events', [
 		'event:voted': updatePostVotesAndUserReputation,
 		'event:bookmarked': updateBookmarkCount,
 
-		'event:topic_deleted': threadTools.setDeleteState,
-		'event:topic_restored': threadTools.setDeleteState,
+		'event:topic_deleted': topicTools.setDeleteState,
+		'event:topic_restored': topicTools.setDeleteState,
 		'event:topic_purged': onTopicPurged,
 
-		'event:topic_locked': threadTools.setLockedState,
-		'event:topic_unlocked': threadTools.setLockedState,
+		'event:topic_locked': topicTools.setLockedState,
+		'event:topic_unlocked': topicTools.setLockedState,
 
-		'event:topic_pinned': threadTools.setPinnedState,
-		'event:topic_unpinned': threadTools.setPinnedState,
+		'event:topic_pinned': topicTools.setPinnedState,
+		'event:topic_unpinned': topicTools.setPinnedState,
 
 		'event:topic_moved': onTopicMoved,
 

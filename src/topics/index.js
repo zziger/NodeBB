@@ -126,7 +126,7 @@ Topics.getTopicWithPosts = async function (topicData, set, uid, start, stop, rev
 		posts,
 		category,
 		tagWhitelist,
-		threadTools,
+		topicTools,
 		followData,
 		bookmark,
 		postSharing,
@@ -137,7 +137,7 @@ Topics.getTopicWithPosts = async function (topicData, set, uid, start, stop, rev
 		getMainPostAndReplies(topicData, set, uid, start, stop, reverse),
 		categories.getCategoryData(topicData.cid),
 		categories.getTagWhitelist([topicData.cid]),
-		plugins.fireHook('filter:topic.thread_tools', { topic: topicData, uid: uid, tools: [] }),
+		plugins.fireHook('filter:topic.topic_tools', { topic: topicData, uid: uid, tools: [] }),
 		Topics.getFollowData([topicData.tid], uid),
 		Topics.getUserBookmark(topicData.tid, uid),
 		social.getActivePostSharing(),
@@ -149,7 +149,7 @@ Topics.getTopicWithPosts = async function (topicData, set, uid, start, stop, rev
 	topicData.posts = posts;
 	topicData.category = category;
 	topicData.tagWhitelist = tagWhitelist[0];
-	topicData.thread_tools = threadTools.tools;
+	topicData.topic_tools = topicTools.tools;
 	topicData.isFollowing = followData[0].following;
 	topicData.isNotFollowing = !followData[0].following && !followData[0].ignoring;
 	topicData.isIgnoring = followData[0].ignoring;

@@ -16,41 +16,29 @@ define('forum/topic/move', ['categorySelector'], function (categorySelector) {
 		if (err) {
 			return app.alertError(err.message);
 		}
+		app.parseAndTranslate('modals/move-topic', { categories: categories, dropdownRight: true }, function (html) {
+			modal = html;
 
-		parseModal(categories, function () {
-			modal.on('hidden.bs.modal', function () {
-				modal.remove();
-			});
-
-			modal.find('#move-confirm').addClass('hide');
+			$('body').append(modal);
 
 			if (Move.moveAll || (Move.tids && Move.tids.length > 1)) {
-				modal.find('.modal-header h3').translateText('[[topic:move_topics]]');
+				modal.find('#move-topic-title').translateText('[[topic:move-topics]]');
 			}
 
 			categorySelector.init(modal.find('[data-component="category-selector"]'), onCategorySelected);
 
-			modal.find('#move_thread_commit').on('click', onCommitClicked);
-
-			modal.modal('show');
-		});
-	}
-
-	function parseModal(categories, callback) {
-		app.parseAndTranslate('modals/move-topic', { categories: categories }, function (html) {
-			modal = $(html);
-
-			callback();
+			modal.find('#move-topic-cancel').on('click', closeModal);
+			modal.find('#move-topic-commit').on('click', onCommitClicked);
 		});
 	}
 
 	function onCategorySelected(category) {
 		selectedCategory = category;
-		modal.find('#move_thread_commit').prop('disabled', false);
+		modal.find('#move-topic-commit').prop('disabled', false);
 	}
 
 	function onCommitClicked() {
-		var commitEl = modal.find('#move_thread_commit');
+		var commitEl = modal.find('#move-topic-commit');
 
 		if (!commitEl.prop('disabled') && selectedCategory && selectedCategory.cid) {
 			commitEl.prop('disabled', true);
@@ -69,19 +57,25 @@ define('forum/topic/move', ['categorySelector'], function (categorySelector) {
 		$(window).trigger('action:topic.move', data);
 
 		socket.emit(Move.moveAll ? 'topics.moveAll' : 'topics.move', data, function (err) {
-			modal.modal('hide');
+			closeModal();
 
 			if (err) {
 				return app.alertError(err.message);
 			}
 
-			app.alertSuccess('[[topic:topic_move_success, ' + selectedCategory.name + ']]');
+			app.alertSuccess('[[topic:topic-move-success, ' + selectedCategory.name + ']]');
 			if (typeof Move.onComplete === 'function') {
 				Move.onComplete();
 			}
 		});
 	}
 
+	function closeModal() {
+		if (modal) {
+			modal.remove();
+			modal = null;
+		}
+	}
 
 	return Move;
 });

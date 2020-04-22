@@ -16,7 +16,6 @@ define('categorySelector', ['benchpress', 'translator', 'categorySearch'], funct
 			selector.selectCategory(categoryEl.attr('data-cid'));
 			callback(selector.selectedCategory);
 		});
-
 		categorySearch.init(el);
 
 		selector.selectCategory = function (cid) {
@@ -27,9 +26,9 @@ define('categorySelector', ['benchpress', 'translator', 'categorySearch'], funct
 			};
 
 			if (categoryEl.length) {
-				selector.el.find('[data-component="category-selector-selected"]').html(categoryEl.find('[data-component="category-markup"]').html());
+				selector.el.find('[data-component="category/dropdown/selected"]').html(categoryEl.find('[data-component="category-markup"]').html());
 			} else {
-				selector.el.find('[data-component="category-selector-selected"]').translateHtml('[[topic:thread_tools.select_category]]');
+				selector.el.find('[data-component="category/dropdown/selected"]').translateHtml('[[topic:tools.select-category]]');
 			}
 		};
 		selector.getSelectedCategory = function () {

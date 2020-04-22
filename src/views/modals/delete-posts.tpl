@@ -1,10 +1,10 @@
 <div class="panel panel-primary tool-modal">
 	<div class="panel-heading">
-		<h3 class="panel-title">[[topic:thread_tools.delete-posts]]</h3>
+		<h3 class="panel-title">[[topic:tools.delete-posts]]</h3>
 	</div>
 	<div class="panel-body">
 		<p>
-			[[topic:delete_posts_instruction]]<br />
+			[[topic:delete-posts-instruction]]<br />
 			<strong><span id="pids"></span></strong>
 		</p>
 	</div>

@@ -1,6 +1,6 @@
 <div class="panel panel-primary tool-modal">
 	<div class="panel-heading">
-		<h3 class="panel-title">[[topic:thread_tools.change_owner]]</h3>
+		<h3 class="panel-title">[[topic:tools.change-owner]]</h3>
 	</div>
 	<div class="panel-body">
 		<div>
@@ -8,7 +8,7 @@
 			<input id="username" type="text" class="form-control"><br/>
 		</div>
 		<p>
-			[[topic:change_owner_instruction]]<br />
+			[[topic:change-owner-instruction]]<br />
 			<strong><span id="pids"></span></strong>
 		</p>
 	</div>

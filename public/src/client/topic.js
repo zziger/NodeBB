@@ -1,15 +1,14 @@
 define('forum/topic', [
 	'infinitescroll',
-	'forum/topic/threadTools',
+	'forum/topic/topicTools',
 	'forum/topic/postTools',
 	'forum/topic/events',
 	'forum/topic/posts',
-	'forum/topic/images',
 	'navigator',
 	'sort',
 	'components',
 	'storage',
-], function (infinitescroll, threadTools, postTools, events, posts, images, navigator, sort, components, storage) {
+], function (infinitescroll, topicTools, postTools, events, posts, navigator, sort, components, storage) {
 	var	Topic = {};
 	var currentUrl = '';
 
@@ -44,7 +43,7 @@ define('forum/topic', [
 		posts.onTopicPageLoad(components.get('post'));
 
 		postTools.init(tid);
-		threadTools.init(tid);
+		topicTools.init(tid);
 		events.init();
 
 		sort.handleSort('topicPostSort', 'user.setTopicSort', 'topic/' + ajaxify.data.slug);

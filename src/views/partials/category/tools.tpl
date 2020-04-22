@@ -1,35 +1,35 @@
 <!-- IF privileges.editable -->
-<div class="btn-group thread-tools bottom-sheet">
+<div class="btn-group topic-tools bottom-sheet">
 	<button class="btn btn-default dropdown-toggle" data-toggle="dropdown" type="button">
-		<span class="visible-sm-inline visible-md-inline visible-lg-inline">[[topic:thread_tools.title]]</span>
+		<span class="visible-sm-inline visible-md-inline visible-lg-inline">[[topic:tools.title]]</span>
 		<span class="visible-xs-inline"><i class="fa fa-fw fa-gear"></i></span>
 		<span class="caret"></span>
 	</button>
 	<ul class="dropdown-menu pull-right">
 		<li>
 			<a data-component="topic/mark-unread-for-all" href="#">
-				<i class="fa fa-fw fa-inbox"></i> [[topic:thread_tools.markAsUnreadForAll]]
+				<i class="fa fa-fw fa-inbox"></i> [[topic:tools.markAsUnreadForAll]]
 			</a>
 		</li>
 		<li>
 			<a data-component="topic/pin" href="#">
-				<i class="fa fa-fw fa-thumb-tack"></i> [[topic:thread_tools.pin]]
+				<i class="fa fa-fw fa-thumb-tack"></i> [[topic:tools.pin]]
 			</a>
 		</li>
 		<li>
 			<a data-component="topic/unpin" href="#" class="hidden">
-				<i class="fa fa-fw fa-thumb-tack fa-rotate-90"></i> [[topic:thread_tools.unpin]]
+				<i class="fa fa-fw fa-thumb-tack fa-rotate-90"></i> [[topic:tools.unpin]]
 			</a>
 		</li>
 
 		<li>
 			<a data-component="topic/lock" href="#">
-				<i class="fa fa-fw fa-lock"></i> [[topic:thread_tools.lock]]
+				<i class="fa fa-fw fa-lock"></i> [[topic:tools.lock]]
 			</a>
 		</li>
 		<li>
 			<a data-component="topic/unlock" href="#" class="hidden">
-				<i class="fa fa-fw fa-unlock"></i> [[topic:thread_tools.unlock]]
+				<i class="fa fa-fw fa-unlock"></i> [[topic:tools.unlock]]
 			</a>
 		</li>
 
@@ -37,17 +37,17 @@
 
 		<li>
 			<a data-component="topic/move" href="#">
-				<i class="fa fa-fw fa-arrows"></i> [[topic:thread_tools.move]]
+				<i class="fa fa-fw fa-arrows"></i> [[topic:tools.move]]
 			</a>
 		</li>
 		<li>
 			<a data-component="topic/move-all" href="#">
-				<i class="fa fa-fw fa-arrows"></i> [[topic:thread_tools.move_all]]
+				<i class="fa fa-fw fa-arrows"></i> [[topic:tools.move_all]]
 			</a>
 		</li>
 		<li>
 			<a data-component="topic/merge" href="#">
-				<i class="fa fa-fw fa-code-fork"></i> [[topic:thread_tools.merge]]
+				<i class="fa fa-fw fa-code-fork"></i> [[topic:tools.merge]]
 			</a>
 		</li>
 
@@ -55,23 +55,23 @@
 
 		<li>
 			<a data-component="topic/delete" href="#">
-				<i class="fa fa-fw fa-trash-o"></i> [[topic:thread_tools.delete]]
+				<i class="fa fa-fw fa-trash-o"></i> [[topic:tools.delete]]
 			</a>
 		</li>
 		<li>
 			<a data-component="topic/restore" href="#" class="hidden">
-				<i class="fa fa-fw fa-history"></i> [[topic:thread_tools.restore]]
+				<i class="fa fa-fw fa-history"></i> [[topic:tools.restore]]
 			</a>
 		</li>
 		<li>
 			<a data-component="topic/purge" href="#" class="hidden">
-				<i class="fa fa-fw fa-eraser"></i> [[topic:thread_tools.purge]]
+				<i class="fa fa-fw fa-eraser"></i> [[topic:tools.purge]]
 			</a>
 		</li>
 
-		{{{each thread_tools}}}
+		{{{each topic_tools}}}
 		<li>
-			<a href="#" class="{thread_tools.class}"><i class="fa fa-fw {thread_tools.icon}"></i> {thread_tools.title}</a>
+			<a href="#" class="{topic_tools.class}"><i class="fa fa-fw {topic_tools.icon}"></i> {topic_tools.title}</a>
 		</li>
 		{{{end}}}
 	</ul>

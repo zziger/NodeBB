@@ -46,7 +46,7 @@ module.exports = function (privileges) {
 			read: privData.read || isAdministrator,
 			purge: (privData.purge && (isOwner || isModerator)) || isAdministrator,
 
-			view_thread_tools: editable || deletable,
+			view_topic_tools: editable || deletable,
 			editable: editable,
 			deletable: deletable,
 			view_deleted: isAdminOrMod || isOwner,

@@ -1,10 +1,10 @@
 <div class="panel panel-primary merge-topic-card">
 	<div class="panel-heading">
-		<h3 class="panel-title">[[topic:thread_tools.merge_topics]]</h3>
+		<h3 class="panel-title">[[topic:tools.merge-topics]]</h3>
 	</div>
 	<div class="panel-body">
 		<p>
-			[[topic:merge_topics_instruction]]<br />
+			[[topic:tools.merge-topics-instruction]]<br />
 			<div class="topics-section">
 				{{{each topics}}}
 				<!-- IF @index -->
@@ -19,7 +19,7 @@
 		&nbsp;
 		<div class="btn-group pull-right">
 			<button class="btn btn-link btn-xs" id="merge_topics_cancel">[[global:buttons.close]]</button>
-			<button class="btn btn-primary btn-xs" id="merge_topics_confirm" disabled>[[topic:thread_tools.merge]]</button>
+			<button class="btn btn-primary btn-xs" id="merge_topics_confirm" disabled>[[topic:tools.merge]]</button>
 		</div>
 	</div>
 </div>

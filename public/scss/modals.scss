@@ -3,6 +3,11 @@
 	bottom: 10%;
 	right: 2rem;
 	z-index: 1;
+	.category-dropdown-menu {
+		max-height: 500px;
+		overflow-y: auto;
+		overflow-x: hidden;
+	}
 }
 
 @include media-breakpoint-up(sm) {

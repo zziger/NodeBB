@@ -1,19 +1,13 @@
-<div data-component="category-selector" class="btn-group <!-- IF pullRight -->pull-right<!-- ENDIF pullRight -->">
-	<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-		<span data-component="category-selector-selected"><!-- IF selectedCategory --><span class="fa-stack" style="{function.generateCategoryBackground, selectedCategory}"><i class="fa fa-fw fa-stack-1x {selectedCategory.icon}" style="color: {selectedCategory.color};"></i></span> {selectedCategory.name}<!-- ELSE -->
-		[[topic:thread_tools.select_category]]<!-- ENDIF selectedCategory --></span> <span class="caret"></span>
+<div data-component="category-selector" class="dropup category-dropdown-container">
+	<button type="button" class="btn btn-light" data-toggle="dropdown" data-display="static">
+		<span data-component="category/dropdown/selected">{{{if selectedCategory}}}<span class="fa-stack" style="{function.generateCategoryBackground, selectedCategory}"><i class="fa fa-fw fa-stack-1x {selectedCategory.icon}" style="color: {selectedCategory.color};"></i></span> {selectedCategory.name}{{{else}}}
+		[[topic:tools.select-category]]{{{end}}}</span>
+		<input data-component="category-selector-search" type="text" class="form-control form-control-sm hidden" autocomplete="off">
 	</button>
-	<div data-component="category-selector-search" class="hidden">
-		<input type="text" class="form-control" autocomplete="off">
-	</div>
-	<ul data-component="category/list" class="dropdown-menu category-dropdown-menu" role="menu">
-		<li data-component="category/no-matches" role="presentation" class="category hidden">
-			<a role="menu-item">[[search:no-matches]]</a>
-		</li>
+	<div data-component="category/list" class="dropdown-menu {{{if dropdownRight}}}dropdown-menu-right{{{end}}} category-dropdown-menu" role="menu">
+		<a data-component="category/no-matches" class="dropdown-item hidden">[[search:no-matches]]</a>
 		{{{each categories}}}
-		<li role="presentation" class="category <!-- IF categories.disabledClass -->disabled<!-- ENDIF categories.disabledClass -->" data-cid="{categories.cid}" data-name="{categories.name}" data-parent-cid="{categories.parentCid}">
-			<a role="menu-item">{categories.level}<span data-component="category-markup"><!-- IF categories.icon --><span class="fa-stack" style="{function.generateCategoryBackground}"><i style="color: {categories.color};" class="fa fa-stack-1x fa-fw {categories.icon}"></i></span><!-- ENDIF categories.icon --> {categories.name}</span></a>
-		</li>
+		<a data-cid="{categories.cid}" data-name="{categories.name}" data-parent-cid="{categories.parentCid}"class="category dropdown-item {{{if categories.disabledClass}}}disabled{{{end}}}">{categories.level}<span data-component="category-markup">{{{if categories.icon}}}<span class="fa-stack" style="{function.generateCategoryBackground}"><i style="color: {categories.color};" class="fa fa-stack-1x fa-fw {categories.icon}"></i></span>{{{end}}} {categories.name}</span></a>
 		{{{end}}}
-	</ul>
+	</div>
 </div>

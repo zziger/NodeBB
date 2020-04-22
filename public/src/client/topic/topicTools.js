@@ -1,10 +1,10 @@
-define('forum/topic/threadTools', [
+define('forum/topic/topicTools', [
 	'components',
 	'translator',
 ], function (components, translator) {
-	var ThreadTools = {};
+	var TopicTools = {};
 
-	ThreadTools.init = function (tid) {
+	TopicTools.init = function (tid) {
 		renderMenu();
 
 		var topicContainer = $('.topic');
@@ -61,7 +61,7 @@ define('forum/topic/threadTools', [
 					return app.alertError(err.message);
 				}
 				app.alertSuccess('[[topic:markAsUnreadForAll.success]]');
-				btn.parents('.thread-tools.open').find('.dropdown-toggle').trigger('click');
+				btn.parents('.topic-tools.open').find('.dropdown-toggle').trigger('click');
 			});
 			return false;
 		});
@@ -70,7 +70,6 @@ define('forum/topic/threadTools', [
 			require(['forum/topic/move'], function (move) {
 				move.init([tid], ajaxify.data.cid);
 			});
-			return false;
 		});
 
 		topicContainer.on('click', '[data-component="topic/delete/posts"]', function () {
@@ -123,7 +122,7 @@ define('forum/topic/threadTools', [
 				setFollowState(type);
 
 				app.alert({
-					alert_id: 'follow_thread',
+					alert_id: 'follow-topic',
 					message: message,
 					type: 'success',
 					timeout: 5000,
@@ -137,7 +136,7 @@ define('forum/topic/threadTools', [
 	};
 
 	function renderMenu() {
-		$('.topic').on('show.bs.dropdown', '.thread-tools', function () {
+		$('.topic').on('show.bs.dropdown', '.topic-tools', function () {
 			var $this = $(this);
 			var dropdownMenu = $this.find('.dropdown-menu');
 			if (dropdownMenu.html()) {
@@ -159,7 +158,7 @@ define('forum/topic/threadTools', [
 	}
 
 	function topicCommand(command, tid) {
-		translator.translate('[[topic:thread_tools.' + command + '_confirm]]', function (msg) {
+		translator.translate('[[topic:tools.' + command + '-confirm]]', function (msg) {
 			bootbox.confirm(msg, function (confirm) {
 				if (!confirm) {
 					return;
@@ -174,9 +173,9 @@ define('forum/topic/threadTools', [
 		});
 	}
 
-	ThreadTools.setLockedState = function (data) {
-		var threadEl = components.get('topic');
-		if (parseInt(data.tid, 10) !== parseInt(threadEl.attr('data-tid'), 10)) {
+	TopicTools.setLockedState = function (data) {
+		var topicEl = components.get('topic');
+		if (parseInt(data.tid, 10) !== parseInt(topicEl.attr('data-tid'), 10)) {
 			return;
 		}
 
@@ -190,19 +189,19 @@ define('forum/topic/threadTools', [
 		components.get('topic/reply/container').toggleClass('hidden', hideReply);
 		components.get('topic/reply/locked').toggleClass('hidden', ajaxify.data.privileges.isAdminOrMod || !data.isLocked || ajaxify.data.deleted);
 
-		threadEl.find('[data-component="post"]:not(.deleted) [data-component="post/reply"], [data-component="post"]:not(.deleted) [data-component="post/quote"]').toggleClass('hidden', hideReply);
-		threadEl.find('[data-component="post/edit"], [data-component="post/delete"]').toggleClass('hidden', isLocked);
+		topicEl.find('[data-component="post"]:not(.deleted) [data-component="post/reply"], [data-component="post"]:not(.deleted) [data-component="post/quote"]').toggleClass('hidden', hideReply);
+		topicEl.find('[data-component="post/edit"], [data-component="post/delete"]').toggleClass('hidden', isLocked);
 
-		threadEl.find('[data-component="post"][data-uid="' + app.user.uid + '"].deleted [data-component="post/tools"]').toggleClass('hidden', isLocked);
+		topicEl.find('[data-component="post"][data-uid="' + app.user.uid + '"].deleted [data-component="post/tools"]').toggleClass('hidden', isLocked);
 
 		$('[data-component="post/header"] i.fa-lock').toggleClass('hidden', !data.isLocked);
 		$('[data-component="post/tools"] .dropdown-menu').html('');
 		ajaxify.data.locked = data.isLocked;
 	};
 
-	ThreadTools.setDeleteState = function (data) {
-		var threadEl = components.get('topic');
-		if (parseInt(data.tid, 10) !== parseInt(threadEl.attr('data-tid'), 10)) {
+	TopicTools.setDeleteState = function (data) {
+		var topicEl = components.get('topic');
+		if (parseInt(data.tid, 10) !== parseInt(topicEl.attr('data-tid'), 10)) {
 			return;
 		}
 
@@ -225,16 +224,16 @@ define('forum/topic/threadTools', [
 
 		components.get('topic/reply/container').toggleClass('hidden', hideReply);
 		components.get('topic/reply/locked').toggleClass('hidden', ajaxify.data.privileges.isAdminOrMod || !ajaxify.data.locked || data.isDelete);
-		threadEl.find('[data-component="post"]:not(.deleted) [data-component="post/reply"], [data-component="post"]:not(.deleted) [data-component="post/quote"]').toggleClass('hidden', hideReply);
+		topicEl.find('[data-component="post"]:not(.deleted) [data-component="post/reply"], [data-component="post"]:not(.deleted) [data-component="post/quote"]').toggleClass('hidden', hideReply);
 
-		threadEl.toggleClass('deleted', data.isDelete);
+		topicEl.toggleClass('deleted', data.isDelete);
 		ajaxify.data.deleted = data.isDelete;
 	};
 
 
-	ThreadTools.setPinnedState = function (data) {
-		var threadEl = components.get('topic');
-		if (parseInt(data.tid, 10) !== parseInt(threadEl.attr('data-tid'), 10)) {
+	TopicTools.setPinnedState = function (data) {
+		var topicEl = components.get('topic');
+		if (parseInt(data.tid, 10) !== parseInt(topicEl.attr('data-tid'), 10)) {
 			return;
 		}
 
@@ -259,5 +258,5 @@ define('forum/topic/threadTools', [
 	}
 
 
-	return ThreadTools;
+	return TopicTools;
 });
