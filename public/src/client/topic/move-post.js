@@ -3,26 +3,29 @@ define('forum/topic/move-post', ['components', 'postSelect'], function (componen
 
 	var moveModal;
 	var moveCommit;
+	var fromTid;
 
 	MovePost.init = function (postEl) {
 		if (moveModal) {
 			return;
 		}
+		fromTid = ajaxify.data.tid;
 		app.parseAndTranslate('modals/move-post', {}, function (html) {
 			moveModal = html;
 
-			moveCommit = moveModal.find('#move_posts_confirm');
+			moveCommit = moveModal.find('#move-posts-confirm');
 
 			$('body').append(moveModal);
 
-			moveModal.find('.close,#move_posts_cancel').on('click', closeMoveModal);
-			moveModal.find('#topicId').on('keyup', checkMoveButtonEnable);
+			moveModal.find('#move-posts-cancel').on('click', closeMoveModal);
 			postSelect.init(onPostToggled);
 			showPostsSelected();
 
 			if (postEl) {
 				postSelect.togglePostSelection(postEl, postEl.attr('data-pid'));
 			}
+
+			$(window).off('action:axajify.end', checkMoveButtonEnable).on('action:ajaxify.end', checkMoveButtonEnable);
 
 			moveCommit.on('click', function () {
 				movePosts();
@@ -39,7 +42,9 @@ define('forum/topic/move-post', ['components', 'postSelect'], function (componen
 	}
 
 	function checkMoveButtonEnable() {
-		if (moveModal.find('#topicId').val().length && postSelect.pids.length) {
+		if (postSelect.pids.length && ajaxify.data.tid &&
+			ajaxify.data.template.topic && ajaxify.data.tid !== fromTid
+		) {
 			moveCommit.removeAttr('disabled');
 		} else {
 			moveCommit.attr('disabled', true);
@@ -52,8 +57,10 @@ define('forum/topic/move-post', ['components', 'postSelect'], function (componen
 	}
 
 	function movePosts() {
-		var tid = moveModal.find('#topicId').val();
-		socket.emit('posts.movePosts', { pids: postSelect.pids, tid: tid }, function (err) {
+		if (!ajaxify.data.template.topic || !ajaxify.data.tid) {
+			return;
+		}
+		socket.emit('posts.movePosts', { pids: postSelect.pids, tid: ajaxify.data.tid }, function (err) {
 			if (err) {
 				return app.alertError(err.message);
 			}

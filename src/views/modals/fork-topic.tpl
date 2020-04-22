@@ -1,4 +1,4 @@
-<div class="panel panel-primary fork-thread-card">
+<div class="panel panel-primary tool-modal">
 	<div class="panel-heading">
 		<h3 class="panel-title">[[topic:fork_topic]]</h3>
 	</div>
