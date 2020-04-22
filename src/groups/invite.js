@@ -15,8 +15,8 @@ module.exports = function (Groups) {
 		const [notification, owners] = await Promise.all([
 			notifications.create({
 				type: 'group-request-membership',
-				bodyShort: '[[groups:request.notification_title, ' + username + ']]',
-				bodyLong: '[[groups:request.notification_text, ' + username + ', ' + groupName + ']]',
+				bodyShort: '[[groups:request.notification-title, ' + username + ']]',
+				bodyLong: '[[groups:request.notification-text, ' + username + ', ' + groupName + ']]',
 				nid: 'group:' + groupName + ':uid:' + uid + ':request',
 				path: '/groups/' + utils.slugify(groupName),
 				from: uid,
@@ -33,7 +33,7 @@ module.exports = function (Groups) {
 
 		const notification = await notifications.create({
 			type: 'group-invite',
-			bodyShort: '[[groups:membership.accept.notification_title, ' + groupName + ']]',
+			bodyShort: '[[groups:membership.accept.notification-title, ' + groupName + ']]',
 			nid: 'group:' + groupName + ':uid:' + uid + ':invite-accepted',
 			path: '/groups/' + utils.slugify(groupName),
 		});
@@ -55,7 +55,7 @@ module.exports = function (Groups) {
 
 		const notificationData = await Promise.all(uids.map(uid => notifications.create({
 			type: 'group-invite',
-			bodyShort: '[[groups:invited.notification_title, ' + groupName + ']]',
+			bodyShort: '[[groups:invited.notification-title, ' + groupName + ']]',
 			bodyLong: '',
 			nid: 'group:' + groupName + ':uid:' + uid + ':invite',
 			path: '/groups/' + utils.slugify(groupName),

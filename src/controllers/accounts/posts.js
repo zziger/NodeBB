@@ -22,7 +22,7 @@ const templateToData = {
 	},
 	'account/posts': {
 		type: 'posts',
-		noItemsFoundKey: '[[user:has_no_posts]]',
+		noItemsFoundKey: '[[user:has-no-posts]]',
 		crumb: '[[global:posts]]',
 		getSets: async function (callerUid, userData) {
 			const cids = await categories.getCidsByPrivilege('categories:cid', callerUid, 'topics:read');

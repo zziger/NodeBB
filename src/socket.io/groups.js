@@ -87,7 +87,7 @@ SocketGroups.leave = async (socket, data) => {
 	const username = await user.getUserField(socket.uid, 'username');
 	const notification = await notifications.create({
 		type: 'group-leave',
-		bodyShort: '[[groups:membership.leave.notification_title, ' + username + ', ' + data.groupName + ']]',
+		bodyShort: '[[groups:membership.leave.notification-title, ' + username + ', ' + data.groupName + ']]',
 		nid: 'group:' + validator.escape(data.groupName) + ':uid:' + socket.uid + ':group-leave',
 		path: '/groups/' + utils.slugify(data.groupName),
 	});

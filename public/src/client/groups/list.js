@@ -6,7 +6,7 @@ define('forum/groups/list', ['infinitescroll', 'benchpress'], function (infinite
 
 		// Group creation
 		$('button[data-action="new"]').on('click', function () {
-			bootbox.prompt('[[groups:new-group.group_name]]', function (name) {
+			bootbox.prompt('[[groups:new-group.group-name]]', function (name) {
 				if (name && name.length) {
 					socket.emit('groups.create', {
 						name: name,

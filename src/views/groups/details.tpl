@@ -58,8 +58,8 @@
 							[[global:more]] <span class="caret"></span>
 						</button>
 						<ul class="dropdown-menu" role="menu">
-							<li><a href="#" data-ajaxify="false" data-action="acceptAll">[[groups:pending.accept_all]]</a></li>
-							<li><a href="#" data-ajaxify="false" data-action="rejectAll">[[groups:pending.reject_all]]</a></li>
+							<li><a href="#" data-ajaxify="false" data-action="acceptAll">[[groups:pending.accept-all]]</a></li>
+							<li><a href="#" data-ajaxify="false" data-action="rejectAll">[[groups:pending.reject-all]]</a></li>
 						</ul>
 					</div>
 					<!-- ENDIF group.pending.length -->
@@ -146,14 +146,14 @@
 			<div class="panel-heading pointer" data-toggle="collapse" data-target=".options">
 				<h3 class="panel-title">
 					<i class="fa fa-caret-down pull-right"></i>
-					<i class="fa fa-cogs"></i> [[groups:details.owner_options]]
+					<i class="fa fa-cogs"></i> [[groups:details.owner-options]]
 				</h3>
 			</div>
 
 			<div class="panel-body options collapse">
 				<form data-component="groups/settings" role="form">
 					<div class="form-group">
-						<label for="name">[[groups:details.group_name]]</label>
+						<label for="name">[[groups:details.group-name]]</label>
 						<input <!-- IF group.system -->readonly<!-- ENDIF group.system --> class="form-control" name="name" id="name" type="text" value="{group.displayName}" />
 					</div>
 					<div class="form-group">
@@ -161,19 +161,19 @@
 						<textarea class="form-control" name="description" id="description" type="text" maxlength="255">{group.description}</textarea>
 					</div>
 					<div class="form-group user-title-option">
-						<label for="userTitle">[[groups:details.badge_text]]</label>
+						<label for="userTitle">[[groups:details.badge-text]]</label>
 						<input data-component="groups/userTitleOption" class="form-control" name="userTitle" id="userTitle" type="text" maxlength="40" value="{group.userTitle}"<!-- IF !group.userTitleEnabled --> disabled<!-- ENDIF !group.userTitleEnabled --> />
 					</div>
 
 					<div class="form-group user-title-option">
-						<label>[[groups:details.badge_preview]]</label><br />
+						<label>[[groups:details.badge-preview]]</label><br />
 						<span class="label<!-- IF !group.userTitleEnabled --> hide<!-- ENDIF !group.userTitleEnabled -->" style="color: {group.textColor}; background-color: {group.labelColor}"><i class="fa<!-- IF group.icon --> {group.icon}<!-- ENDIF group.icon -->"></i> <!-- IF group.userTitle -->{group.userTitle}<!-- ELSE -->{group.displayName}<!-- ENDIF group.userTitle --></span>
 						<hr/>
-						<button data-component="groups/userTitleOption" type="button" class="btn btn-default btn-sm" data-action="icon-select"<!-- IF !group.userTitleEnabled --> disabled<!-- ENDIF !group.userTitleEnabled -->>[[groups:details.change_icon]]</button>
+						<button data-component="groups/userTitleOption" type="button" class="btn btn-default btn-sm" data-action="icon-select"<!-- IF !group.userTitleEnabled --> disabled<!-- ENDIF !group.userTitleEnabled -->>[[groups:details.change-icon]]</button>
 
-						<button data-component="groups/userTitleOption" type="button" class="btn btn-default btn-sm" data-action="label-color-select"<!-- IF !group.userTitleEnabled --> disabled<!-- ENDIF !group.userTitleEnabled -->>[[groups:details.change_label_colour]]</button>
+						<button data-component="groups/userTitleOption" type="button" class="btn btn-default btn-sm" data-action="label-color-select"<!-- IF !group.userTitleEnabled --> disabled<!-- ENDIF !group.userTitleEnabled -->>[[groups:details.change-label-colour]]</button>
 
-						<button data-component="groups/userTitleOption" type="button" class="btn btn-default btn-sm" data-action="text-color-select"<!-- IF !group.userTitleEnabled --> disabled<!-- ENDIF !group.userTitleEnabled -->>[[groups:details.change_text_colour]]</button>
+						<button data-component="groups/userTitleOption" type="button" class="btn btn-default btn-sm" data-action="text-color-select"<!-- IF !group.userTitleEnabled --> disabled<!-- ENDIF !group.userTitleEnabled -->>[[groups:details.change-text-colour]]</button>
 
 						<input type="hidden" name="labelColor" value="<!-- IF group.labelColor -->{group.labelColor}<!-- ENDIF group.labelColor -->" />
 						<input type="hidden" name="textColor" value="<!-- IF group.textColor -->{group.textColor}<!-- ENDIF group.textColor -->" />
@@ -198,9 +198,9 @@
 						<label>
 							<input name="private" type="checkbox"<!-- IF group.private --> checked<!-- ENDIF group.private -->> <strong>[[groups:details.private]]</strong>
 							<!-- IF !allowPrivateGroups -->
-							<small class="form-text text-muted">[[groups:details.private_system_help]]</small>
+							<small class="form-text text-muted">[[groups:details.private-system-help]]</small>
 							<!-- ENDIF !allowPrivateGroups -->
-							<small class="form-text text-muted">[[groups:details.private_help]]</small>
+							<small class="form-text text-muted">[[groups:details.private-help]]</small>
 						</label>
 					</div>
 					<div class="checkbox">
@@ -216,11 +216,11 @@
 					<div class="checkbox">
 						<label>
 							<input name="hidden" type="checkbox"<!-- IF group.hidden --> checked<!-- ENDIF group.hidden -->> <strong>[[groups:details.hidden]]</strong>
-							<small class="form-text text-muted">[[groups:details.hidden_help]]</small>
+							<small class="form-text text-muted">[[groups:details.hidden-help]]</small>
 						</label>
 					</div>
 
-					<button class="btn btn-link btn-xs pull-right" type="button" data-action="delete">[[groups:details.delete_group]]</button>
+					<button class="btn btn-link btn-xs pull-right" type="button" data-action="delete">[[groups:details.delete-group]]</button>
 					<button class="btn btn-primary" type="button" data-action="update">[[global:save-changes]]</button>
 				</form>
 			</div>
@@ -235,7 +235,7 @@
 	<div class="col-lg-8 col-xs-12">
 		<div class="col-lg-11">
 			<!-- IF !posts.length -->
-			<div class="alert alert-info">[[groups:details.has_no_posts]]</div>
+			<div class="alert alert-info">[[groups:details.has-no-posts]]</div>
 			<!-- ENDIF !posts.length -->
 			<!-- IMPORT partials/posts-list.tpl -->
 		</div>
