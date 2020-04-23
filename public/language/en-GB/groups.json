@@ -3,7 +3,7 @@
 	"view-group": "View Group",
 	"owner": "Group Owner",
 	"new-group": "Create New Group",
-	"no_groups_found": "There are no groups to see",
+	"no-groups-found": "There are no groups to see",
 
 	"pending.accept": "Accept",
 	"pending.reject": "Reject",

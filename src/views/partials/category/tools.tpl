@@ -42,7 +42,7 @@
 		</li>
 		<li>
 			<a data-component="topic/move-all" href="#">
-				<i class="fa fa-fw fa-arrows"></i> [[topic:tools.move_all]]
+				<i class="fa fa-fw fa-arrows"></i> [[topic:tools.move-all]]
 			</a>
 		</li>
 		<li>
