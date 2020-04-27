@@ -33,10 +33,6 @@ tagsController.getTag = async function (req, res) {
 		helpers.canPostTopic(req.uid),
 	]);
 
-	if (Array.isArray(tids) && !tids.length) {
-		return res.render('tag', templateData);
-	}
-
 	templateData.categories = categoriesData.categories;
 	templateData.canPost = canPost;
 	templateData.topics = await topics.getTopics(tids, req.uid);
