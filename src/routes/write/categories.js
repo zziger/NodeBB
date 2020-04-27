@@ -3,7 +3,7 @@
 const router = require('express').Router();
 const middleware = require('../../middleware');
 const controllers = require('../../controllers');
-const routeHelpers = require('../../routes/helpers');
+const routeHelpers = require('../helpers');
 
 const setupApiRoute = routeHelpers.setupApiRoute;
 
@@ -37,6 +37,7 @@ module.exports = function () {
 	// 		});
 	// 	});
 
+	// Category privileges should be ported over to `/api/v1/privileges instead
 	// app.route('/:cid/privileges')
 	// 	.put(apiMiddleware.requireUser, apiMiddleware.requireAdmin, apiMiddleware.validateCidIncludingGlobal, function(req, res) {
 	// 		changeGroupMembership(req.params.cid, req.body.privileges, req.body.groups, 'join', function(err) {

@@ -110,24 +110,33 @@ GroupDataObject:
       type: number
     cover:url:
       type: string
+      writeOnly: true
     cover:thumb:url:
       type: string
+      writeOnly: true
     nameEncoded:
       type: string
+      writeOnly: true
     displayName:
       type: string
       description: A custom override of the group's name, a friendly name
+      writeOnly: true
     labelColor:
       type: string
       description: A six-character hexadecimal colour code
+      writeOnly: true
     textColor:
       type: string
       description: A six-character hexadecimal colour code
+      writeOnly: true
     icon:
       type: string
       description: A FontAwesome icon string
+      writeOnly: true
     createtimeISO:
       type: string
       description: "`createtime` rendered as an ISO 8601 format"
+      writeOnly: true
     cover:position:
       type: string
+      writeOnly: true
