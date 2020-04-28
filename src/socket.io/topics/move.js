@@ -23,7 +23,7 @@ module.exports = function (SocketTopics) {
 
 			socketHelpers.emitToTopicAndCategory('event:topic_moved', topicData);
 			if (!topicData.deleted) {
-				socketHelpers.sendNotificationToTopicOwner(tid, socket.uid, 'move', 'notifications:moved_your_topic');
+				socketHelpers.sendNotificationToTopicOwner(tid, socket.uid, 'move', 'notifications:moved-your-topic');
 			}
 		});
 	};

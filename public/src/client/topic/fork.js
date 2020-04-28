@@ -77,9 +77,9 @@ define('forum/topic/fork', ['components', 'postSelect'], function (components, p
 
 	function showPostsSelected() {
 		if (postSelect.pids.length) {
-			forkModal.find('#fork-pids').translateHtml('[[topic:fork-pid-count, ' + postSelect.pids.length + ']]');
+			forkModal.find('#fork-pids').translateHtml('[[topic:selected-post-count, ' + postSelect.pids.length + ']]');
 		} else {
-			forkModal.find('#fork-pids').translateHtml('[[topic:fork-no-pids]]');
+			forkModal.find('#fork-pids').translateHtml('[[topic:no-posts-selected]]');
 		}
 	}
 

@@ -128,7 +128,7 @@ define('admin/manage/category', [
 			}, function (html) {
 				var selectedCid;
 				var modal = bootbox.dialog({
-					title: '[[modules:composer.select_category]]',
+					title: '[[modules:composer.select-category]]',
 					message: html,
 					buttons: {
 						save: {

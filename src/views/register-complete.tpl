@@ -42,6 +42,6 @@
 </form>
 <form role="form" method="post" action="{config.relative_path}/register/abort">
 	<p class="text-center">
-		<button class="btn btn-link">[[register:cancel_registration]]</button>
+		<button class="btn btn-link">[[register:cancel-registration]]</button>
 	</p>
 </form>

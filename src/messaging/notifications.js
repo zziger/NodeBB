@@ -61,7 +61,7 @@ module.exports = function (Messaging) {
 		const notification = await notifications.create({
 			type: 'new-chat',
 			subject: '[[email:notif.chat.subject, ' + messageObj.fromUser.username + ']]',
-			bodyShort: '[[notifications:new_message_from, ' + messageObj.fromUser.username + ']]',
+			bodyShort: '[[notifications:new-message-from, ' + messageObj.fromUser.username + ']]',
 			bodyLong: messageObj.content,
 			nid: 'chat_' + fromuid + '_' + roomId,
 			from: fromuid,

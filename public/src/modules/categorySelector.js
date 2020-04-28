@@ -50,7 +50,7 @@ define('categorySelector', ['benchpress', 'translator', 'categorySearch'], funct
 		}, function (html) {
 			translator.translate(html, function (html) {
 				var modal = bootbox.dialog({
-					title: '[[modules:composer.select_category]]',
+					title: '[[modules:composer.select-category]]',
 					message: html,
 					buttons: {
 						save: {

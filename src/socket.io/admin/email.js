@@ -52,7 +52,7 @@ Email.test = function (socket, data, callback) {
 			function (notifObj, next) {
 				emailer.send('notification', socket.uid, {
 					path: notifObj.path,
-					subject: utils.stripHTMLTags(notifObj.subject || '[[notifications:new_notification]]'),
+					subject: utils.stripHTMLTags(notifObj.subject || '[[notifications:new-notification]]'),
 					intro: utils.stripHTMLTags(notifObj.bodyShort),
 					body: notifObj.bodyLong || '',
 					notification: notifObj,

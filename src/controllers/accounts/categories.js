@@ -24,6 +24,6 @@ categoriesController.get = async function (req, res, next) {
 		}
 	});
 	userData.categories = categoriesData;
-	userData.title = '[[pages:account/watched_categories, ' + userData.username + ']]';
+	userData.title = '[[pages:account/watched-categories, ' + userData.username + ']]';
 	res.render('account/categories', userData);
 };

@@ -20,7 +20,7 @@
 
 	<div class="category">
 		<!-- IF !topics.length -->
-		<div class="alert alert-warning" id="category-no-topics">[[top:no_top_topics]]</div>
+		<div class="alert alert-warning" id="category-no-topics">[[top:no-top-topics]]</div>
 		<!-- ENDIF !topics.length -->
 
 		<!-- IMPORT partials/topics-list.tpl -->

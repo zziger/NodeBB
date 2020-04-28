@@ -197,7 +197,7 @@ define('forum/register', ['translator'], function (translator) {
 		}
 
 		if (password !== password_confirm && password_confirm !== '') {
-			showError(password_confirm_notify, '[[user:change_password_error_match]]');
+			showError(password_confirm_notify, '[[user:change-password-error-match]]');
 		}
 	}
 
@@ -210,7 +210,7 @@ define('forum/register', ['translator'], function (translator) {
 		}
 
 		if (password !== password_confirm) {
-			showError(password_confirm_notify, '[[user:change_password_error_match]]');
+			showError(password_confirm_notify, '[[user:change-password-error-match]]');
 		} else {
 			showSuccess(password_confirm_notify, successIcon);
 		}

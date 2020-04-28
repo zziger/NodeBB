@@ -15,12 +15,12 @@
 
 	<div class="category">
 		<!-- IF !topics.length -->
-		<div class="alert alert-warning">[[tags:no_tag_topics]]</div>
+		<div class="alert alert-warning">[[tags:no-tag-topics]]</div>
 		<!-- ENDIF !topics.length -->
 
 		<!-- IMPORT partials/topics-list.tpl -->
 
-		<button id="load-more-btn" class="btn btn-primary hidden">[[unread:load_more]]</button>
+		<button id="load-more-btn" class="btn btn-primary hidden">[[unread:load-more]]</button>
 		<!-- IF config.usePagination -->
 			<!-- IMPORT partials/paginator.tpl -->
 		<!-- ENDIF config.usePagination -->

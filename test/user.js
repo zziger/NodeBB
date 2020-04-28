@@ -984,7 +984,7 @@ describe('User', function () {
 				assert(data);
 				assert(Array.isArray(data));
 				assert.equal(data[0].type, 'uploaded');
-				assert.equal(data[0].text, '[[user:uploaded_picture]]');
+				assert.equal(data[0].text, '[[user:uploaded-picture]]');
 				done();
 			});
 		});

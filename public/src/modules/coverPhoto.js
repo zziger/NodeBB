@@ -57,8 +57,8 @@ define('coverPhoto', [
 
 		app.alert({
 			alert_id: 'drag_start',
-			title: '[[modules:cover.dragging_title]]',
-			message: '[[modules:cover.dragging_message]]',
+			title: '[[modules:cover.dragging-title]]',
+			message: '[[modules:cover.dragging-message]]',
 			timeout: 5000,
 		});
 	}

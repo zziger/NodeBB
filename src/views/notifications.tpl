@@ -7,7 +7,7 @@
 				<span class="caret"></span>
 			</button>
 			<ul class="dropdown-menu dropdown-menu-right" role="menu" aria-labelledby="dropdownMenu1">
-				<li role="presentation"><a role="menuitem" tabindex="-1" href="#" data-ajaxify="false" data-component="notifications/mark_all">[[notifications:mark_all_read]]</a></li>
+				<li role="presentation"><a role="menuitem" tabindex="-1" href="#" data-ajaxify="false" data-component="notifications/mark_all">[[notifications:mark-all-read]]</a></li>
 			</ul>
 		</div>
 
@@ -32,7 +32,7 @@
 	<hr />
 
 	<div class="alert alert-info <!-- IF notifications.length -->hidden<!-- ENDIF notifications.length -->">
-		[[notifications:no_notifs]]
+		[[notifications:no-notifs]]
 	</div>
 
 	<ul class="notifications-list" data-nextstart="{nextStart}">

@@ -167,7 +167,7 @@ define('forum/chats/messages', ['components', 'translator', 'benchpress'], funct
 	}
 
 	messages.delete = function (messageId, roomId) {
-		translator.translate('[[modules:chat.delete_message_confirm]]', function (translated) {
+		translator.translate('[[modules:chat.delete-message-confirm]]', function (translated) {
 			bootbox.confirm(translated, function (ok) {
 				if (!ok) {
 					return;

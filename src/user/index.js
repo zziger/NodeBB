@@ -250,7 +250,7 @@ User.addInterstitials = function (callback) {
 								userData.gdpr_consent = true;
 							}
 
-							next(userData.gdpr_consent ? null : new Error('[[register:gdpr_consent_denied]]'));
+							next(userData.gdpr_consent ? null : new Error('[[register:gdpr-consent-denied]]'));
 						},
 					});
 				};
@@ -293,7 +293,7 @@ User.addInterstitials = function (callback) {
 								userData.acceptTos = true;
 							}
 
-							next(userData.acceptTos ? null : new Error('[[register:terms_of_use_error]]'));
+							next(userData.acceptTos ? null : new Error('[[register:terms-of-use-error]]'));
 						},
 					});
 				};

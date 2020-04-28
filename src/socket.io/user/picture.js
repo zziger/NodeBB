@@ -73,7 +73,7 @@ module.exports = function (SocketUser) {
 			list.pictures.push({
 				type: 'uploaded',
 				url: uploaded,
-				text: '[[user:uploaded_picture]]',
+				text: '[[user:uploaded-picture]]',
 			});
 		}
 

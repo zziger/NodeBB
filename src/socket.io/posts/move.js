@@ -33,7 +33,7 @@ module.exports = function (SocketPosts) {
 			]);
 
 			if (!postDeleted && !topicDeleted) {
-				socketHelpers.sendNotificationToPostOwner(pid, socket.uid, 'move', 'notifications:moved_your_post');
+				socketHelpers.sendNotificationToPostOwner(pid, socket.uid, 'move', 'notifications:moved-your-post');
 			}
 		}
 	};

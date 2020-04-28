@@ -58,7 +58,7 @@ define('notifications', [
 		// If a path is defined, show notif data, otherwise show generic data
 		var payload = {
 			alert_id: 'new_notif',
-			title: '[[notifications:new_notification]]',
+			title: '[[notifications:new-notification]]',
 			timeout: parseInt(config.notificationAlertTimeout, 10) || 5000,
 		};
 
@@ -74,7 +74,7 @@ define('notifications', [
 				}
 			};
 		} else {
-			payload.message = '[[notifications:you_have_unread_notifications]]';
+			payload.message = '[[notifications:you-have-unread-notifications]]';
 			payload.type = 'warning';
 		}
 

@@ -176,7 +176,7 @@ async function pushToUids(uids, notification) {
 			emailer.send('notification', uid, {
 				path: notification.path,
 				notification_url: notification.path.startsWith('http') ? notification.path : nconf.get('url') + notification.path,
-				subject: utils.stripHTMLTags(notification.subject || '[[notifications:new_notification]]'),
+				subject: utils.stripHTMLTags(notification.subject || '[[notifications:new-notification]]'),
 				intro: utils.stripHTMLTags(notification.bodyShort),
 				body: notification.bodyLong || '',
 				notification: notification,
@@ -333,12 +333,12 @@ Notifications.prune = async function () {
 Notifications.merge = async function (notifications) {
 	// When passed a set of notification objects, merge any that can be merged
 	const mergeIds = [
-		'notifications:upvoted_your_post_in',
-		'notifications:user_started_following_you',
-		'notifications:user_posted_to',
-		'notifications:user_flagged_post_in',
-		'notifications:user_flagged_user',
-		'new_register',
+		'notifications:upvoted-your-post-in',
+		'notifications:user-started-following-you',
+		'notifications:user-posted-to',
+		'notifications:user-flagged-post-in',
+		'notifications:user-flagged-user',
+		'new-register',
 		'post-queue',
 	];
 
@@ -372,11 +372,11 @@ Notifications.merge = async function (notifications) {
 			}
 
 			switch (mergeId) {
-			case 'notifications:upvoted_your_post_in':
-			case 'notifications:user_started_following_you':
-			case 'notifications:user_posted_to':
-			case 'notifications:user_flagged_post_in':
-			case 'notifications:user_flagged_user':
+			case 'notifications:upvoted-your-post-in':
+			case 'notifications:user-started-following-you':
+			case 'notifications:user-posted-to':
+			case 'notifications:user-flagged-post-in':
+			case 'notifications:user-flagged-user':
 				var usernames = _.uniq(set.map(notifObj => notifObj && notifObj.user && notifObj.user.username));
 				var numUsers = usernames.length;
 
@@ -385,16 +385,16 @@ Notifications.merge = async function (notifications) {
 				titleEscaped = titleEscaped ? (', ' + titleEscaped) : '';
 
 				if (numUsers === 2) {
-					notifications[modifyIndex].bodyShort = '[[' + mergeId + '_dual, ' + usernames.join(', ') + titleEscaped + ']]';
+					notifications[modifyIndex].bodyShort = '[[' + mergeId + '-dual, ' + usernames.join(', ') + titleEscaped + ']]';
 				} else if (numUsers > 2) {
-					notifications[modifyIndex].bodyShort = '[[' + mergeId + '_multiple, ' + usernames[0] + ', ' + (numUsers - 1) + titleEscaped + ']]';
+					notifications[modifyIndex].bodyShort = '[[' + mergeId + '-multiple, ' + usernames[0] + ', ' + (numUsers - 1) + titleEscaped + ']]';
 				}
 
 				notifications[modifyIndex].path = set[set.length - 1].path;
 				break;
 
-			case 'new_register':
-				notifications[modifyIndex].bodyShort = '[[notifications:' + mergeId + '_multiple, ' + set.length + ']]';
+			case 'new-register':
+				notifications[modifyIndex].bodyShort = '[[notifications:' + mergeId + '-multiple, ' + set.length + ']]';
 				break;
 			}
 

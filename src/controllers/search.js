@@ -92,7 +92,7 @@ async function buildCategories(uid, searchOnly) {
 	categoriesData = categories.buildForSelectCategories(categoriesData, ['text', 'value']);
 
 	return [
-		{ value: 'all', text: '[[unread:all_categories]]' },
+		{ value: 'all', text: '[[unread:all-categories]]' },
 		{ value: 'watched', text: '[[category:watched-categories]]' },
 	].concat(categoriesData);
 }

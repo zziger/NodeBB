@@ -152,7 +152,7 @@ module.exports = function (Categories) {
 
 		topics.forEach(function (topic) {
 			if (topic.deleted && !topic.isOwner) {
-				topic.title = '[[topic:topic_is_deleted]]';
+				topic.title = '[[topic:topic-is-deleted]]';
 				topic.slug = topic.tid;
 				topic.teaser = null;
 				topic.noAnchor = true;

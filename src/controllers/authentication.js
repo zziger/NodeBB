@@ -90,7 +90,7 @@ authenticationController.register = async function (req, res) {
 		}
 
 		if (userData.password !== userData['password-confirm']) {
-			throw new Error('[[user:change_password_error_match]]');
+			throw new Error('[[user:change-password-error-match]]');
 		}
 
 		user.isPasswordValid(userData.password);

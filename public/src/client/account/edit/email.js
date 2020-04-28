@@ -18,7 +18,7 @@ define('forum/account/edit/email', ['forum/account/header'], function (header) {
 
 			if (userData.email === userData.password) {
 				curPasswordEl.parents('.control-group').toggleClass('has-error', true);
-				return app.alertError('[[user:email_same_as_password]]');
+				return app.alertError('[[user:email-same-as-password]]');
 			}
 
 			var btn = $(this);

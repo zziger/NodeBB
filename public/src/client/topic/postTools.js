@@ -93,7 +93,7 @@ define('forum/topic/postTools', [
 		});
 
 		$('.topic').on('click', '[data-component="topic/reply-as-topic"]', function () {
-			translator.translate('[[topic:link_back, ' + ajaxify.data.titleRaw + ', ' + config.relative_path + '/topic/' + ajaxify.data.slug + ']]', function (body) {
+			translator.translate('[[topic:link-back, ' + ajaxify.data.titleRaw + ', ' + config.relative_path + '/topic/' + ajaxify.data.slug + ']]', function (body) {
 				$(window).trigger('action:composer.topic.new', {
 					cid: ajaxify.data.cid,
 					body: body,
@@ -410,7 +410,7 @@ define('forum/topic/postTools', [
 				message: translated,
 				buttons: {
 					reply: {
-						label: '[[topic:stale.reply_anyway]]',
+						label: '[[topic:stale.reply-anyway]]',
 						className: 'btn-link',
 						callback: function () {
 							staleReplyAnyway = true;
@@ -421,7 +421,7 @@ define('forum/topic/postTools', [
 						label: '[[topic:stale.create]]',
 						className: 'btn-primary',
 						callback: function () {
-							translator.translate('[[topic:link_back, ' + ajaxify.data.title + ', ' + config.relative_path + '/topic/' + ajaxify.data.slug + ']]', function (body) {
+							translator.translate('[[topic:link-back, ' + ajaxify.data.title + ', ' + config.relative_path + '/topic/' + ajaxify.data.slug + ']]', function (body) {
 								$(window).trigger('action:composer.topic.new', {
 									cid: ajaxify.data.cid,
 									body: body,

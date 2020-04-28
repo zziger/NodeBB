@@ -90,7 +90,7 @@
 
 <!-- IF postSharing.length -->
 <li role="presentation" class="divider"></li>
-<li role="presentation" class="dropdown-header">[[topic:share_this_post]]</li>
+<li role="presentation" class="dropdown-header">[[topic:share-this-post]]</li>
 <!-- ENDIF postSharing.length -->
 {{{each postSharing}}}
 	<li role="presentation">
@@ -102,7 +102,7 @@
 <li role="presentation" class="divider"></li>
 <li role="presentation">
 	<a data-component="post/flag" role="menuitem" tabindex="-1" href="#">
-		[[topic:flag_title]]
+		[[topic:flag-title]]
 	</a>
 </li>
 <!-- ENDIF posts.display_flag_tools -->

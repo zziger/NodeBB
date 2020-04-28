@@ -174,14 +174,14 @@ module.exports = function (Topics) {
 		const notification = await notifications.create({
 			type: 'new-reply',
 			subject: title,
-			bodyShort: '[[notifications:user_posted_to, ' + postData.user.username + ', ' + titleEscaped + ']]',
+			bodyShort: '[[notifications:user-posted-to, ' + postData.user.username + ', ' + titleEscaped + ']]',
 			bodyLong: postData.content,
 			pid: postData.pid,
 			path: '/post/' + postData.pid,
 			nid: 'new_post:tid:' + postData.topic.tid + ':pid:' + postData.pid + ':uid:' + exceptUid,
 			tid: postData.topic.tid,
 			from: exceptUid,
-			mergeId: 'notifications:user_posted_to|' + postData.topic.tid,
+			mergeId: 'notifications:user-posted-to|' + postData.topic.tid,
 			topicTitle: title,
 		});
 		if (notification) {

@@ -22,10 +22,10 @@
 	<hr class="d-none d-md-block"/>
 
 	<div class="category">
-		<div id="category-no-topics" class="alert alert-warning <!-- IF topics.length -->hidden<!-- ENDIF topics.length -->">[[unread:no_unread_topics]]</div>
+		<div id="category-no-topics" class="alert alert-warning <!-- IF topics.length -->hidden<!-- ENDIF topics.length -->">[[unread:no-unread-topics]]</div>
 
 		<!-- IMPORT partials/topics-list.tpl -->
-		<button id="load-more-btn" class="btn btn-primary hidden">[[unread:load_more]]</button>
+		<button id="load-more-btn" class="btn btn-primary hidden">[[unread:load-more]]</button>
 		<!-- IF config.usePagination -->
 			<!-- IMPORT partials/paginator.tpl -->
 		<!-- ENDIF config.usePagination -->

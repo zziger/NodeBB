@@ -179,7 +179,7 @@ UserNotifications.sendTopicNotificationToFollowers = async function (uid, topicD
 
 		const notifObj = await notifications.create({
 			type: 'new-topic',
-			bodyShort: '[[notifications:user_posted_topic, ' + postData.user.username + ', ' + title + ']]',
+			bodyShort: '[[notifications:user-posted-topic, ' + postData.user.username + ', ' + title + ']]',
 			bodyLong: postData.content,
 			pid: postData.pid,
 			path: '/post/' + postData.pid,
@@ -212,7 +212,7 @@ UserNotifications.sendWelcomeNotification = async function (uid) {
 
 UserNotifications.sendNameChangeNotification = async function (uid, username) {
 	const notifObj = await notifications.create({
-		bodyShort: '[[user:username_taken_workaround, ' + username + ']]',
+		bodyShort: '[[user:username-taken-workaround, ' + username + ']]',
 		image: 'brand:logo',
 		nid: 'username_taken:' + uid,
 		datetime: Date.now(),

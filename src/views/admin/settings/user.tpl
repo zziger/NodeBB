@@ -316,9 +316,9 @@
 				<div class="form-group col-5 col-md-3">
 					<select class="form-control" id="notificationSettings" data-field="{notificationSettings.name}">
 						<option value="none">[[notifications:none]]</option>
-						<option value="notification">[[notifications:notification_only]]</option>
-						<option value="email">[[notifications:email_only]]</option>
-						<option value="notificationemail">[[notifications:notification_and_email]]</option>
+						<option value="notification">[[notifications:notification-only]]</option>
+						<option value="email">[[notifications:email-only]]</option>
+						<option value="notificationemail">[[notifications:notification-and-email]]</option>
 					</select>
 				</div>
 			</div>

@@ -10,7 +10,7 @@
 					<!-- ENDIF defaultAvatar -->
 				</div>
 				<div class="media-body">
-					<h4 class="media-heading">[[user:default_picture]]</h4>
+					<h4 class="media-heading">[[user:default-picture]]</h4>
 				</div>
 			</button>
 			{{{each pictures}}}
@@ -30,7 +30,7 @@
 			<!-- IF allowProfileImageUploads -->
 			<button type="button" class="btn btn-default" data-action="upload">
 				<span class="hidden-xs hidden-sm">
-					[[user:upload_new_picture]]
+					[[user:upload-new-picture]]
 				</span>
 				<span class="visible-xs-inline visible-sm-inline">
 					<i class="fa fa-plus"></i>
@@ -40,7 +40,7 @@
 			<!-- ENDIF allowProfileImageUploads -->
 			<button type="button" class="btn btn-default" data-action="upload-url">
 				<span class="hidden-xs hidden-sm">
-					[[user:upload_new_picture_from_url]]
+					[[user:upload-new-picture-from-url]]
 				</span>
 				<span class="visible-xs-inline visible-sm-inline">
 					<i class="fa fa-plus"></i>
@@ -50,7 +50,7 @@
 			<!-- IF uploaded -->
 			<button type="button" class="btn btn-default" data-action="remove-uploaded">
 				<span class="hidden-xs hidden-sm">
-					[[user:remove_uploaded_picture]]
+					[[user:remove-uploaded-picture]]
 				</span>
 				<span class="visible-xs-inline visible-sm-inline">
 					<i class="fa fa-picture-o"></i>

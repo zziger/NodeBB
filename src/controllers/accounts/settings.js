@@ -50,10 +50,10 @@ settingsController.get = async function (req, res, next) {
 	userData.disableEmailSubscriptions = meta.config.disableEmailSubscriptions;
 
 	userData.dailyDigestFreqOptions = [
-		{ value: 'off', name: '[[user:digest_off]]', selected: userData.settings.dailyDigestFreq === 'off' },
-		{ value: 'day', name: '[[user:digest_daily]]', selected: userData.settings.dailyDigestFreq === 'day' },
-		{ value: 'week', name: '[[user:digest_weekly]]', selected: userData.settings.dailyDigestFreq === 'week' },
-		{ value: 'month', name: '[[user:digest_monthly]]', selected: userData.settings.dailyDigestFreq === 'month' },
+		{ value: 'off', name: '[[user:digest-off]]', selected: userData.settings.dailyDigestFreq === 'off' },
+		{ value: 'day', name: '[[user:digest-daily]]', selected: userData.settings.dailyDigestFreq === 'day' },
+		{ value: 'week', name: '[[user:digest-weekly]]', selected: userData.settings.dailyDigestFreq === 'week' },
+		{ value: 'month', name: '[[user:digest-monthly]]', selected: userData.settings.dailyDigestFreq === 'month' },
 	];
 
 	userData.bootswatchSkinOptions = [
@@ -200,7 +200,7 @@ async function getNotificationSettings(userData) {
 		const setting = userData.settings[type];
 		return {
 			name: type,
-			label: '[[notifications:' + type + ']]',
+			label: '[[notifications:' + type.replace('_', '-') + ']]',
 			none: setting === 'none',
 			notification: setting === 'notification',
 			email: setting === 'email',

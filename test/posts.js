@@ -360,7 +360,7 @@ describe('Post\'s', function () {
 
 						request(nconf.get('url') + '/api/topic/' + tid, { jar: jar, json: true }, function (err, res, body) {
 							assert.ifError(err);
-							assert.equal(body.posts[1].content, '[[topic:post_is_deleted]]');
+							assert.equal(body.posts[1].content, '[[topic:post-is-deleted]]');
 							privileges.categories.give(['posts:view_deleted'], cid, 'Global Moderators', next);
 						});
 					});

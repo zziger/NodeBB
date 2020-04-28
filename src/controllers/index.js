@@ -317,7 +317,7 @@ Controllers.outgoing = function (req, res, next) {
 		outgoing: validator.escape(String(url)),
 		title: meta.config.title,
 		breadcrumbs: helpers.buildBreadcrumbs([{
-			text: '[[notifications:outgoing_link]]',
+			text: '[[notifications:outgoing-link]]',
 		}]),
 	});
 };

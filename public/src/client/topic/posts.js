@@ -294,7 +294,7 @@ define('forum/topic/posts', [
 				$.timeago.settings.strings.suffixFromNow = '';
 				$.timeago.settings.strings.prefixFromNow = '';
 
-				var translationText = (diff > 0 ? '[[topic:timeago_later,' : '[[topic:timeago_earlier,') + $.timeago.inWords(diff) + ']]';
+				var translationText = (diff > 0 ? '[[topic:timeago-later,' : '[[topic:timeago-earlier,') + $.timeago.inWords(diff) + ']]';
 
 				$.timeago.settings.strings.suffixAgo = suffixAgo;
 				$.timeago.settings.strings.prefixAgo = prefixAgo;

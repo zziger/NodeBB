@@ -80,7 +80,7 @@ describe('new Translator(language)', function () {
 		it('should handle language keys inside language keys', function () {
 			var translator = Translator.create('en-GB');
 
-			return translator.translate('[[notifications:outgoing_link_message, [[global:guest]]]]').then(function (translated) {
+			return translator.translate('[[notifications:outgoing-link-message, [[global:guest]]]]').then(function (translated) {
 				assert.strictEqual(translated, 'You are now leaving Guest');
 			});
 		});
@@ -88,7 +88,7 @@ describe('new Translator(language)', function () {
 		it('should handle language keys inside language keys with multiple parameters', function () {
 			var translator = Translator.create('en-GB');
 
-			return translator.translate('[[notifications:user_posted_to, [[global:guest]], My Topic]]').then(function (translated) {
+			return translator.translate('[[notifications:user-posted-to, [[global:guest]], My Topic]]').then(function (translated) {
 				assert.strictEqual(translated, '<strong>Guest</strong> has posted a reply to: <strong>My Topic</strong>');
 			});
 		});
@@ -96,7 +96,7 @@ describe('new Translator(language)', function () {
 		it('should handle language keys inside language keys with all parameters as language keys', function () {
 			var translator = Translator.create('en-GB');
 
-			return translator.translate('[[notifications:user_posted_to, [[global:guest]], [[global:guest]]]]').then(function (translated) {
+			return translator.translate('[[notifications:user-posted-to, [[global:guest]], [[global:guest]]]]').then(function (translated) {
 				assert.strictEqual(translated, '<strong>Guest</strong> has posted a reply to: <strong>Guest</strong>');
 			});
 		});
@@ -139,7 +139,7 @@ describe('new Translator(language)', function () {
 			var translator = Translator.create('en-GB');
 
 			var title = 'Test 1\\, 2\\, 3 %2 salmon';
-			var key = '[[topic:composer.replying_to, ' + title + ']]';
+			var key = '[[topic:composer.replying-to, ' + title + ']]';
 			return translator.translate(key).then(function (translated) {
 				assert.strictEqual(translated, 'Replying to Test 1&#44; 2&#44; 3 &#37;2 salmon');
 			});
@@ -149,7 +149,7 @@ describe('new Translator(language)', function () {
 			var translator = Translator.create('en-GB');
 
 			var title = '3 % salmon';
-			var key = '[[topic:composer.replying_to, ' + title + ']]';
+			var key = '[[topic:composer.replying-to, ' + title + ']]';
 			return translator.translate(key).then(function (translated) {
 				assert.strictEqual(translated, 'Replying to 3 % salmon');
 			});

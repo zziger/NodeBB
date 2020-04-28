@@ -371,7 +371,7 @@ Flags.update = async function (flagId, uid, changeset) {
 		}
 		const notifObj = await notifications.create({
 			type: 'my-flags',
-			bodyShort: '[[notifications:flag_assigned_to_you, ' + flagId + ']]',
+			bodyShort: '[[notifications:flag-assigned-to-you, ' + flagId + ']]',
 			bodyLong: '',
 			path: '/flags/' + flagId,
 			nid: 'flags:assign:' + flagId + ':uid:' + assigneeId,
@@ -489,25 +489,25 @@ Flags.notify = async function (flagObj, uid) {
 
 		notifObj = await notifications.create({
 			type: 'new-post-flag',
-			bodyShort: '[[notifications:user_flagged_post_in, ' + flagObj.reporter.username + ', ' + titleEscaped + ']]',
+			bodyShort: '[[notifications:user-flagged-post-in, ' + flagObj.reporter.username + ', ' + titleEscaped + ']]',
 			bodyLong: flagObj.description,
 			pid: flagObj.targetId,
 			path: '/flags/' + flagObj.flagId,
 			nid: 'flag:post:' + flagObj.targetId + ':uid:' + uid,
 			from: uid,
-			mergeId: 'notifications:user_flagged_post_in|' + flagObj.targetId,
+			mergeId: 'notifications:user-flagged-post-in|' + flagObj.targetId,
 			topicTitle: title,
 		});
 		uids = uids.concat(modUids[0]);
 	} else if (flagObj.type === 'user') {
 		notifObj = await notifications.create({
 			type: 'new-user-flag',
-			bodyShort: '[[notifications:user_flagged_user, ' + flagObj.reporter.username + ', ' + flagObj.target.username + ']]',
+			bodyShort: '[[notifications:user-flagged-user, ' + flagObj.reporter.username + ', ' + flagObj.target.username + ']]',
 			bodyLong: flagObj.description,
 			path: '/flags/' + flagObj.flagId,
 			nid: 'flag:user:' + flagObj.targetId + ':uid:' + uid,
 			from: uid,
-			mergeId: 'notifications:user_flagged_user|' + flagObj.targetId,
+			mergeId: 'notifications:user-flagged-user|' + flagObj.targetId,
 		});
 	} else {
 		throw new Error('[[error:invalid-data]]');

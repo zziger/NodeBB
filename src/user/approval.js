@@ -45,7 +45,7 @@ module.exports = function (User) {
 	async function sendNotificationToAdmins(username) {
 		const notifObj = await notifications.create({
 			type: 'new-register',
-			bodyShort: '[[notifications:new_register, ' + username + ']]',
+			bodyShort: '[[notifications:new-register, ' + username + ']]',
 			nid: 'new_register:' + username,
 			path: '/admin/manage/registration',
 			mergeId: 'new_register',

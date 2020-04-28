@@ -35,7 +35,7 @@ define('forum/unread', ['topicSelect', 'components', 'topicList'], function (top
 					return app.alertError(err.message);
 				}
 
-				app.alertSuccess('[[unread:topics_marked_as_read.success]]');
+				app.alertSuccess('[[unread:topics-marked-as-read.success]]');
 
 				$('[data-component="category"]').empty();
 				$('[data-component="pagination"]').addClass('hidden');
@@ -68,7 +68,7 @@ define('forum/unread', ['topicSelect', 'components', 'topicList'], function (top
 	function doneRemovingTids(tids) {
 		removeTids(tids);
 
-		app.alertSuccess('[[unread:topics_marked_as_read.success]]');
+		app.alertSuccess('[[unread:topics-marked-as-read.success]]');
 
 		if (!$('[data-component="category"]').children().length) {
 			$('#category-no-topics').removeClass('hidden');

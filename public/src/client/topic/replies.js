@@ -77,9 +77,9 @@ define('forum/topic/replies', ['navigator', 'components', 'forum/topic/posts'], 
 		countEl.attr('data-replies', count);
 		replyCount.toggleClass('hidden', count <= 0);
 		if (count > 1) {
-			countEl.translateText('[[topic:replies_to_this_post, ' + count + ']]');
+			countEl.translateText('[[topic:replies-to-this-post, ' + count + ']]');
 		} else {
-			countEl.translateText('[[topic:one_reply_to_this_post]]');
+			countEl.translateText('[[topic:one-reply-to-this-post]]');
 		}
 
 		if (!avatars.find('[data-uid="' + post.uid + '"]').length && count < 7) {

@@ -158,7 +158,7 @@ define('admin/manage/users', ['translator', 'benchpress', 'autocomplete'], funct
 			Benchpress.parse('admin/partials/temporary-ban', {}, function (html) {
 				bootbox.dialog({
 					className: 'ban-modal',
-					title: '[[user:ban_account]]',
+					title: '[[user:ban-account]]',
 					message: html,
 					show: true,
 					buttons: {

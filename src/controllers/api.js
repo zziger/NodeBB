@@ -121,7 +121,7 @@ apiController.getPostData = async function (pid, uid) {
 	post.ip = userPrivilege.isAdminOrMod ? post.ip : undefined;
 	const selfPost = uid && uid === parseInt(post.uid, 10);
 	if (post.deleted && !(userPrivilege.isAdminOrMod || selfPost)) {
-		post.content = '[[topic:post_is_deleted]]';
+		post.content = '[[topic:post-is-deleted]]';
 	}
 	return post;
 };

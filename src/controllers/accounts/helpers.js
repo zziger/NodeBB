@@ -142,7 +142,7 @@ async function getProfileMenu(uid, callerUID) {
 	const links = [{
 		id: 'info',
 		route: 'info',
-		name: '[[user:account_info]]',
+		name: '[[user:account-info]]',
 		icon: 'fa-info',
 		visibility: {
 			self: false,

@@ -133,11 +133,11 @@ Users.follow = async (req, res) => {
 	const userData = await user.getUserFields(req.user.uid, ['username', 'userslug']);
 	const notifObj = await notifications.create({
 		type: 'follow',
-		bodyShort: '[[notifications:user_started_following_you, ' + userData.username + ']]',
+		bodyShort: '[[notifications:user-started-following-you, ' + userData.username + ']]',
 		nid: 'follow:' + req.params.uid + ':uid:' + req.user.uid,
 		from: req.user.uid,
 		path: '/uid/' + req.params.uid + '/followers',
-		mergeId: 'notifications:user_started_following_you',
+		mergeId: 'notifications:user-started-following-you',
 	});
 	if (!notifObj) {
 		return;

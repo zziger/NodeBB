@@ -1,6 +1,6 @@
 <div class="dropdown markread d-inline-block category-dropdown-container bottom-sheet<!-- IF !topics.length --> hidden<!-- ENDIF !topics.length -->">
     <button type="button" class="btn btn-light" data-toggle="dropdown">
-        [[unread:mark_as_read]] <i class="fa fa-chevron-down"></i>
+        [[unread:mark-as-read]] <i class="fa fa-chevron-down"></i>
     </button>
     <div class="dropdown-menu dropdown-menu-right category-dropdown-menu" role="menu">
         <a id="markSelectedRead" class="dropdown-item" tabindex="-1" href="#">[[unread:selected]]</a>

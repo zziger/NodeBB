@@ -82,7 +82,7 @@ define('forum/account/header', [
 			},
 			function () {
 				pictureCropper.show({
-					title: '[[user:upload_cover_picture]]',
+					title: '[[user:upload-cover-picture]]',
 					socketMethod: 'user.updateCover',
 					aspectRatio: NaN,
 					allowSkippingCrop: true,
@@ -119,7 +119,7 @@ define('forum/account/header', [
 		Benchpress.parse('admin/partials/temporary-ban', {}, function (html) {
 			bootbox.dialog({
 				className: 'ban-modal',
-				title: '[[user:ban_account]]',
+				title: '[[user:ban-account]]',
 				message: html,
 				show: true,
 				buttons: {
@@ -128,7 +128,7 @@ define('forum/account/header', [
 						className: 'btn-link',
 					},
 					submit: {
-						label: '[[user:ban_account]]',
+						label: '[[user:ban-account]]',
 						callback: function () {
 							var formData = $('.ban-modal form').serializeArray().reduce(function (data, cur) {
 								data[cur.name] = cur.value;
@@ -168,7 +168,7 @@ define('forum/account/header', [
 	}
 
 	function deleteAccount() {
-		translator.translate('[[user:delete_this_account_confirm]]', function (translated) {
+		translator.translate('[[user:delete-this-account-confirm]]', function (translated) {
 			bootbox.confirm(translated, function (confirm) {
 				if (!confirm) {
 					return;
@@ -216,7 +216,7 @@ define('forum/account/header', [
 	}
 
 	function removeCover() {
-		translator.translate('[[user:remove_cover_picture_confirm]]', function (translated) {
+		translator.translate('[[user:remove-cover-picture-confirm]]', function (translated) {
 			bootbox.confirm(translated, function (confirm) {
 				if (!confirm) {
 					return;

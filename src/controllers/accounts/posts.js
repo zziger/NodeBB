@@ -14,7 +14,7 @@ const postsController = module.exports;
 const templateToData = {
 	'account/bookmarks': {
 		type: 'posts',
-		noItemsFoundKey: '[[topic:bookmarks.has_no_bookmarks]]',
+		noItemsFoundKey: '[[topic:bookmarks.has-no-bookmarks]]',
 		crumb: '[[user:bookmarks]]',
 		getSets: function (callerUid, userData) {
 			return 'uid:' + userData.uid + ':bookmarks';
@@ -31,7 +31,7 @@ const templateToData = {
 	},
 	'account/upvoted': {
 		type: 'posts',
-		noItemsFoundKey: '[[user:has_no_upvoted_posts]]',
+		noItemsFoundKey: '[[user:has-no-upvoted-posts]]',
 		crumb: '[[global:upvoted]]',
 		getSets: function (callerUid, userData) {
 			return 'uid:' + userData.uid + ':upvote';
@@ -39,7 +39,7 @@ const templateToData = {
 	},
 	'account/downvoted': {
 		type: 'posts',
-		noItemsFoundKey: '[[user:has_no_downvoted_posts]]',
+		noItemsFoundKey: '[[user:has-no-downvoted-posts]]',
 		crumb: '[[global:downvoted]]',
 		getSets: function (callerUid, userData) {
 			return 'uid:' + userData.uid + ':downvote';
@@ -47,7 +47,7 @@ const templateToData = {
 	},
 	'account/best': {
 		type: 'posts',
-		noItemsFoundKey: '[[user:has_no_voted_posts]]',
+		noItemsFoundKey: '[[user:has-no-voted-posts]]',
 		crumb: '[[global:best]]',
 		getSets: async function (callerUid, userData) {
 			const cids = await categories.getCidsByPrivilege('categories:cid', callerUid, 'topics:read');
@@ -56,7 +56,7 @@ const templateToData = {
 	},
 	'account/watched': {
 		type: 'topics',
-		noItemsFoundKey: '[[user:has_no_watched_topics]]',
+		noItemsFoundKey: '[[user:has-no-watched-topics]]',
 		crumb: '[[user:watched]]',
 		getSets: function (callerUid, userData) {
 			return 'uid:' + userData.uid + ':followed_tids';
@@ -89,7 +89,7 @@ const templateToData = {
 	},
 	'account/ignored': {
 		type: 'topics',
-		noItemsFoundKey: '[[user:has_no_ignored_topics]]',
+		noItemsFoundKey: '[[user:has-no-ignored-topics]]',
 		crumb: '[[user:ignored]]',
 		getSets: function (callerUid, userData) {
 			return 'uid:' + userData.uid + ':ignored_tids';
@@ -97,7 +97,7 @@ const templateToData = {
 	},
 	'account/topics': {
 		type: 'topics',
-		noItemsFoundKey: '[[user:has_no_topics]]',
+		noItemsFoundKey: '[[user:has-no-topics]]',
 		crumb: '[[global:topics]]',
 		getSets: async function (callerUid, userData) {
 			const cids = await categories.getCidsByPrivilege('categories:cid', callerUid, 'topics:read');

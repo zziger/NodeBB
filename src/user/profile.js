@@ -288,7 +288,7 @@ module.exports = function (User) {
 		}
 
 		if (!isAdminOrPasswordMatch) {
-			throw new Error('[[user:change_password_error_wrong_current]]');
+			throw new Error('[[user:change-password-error-wrong-current]]');
 		}
 
 		const hashedPassword = await User.hashPassword(data.newPassword);

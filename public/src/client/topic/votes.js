@@ -47,7 +47,7 @@ define('forum/topic/votes', ['components', 'translator', 'benchpress'], function
 		}
 		if (usernames.length + data.otherCount > 6) {
 			usernames = usernames.join(', ').replace(/,/g, '|');
-			translator.translate('[[topic:users_and_others, ' + usernames + ', ' + data.otherCount + ']]', function (translated) {
+			translator.translate('[[topic:users-and-others, ' + usernames + ', ' + data.otherCount + ']]', function (translated) {
 				translated = translated.replace(/\|/g, ',');
 				doCreateTooltip(translated);
 			});

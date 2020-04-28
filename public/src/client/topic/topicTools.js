@@ -49,7 +49,7 @@ define('forum/topic/topicTools', [
 				if (err) {
 					return app.alertError(err);
 				}
-				app.alertSuccess('[[topic:mark_unread.success]]');
+				app.alertSuccess('[[topic:mark-unread.success]]');
 			});
 			return false;
 		});
@@ -107,11 +107,11 @@ define('forum/topic/topicTools', [
 				}
 				var message = '';
 				if (type === 'follow') {
-					message = '[[topic:following_topic.message]]';
+					message = '[[topic:following-topic.message]]';
 				} else if (type === 'unfollow') {
-					message = '[[topic:not_following_topic.message]]';
+					message = '[[topic:not-following-topic.message]]';
 				} else if (type === 'ignore') {
-					message = '[[topic:ignoring_topic.message]]';
+					message = '[[topic:ignoring-topic.message]]';
 				}
 				setFollowState(type);
 

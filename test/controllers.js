@@ -1261,14 +1261,14 @@ describe('Controllers', function () {
 		it('should load notifications page', function (done) {
 			var notifications = require('../src/notifications');
 			var notifData = {
-				bodyShort: '[[notifications:user_posted_to, test1, test2]]',
+				bodyShort: '[[notifications:user-posted-to, test1, test2]]',
 				bodyLong: 'some post content',
 				pid: 1,
 				path: '/post/' + 1,
 				nid: 'new_post:tid:' + 1 + ':pid:' + 1 + ':uid:' + fooUid,
 				tid: 1,
 				from: fooUid,
-				mergeId: 'notifications:user_posted_to|' + 1,
+				mergeId: 'notifications:user-posted-to|' + 1,
 				topicTitle: 'topic title',
 			};
 			async.waterfall([

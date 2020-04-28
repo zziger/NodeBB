@@ -196,7 +196,7 @@ define('forum/topic/events', [
 		if (!ajaxify.data.privileges.isAdminOrMod && parseInt(data.uid, 10) !== parseInt(app.user.uid, 10)) {
 			postEl.find('[data-component="post/tools"]').toggleClass('hidden', isDeleted);
 			if (isDeleted) {
-				postEl.find('[data-component="post/content"]').translateHtml('[[topic:post_is_deleted]]');
+				postEl.find('[data-component="post/content"]').translateHtml('[[topic:post-is-deleted]]');
 			} else {
 				postEl.find('[data-component="post/content"]').html(translator.unescape(data.content));
 			}

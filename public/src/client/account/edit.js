@@ -48,7 +48,7 @@ define('forum/account/edit', [
 			data: userData,
 			method: 'put',
 		}).done(function (res) {
-			app.alertSuccess('[[user:profile_update_success]]');
+			app.alertSuccess('[[user:profile-update-success]]');
 
 			if (res.response.picture) {
 				$('#user-current-picture').attr('src', res.response.picture);
@@ -100,7 +100,7 @@ define('forum/account/edit', [
 					translator.translate(html, function (html) {
 						var modal = bootbox.dialog({
 							className: 'picture-switcher',
-							title: '[[user:change_picture]]',
+							title: '[[user:change-picture]]',
 							message: html,
 							show: true,
 							buttons: {
@@ -163,7 +163,7 @@ define('forum/account/edit', [
 
 	function handleAccountDelete() {
 		$('#deleteAccountBtn').on('click', function () {
-			translator.translate('[[user:delete_account_confirm]]', function (translated) {
+			translator.translate('[[user:delete-account-confirm]]', function (translated) {
 				var modal = bootbox.confirm(translated + '<p><input type="password" class="form-control" id="confirm-password" /></p>', function (confirm) {
 					if (!confirm) {
 						return;
@@ -237,8 +237,8 @@ define('forum/account/edit', [
 				paramValue: ajaxify.data.theirid,
 				fileSize: ajaxify.data.maximumProfileImageSize,
 				allowSkippingCrop: false,
-				title: '[[user:upload_picture]]',
-				description: '[[user:upload_a_picture]]',
+				title: '[[user:upload-picture]]',
+				description: '[[user:upload-a-picture]]',
 				accept: ajaxify.data.allowedProfileImageExtensios,
 			}, function (url) {
 				onUploadComplete(url);

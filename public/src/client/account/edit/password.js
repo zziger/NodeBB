@@ -32,7 +32,7 @@ define('forum/account/edit/password', ['forum/account/header', 'translator'], fu
 			} else if (password.val() === ajaxify.data.email) {
 				showError(password_notify, '[[user:password-same-as-email]]');
 			} else if (passwordStrength.score < ajaxify.data.minimumPasswordStrength) {
-				showError(password_notify, '[[user:weak_password]]');
+				showError(password_notify, '[[user:weak-password]]');
 			} else {
 				showSuccess(password_notify);
 				passwordvalid = true;
@@ -41,7 +41,7 @@ define('forum/account/edit/password', ['forum/account/header', 'translator'], fu
 
 		function onPasswordConfirmChanged() {
 			if (password.val() !== password_confirm.val()) {
-				showError(password_confirm_notify, '[[user:change_password_error_match]]');
+				showError(password_confirm_notify, '[[user:change-password-error-match]]');
 				passwordsmatch = false;
 			} else {
 				if (password.val()) {
@@ -93,11 +93,11 @@ define('forum/account/edit/password', ['forum/account/header', 'translator'], fu
 				});
 			} else {
 				if (!passwordsmatch) {
-					app.alertError('[[user:change_password_error_match]]');
+					app.alertError('[[user:change-password-error-match]]');
 				}
 
 				if (!passwordvalid) {
-					app.alertError('[[user:change_password_error]]');
+					app.alertError('[[user:change-password-error]]');
 				}
 			}
 			return false;

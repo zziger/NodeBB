@@ -29,7 +29,7 @@
 			</ul>
 		</div>
 		<span class="members">
-			[[modules:chat.chatting_with]]:
+			[[modules:chat.chatting-with]]:
 			{{{each users}}}
 			<a href="{config.relative_path}/uid/{../uid}">{../username}</a><!-- IF !@last -->,<!-- END -->
 			{{{end}}}

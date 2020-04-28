@@ -61,7 +61,7 @@ module.exports = function (SocketPosts) {
 	};
 
 	SocketPosts.upvote = async function (socket, data) {
-		return await helpers.postCommand(socket, 'upvote', 'voted', 'notifications:upvoted_your_post_in', data);
+		return await helpers.postCommand(socket, 'upvote', 'voted', 'notifications:upvoted-your-post-in', data);
 	};
 
 	SocketPosts.downvote = async function (socket, data) {

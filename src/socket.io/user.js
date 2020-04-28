@@ -164,11 +164,11 @@ SocketUser.follow = async function (socket, data) {
 	const userData = await user.getUserFields(socket.uid, ['username', 'userslug']);
 	const notifObj = await notifications.create({
 		type: 'follow',
-		bodyShort: '[[notifications:user_started_following_you, ' + userData.username + ']]',
+		bodyShort: '[[notifications:user-started-following-you, ' + userData.username + ']]',
 		nid: 'follow:' + data.uid + ':uid:' + socket.uid,
 		from: socket.uid,
 		path: '/uid/' + data.uid + '/followers',
-		mergeId: 'notifications:user_started_following_you',
+		mergeId: 'notifications:user-started-following-you',
 	});
 	if (!notifObj) {
 		return;
