@@ -84,12 +84,9 @@ define('forum/topic', [
 		if (config.topicSearchEnabled) {
 			require(['mousetrap'], function (mousetrap) {
 				mousetrap.bind('ctrl+f', function (e) {
-					var match = ajaxify.currentPage.match(/^topic\/([\d]+)/);
-					var tid;
-					if (match) {
+					if (ajaxify.data.template.topic && ajaxify.data.tid) {
 						e.preventDefault();
-						tid = match[1];
-						$('#search-fields input').val('in:topic-' + tid + ' ');
+						$('#search-fields input').val('in:topic-' + ajaxify.data.tid + ' ');
 						app.prepareSearch();
 					}
 				});
