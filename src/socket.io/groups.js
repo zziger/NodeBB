@@ -8,6 +8,7 @@ const utils = require('../utils');
 const events = require('../events');
 const privileges = require('../privileges');
 const notifications = require('../notifications');
+const sockets = require('.');
 
 const SocketGroups = module.exports;
 
@@ -266,6 +267,8 @@ SocketGroups.kick = async (socket, data) => {
 };
 
 SocketGroups.create = async (socket, data) => {
+	sockets.warnDeprecated(socket, 'POST /api/v1/groups');
+
 	if (!socket.uid) {
 		throw new Error('[[error:no-privileges]]');
 	} else if (typeof data.name !== 'string' || groups.isPrivilegeGroup(data.name)) {

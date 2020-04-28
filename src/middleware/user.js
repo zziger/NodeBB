@@ -22,7 +22,7 @@ module.exports = function (middleware) {
 		if (req.loggedIn) {
 			return next();
 		} else if (req.headers.hasOwnProperty('authorization')) {
-			passport.authenticate('bearer', { session: false }, function (err, user) {
+			return passport.authenticate('bearer', { session: false }, function (err, user) {
 				if (err) { return next(err); }
 				if (!user) { return callback(); }
 

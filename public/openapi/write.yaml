@@ -405,16 +405,8 @@ paths:
               required:
                 - name
             example:
-              name: My New Category
-              description: Lorem ipsum, dolor sit amet
-              parentCid: 0
-              cloneFromCid: 0
-              icon: bullhorn
-              bgColor: '#ffffff'
-              color: '#000000'
-              link: 'https://example.org'
-              class: 'col-md-3 col-xs-6'
-              backgroundImage: '/assets/relative/path/to/image'
+              name: 'My Test Group'
+              hidden: 1
       responses:
         '200':
           description: group successfully created
