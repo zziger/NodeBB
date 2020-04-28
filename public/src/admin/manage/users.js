@@ -1,4 +1,4 @@
-define('admin/manage/users', ['translator', 'benchpress', 'autocomplete'], function (translator, Benchpress, autocomplete) {
+define('admin/manage/users', ['translator', 'benchpress', 'autocomplete', 'api'], function (translator, Benchpress, autocomplete, api) {
 	var Users = {};
 
 	Users.init = function () {
@@ -131,10 +131,7 @@ define('admin/manage/users', ['translator', 'benchpress', 'autocomplete'], funct
 			bootbox.confirm((uids.length > 1 ? '[[admin/manage/users:alerts.confirm-ban-multi]]' : '[[admin/manage/users:alerts.confirm-ban]]'), function (confirm) {
 				if (confirm) {
 					var requests = uids.map(function (uid) {
-						return $.ajax({
-							url: config.relative_path + '/api/v1/users/' + uid + '/ban',
-							method: 'put',
-						});
+						return api.put('/users/' + uid + '/ban');
 					});
 
 					$.when(requests)
@@ -176,13 +173,9 @@ define('admin/manage/users', ['translator', 'benchpress', 'autocomplete'], funct
 								var until = formData.length > 0 ? (Date.now() + (formData.length * 1000 * 60 * 60 * (parseInt(formData.unit, 10) ? 24 : 1))) : 0;
 
 								var requests = uids.map(function (uid) {
-									return $.ajax({
-										url: config.relative_path + '/api/v1/users/' + uid + '/ban',
-										method: 'put',
-										data: {
-											until: until,
-											reason: formData.reason,
-										},
+									return api.put('/users/' + uid + '/ban', {
+										until: until,
+										reason: formData.reason,
 									});
 								});
 
@@ -207,10 +200,7 @@ define('admin/manage/users', ['translator', 'benchpress', 'autocomplete'], funct
 			}
 
 			var requests = uids.map(function (uid) {
-				return $.ajax({
-					url: config.relative_path + '/api/v1/users/' + uid + '/ban',
-					method: 'delete',
-				});
+				return api.delete('/users/' + uid + '/ban');
 			});
 
 			$.when(requests)
@@ -384,15 +374,13 @@ define('admin/manage/users', ['translator', 'benchpress', 'autocomplete'], funct
 				password: password,
 			};
 
-			$.post(config.relative_path + '/api/v1/users', user).done(function () {
+			api.post('/users', user, () => {
 				modal.modal('hide');
 				modal.on('hidden.bs.modal', function () {
 					ajaxify.refresh();
 				});
 				app.alertSuccess('[[admin/manage/users:alerts.create-success]]');
-			}).fail(function (ev) {
-				return errorEl.translateHtml('[[admin/manage/users:alerts.error-x, ' + ev.responseJSON.status.message + ']]').removeClass('hidden');
-			});
+			}, err => errorEl.translateHtml('[[admin/manage/users:alerts.error-x, ' + err.status.message + ']]').removeClass('hidden'));
 		}
 
 		var timeoutId = 0;

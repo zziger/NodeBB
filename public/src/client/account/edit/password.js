@@ -1,5 +1,5 @@
 
-define('forum/account/edit/password', ['forum/account/header', 'translator'], function (header, translator) {
+define('forum/account/edit/password', ['forum/account/header', 'translator', 'api'], function (header, translator, api) {
 	var AccountEditPassword = {};
 	var zxcvbn;
 	AccountEditPassword.init = async function () {
@@ -66,22 +66,16 @@ define('forum/account/edit/password', ['forum/account/header', 'translator'], fu
 			var btn = $(this);
 			if (passwordvalid && passwordsmatch) {
 				btn.addClass('disabled').find('i').removeClass('hide');
-				$.ajax({
-					url: config.relative_path + '/api/v1/users/' + ajaxify.data.theirid + '/password',
-					method: 'put',
-					data: {
-						currentPassword: currentPassword.val(),
-						newPassword: password.val(),
-					},
-				}).done(function () {
+				api.put('/users/' + ajaxify.data.theirid + '/password', {
+					currentPassword: currentPassword.val(),
+					newPassword: password.val(),
+				}, () => {
 					if (parseInt(app.user.uid, 10) === parseInt(ajaxify.data.uid, 10)) {
 						window.location.href = config.relative_path + '/login';
 					} else {
 						ajaxify.go('user/' + ajaxify.data.userslug + '/edit');
 					}
-				}).fail(function (ev) {
-					app.alertError(ev.responseJSON.status.message);
-				}).always(function () {
+				}, err => app.alertError(err.status.message)).always(() => {
 					btn.removeClass('disabled').find('i').addClass('hide');
 					currentPassword.val('');
 					password.val('');

@@ -1,4 +1,4 @@
-define('forum/groups/list', ['infinitescroll', 'benchpress'], function (infinitescroll, Benchpress) {
+define('forum/groups/list', ['infinitescroll', 'benchpress', 'api'], function (infinitescroll, Benchpress, api) {
 	var Groups = {};
 
 	Groups.init = function () {
@@ -8,17 +8,11 @@ define('forum/groups/list', ['infinitescroll', 'benchpress'], function (infinite
 		$('button[data-action="new"]').on('click', function () {
 			bootbox.prompt('[[groups:new-group.group-name]]', function (name) {
 				if (name && name.length) {
-					$.ajax({
-						url: config.relative_path + '/api/v1/groups',
-						method: 'post',
-						data: {
-							name: name,
-						},
-					}).done(function (res) {
-						ajaxify.go('groups/' + res.response.slug);
-					}).fail(function (ev) {
-						app.alertError(ev.responseJSON.status.message);
-					});
+					api.post('/groups', {
+						name: name,
+					}, (res) => {
+						ajaxify.go('groups/' + res.slug);
+					}, err => app.alertError(err.status.message));
 				}
 			});
 		});
