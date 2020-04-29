@@ -84,7 +84,7 @@ define('admin/manage/users', ['translator', 'benchpress', 'autocomplete', 'api']
 				}
 				Benchpress.parse('admin/partials/manage-user-groups', data, function (html) {
 					var modal = bootbox.dialog({
-						message: utils.escapeHTML(html),
+						message: html,
 						title: '[[admin/manage/users:manage-groups]]',
 						onEscape: true,
 					});
