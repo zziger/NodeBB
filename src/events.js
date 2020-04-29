@@ -8,6 +8,7 @@ const db = require('./database');
 const batch = require('./batch');
 const user = require('./user');
 const utils = require('./utils');
+const plugins = require('./plugins');
 
 const events = module.exports;
 
@@ -71,12 +72,15 @@ events.log = async function (data) {
 	data.timestamp = Date.now();
 	data.eid = eid;
 
+	data = await plugins.fireHook('filter:events.log', data);
+
 	await Promise.all([
 		db.sortedSetsAdd([
 			'events:time',
 			'events:time:' + data.type,
 		], data.timestamp, eid),
 		db.setObject('event:' + eid, data),
+		plugins.fireHook('action:events.log', data),
 	]);
 };
 
