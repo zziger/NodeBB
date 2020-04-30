@@ -6,7 +6,8 @@ define('forum/groups/details', [
 	'pictureCropper',
 	'translator',
 	'admin/modules/colorpicker',
-], function (memberList, iconSelect, components, coverPhoto, pictureCropper, translator, colorpicker) {
+	'api',
+], function (memberList, iconSelect, components, coverPhoto, pictureCropper, translator, colorpicker, api) {
 	var Details = {};
 	var groupName;
 
@@ -103,7 +104,10 @@ define('forum/groups/details', [
 				break;
 
 			case 'join':	// intentional fall-throughs!
-			case 'leave':
+				api.put('/groups/' + ajaxify.data.group.slug + '/membership/' + (uid || app.user.uid), undefined, () => ajaxify.refresh(), err => app.alertError(err.status.message));
+				break;
+
+			case 'leave':	// intentional fall-throughs!
 			case 'accept':
 			case 'reject':
 			case 'issueInvite':
