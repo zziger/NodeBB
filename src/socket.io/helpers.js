@@ -24,8 +24,8 @@ SocketHelpers.setDefaultPostData = function (data, socket) {
 };
 
 SocketHelpers.notifyNew = async function (uid, type, result) {
-	let uids = await user.getUidsFromSet('users:online', 0, -1);
-	uids = uids.filter(toUid => parseInt(toUid, 10) !== uid);
+	const uids = await user.getUidsFromSet('users:online', 0, -1);
+	// uids = uids.filter(toUid => parseInt(toUid, 10) !== uid);
 	await batch.processArray(uids, async function (uids) {
 		await notifyUids(uid, uids, type, result);
 	}, {

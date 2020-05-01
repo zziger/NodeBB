@@ -29,10 +29,6 @@ Topics.create = async (req, res) => {
 
 	const result = await topics.post(payload);
 	helpers.formatApiResponse(200, res, result.topicData);
-
-	// TODO
-	// socket.emit('event:new_post', { posts: [result.postData] });
-	// socket.emit('event:new_topic', result.topicData);
 	socketHelpers.notifyNew(req.user.uid, 'newTopic', { posts: [result.postData], topic: result.topicData });
 };
 
@@ -64,9 +60,6 @@ Topics.reply = async (req, res) => {
 		'reputation:disabled': meta.config['reputation:disabled'] === 1,
 		'downvote:disabled': meta.config['downvote:disabled'] === 1,
 	};
-
-	// TODO
-	// socket.emit('event:new_post', result);
 
 	user.updateOnlineUsers(req.user.uid);
 	socketHelpers.notifyNew(req.user.uid, 'newPost', result);
