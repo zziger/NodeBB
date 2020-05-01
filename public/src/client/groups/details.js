@@ -81,16 +81,7 @@ define('forum/groups/details', [
 							return;
 						}
 
-						socket.emit('groups.kick', {
-							uid: uid,
-							groupName: groupName,
-						}, function (err) {
-							if (!err) {
-								userRow.slideUp().remove();
-							} else {
-								app.alertError(err.message);
-							}
-						});
+						api.del('/groups/' + ajaxify.data.group.slug + '/membership/' + (uid || app.user.uid), undefined, () => userRow.slideUp().remove(), err => app.alertError(err.status.message));
 					});
 				});
 				break;
@@ -103,12 +94,15 @@ define('forum/groups/details', [
 				Details.deleteGroup();
 				break;
 
-			case 'join':	// intentional fall-throughs!
+			case 'join':
 				api.put('/groups/' + ajaxify.data.group.slug + '/membership/' + (uid || app.user.uid), undefined, () => ajaxify.refresh(), err => app.alertError(err.status.message));
 				break;
 
-			case 'leave':	// intentional fall-throughs!
-			case 'accept':
+			case 'leave':
+				api.del('/groups/' + ajaxify.data.group.slug + '/membership/' + (uid || app.user.uid), undefined, () => ajaxify.refresh(), err => app.alertError(err.status.message));
+				break;
+
+			case 'accept':	// intentional fall-throughs!
 			case 'reject':
 			case 'issueInvite':
 			case 'rescindInvite':

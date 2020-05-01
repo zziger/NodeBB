@@ -2,7 +2,8 @@ define('admin/manage/group', [
 	'forum/groups/memberlist',
 	'iconSelect',
 	'admin/modules/colorpicker',
-], function (memberList, iconSelect, colorpicker) {
+	'api',
+], function (memberList, iconSelect, colorpicker, api) {
 	var Groups = {};
 
 	Groups.init = function () {
@@ -59,15 +60,9 @@ define('admin/manage/group', [
 					if (!confirm) {
 						return;
 					}
-					socket.emit('admin.groups.leave', {
-						uid: uid,
-						groupName: groupName,
-					}, function (err) {
-						if (err) {
-							return app.alertError(err.message);
-						}
+					api.del('/groups/' + ajaxify.data.group.slug + '/membership/' + uid, undefined, () => {
 						userRow.slideUp().remove();
-					});
+					}, err => app.alertError(err.status.message));
 				});
 				break;
 			default:

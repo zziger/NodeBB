@@ -1,4 +1,4 @@
-define('forum/groups/memberlist', ['autocomplete'], function (autocomplete) {
+define('forum/groups/memberlist', ['autocomplete', 'api'], function (autocomplete, api) {
 	var MemberList = {};
 	var searchInterval;
 	var groupName;
@@ -43,7 +43,9 @@ define('forum/groups/memberlist', ['autocomplete'], function (autocomplete) {
 		if (groupName === 'administrators') {
 			socket.emit('admin.user.makeAdmins', [user.uid], done);
 		} else {
-			socket.emit('groups.addMember', { groupName: groupName, uid: user.uid }, done);
+			api.put('/groups/' + ajaxify.data.group.slug + '/membership/' + user.uid, undefined, () => {
+				done();
+			}, err => app.alertError(err.status.message));
 		}
 	}
 
