@@ -24,8 +24,15 @@ SocketHelpers.setDefaultPostData = function (data, socket) {
 };
 
 SocketHelpers.notifyNew = async function (uid, type, result) {
-	const uids = await user.getUidsFromSet('users:online', 0, -1);
-	// uids = uids.filter(toUid => parseInt(toUid, 10) !== uid);
+	// send to caller first
+	websockets.in('uid_' + uid).emit('event:new_post', result);
+	if (result.topic && type === 'newTopic') {
+		websockets.in('uid_' + uid).emit('event:new_topic', result.topic);
+	}
+
+	// send to rest of the online users
+	let uids = await user.getUidsFromSet('users:online', 0, -1);
+	uids = uids.filter(toUid => parseInt(toUid, 10) !== uid);
 	await batch.processArray(uids, async function (uids) {
 		await notifyUids(uid, uids, type, result);
 	}, {

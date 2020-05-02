@@ -230,11 +230,12 @@ Sockets.getUserSocketCount = function (uid) {
 
 
 Sockets.reqFromSocket = function (socket, payload, event) {
-	var headers = socket.request ? socket.request.headers : {};
-	var encrypted = socket.request ? !!socket.request.connection.encrypted : false;
-	var host = headers.host;
-	var referer = headers.referer || '';
-	var data = ((payload || {}).data || []);
+	const req = socket.request || {};
+	const headers = req.headers || {};
+	const encrypted = req.connection ? !!req.connection.encrypted : false;
+	let host = headers.host;
+	const referer = headers.referer || '';
+	const data = ((payload || {}).data || []);
 
 	if (!host) {
 		host = url.parse(referer).host || '';
@@ -242,9 +243,9 @@ Sockets.reqFromSocket = function (socket, payload, event) {
 
 	return {
 		uid: socket.uid,
-		params: data[1],
-		method: event || data[0],
-		body: payload,
+		params: data[1] || req.params,
+		method: event || data[0] || req.method,
+		body: payload || req.body,
 		ip: socket.ip,
 		host: host,
 		protocol: encrypted ? 'https' : 'http',

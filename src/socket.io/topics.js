@@ -31,18 +31,13 @@ SocketTopics.post = async function (socket, data) {
 	if (shouldQueue) {
 		return await posts.addToQueue(data);
 	}
-	return await postTopic(socket, data);
-};
-
-async function postTopic(socket, data) {
 	const result = await topics.post(data);
-
-	socket.emit('event:new_post', { posts: [result.postData] });
-	socket.emit('event:new_topic', result.topicData);
-
-	socketHelpers.notifyNew(socket.uid, 'newTopic', { posts: [result.postData], topic: result.topicData });
+	socketHelpers.notifyNew(socket.uid, 'newTopic', {
+		posts: [result.postData],
+		topic: result.topicData
+	});
 	return result.topicData;
-}
+};
 
 SocketTopics.postcount = async function (socket, tid) {
 	const canRead = await privileges.topics.can('topics:read', tid, socket.uid);

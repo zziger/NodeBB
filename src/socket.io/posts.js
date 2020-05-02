@@ -36,25 +36,19 @@ SocketPosts.reply = async function (socket, data) {
 	if (shouldQueue) {
 		return await posts.addToQueue(data);
 	}
-	return await postReply(socket, data);
-};
 
-async function postReply(socket, data) {
 	const postData = await topics.reply(data);
-	const result = {
-		posts: [postData],
-		'reputation:disabled': meta.config['reputation:disabled'] === 1,
-		'downvote:disabled': meta.config['downvote:disabled'] === 1,
-	};
-
-	socket.emit('event:new_post', result);
 
 	user.updateOnlineUsers(socket.uid);
 
-	socketHelpers.notifyNew(socket.uid, 'newPost', result);
+	socketHelpers.notifyNew(socket.uid, 'newPost', {
+		posts: [postData],
+		'reputation:disabled': meta.config['reputation:disabled'] === 1,
+		'downvote:disabled': meta.config['downvote:disabled'] === 1,
+	});
 
 	return postData;
-}
+};
 
 SocketPosts.getRawPost = async function (socket, pid) {
 	const canRead = await privileges.posts.can('topics:read', pid, socket.uid);
