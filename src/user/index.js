@@ -324,4 +324,4 @@ User.addInterstitials = function (callback) {
 	callback();
 };
 
-User.async = require('../promisify')(User);
+require('../promisify')(User);

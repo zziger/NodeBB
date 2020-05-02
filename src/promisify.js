@@ -1,7 +1,6 @@
 'use strict';
 
-var util = require('util');
-var _ = require('lodash');
+const util = require('util');
 
 module.exports = function (theModule, ignoreKeys) {
 	ignoreKeys = ignoreKeys || [];
@@ -61,34 +60,5 @@ module.exports = function (theModule, ignoreKeys) {
 		};
 	}
 
-	var parts = [];
-	function deprecateRecursive(module, key) {
-		if (!module) {
-			return;
-		}
-		if (key) {
-			parts.push(key);
-		}
-		var keys = Object.keys(module);
-		keys.forEach(function (key) {
-			if (ignoreKeys.includes(key)) {
-				return;
-			}
-
-			if (typeof module[key] === 'object') {
-				deprecateRecursive(module[key], key);
-			}
-
-			if (typeof module[key] === 'function') {
-				module[key] = require('util').deprecate(module[key], '.async.' + (parts.concat([key]).join('.')) + ' usage is deprecated use .' + (parts.concat([key]).join('.')) + ' directly!');
-			}
-		});
-		parts.pop();
-	}
-
 	promisifyRecursive(theModule);
-	const asyncModule = _.cloneDeep(theModule);
-	deprecateRecursive(asyncModule);
-
-	return asyncModule;
 };

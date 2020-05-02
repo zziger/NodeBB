@@ -4,7 +4,6 @@ const nconf = require('nconf');
 const validator = require('validator');
 const winston = require('winston');
 const querystring = require('querystring');
-const url = require('url');
 const _ = require('lodash');
 
 const user = require('../user');

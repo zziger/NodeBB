@@ -131,4 +131,4 @@ require('./redis/sorted')(redisModule);
 require('./redis/list')(redisModule);
 require('./redis/transaction')(redisModule);
 
-redisModule.async = require('../promisify')(redisModule, ['client', 'sessionStore']);
+require('../promisify')(redisModule, ['client', 'sessionStore']);

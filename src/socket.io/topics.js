@@ -34,7 +34,7 @@ SocketTopics.post = async function (socket, data) {
 	const result = await topics.post(data);
 	socketHelpers.notifyNew(socket.uid, 'newTopic', {
 		posts: [result.postData],
-		topic: result.topicData
+		topic: result.topicData,
 	});
 	return result.topicData;
 };

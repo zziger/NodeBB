@@ -10,7 +10,7 @@ const events = require('../../events');
 const meta = require('../../meta');
 const plugins = require('../../plugins');
 const translator = require('../../translator');
-const sockets = require('../');
+const sockets = require('../index');
 
 const User = module.exports;
 

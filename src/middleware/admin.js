@@ -18,10 +18,6 @@ var controllers = {
 
 module.exports = function (middleware) {
 	middleware.admin = {};
-	middleware.admin.isAdmin = function (req, res, next) {
-		winston.warn('[middleware.admin.isAdmin] deprecation warning, no need to use this from plugins!');
-		middleware.isAdmin(req, res, next);
-	};
 
 	middleware.admin.buildHeader = function (req, res, next) {
 		res.locals.renderAdminHeader = true;

@@ -242,4 +242,4 @@ Analytics.getBlacklistAnalytics = async function () {
 	});
 };
 
-Analytics.async = require('./promisify')(Analytics);
+require('./promisify')(Analytics);

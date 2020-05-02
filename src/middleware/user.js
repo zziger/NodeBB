@@ -115,11 +115,6 @@ module.exports = function (middleware) {
 		return next();
 	}
 
-	middleware.checkGlobalPrivacySettings = function checkGlobalPrivacySettings(req, res, next) {
-		winston.warn('[middleware], checkGlobalPrivacySettings deprecated, use canViewUsers or canViewGroups');
-		middleware.canViewUsers(req, res, next);
-	};
-
 	middleware.canViewUsers = async function canViewUsers(req, res, next) {
 		if (parseInt(res.locals.uid, 10) === req.uid) {
 			return next();

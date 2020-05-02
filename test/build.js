@@ -132,7 +132,7 @@ describe('Build', function (done) {
 	it('should build plugin static dirs', function (done) {
 		build.build(['plugin static dirs'], function (err) {
 			assert.ifError(err);
-			assert(file.existsSync(path.join(__dirname, '../build/public/plugins/nodebb-plugin-dbsearch/dbsearch')));
+			assert(file.existsSync(path.join(__dirname, '../build/public/plugins/nodebb-plugin-markdown/styles')));
 			done();
 		});
 	});

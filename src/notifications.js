@@ -417,4 +417,4 @@ Notifications.merge = async function (notifications) {
 	return data && data.notifications;
 };
 
-Notifications.async = require('./promisify')(Notifications);
+require('./promisify')(Notifications);
