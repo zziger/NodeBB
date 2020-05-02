@@ -34,7 +34,7 @@ Topics.reply = async (req, res) => {
 		tid: req.params.tid,
 		content: req.body.content,
 	};
-console.log('req.user', req.user);
+
 	if (req.body.toPid) { payload.toPid = req.body.toPid; }
 
 	socketHelpers.setDefaultPostData(payload, { uid: req.uid, request: req, ip: req.ip });
