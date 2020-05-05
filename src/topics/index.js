@@ -110,8 +110,6 @@ Topics.getTopicsByTids = async function (tids, options) {
 			topics[i].unread = !hasRead[i] && !isIgnored[i];
 			topics[i].bookmark = sortOldToNew ? Math.max(1, topics[i].postcount + 2 - bookmarks[i]) : bookmarks[i];
 			topics[i].unreplied = !topics[i].teaser;
-
-			topics[i].icons = [];
 		}
 	}
 
