@@ -337,7 +337,7 @@ function updateTitle(title) {
 	title = translator.unescape(title);
 
 	translator.translate(title, function (translated) {
-		window.document.title = $('<div/>').html(translated).text();
+		window.document.title = $('<div></div>').html(translated).text();
 	});
 }
 
