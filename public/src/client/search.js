@@ -145,7 +145,7 @@ define('forum/search', ['search', 'autocomplete', 'storage'], function (searchMo
 
 			result.find('*').each(function () {
 				$(this).after('<!-- ' + nested.length + ' -->');
-				nested.push($('<div />').append($(this)));
+				nested.push($('<div></div>').append($(this)));
 			});
 
 			result.html(result.html().replace(regex, function (match, p1) {

@@ -32,7 +32,7 @@ define('settings/sorted-list', ['benchpress', 'jquery-ui', 'jquery-deserialize',
 					var modal = bootbox.confirm(formHtml, function (save) {
 						if (save) {
 							var itemUUID = utils.generateUUID();
-							var form = $('<form class="" data-sorted-list-uuid="' + itemUUID + '" data-sorted-list-object="' + key + '" />');
+							var form = $('<form class="" data-sorted-list-uuid="' + itemUUID + '" data-sorted-list-object="' + key + '"></form>');
 							form.append(modal.find('form').children());
 
 							$('#content').append(form.hide());
@@ -82,7 +82,7 @@ define('settings/sorted-list', ['benchpress', 'jquery-ui', 'jquery-deserialize',
 
 			var modal = bootbox.confirm(form, function (save) {
 				if (save) {
-					var form = $('<form class="" data-sorted-list-uuid="' + itemUUID + '" data-sorted-list-object="' + key + '" />');
+					var form = $('<form class="" data-sorted-list-uuid="' + itemUUID + '" data-sorted-list-object="' + key + '"></form>');
 					form.append(modal.find('form').children());
 
 					$('#content').find('[data-sorted-list-uuid="' + itemUUID + '"][data-sorted-list-object="' + key + '"]').remove();

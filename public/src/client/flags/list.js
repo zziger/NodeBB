@@ -22,7 +22,7 @@ define('forum/flags/list', ['components', 'chart.js'], function (components, Cha
 			var payload = filtersEl.serializeArray().filter(function (item) {
 				return !!item.value;
 			});
-			ajaxify.go('flags?' + $.param(payload));
+			ajaxify.go('flags?' + (payload.length ? $.param(payload) : 'reset=1'));
 		});
 	};
 

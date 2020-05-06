@@ -105,6 +105,7 @@
 
 	"bookmark": "Bookmark",
 	"bookmarks": "Bookmarks",
+
 	"bookmarks.has-no-bookmarks": "You haven't bookmarked any posts yet.",
 
 	"loading-more-posts": "Loading More Posts",
@@ -119,7 +120,8 @@
 	"fork-success": "Successfully forked topic! Click here to go to the forked topic.",
 
 	"composer.title-placeholder": "Enter your topic title here...",
-	"composer.handle-placeholder": "Name",
+	"composer.handle-placeholder": "Enter your name/handle here",
+
 	"composer.discard": "Discard",
 	"composer.submit": "Submit",
 	"composer.replying-to": "Replying to %1",

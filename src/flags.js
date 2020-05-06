@@ -296,8 +296,7 @@ Flags.create = async function (type, id, uid, reason, timestamp) {
 	if (type === 'post') {
 		await db.sortedSetAdd('flags:byPid:' + id, timestamp, flagId);	// by target pid
 		if (targetUid) {
-			await db.sortedSetIncrBy('users:flags', 1, targetUid);
-			await user.incrementUserFieldBy(targetUid, 'flags', 1);
+			await user.incrementUserFlagsBy(targetUid, 1);
 		}
 	}
 
@@ -363,7 +362,7 @@ Flags.getTargetCid = async function (type, id) {
 };
 
 Flags.update = async function (flagId, uid, changeset) {
-	const current = await db.getObjectFields('flag:' + flagId, ['state', 'assignee', 'type', 'targetId']);
+	const current = await db.getObjectFields('flag:' + flagId, ['uid', 'state', 'assignee', 'type', 'targetId']);
 	const now = changeset.datetime || Date.now();
 	const notifyAssignee = async function (assigneeId) {
 		if (assigneeId === '' || parseInt(uid, 10) === parseInt(assigneeId, 10)) {
@@ -404,6 +403,9 @@ Flags.update = async function (flagId, uid, changeset) {
 				} else {
 					tasks.push(db.sortedSetAdd('flags:byState:' + changeset[prop], now, flagId));
 					tasks.push(db.sortedSetRemove('flags:byState:' + current[prop], flagId));
+					if (changeset[prop] === 'resolved' || changeset[prop] === 'rejected') {
+						tasks.push(notifications.rescind('flag:' + current.type + ':' + current.targetId + ':uid:' + current.uid));
+					}
 				}
 			} else if (prop === 'assignee') {
 				/* eslint-disable-next-line */
