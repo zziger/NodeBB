@@ -83,7 +83,7 @@ define('forum/topic', [
 
 		if (config.topicSearchEnabled) {
 			require(['mousetrap'], function (mousetrap) {
-				mousetrap.bind('ctrl+f', function (e) {
+				mousetrap.bind(['command+f', 'ctrl+f'], function (e) {
 					if (ajaxify.data.template.topic && ajaxify.data.tid) {
 						e.preventDefault();
 						$('#search-fields input').val('in:topic-' + ajaxify.data.tid + ' ');
