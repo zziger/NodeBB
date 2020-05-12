@@ -76,7 +76,7 @@ function authenticatedRoutes() {
 	// 		});
 
 	/**
-	 * Implement this later...
+	 * Implement this later... in its own "tokens" route, no need for uid in path (see https://github.com/NodeBB/nodebb-plugin-write-api/issues/124)
 	 */
 	// 	app.route('/:uid/tokens')
 	// 		.get(apiMiddleware.requireUser, function(req, res) {
