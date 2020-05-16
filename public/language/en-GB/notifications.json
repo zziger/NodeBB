@@ -38,6 +38,7 @@
 	"user-posted-to-dual" : "<strong>%1</strong> and <strong>%2</strong> have posted replies to: <strong>%3</strong>",
 	"user-posted-to-multiple" : "<strong>%1</strong> and %2 others have posted replies to: <strong>%3</strong>",
 	"user-posted-topic": "<strong>%1</strong> has posted a new topic: <strong>%2</strong>",
+	"user-edited-post" : "<strong>%1</strong> has edited a post in <strong>%2</strong>",
 	"user-started-following-you": "<strong>%1</strong> started following you.",
 	"user-started-following-you-dual": "<strong>%1</strong> and <strong>%2</strong> started following you.",
 	"user-started-following-you-multiple": "<strong>%1</strong> and %2 others started following you.",
@@ -52,12 +53,14 @@
 	"email-confirm-sent": "Confirmation email sent.",
 
 	"none": "None",
+
 	"notification-only": "Notification Only",
 	"email-only": "Email Only",
 	"notification-and-email": "Notification & Email",
 	"notificationType-upvote": "When someone upvotes your post",
 	"notificationType-new-topic": "When someone you follow posts a topic",
 	"notificationType-new-reply": "When a new reply is posted in a topic you are watching",
+	"notificationType-post-edit": "When a post is edited in a topic you are watching",
 	"notificationType-follow": "When someone starts following you",
 	"notificationType-new-chat": "When you receive a chat message",
 	"notificationType-group-invite": "When you receive a group invite",

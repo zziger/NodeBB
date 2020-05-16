@@ -15,15 +15,17 @@ info:
 
     ## Authentication
 
+    There are a multitude of ways to authenticate with the Read API.
+
     ### Cookie Authentication
 
     This default authentication behaviour of this API is via cookie jar to find a valid session. A valid login session is required for API calls that pertain to operations involving a logged-in user. For example, `/api/unread` is a route showing unread topics, and is not accessible by guest users.
 
-    ### Bearer Authentcation
+    ### Bearer Authentication
 
-    The Write API offers bearer authentication, as administered through the administration panel.
+    Both the Read API and Write API offers bearer authentication, as administered through the administration panel.
 
-      * For NodeBB v1.x, this is provided by [`nodebb-plugin-write-api`](https://github.com/NodeBB/nodebb-plugin-write-api).
+      * For NodeBB v1.x, this is provided by [`nodebb-plugin-write-api`](https://github.com/NodeBB/nodebb-plugin-write-api). The Write API plugin needs to be installed before authentication via bearer token is enabled on routes provided by the Read API.
       * For NodeBB v2.x+ (in development), the Write API is available in core, and bearer authentication is available out-of-the-box
 
     ### JSON Web Token (JWT)
@@ -260,14 +262,6 @@ paths:
                                 imageClass:
                                   type: string
                   - $ref: components/schemas/CommonProps.yaml#/CommonProps
-  /api/admin:
-    get:
-      tags:
-        - admin
-      summary: /api/admin
-      responses:
-        "418":
-          description: "TODO: A proper response needs to be added. It is not really a teapot | This route is identical to /api/admin/general/dashboard. When the routes are split into separate files, replace this definition with a $ref to that route"
   /api/admin/general/dashboard:
     get:
       tags:
@@ -511,7 +505,7 @@ paths:
     get:
       tags:
         - admin
-      summary: /api/admin/general/homepage
+      summary: Get homepage settings
       responses:
         "200":
           description: ""
@@ -564,7 +558,7 @@ paths:
     get:
       tags:
         - admin
-      summary: /api/admin/manage/categories
+      summary: Get category management settings
       responses:
         "200":
           description: ""
@@ -576,7 +570,7 @@ paths:
     get:
       tags:
         - admin
-      summary: /api/admin/manage/categories/{category_id}
+      summary: Get category settings
       parameters:
         - name: category_id
           in: path
@@ -626,7 +620,7 @@ paths:
     get:
       tags:
         - admin
-      summary: /api/admin/manage/categories/{category_id}/analytics
+      summary: Get category anayltics
       parameters:
         - name: category_id
           in: path
@@ -1012,7 +1006,7 @@ paths:
     get:
       tags:
         - admin
-      summary: /api/admin/manage/users
+      summary: Get users
       responses:
         "200":
           description: ""
@@ -1048,7 +1042,7 @@ paths:
     get:
       tags:
         - admin
-      summary: /api/admin/manage/users/search
+      summary: Get users via search term
       responses:
         "200":
           description: ""
@@ -1069,7 +1063,7 @@ paths:
     get:
       tags:
         - admin
-      summary: /api/admin/manage/users/latest
+      summary: Get latest users
       responses:
         "418":
           description: "TODO: A proper response needs to be added. It is not really a teapot | Replace this responses block with the block from /manage/users/latest"
@@ -1077,7 +1071,7 @@ paths:
     get:
       tags:
         - admin
-      summary: /api/admin/manage/users/not-validated
+      summary: Get non-verified users
       responses:
         "418":
           description: "TODO: A proper response needs to be added. It is not really a teapot | Replace this responses block with the block from /manage/users/latest"
@@ -1085,7 +1079,7 @@ paths:
     get:
       tags:
         - admin
-      summary: /api/admin/manage/users/no-posts
+      summary: Get users with no posts
       responses:
         "418":
           description: "TODO: A proper response needs to be added. It is not really a teapot | Replace this responses block with the block from /manage/users/latest"
@@ -1093,7 +1087,7 @@ paths:
     get:
       tags:
         - admin
-      summary: /api/admin/manage/users/top-posters
+      summary: Get users with the most posts
       responses:
         "418":
           description: "TODO: A proper response needs to be added. It is not really a teapot | Replace this responses block with the block from /manage/users/latest"
@@ -1101,7 +1095,7 @@ paths:
     get:
       tags:
         - admin
-      summary: /api/admin/manage/users/most-reputation
+      summary: Get users with the most reputation
       responses:
         "418":
           description: "TODO: A proper response needs to be added. It is not really a teapot | Replace this responses block with the block from /manage/users/latest"
@@ -1109,7 +1103,7 @@ paths:
     get:
       tags:
         - admin
-      summary: /api/admin/manage/users/inactive
+      summary: Get inactive users
       responses:
         "418":
           description: "TODO: A proper response needs to be added. It is not really a teapot | Replace this responses block with the block from /manage/users/latest"
@@ -1117,7 +1111,7 @@ paths:
     get:
       tags:
         - admin
-      summary: /api/admin/manage/users/flagged
+      summary: Get flagged users
       responses:
         "418":
           description: "TODO: A proper response needs to be added. It is not really a teapot | Replace this responses block with the block from /manage/users/latest"
@@ -1125,7 +1119,7 @@ paths:
     get:
       tags:
         - admin
-      summary: /api/admin/manage/users/banned
+      summary: Get banned users
       responses:
         "418":
           description: "TODO: A proper response needs to be added. It is not really a teapot | Replace this responses block with the block from /manage/users/latest"
@@ -1281,7 +1275,7 @@ paths:
     get:
       tags:
         - admin
-      summary: /api/admin/manage/groups
+      summary: Get user groups
       responses:
         "200":
           description: ""
@@ -1374,7 +1368,7 @@ paths:
     get:
       tags:
         - admin
-      summary: /api/admin/manage/groups/{name}
+      summary: Get user group details
       parameters:
         - name: name
           in: path
@@ -1569,7 +1563,7 @@ paths:
     get:
       tags:
         - admin
-      summary: /api/admin/extend/plugins
+      summary: Get system plugin settings
       responses:
         "200":
           description: ""
@@ -1721,7 +1715,7 @@ paths:
     get:
       tags:
         - admin
-      summary: /api/admin/extend/widgets
+      summary: Get widget settings
       responses:
         "200":
           description: ""
@@ -2095,7 +2089,7 @@ paths:
     get:
       tags:
         - admin
-      summary: /api/admin/advanced/cache
+      summary: Get system cache info
       responses:
         "200":
           description: ""
@@ -2187,7 +2181,7 @@ paths:
     get:
       tags:
         - admin
-      summary: /api/admin/development/logger
+      summary: Get system logger settings
       responses:
         "200":
           description: ""
@@ -2692,7 +2686,8 @@ paths:
     get:
       tags:
         - home
-      summary: /api/config
+      summary: Get forum settings
+      description: This route retrieves forum settings and user-specific settings for client-side options on the forum.
       responses:
         "200":
           description: ""
@@ -2825,23 +2820,131 @@ paths:
                     type: boolean
                   enableQuickReply:
                     type: boolean
-  /api/me:
+  /api/users:
     get:
       tags:
-        - shorthand
-      summary: /api/me
+        - users
+      summary: Get users
+      parameters:
+        - in: query
+          name: section
+          schema:
+            type: string
+            enum: ['joindate', 'online', 'sort-posts', 'sort-reputation', 'banned', 'flagged']
+          required: false
+          description: Allows filtering of the user list via pre-defined sections
+          example: 'joindate'
+        - in: query
+          name: term
+          schema:
+            type: string
+          required: false
+          description: Allows for searching of user list
+          example: ''
       responses:
         "200":
           description: ""
           content:
             application/json:
               schema:
-                $ref: components/schemas/UserObject.yaml#/UserObjectFull
+                allOf:
+                  - type: object
+                    properties:
+                      users:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            uid:
+                              type: number
+                              description: A user identifier
+                            username:
+                              type: string
+                              description: A friendly name for a given user account
+                            userslug:
+                              type: string
+                              description: An URL-safe variant of the username (i.e. lower-cased, spaces
+                                removed, etc.)
+                            picture:
+                              nullable: true
+                              type: string
+                            status:
+                              type: string
+                            postcount:
+                              type: number
+                            reputation:
+                              type: number
+                            email:confirmed:
+                              type: number
+                              description: Whether the user has confirmed their email address or not
+                            lastonline:
+                              type: number
+                            flags:
+                              nullable: true
+                            banned:
+                              type: number
+                            banned:expire:
+                              type: number
+                            joindate:
+                              type: number
+                              description: A UNIX timestamp representing the moment the user's account was
+                                created
+                            icon:text:
+                              type: string
+                              description: A single-letter representation of a username. This is used in the
+                                auto-generated icon given to users without an
+                                avatar
+                            icon:bgColor:
+                              type: string
+                              description: A six-character hexadecimal colour code assigned to the user. This
+                                value is used in conjunction with `icon:text`
+                                for the user's auto-generated icon
+                              example: "#f44336"
+                            joindateISO:
+                              type: string
+                            lastonlineISO:
+                              type: string
+                            banned_until:
+                              type: number
+                            banned_until_readable:
+                              type: string
+                            administrator:
+                              type: boolean
+                      userCount:
+                        type: number
+                      title:
+                        type: string
+                      isAdminOrGlobalMod:
+                        type: boolean
+                      isAdmin:
+                        type: boolean
+                      isGlobalMod:
+                        type: boolean
+                      displayUserSearch:
+                        type: boolean
+                      section_joindate:
+                        type: boolean
+                      maximumInvites:
+                        type: number
+                      inviteOnly:
+                        type: boolean
+                      adminInviteOnly:
+                        type: boolean
+                      invites:
+                        type: number
+                      showInviteButton:
+                        type: boolean
+                      reputation:disabled:
+                        type: number
+                  - $ref: components/schemas/Pagination.yaml#/Pagination
+                  - $ref: components/schemas/Breadcrumbs.yaml#/Breadcrumbs
+                  - $ref: components/schemas/CommonProps.yaml#/CommonProps
   "/api/user/uid/{uid}":
     get:
       tags:
         - users
-      summary: /api/user/uid/{uid}
+      summary: Get user by uid
+      description: This route retrieves a user's public profile data. If the calling user is the same as the profile, then it will also return data the user elected to hide (e.g. email/fullname)
       parameters:
         - name: uid
           in: path
@@ -2860,7 +2963,8 @@ paths:
     get:
       tags:
         - users
-      summary: /api/user/username/{username}
+      summary: Get user by username
+      description: This route retrieves a user's public profile data. If the calling user is the same as the profile, then it will also return data the user elected to hide (e.g. email/fullname)
       parameters:
         - name: username
           in: path
@@ -2879,7 +2983,8 @@ paths:
     get:
       tags:
         - users
-      summary: /api/user/email/{email}
+      summary: Get user by email
+      description: This route retrieves a user's public profile data. If the calling user is the same as the profile, then it will also return data the user elected to hide (e.g. email/fullname)
       parameters:
         - name: email
           in: path
@@ -2918,7 +3023,7 @@ paths:
     get:
       tags:
         - users
-      summary: /api/user/uid/{userslug}/export/uploads
+      summary: Export a user's uploads (.zip)
       parameters:
         - name: userslug
           in: path
@@ -2938,7 +3043,7 @@ paths:
     get:
       tags:
         - users
-      summary: /api/user/uid/{userslug}/export/profile
+      summary: Export a user's profile data (.csv)
       parameters:
         - name: userslug
           in: path
@@ -3373,456 +3478,11 @@ paths:
                   - 1
                   - 2
                   - 3
-  "/api/recent/posts/{term?}":
-    get:
-      tags:
-        - topics
-      summary: /api/recent/posts/{term?}
-      parameters:
-        - name: term?
-          in: path
-          required: true
-          schema:
-            type: string
-          example: day
-      responses:
-        "200":
-          description: ""
-          content:
-            application/json:
-              schema:
-                $ref: components/schemas/PostsObject.yaml#/PostsObject
-  /api/unread/total:
-    get:
-      tags:
-        - topics
-      summary: Get number of unread topics
-      responses:
-        "200":
-          description: "Success"
-          content:
-            text/plain:
-              schema:
-                type: number
-  "/api/topic/teaser/{topic_id}":
-    get:
-      tags:
-        - topics
-      summary: Get a topic's teaser post
-      parameters:
-        - name: topic_id
-          in: path
-          required: true
-          schema:
-            type: string
-          example: 1
-      responses:
-        "200":
-          description: "A JSON object containing the teaser post for a topic"
-          content:
-            application/json:
-              schema:
-                $ref: components/schemas/PostsObject.yaml#/PostsObject
-  "/api/topic/pagination/{topic_id}":
-    get:
-      tags:
-        - topics
-      summary: /api/topic/pagination/{topic_id}
-      parameters:
-        - name: topic_id
-          in: path
-          required: true
-          schema:
-            type: string
-          example: 1
-      responses:
-        "200":
-          description: ""
-          content:
-            application/json:
-              schema:
-                $ref: components/schemas/Pagination.yaml#/Pagination
-  /api/post/upload:
-    post:
-      tags:
-        - posts
-      summary: /api/post/upload
-      responses:
-        "200":
-          description: ""
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    name:
-                      type: string
-                    url:
-                      type: string
-            text/plain:
-              schema:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    name:
-                      type: string
-                    url:
-                      type: string
-        "403":
-          description: ""
-          content:
-            application/json:
-              schema:
-                type: string
-                example: Forbidden
-            text/plain:
-              schema:
-                type: string
-                example: Forbidden
-        "500":
-          description: ""
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  path:
-                    type: string
-                  error:
-                    type: string
-            text/plain:
-              schema:
-                type: object
-                properties:
-                  path:
-                    type: string
-                  error:
-                    type: string
-  /api/topic/thumb/upload:
-    post:
-      tags:
-        - topics
-      summary: Upload topic thumb
-      requestBody:
-        required: true
-        content:
-          multipart/form-data:
-            schema:
-              type: object
-              properties:
-                files:
-                  type: array
-                  items:
-                    type: string
-                    format: binary
-              required:
-                - files
-      responses:
-        "200":
-          description: "Image uploaded"
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  name:
-                    type: string
-                    description: The filename
-                  url:
-                    type: string
-                    description: URL of the uploaded image for use client-side
-                  path:
-                    type: string
-                    description: Path to the file in the local file system
-  /api/login:
-    get:
-      tags:
-        - authentication
-      summary: /api/login
-      responses:
-        "200":
-          description: ""
-          content:
-            application/json:
-              schema:
-                allOf:
-                  - type: object
-                    properties:
-                      loginFormEntry:
-                        type: array
-                        items:
-                          type: object
-                          properties:
-                            label:
-                              type: string
-                              description: A label for the added block
-                            html:
-                              type: string
-                              description: HTML to render on the login page
-                            styleName:
-                              type: string
-                              description: Custom identifier (value is added to `input[id]` and `label[for]`)
-                      alternate_logins:
-                        type: boolean
-                      authentication:
-                        type: array
-                        items:
-                          type: object
-                          properties:
-                            name:
-                              type: string
-                            url:
-                              type: string
-                            callbackURL:
-                              type: string
-                            icon:
-                              type: string
-                            scope:
-                              type: string
-                            prompt:
-                              type: string
-                      allowRegistration:
-                        type: boolean
-                      allowLoginWith:
-                        type: string
-                      title:
-                        type: string
-                      allowPasswordReset:
-                        type: boolean
-                      allowLocalLogin:
-                        type: boolean
-                  - $ref: components/schemas/Breadcrumbs.yaml#/Breadcrumbs
-                  - $ref: components/schemas/CommonProps.yaml#/CommonProps
-  /api/register:
-    get:
-      tags:
-        - authentication
-      summary: /api/register
-      responses:
-        "200":
-          description: ""
-          content:
-            application/json:
-              schema:
-                allOf:
-                  - type: object
-                    properties:
-                      register_window:spansize:
-                        type: string
-                      alternate_logins:
-                        type: boolean
-                      authentication:
-                        type: array
-                        items:
-                          type: object
-                          properties:
-                            name:
-                              type: string
-                            url:
-                              type: string
-                            callbackURL:
-                              type: string
-                            icon:
-                              type: string
-                            scope:
-                              type: string
-                            prompt:
-                              type: string
-                      minimumUsernameLength:
-                        type: number
-                      maximumUsernameLength:
-                        type: number
-                      minimumPasswordLength:
-                        type: number
-                      minimumPasswordStrength:
-                        type: number
-                      regFormEntry:
-                        type: array
-                        items:
-                          type: object
-                          properties:
-                            label:
-                              type: string
-                            html:
-                              type: string
-                            styleName:
-                              type: string
-                      title:
-                        type: string
-                  - $ref: components/schemas/Breadcrumbs.yaml#/Breadcrumbs
-                  - $ref: components/schemas/CommonProps.yaml#/CommonProps
-  # /api/register/complete:
-  #   get:
-  #     tags:
-  #       - authentication
-  #     summary: /api/register/complete
-  #     responses:
-  #       "200":
-  #         description: ""
-  #         content:
-  #           application/json:
-  #             schema:
-  #               allOf:
-  #                 - type: object
-  #                   properties:
-  #                     title:
-  #                       type: string
-  #                     errors:
-  #                       type: array
-  #                       items: {}
-  #                     sections:
-  #                       type: array
-  #                       items:
-  #                         type: string
-  #                 - $ref: components/schemas/CommonProps.yaml#/CommonProps
-  /api/search:
-    get:
-      tags:
-        - search
-      summary: /api/search
-      responses:
-        "200":
-          description: ""
-          content:
-            application/json:
-              schema:
-                allOf:
-                  - type: object
-                    properties:
-                      posts:
-                        $ref: components/schemas/PostsObject.yaml#/PostsObject
-                      matchCount:
-                        type: number
-                      pageCount:
-                        type: number
-                      time:
-                        type: string
-                      multiplePages:
-                        type: boolean
-                      search_query:
-                        type: string
-                      term:
-                        type: string
-                      categories:
-                        type: array
-                        items:
-                          type: object
-                          properties:
-                            value:
-                              oneOf:
-                                - type: string
-                                - type: number
-                            text:
-                              type: string
-                      categoriesCount:
-                        type: number
-                      expandSearch:
-                        type: boolean
-                      showAsPosts:
-                        type: boolean
-                      showAsTopics:
-                        type: boolean
-                      title:
-                        type: string
-                      searchDefaultSortBy:
-                        type: string
-                    required:
-                      - posts
-                      - matchCount
-                      - pageCount
-                      - time
-                      - multiplePages
-                      - search_query
-                      - categories
-                      - categoriesCount
-                      - expandSearch
-                      - showAsPosts
-                      - showAsTopics
-                      - title
-                      - searchDefaultSortBy
-                  - $ref: components/schemas/Pagination.yaml#/Pagination
-                  - $ref: components/schemas/Breadcrumbs.yaml#/Breadcrumbs
-                  - $ref: components/schemas/CommonProps.yaml#/CommonProps
-  "/api/reset":
-    get:
-      tags:
-        - authentication
-      summary: Get user password reset (step 1)
-      responses:
-        "200":
-          description: "A JSON object containing the 1st step of the user password reset flow"
-          content:
-            application/json:
-              schema:
-                allOf:
-                  - type: object
-                    properties:
-                      code:
-                        type: string
-                        nullable: true
-                      title:
-                        type: string
-                  - $ref: components/schemas/Breadcrumbs.yaml#/Breadcrumbs
-                  - $ref: components/schemas/CommonProps.yaml#/CommonProps
-  "/api/reset/{code}":
-    get:
-      tags:
-        - authentication
-      summary: Get user password reset (step 2)
-      parameters:
-        - name: code
-          in: path
-          required: true
-          schema:
-            type: string
-          example: testCode
-      responses:
-        "200":
-          description: "A JSON object containing the 2nd step of the user password reset flow"
-          content:
-            application/json:
-              schema:
-                allOf:
-                  - type: object
-                    properties:
-                      valid:
-                        type: boolean
-                      code:
-                        type: string
-                      minimumPasswordLength:
-                        type: number
-                      minimumPasswordStrength:
-                        type: number
-                      title:
-                        type: string
-                  - $ref: components/schemas/Breadcrumbs.yaml#/Breadcrumbs
-                  - $ref: components/schemas/CommonProps.yaml#/CommonProps
-  "/api/email/unsubscribe/{token}":
-    # TODO: Need GET route here as well
-    post:
-      tags:
-        - emails
-      summary: /api/email/unsubscribe/{token}
-      parameters:
-        - name: token
-          in: path
-          required: true
-          schema:
-            type: string
-          example: testToken
-      responses:
-        "200":
-          description: "Successfully unsubscribed"
-        "500":
-          description: "Server-side error (likely token verification failure)"
   "/api/topic/{topic_id}/{slug}/{post_index}":
     get:
       tags:
         - topics
-      summary: /api/topic/{topic_id}/{slug}/{post_index}
+      summary: Get topic data
       parameters:
         - name: topic_id
           in: path
@@ -3831,12 +3491,14 @@ paths:
             type: string
           example: 1
         - name: slug
+          description: This parameter is not required. If omitted, the request will be automatically redirected with the proper topic slug.
           in: path
           required: true
           schema:
             type: string
           example: test-topic
         - name: post_index
+          description: This parameter is not required. If omitted, the request will presume that you want the first post. The API response is largely unaffected by this parameter, it is used client-side (to send the user to the requested post), and changes the meta/link tags in the server-side generated HTML.
           in: path
           required: true
           schema:
@@ -4219,11 +3881,455 @@ paths:
                   - $ref: components/schemas/Pagination.yaml#/Pagination
                   - $ref: components/schemas/Breadcrumbs.yaml#/Breadcrumbs
                   - $ref: components/schemas/CommonProps.yaml#/CommonProps
-  "/api/topic/{topic_id}/{slug}":
+  /api/recent:
     get:
       tags:
         - topics
-      summary: /api/topic/{topic_id}/{slug}
+      summary: Get recent topics
+      description: Returns a list of topics sorted by timestamp.
+      responses:
+        "200":
+          description: An array of topic objects sorted by timestamp.
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - type: object
+                    properties:
+                      nextStart:
+                        type: number
+                      topicCount:
+                        type: number
+                      topics:
+                        type: array
+                        items:
+                          $ref: components/schemas/TopicObject.yaml#/TopicObject
+                      tids:
+                        type: array
+                        items:
+                          type: number
+                      canPost:
+                        type: boolean
+                      categories:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            cid:
+                              type: number
+                              description: A category identifier
+                            name:
+                              type: string
+                            level:
+                              type: string
+                            icon:
+                              type: string
+                            parentCid:
+                              type: number
+                              description: The category identifier for the category that is the immediate
+                                ancestor of the current category
+                            color:
+                              type: string
+                            bgColor:
+                              type: string
+                            selected:
+                              type: boolean
+                            imageClass:
+                              type: string
+                      allCategoriesUrl:
+                        type: string
+                      selectedCategory:
+                        type: object
+                        properties:
+                          icon:
+                            type: string
+                          name:
+                            type: string
+                          bgColor:
+                            type: string
+                        nullable: true
+                      selectedCids:
+                        type: array
+                        items:
+                          type: number
+                      feeds:disableRSS:
+                        type: number
+                      rssFeedUrl:
+                        type: string
+                      title:
+                        type: string
+                      filters:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            name:
+                              type: string
+                            url:
+                              type: string
+                            selected:
+                              type: boolean
+                            filter:
+                              type: string
+                      selectedFilter:
+                        type: object
+                        properties:
+                          name:
+                            type: string
+                          url:
+                            type: string
+                          selected:
+                            type: boolean
+                          filter:
+                            type: string
+                      terms:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            name:
+                              type: string
+                            url:
+                              type: string
+                            selected:
+                              type: boolean
+                            term:
+                              type: string
+                      selectedTerm:
+                        type: object
+                        properties:
+                          name:
+                            type: string
+                          url:
+                            type: string
+                          selected:
+                            type: boolean
+                          term:
+                            type: string
+                  - $ref: components/schemas/Pagination.yaml#/Pagination
+                  - $ref: components/schemas/Breadcrumbs.yaml#/Breadcrumbs
+                  - $ref: components/schemas/CommonProps.yaml#/CommonProps
+  "/api/recent/posts/{term}":
+    get:
+      tags:
+        - posts
+      summary: Get recent posts
+      parameters:
+        - name: term
+          in: path
+          required: true
+          schema:
+            type: string
+          example: daily
+      responses:
+        "200":
+          description: ""
+          content:
+            application/json:
+              schema:
+                $ref: components/schemas/PostsObject.yaml#/PostsObject
+  /api/unread:
+    get:
+      tags:
+        - topics
+      summary: Get unread topics
+      description: Returns a list of the current user's unread topics, sorted by the
+        last post's timestamp.
+      responses:
+        "200":
+          description: An array of unread topic objects sorted by the last post's timestamp.
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - type: object
+                    properties:
+                      showSelect:
+                        type: boolean
+                      nextStart:
+                        type: number
+                      topics:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            tid:
+                              type: number
+                              description: A topic identifier
+                            uid:
+                              type: number
+                              description: A user identifier
+                            cid:
+                              type: number
+                              description: A category identifier
+                            mainPid:
+                              type: number
+                              description: The post id of the first post in this topic (also called the
+                                "original post")
+                            title:
+                              type: string
+                            slug:
+                              type: string
+                            timestamp:
+                              type: number
+                            lastposttime:
+                              type: number
+                            postcount:
+                              type: number
+                            viewcount:
+                              type: number
+                            teaserPid:
+                              type: number
+                            upvotes:
+                              type: number
+                            downvotes:
+                              type: number
+                            deleted:
+                              type: number
+                            locked:
+                              type: number
+                            pinned:
+                              type: number
+                              description: Whether or not this particular topic is pinned to the top of the
+                                category
+                            titleRaw:
+                              type: string
+                            timestampISO:
+                              type: string
+                              description: An ISO 8601 formatted date string (complementing `timestamp`)
+                            lastposttimeISO:
+                              type: string
+                            votes:
+                              type: number
+                            category:
+                              type: object
+                              properties:
+                                cid:
+                                  type: number
+                                  description: A category identifier
+                                name:
+                                  type: string
+                                slug:
+                                  type: string
+                                icon:
+                                  type: string
+                                image:
+                                  nullable: true
+                                imageClass:
+                                  nullable: true
+                                  type: string
+                                bgColor:
+                                  type: string
+                                color:
+                                  type: string
+                                disabled:
+                                  type: number
+                            user:
+                              type: object
+                              properties:
+                                uid:
+                                  type: number
+                                  description: A user identifier
+                                username:
+                                  type: string
+                                  description: A friendly name for a given user account
+                                fullname:
+                                  type: string
+                                userslug:
+                                  type: string
+                                  description: An URL-safe variant of the username (i.e. lower-cased, spaces
+                                    removed, etc.)
+                                reputation:
+                                  type: number
+                                postcount:
+                                  type: number
+                                picture:
+                                  nullable: true
+                                  type: string
+                                signature:
+                                  nullable: true
+                                  type: string
+                                banned:
+                                  type: number
+                                status:
+                                  type: string
+                                icon:text:
+                                  type: string
+                                  description: A single-letter representation of a username. This is used in the
+                                    auto-generated icon given to users without
+                                    an avatar
+                                icon:bgColor:
+                                  type: string
+                                  description: A six-character hexadecimal colour code assigned to the user. This
+                                    value is used in conjunction with
+                                    `icon:text` for the user's auto-generated
+                                    icon
+                                  example: "#f44336"
+                                banned_until_readable:
+                                  type: string
+                            teaser:
+                              type: object
+                              properties:
+                                pid:
+                                  type: number
+                                uid:
+                                  type: number
+                                  description: A user identifier
+                                timestamp:
+                                  type: number
+                                tid:
+                                  type: number
+                                  description: A topic identifier
+                                content:
+                                  type: string
+                                timestampISO:
+                                  type: string
+                                  description: An ISO 8601 formatted date string (complementing `timestamp`)
+                                user:
+                                  type: object
+                                  properties:
+                                    uid:
+                                      type: number
+                                      description: A user identifier
+                                    username:
+                                      type: string
+                                      description: A friendly name for a given user account
+                                    userslug:
+                                      type: string
+                                      description: An URL-safe variant of the username (i.e. lower-cased, spaces
+                                        removed, etc.)
+                                    picture:
+                                      nullable: true
+                                      type: string
+                                    icon:text:
+                                      type: string
+                                      description: A single-letter representation of a username. This is used in the
+                                        auto-generated icon given to users
+                                        without an avatar
+                                    icon:bgColor:
+                                      type: string
+                                      description: A six-character hexadecimal colour code assigned to the user. This
+                                        value is used in conjunction with
+                                        `icon:text` for the user's
+                                        auto-generated icon
+                                      example: "#f44336"
+                                index:
+                                  type: number
+                            tags:
+                              type: array
+                              items:
+                                type: object
+                                properties:
+                                  value:
+                                    type: string
+                                  valueEscaped:
+                                    type: string
+                                  color:
+                                    type: string
+                                  bgColor:
+                                    type: string
+                                  score:
+                                    type: number
+                            isOwner:
+                              type: boolean
+                            ignored:
+                              type: boolean
+                            unread:
+                              type: boolean
+                            bookmark:
+                              nullable: true
+                            unreplied:
+                              type: boolean
+                            icons:
+                              type: array
+                              items:
+                                type: string
+                            index:
+                              type: number
+                            isQuestion:
+                              nullable: true
+                      topicCount:
+                        type: number
+                      title:
+                        type: string
+                      pageCount:
+                        type: number
+                      categories:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            cid:
+                              type: number
+                              description: A category identifier
+                            name:
+                              type: string
+                            level:
+                              type: string
+                            icon:
+                              type: string
+                            parentCid:
+                              type: number
+                              description: The category identifier for the category that is the immediate
+                                ancestor of the current category
+                            color:
+                              type: string
+                            bgColor:
+                              type: string
+                            selected:
+                              type: boolean
+                            imageClass:
+                              type: string
+                      allCategoriesUrl:
+                        type: string
+                      selectedCids:
+                        type: array
+                        items:
+                          type: number
+                      filters:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            name:
+                              type: string
+                            url:
+                              type: string
+                            selected:
+                              type: boolean
+                            filter:
+                              type: string
+                      selectedFilter:
+                        type: object
+                        properties:
+                          name:
+                            type: string
+                          url:
+                            type: string
+                          selected:
+                            type: boolean
+                          filter:
+                            type: string
+                  - $ref: components/schemas/Pagination.yaml#/Pagination
+                  - $ref: components/schemas/Breadcrumbs.yaml#/Breadcrumbs
+                  - $ref: components/schemas/CommonProps.yaml#/CommonProps
+  /api/unread/total:
+    get:
+      tags:
+        - topics
+      summary: Get number of unread topics
+      responses:
+        "200":
+          description: "Success"
+          content:
+            text/plain:
+              schema:
+                type: number
+  "/api/topic/teaser/{topic_id}":
+    get:
+      tags:
+        - topics
+      summary: Get a topic's teaser post
       parameters:
         - name: topic_id
           in: path
@@ -4231,15 +4337,410 @@ paths:
           schema:
             type: string
           example: 1
-        - name: slug
+      responses:
+        "200":
+          description: "A JSON object containing the teaser post for a topic"
+          content:
+            application/json:
+              schema:
+                $ref: components/schemas/PostsObject.yaml#/PostsObject
+  "/api/topic/pagination/{topic_id}":
+    get:
+      tags:
+        - topics
+      summary: Get topic pagination data
+      description: This route retrieves pagination data for a given topic. It is used mainly client-side, as it return data necessary to update a pagination block client-side.
+      parameters:
+        - name: topic_id
           in: path
           required: true
           schema:
             type: string
-          example: ''
+          example: 1
       responses:
-        "418":
-          description: "TODO: A proper response needs to be added. It is not really a teapot | Copy response from the route w/o post_index"
+        "200":
+          description: ""
+          content:
+            application/json:
+              schema:
+                $ref: components/schemas/Pagination.yaml#/Pagination
+  /api/post/upload:
+    post:
+      tags:
+        - posts
+      summary: Upload a file to a specific post
+      description: Provided by NodeBB core and used mainly by the composer, this route allows you to upload an image or file to a post.
+      responses:
+        "200":
+          description: ""
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                    url:
+                      type: string
+            text/plain:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                    url:
+                      type: string
+        "403":
+          description: ""
+          content:
+            application/json:
+              schema:
+                type: string
+                example: Forbidden
+            text/plain:
+              schema:
+                type: string
+                example: Forbidden
+        "500":
+          description: ""
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  path:
+                    type: string
+                  error:
+                    type: string
+            text/plain:
+              schema:
+                type: object
+                properties:
+                  path:
+                    type: string
+                  error:
+                    type: string
+  /api/topic/thumb/upload:
+    post:
+      tags:
+        - topics
+      summary: Upload topic thumb
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                files:
+                  type: array
+                  items:
+                    type: string
+                    format: binary
+              required:
+                - files
+      responses:
+        "200":
+          description: "Image uploaded"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  name:
+                    type: string
+                    description: The filename
+                  url:
+                    type: string
+                    description: URL of the uploaded image for use client-side
+                  path:
+                    type: string
+                    description: Path to the file in the local file system
+  /api/login:
+    get:
+      tags:
+        - authentication
+      summary: /api/login
+      responses:
+        "200":
+          description: ""
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - type: object
+                    properties:
+                      loginFormEntry:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            label:
+                              type: string
+                              description: A label for the added block
+                            html:
+                              type: string
+                              description: HTML to render on the login page
+                            styleName:
+                              type: string
+                              description: Custom identifier (value is added to `input[id]` and `label[for]`)
+                      alternate_logins:
+                        type: boolean
+                      authentication:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            name:
+                              type: string
+                            url:
+                              type: string
+                            callbackURL:
+                              type: string
+                            icon:
+                              type: string
+                            scope:
+                              type: string
+                            prompt:
+                              type: string
+                      allowRegistration:
+                        type: boolean
+                      allowLoginWith:
+                        type: string
+                      title:
+                        type: string
+                      allowPasswordReset:
+                        type: boolean
+                      allowLocalLogin:
+                        type: boolean
+                  - $ref: components/schemas/Breadcrumbs.yaml#/Breadcrumbs
+                  - $ref: components/schemas/CommonProps.yaml#/CommonProps
+  /api/register:
+    get:
+      tags:
+        - authentication
+      summary: /api/register
+      responses:
+        "200":
+          description: ""
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - type: object
+                    properties:
+                      register_window:spansize:
+                        type: string
+                      alternate_logins:
+                        type: boolean
+                      authentication:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            name:
+                              type: string
+                            url:
+                              type: string
+                            callbackURL:
+                              type: string
+                            icon:
+                              type: string
+                            scope:
+                              type: string
+                            prompt:
+                              type: string
+                      minimumUsernameLength:
+                        type: number
+                      maximumUsernameLength:
+                        type: number
+                      minimumPasswordLength:
+                        type: number
+                      minimumPasswordStrength:
+                        type: number
+                      regFormEntry:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            label:
+                              type: string
+                            html:
+                              type: string
+                            styleName:
+                              type: string
+                      title:
+                        type: string
+                  - $ref: components/schemas/Breadcrumbs.yaml#/Breadcrumbs
+                  - $ref: components/schemas/CommonProps.yaml#/CommonProps
+  # /api/register/complete:
+  #   get:
+  #     tags:
+  #       - authentication
+  #     summary: /api/register/complete
+  #     responses:
+  #       "200":
+  #         description: ""
+  #         content:
+  #           application/json:
+  #             schema:
+  #               allOf:
+  #                 - type: object
+  #                   properties:
+  #                     title:
+  #                       type: string
+  #                     errors:
+  #                       type: array
+  #                       items: {}
+  #                     sections:
+  #                       type: array
+  #                       items:
+  #                         type: string
+  #                 - $ref: components/schemas/CommonProps.yaml#/CommonProps
+  /api/search:
+    get:
+      tags:
+        - search
+      summary: Get search results
+      responses:
+        "200":
+          description: ""
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - type: object
+                    properties:
+                      posts:
+                        $ref: components/schemas/PostsObject.yaml#/PostsObject
+                      matchCount:
+                        type: number
+                      pageCount:
+                        type: number
+                      time:
+                        type: string
+                      multiplePages:
+                        type: boolean
+                      search_query:
+                        type: string
+                      term:
+                        type: string
+                      categories:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            value:
+                              oneOf:
+                                - type: string
+                                - type: number
+                            text:
+                              type: string
+                      categoriesCount:
+                        type: number
+                      expandSearch:
+                        type: boolean
+                      showAsPosts:
+                        type: boolean
+                      showAsTopics:
+                        type: boolean
+                      title:
+                        type: string
+                      searchDefaultSortBy:
+                        type: string
+                    required:
+                      - posts
+                      - matchCount
+                      - pageCount
+                      - time
+                      - multiplePages
+                      - search_query
+                      - categories
+                      - categoriesCount
+                      - expandSearch
+                      - showAsPosts
+                      - showAsTopics
+                      - title
+                      - searchDefaultSortBy
+                  - $ref: components/schemas/Pagination.yaml#/Pagination
+                  - $ref: components/schemas/Breadcrumbs.yaml#/Breadcrumbs
+                  - $ref: components/schemas/CommonProps.yaml#/CommonProps
+  "/api/reset":
+    get:
+      tags:
+        - authentication
+      summary: Get user password reset (step 1)
+      responses:
+        "200":
+          description: "A JSON object containing the 1st step of the user password reset flow"
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - type: object
+                    properties:
+                      code:
+                        type: string
+                        nullable: true
+                      title:
+                        type: string
+                  - $ref: components/schemas/Breadcrumbs.yaml#/Breadcrumbs
+                  - $ref: components/schemas/CommonProps.yaml#/CommonProps
+  "/api/reset/{code}":
+    get:
+      tags:
+        - authentication
+      summary: Get user password reset (step 2)
+      parameters:
+        - name: code
+          in: path
+          required: true
+          schema:
+            type: string
+          example: testCode
+      responses:
+        "200":
+          description: "A JSON object containing the 2nd step of the user password reset flow"
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - type: object
+                    properties:
+                      valid:
+                        type: boolean
+                      code:
+                        type: string
+                      minimumPasswordLength:
+                        type: number
+                      minimumPasswordStrength:
+                        type: number
+                      title:
+                        type: string
+                  - $ref: components/schemas/Breadcrumbs.yaml#/Breadcrumbs
+                  - $ref: components/schemas/CommonProps.yaml#/CommonProps
+  "/api/email/unsubscribe/{token}":
+    # TODO: Need GET route here as well
+    post:
+      tags:
+        - emails
+      summary: Unsubscribe user from email type
+      parameters:
+        - name: token
+          in: path
+          required: true
+          schema:
+            type: string
+          example: testToken
+      responses:
+        "200":
+          description: "Successfully unsubscribed"
+        "500":
+          description: "Server-side error (likely token verification failure)"
   "/api/post/{pid}":
     get:
       tags:
@@ -4264,7 +4765,7 @@ paths:
     get:
       tags:
         - flags
-      summary: /api/flags
+      summary: Get flags list
       responses:
         "200":
           description: ""
@@ -4542,7 +5043,7 @@ paths:
     get:
       tags:
         - admin
-      summary: /api/post-queue
+      summary: Get flag data
       responses:
         "200":
           description: ""
@@ -4693,7 +5194,7 @@ paths:
     get:
       tags:
         - admin
-      summary: /api/ip-blacklist
+      summary: Get IP blacklist settings
       responses:
         "418":
           description: "TODO: A proper response needs to be added. It is not really a teapot | Copy response from corresponding admin route"
@@ -4701,15 +5202,57 @@ paths:
     get:
       tags:
         - admin
-      summary: /api/registration-queue
+      summary: Get registration queue
       responses:
         "418":
           description: "TODO: A proper response needs to be added. It is not really a teapot | Copy response from corresponding admin route"
+  /api/tags:
+    get:
+      tags:
+        - tags
+      summary: Get tags
+      description: Returns a list of tags sorted by the most topics
+      responses:
+        "200":
+          description: ""
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - type: object
+                    properties:
+                      tags:
+                        type: array
+                        description: An array of tags sorted by the most topics
+                        items:
+                          type: object
+                          properties:
+                            value:
+                              type: string
+                              description: The raw tag
+                            score:
+                              type: number
+                              description: Number of topics tagged by this tag
+                            valueEscaped:
+                              type: string
+                              description: This is the escaped tag value, equal to validator.escape(value)
+                            color:
+                              type: string
+                            bgColor:
+                              type: string
+                      displayTagSearch:
+                        type: boolean
+                      nextStart:
+                        type: number
+                      title:
+                        type: string
+                  - $ref: components/schemas/Breadcrumbs.yaml#/Breadcrumbs
+                  - $ref: components/schemas/CommonProps.yaml#/CommonProps
   "/api/tags/{tag}":
     get:
       tags:
         - tags
-      summary: /api/tags/{tag}
+      summary: Get tag data
       description: Returns a list of topics that are tagged with {tag}
       parameters:
         - name: tag
@@ -4974,8 +5517,6 @@ paths:
                               type: string
                       rssFeedUrl:
                         type: string
-                      canPost:
-                        type: boolean
                     required:
                       - topics
                       - tag
@@ -4984,53 +5525,11 @@ paths:
                   - $ref: components/schemas/Pagination.yaml#/Pagination
                   - $ref: components/schemas/Breadcrumbs.yaml#/Breadcrumbs
                   - $ref: components/schemas/CommonProps.yaml#/CommonProps
-  /api/tags:
-    get:
-      tags:
-        - tags
-      summary: /api/tags
-      description: Returns a list of tags sorted by the most topics
-      responses:
-        "200":
-          description: ""
-          content:
-            application/json:
-              schema:
-                allOf:
-                  - type: object
-                    properties:
-                      tags:
-                        type: array
-                        description: An array of tags sorted by the most topics
-                        items:
-                          type: object
-                          properties:
-                            value:
-                              type: string
-                              description: The raw tag
-                            score:
-                              type: number
-                              description: Number of topics tagged by this tag
-                            valueEscaped:
-                              type: string
-                              description: This is the escaped tag value, equal to validator.escape(value)
-                            color:
-                              type: string
-                            bgColor:
-                              type: string
-                      displayTagSearch:
-                        type: boolean
-                      nextStart:
-                        type: number
-                      title:
-                        type: string
-                  - $ref: components/schemas/Breadcrumbs.yaml#/Breadcrumbs
-                  - $ref: components/schemas/CommonProps.yaml#/CommonProps
   /api/popular:
     get:
       tags:
         - topics
-      summary: Get Popular Topics
+      summary: Get popular topics
       description: Returns a list of topics sorted by most replies. In an event of a
         tie breaker, the topic with the most views. Can be filtered by All Time,
         Day, Week, or Month.
@@ -5156,139 +5655,11 @@ paths:
                   - $ref: components/schemas/Pagination.yaml#/Pagination
                   - $ref: components/schemas/Breadcrumbs.yaml#/Breadcrumbs
                   - $ref: components/schemas/CommonProps.yaml#/CommonProps
-  /api/recent:
-    get:
-      tags:
-        - topics
-      summary: Recent Topics
-      description: Returns a list of topics sorted by timestamp.
-      responses:
-        "200":
-          description: An array of topic objects sorted by timestamp.
-          content:
-            application/json:
-              schema:
-                allOf:
-                  - type: object
-                    properties:
-                      nextStart:
-                        type: number
-                      topicCount:
-                        type: number
-                      topics:
-                        type: array
-                        items:
-                          $ref: components/schemas/TopicObject.yaml#/TopicObject
-                      tids:
-                        type: array
-                        items:
-                          type: number
-                      canPost:
-                        type: boolean
-                      categories:
-                        type: array
-                        items:
-                          type: object
-                          properties:
-                            cid:
-                              type: number
-                              description: A category identifier
-                            name:
-                              type: string
-                            level:
-                              type: string
-                            icon:
-                              type: string
-                            parentCid:
-                              type: number
-                              description: The category identifier for the category that is the immediate
-                                ancestor of the current category
-                            color:
-                              type: string
-                            bgColor:
-                              type: string
-                            selected:
-                              type: boolean
-                            imageClass:
-                              type: string
-                      allCategoriesUrl:
-                        type: string
-                      selectedCategory:
-                        type: object
-                        properties:
-                          icon:
-                            type: string
-                          name:
-                            type: string
-                          bgColor:
-                            type: string
-                        nullable: true
-                      selectedCids:
-                        type: array
-                        items:
-                          type: number
-                      feeds:disableRSS:
-                        type: number
-                      rssFeedUrl:
-                        type: string
-                      title:
-                        type: string
-                      filters:
-                        type: array
-                        items:
-                          type: object
-                          properties:
-                            name:
-                              type: string
-                            url:
-                              type: string
-                            selected:
-                              type: boolean
-                            filter:
-                              type: string
-                      selectedFilter:
-                        type: object
-                        properties:
-                          name:
-                            type: string
-                          url:
-                            type: string
-                          selected:
-                            type: boolean
-                          filter:
-                            type: string
-                      terms:
-                        type: array
-                        items:
-                          type: object
-                          properties:
-                            name:
-                              type: string
-                            url:
-                              type: string
-                            selected:
-                              type: boolean
-                            term:
-                              type: string
-                      selectedTerm:
-                        type: object
-                        properties:
-                          name:
-                            type: string
-                          url:
-                            type: string
-                          selected:
-                            type: boolean
-                          term:
-                            type: string
-                  - $ref: components/schemas/Pagination.yaml#/Pagination
-                  - $ref: components/schemas/Breadcrumbs.yaml#/Breadcrumbs
-                  - $ref: components/schemas/CommonProps.yaml#/CommonProps
   /api/top:
     get:
       tags:
         - topics
-      summary: Top Topics
+      summary: Get top topics
       description: Returns a list of topics sorted by most upvotes.
       responses:
         "200":
@@ -5425,298 +5796,12 @@ paths:
                   - $ref: components/schemas/Pagination.yaml#/Pagination
                   - $ref: components/schemas/Breadcrumbs.yaml#/Breadcrumbs
                   - $ref: components/schemas/CommonProps.yaml#/CommonProps
-  /api/unread:
-    get:
-      tags:
-        - topics
-      summary: Unread Topics
-      description: Returns a list of the current user's unread topics, sorted by the
-        last post's timestamp.
-      responses:
-        "200":
-          description: An array of unread topic objects sorted by the last post's timestamp.
-          content:
-            application/json:
-              schema:
-                allOf:
-                  - type: object
-                    properties:
-                      showSelect:
-                        type: boolean
-                      nextStart:
-                        type: number
-                      topics:
-                        type: array
-                        items:
-                          type: object
-                          properties:
-                            tid:
-                              type: number
-                              description: A topic identifier
-                            uid:
-                              type: number
-                              description: A user identifier
-                            cid:
-                              type: number
-                              description: A category identifier
-                            mainPid:
-                              type: number
-                              description: The post id of the first post in this topic (also called the
-                                "original post")
-                            title:
-                              type: string
-                            slug:
-                              type: string
-                            timestamp:
-                              type: number
-                            lastposttime:
-                              type: number
-                            postcount:
-                              type: number
-                            viewcount:
-                              type: number
-                            teaserPid:
-                              type: number
-                            upvotes:
-                              type: number
-                            downvotes:
-                              type: number
-                            deleted:
-                              type: number
-                            locked:
-                              type: number
-                            pinned:
-                              type: number
-                              description: Whether or not this particular topic is pinned to the top of the
-                                category
-                            titleRaw:
-                              type: string
-                            timestampISO:
-                              type: string
-                              description: An ISO 8601 formatted date string (complementing `timestamp`)
-                            lastposttimeISO:
-                              type: string
-                            votes:
-                              type: number
-                            category:
-                              type: object
-                              properties:
-                                cid:
-                                  type: number
-                                  description: A category identifier
-                                name:
-                                  type: string
-                                slug:
-                                  type: string
-                                icon:
-                                  type: string
-                                image:
-                                  nullable: true
-                                imageClass:
-                                  nullable: true
-                                  type: string
-                                bgColor:
-                                  type: string
-                                color:
-                                  type: string
-                                disabled:
-                                  type: number
-                            user:
-                              type: object
-                              properties:
-                                uid:
-                                  type: number
-                                  description: A user identifier
-                                username:
-                                  type: string
-                                  description: A friendly name for a given user account
-                                fullname:
-                                  type: string
-                                userslug:
-                                  type: string
-                                  description: An URL-safe variant of the username (i.e. lower-cased, spaces
-                                    removed, etc.)
-                                reputation:
-                                  type: number
-                                postcount:
-                                  type: number
-                                picture:
-                                  nullable: true
-                                  type: string
-                                signature:
-                                  nullable: true
-                                  type: string
-                                banned:
-                                  type: number
-                                status:
-                                  type: string
-                                icon:text:
-                                  type: string
-                                  description: A single-letter representation of a username. This is used in the
-                                    auto-generated icon given to users without
-                                    an avatar
-                                icon:bgColor:
-                                  type: string
-                                  description: A six-character hexadecimal colour code assigned to the user. This
-                                    value is used in conjunction with
-                                    `icon:text` for the user's auto-generated
-                                    icon
-                                  example: "#f44336"
-                                banned_until_readable:
-                                  type: string
-                            teaser:
-                              type: object
-                              properties:
-                                pid:
-                                  type: number
-                                uid:
-                                  type: number
-                                  description: A user identifier
-                                timestamp:
-                                  type: number
-                                tid:
-                                  type: number
-                                  description: A topic identifier
-                                content:
-                                  type: string
-                                timestampISO:
-                                  type: string
-                                  description: An ISO 8601 formatted date string (complementing `timestamp`)
-                                user:
-                                  type: object
-                                  properties:
-                                    uid:
-                                      type: number
-                                      description: A user identifier
-                                    username:
-                                      type: string
-                                      description: A friendly name for a given user account
-                                    userslug:
-                                      type: string
-                                      description: An URL-safe variant of the username (i.e. lower-cased, spaces
-                                        removed, etc.)
-                                    picture:
-                                      nullable: true
-                                      type: string
-                                    icon:text:
-                                      type: string
-                                      description: A single-letter representation of a username. This is used in the
-                                        auto-generated icon given to users
-                                        without an avatar
-                                    icon:bgColor:
-                                      type: string
-                                      description: A six-character hexadecimal colour code assigned to the user. This
-                                        value is used in conjunction with
-                                        `icon:text` for the user's
-                                        auto-generated icon
-                                      example: "#f44336"
-                                index:
-                                  type: number
-                            tags:
-                              type: array
-                              items:
-                                type: object
-                                properties:
-                                  value:
-                                    type: string
-                                  valueEscaped:
-                                    type: string
-                                  color:
-                                    type: string
-                                  bgColor:
-                                    type: string
-                                  score:
-                                    type: number
-                            isOwner:
-                              type: boolean
-                            ignored:
-                              type: boolean
-                            unread:
-                              type: boolean
-                            bookmark:
-                              nullable: true
-                            unreplied:
-                              type: boolean
-                            icons:
-                              type: array
-                              items:
-                                type: string
-                            index:
-                              type: number
-                            isQuestion:
-                              nullable: true
-                      topicCount:
-                        type: number
-                      canPost:
-                        type: boolean
-                      title:
-                        type: string
-                      pageCount:
-                        type: number
-                      categories:
-                        type: array
-                        items:
-                          type: object
-                          properties:
-                            cid:
-                              type: number
-                              description: A category identifier
-                            name:
-                              type: string
-                            level:
-                              type: string
-                            icon:
-                              type: string
-                            parentCid:
-                              type: number
-                              description: The category identifier for the category that is the immediate
-                                ancestor of the current category
-                            color:
-                              type: string
-                            bgColor:
-                              type: string
-                            selected:
-                              type: boolean
-                            imageClass:
-                              type: string
-                      allCategoriesUrl:
-                        type: string
-                      selectedCids:
-                        type: array
-                        items:
-                          type: number
-                      filters:
-                        type: array
-                        items:
-                          type: object
-                          properties:
-                            name:
-                              type: string
-                            url:
-                              type: string
-                            selected:
-                              type: boolean
-                            filter:
-                              type: string
-                      selectedFilter:
-                        type: object
-                        properties:
-                          name:
-                            type: string
-                          url:
-                            type: string
-                          selected:
-                            type: boolean
-                          filter:
-                            type: string
-                  - $ref: components/schemas/Pagination.yaml#/Pagination
-                  - $ref: components/schemas/Breadcrumbs.yaml#/Breadcrumbs
-                  - $ref: components/schemas/CommonProps.yaml#/CommonProps
   "/api/category/{category_id}/{slug}/{topic_index}":
     get:
       tags:
         - categories
-      summary: /api/category/{category_id}/{slug}/{topic_index}
+      summary: Get a single category
+      description: This route retrieves a single category's data, along with its children and the topics created inside of the category.
       parameters:
         - name: category_id
           in: path
@@ -5725,12 +5810,14 @@ paths:
             type: string
           example: 1
         - name: slug
+          description: This parameter is not required. If omitted, the request will be automatically redirected with the proper category slug.
           in: path
           required: true
           schema:
             type: string
           example: test
         - name: topic_index
+          description: This parameter is not required. If omitted, the request will presume that you want the first post. The API response is largely unaffected by this parameter, it is used client-side (to send the user to the requested post), and changes the meta/link tags in the server-side generated HTML.
           in: path
           required: true
           schema:
@@ -5805,32 +5892,24 @@ paths:
                   - $ref: components/schemas/Pagination.yaml#/Pagination
                   - $ref: components/schemas/Breadcrumbs.yaml#/Breadcrumbs
                   - $ref: components/schemas/CommonProps.yaml#/CommonProps
-  "/api/category/{category_id}/{slug?}":
+  /api/me:
     get:
       tags:
-        - categories
-      summary: /api/category/{category_id}/{slug}
-      parameters:
-        - name: category_id
-          in: path
-          required: true
-          schema:
-            type: string
-          example: 1
-        - name: slug
-          in: path
-          required: true
-          schema:
-            type: string
-          example: test
+        - shorthand
+      summary: Access your profile
+      description: This shorthand is useful if you want to link to pages in your own account profile, but do not want (or have) the userslug. It is also especially useful as a means to instruct users on how to do things, as you can easily redirect them to their own profile pages.
       responses:
-        "418":
-          description: "TODO: A proper response needs to be added. It is not really a teapot | Copy response from indexed variant"
+        "200":
+          description: ""
+          content:
+            application/json:
+              schema:
+                $ref: components/schemas/UserObject.yaml#/UserObjectFull
   /api/me/*:
     get:
       tags:
         - shorthand
-      summary: Access your own profile's pages
+      summary: Access your own profile's sub-pages
       description: >-
         This shorthand is useful if you want to link to pages in your own account profile, but do not want (or have) the `userslug`. It is also especially useful as a
         means to instruct users on how to do things, as you can easily redirect them to their own profile pages.
@@ -6132,7 +6211,8 @@ paths:
     get:
       tags:
         - users
-      summary: /api/user/{userslug}/categories
+      summary: Get user's watched categories
+      description: This route retrieves the list of categories and their watch states
       parameters:
         - name: userslug
           in: path
@@ -6193,7 +6273,7 @@ paths:
     get:
       tags:
         - users
-      summary: /api/user/{userslug}/posts
+      summary: Get a user's posts
       parameters:
         - name: userslug
           in: path
@@ -6239,7 +6319,7 @@ paths:
     get:
       tags:
         - users
-      summary: /api/user/{userslug}/topics
+      summary: Get a user's topics
       parameters:
         - name: userslug
           in: path
@@ -6287,7 +6367,7 @@ paths:
     get:
       tags:
         - users
-      summary: /api/user/{userslug}/best
+      summary: Get a user's best performing topics
       parameters:
         - name: userslug
           in: path
@@ -6333,7 +6413,7 @@ paths:
     get:
       tags:
         - users
-      summary: /api/user/{userslug}/groups
+      summary: Get user's groups
       parameters:
         - name: userslug
           in: path
@@ -6366,7 +6446,7 @@ paths:
     get:
       tags:
         - users
-      summary: /api/user/{userslug}/bookmarks
+      summary: Get user's bookmarks
       parameters:
         - name: userslug
           in: path
@@ -6412,7 +6492,7 @@ paths:
     get:
       tags:
         - users
-      summary: /api/user/{userslug}/watched
+      summary: Get user's watched topics
       parameters:
         - name: userslug
           in: path
@@ -6620,7 +6700,7 @@ paths:
     get:
       tags:
         - users
-      summary: /api/user/{userslug}/ignored
+      summary: Get user's ignored topics
       parameters:
         - name: userslug
           in: path
@@ -6668,7 +6748,7 @@ paths:
     get:
       tags:
         - users
-      summary: /api/user/{userslug}/upvoted
+      summary: Get user's upvoted posts
       parameters:
         - name: userslug
           in: path
@@ -6720,7 +6800,7 @@ paths:
     get:
       tags:
         - users
-      summary: Get user's downvotes
+      summary: Get user's downvoted posts
       parameters:
         - name: userslug
           in: path
@@ -6772,7 +6852,7 @@ paths:
     get:
       tags:
         - users
-      summary: /api/user/{userslug}/edit
+      summary: Get user profile for editing
       parameters:
         - name: userslug
           in: path
@@ -6839,7 +6919,7 @@ paths:
     get:
       tags:
         - users
-      summary: /api/user/{userslug}/edit/username
+      summary: Get configs for username editing
       parameters:
         - name: userslug
           in: path
@@ -6867,7 +6947,7 @@ paths:
     get:
       tags:
         - users
-      summary: /api/user/{userslug}/edit/email
+      summary: Get configs for email editing
       parameters:
         - name: userslug
           in: path
@@ -6895,7 +6975,7 @@ paths:
     get:
       tags:
         - users
-      summary: /api/user/{userslug}/edit/password
+      summary: Get configs for password editing
       parameters:
         - name: userslug
           in: path
@@ -6927,7 +7007,8 @@ paths:
     get:
       tags:
         - users
-      summary: /api/user/{userslug}/info
+      summary: Get user moderation info
+      description: Administrators and Global Moderators get access to the `/info` page, which shows some backend data that is useful from a moderation point-of-view (such as IP addresses, recent bans, moderation history, etc).
       parameters:
         - name: userslug
           in: path
@@ -7108,7 +7189,7 @@ paths:
     get:
       tags:
         - users
-      summary: /api/user/{userslug}/settings
+      summary: Get user's settings
       parameters:
         - name: userslug
           in: path
@@ -7166,6 +7247,8 @@ paths:
                           notificationType_new-chat:
                             type: string
                           notificationType_new-reply:
+                            type: string
+                          notificationType_post-edit:
                             type: string
                           sendChatNotifications:
                             nullable: true
@@ -7353,7 +7436,7 @@ paths:
     get:
       tags:
         - users
-      summary: /api/user/{userslug}/uploads
+      summary: Get user's uploads
       parameters:
         - name: userslug
           in: path
@@ -7391,7 +7474,7 @@ paths:
     get:
       tags:
         - users
-      summary: /api/user/{userslug}/consent
+      summary: Get user's GDPR consent settings
       parameters:
         - name: userslug
           in: path
@@ -7426,7 +7509,7 @@ paths:
     get:
       tags:
         - users
-      summary: /api/user/{userslug}/blocks
+      summary: Get user's blocks
       parameters:
         - name: userslug
           in: path
@@ -7457,7 +7540,7 @@ paths:
     get:
       tags:
         - users
-      summary: /api/user/{userslug}/sessions
+      summary: Get user's active sessions
       parameters:
         - name: userslug
           in: path
@@ -7525,7 +7608,7 @@ paths:
     get:
       tags:
         - notifications
-      summary: /api/notifications
+      summary: Get notifications
       responses:
         "200":
           description: ""
@@ -7950,7 +8033,8 @@ paths:
     get:
       tags:
         - shorthand
-      summary: /api/chats/{roomid}
+      summary: Access a chat room
+      description: Redirects a request to the proper chat page URL
       parameters:
         - name: roomid
           in: path
@@ -7966,114 +8050,11 @@ paths:
               schema:
                 type: string
                 description: A relative path to the canonical URL for that chat page
-  /api/users:
-    get:
-      tags:
-        - users
-      summary: /api/users
-      responses:
-        "200":
-          description: ""
-          content:
-            application/json:
-              schema:
-                allOf:
-                  - type: object
-                    properties:
-                      users:
-                        type: array
-                        items:
-                          type: object
-                          properties:
-                            uid:
-                              type: number
-                              description: A user identifier
-                            username:
-                              type: string
-                              description: A friendly name for a given user account
-                            userslug:
-                              type: string
-                              description: An URL-safe variant of the username (i.e. lower-cased, spaces
-                                removed, etc.)
-                            picture:
-                              nullable: true
-                              type: string
-                            status:
-                              type: string
-                            postcount:
-                              type: number
-                            reputation:
-                              type: number
-                            email:confirmed:
-                              type: number
-                              description: Whether the user has confirmed their email address or not
-                            lastonline:
-                              type: number
-                            flags:
-                              nullable: true
-                            banned:
-                              type: number
-                            banned:expire:
-                              type: number
-                            joindate:
-                              type: number
-                              description: A UNIX timestamp representing the moment the user's account was
-                                created
-                            icon:text:
-                              type: string
-                              description: A single-letter representation of a username. This is used in the
-                                auto-generated icon given to users without an
-                                avatar
-                            icon:bgColor:
-                              type: string
-                              description: A six-character hexadecimal colour code assigned to the user. This
-                                value is used in conjunction with `icon:text`
-                                for the user's auto-generated icon
-                              example: "#f44336"
-                            joindateISO:
-                              type: string
-                            lastonlineISO:
-                              type: string
-                            banned_until:
-                              type: number
-                            banned_until_readable:
-                              type: string
-                            administrator:
-                              type: boolean
-                      userCount:
-                        type: number
-                      title:
-                        type: string
-                      isAdminOrGlobalMod:
-                        type: boolean
-                      isAdmin:
-                        type: boolean
-                      isGlobalMod:
-                        type: boolean
-                      displayUserSearch:
-                        type: boolean
-                      section_joindate:
-                        type: boolean
-                      maximumInvites:
-                        type: number
-                      inviteOnly:
-                        type: boolean
-                      adminInviteOnly:
-                        type: boolean
-                      invites:
-                        type: number
-                      showInviteButton:
-                        type: boolean
-                      reputation:disabled:
-                        type: number
-                  - $ref: components/schemas/Pagination.yaml#/Pagination
-                  - $ref: components/schemas/Breadcrumbs.yaml#/Breadcrumbs
-                  - $ref: components/schemas/CommonProps.yaml#/CommonProps
   /api/groups:
     get:
       tags:
         - groups
-      summary: /api/groups
+      summary: Get user groups
       responses:
         "200":
           description: ""
@@ -8180,7 +8161,7 @@ paths:
     get:
       tags:
         - groups
-      summary: /api/groups/{slug}
+      summary: Get user group details
       parameters:
         - name: slug
           in: path

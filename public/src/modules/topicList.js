@@ -197,7 +197,11 @@ define('topicList', [
 				});
 			}
 			var categoryEl = $(this);
-			var cid = $(this).attr('data-cid');
+			var link = categoryEl.find('a').attr('href');
+			if (link && link !== '#' && link.length) {
+				return;
+			}
+			var cid = categoryEl.attr('data-cid');
 			if (ev.ctrlKey) {
 				selectChildren(cid, !categoryEl.find('[data-component="category/select/icon"]').hasClass('fa-check'));
 			}

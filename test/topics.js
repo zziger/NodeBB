@@ -906,6 +906,22 @@ describe('Topic\'s', function () {
 				},
 			], done);
 		});
+
+		it('should properly update topic vote count after forking', async () => {
+			const result = await topics.post({ uid: fooUid, cid: categoryObj.cid, title: 'fork vote test', content: 'main post' });
+			const reply1 = await topics.reply({ tid: result.topicData.tid, uid: fooUid, content: 'test reply 1' });
+			const reply2 = await topics.reply({ tid: result.topicData.tid, uid: fooUid, content: 'test reply 2' });
+			const reply3 = await topics.reply({ tid: result.topicData.tid, uid: fooUid, content: 'test reply 3' });
+			await posts.upvote(result.postData.pid, adminUid);
+			await posts.upvote(reply1.pid, adminUid);
+			assert.strictEqual(await db.sortedSetScore('topics:votes', result.topicData.tid), 1);
+			assert.strictEqual(await db.sortedSetScore('cid:' + categoryObj.cid + ':tids:votes', result.topicData.tid), 1);
+			const newTopic = await topics.createTopicFromPosts(adminUid, 'Fork test, vote update', [reply1.pid, reply2.pid], result.topicData.tid);
+
+			assert.strictEqual(await db.sortedSetScore('topics:votes', newTopic.tid), 1);
+			assert.strictEqual(await db.sortedSetScore('cid:' + categoryObj.cid + ':tids:votes', newTopic.tid), 1);
+			assert.strictEqual(await topics.getTopicField(newTopic.tid, 'upvotes'), 1);
+		});
 	});
 
 	describe('controller', function () {
@@ -1752,6 +1768,19 @@ describe('Topic\'s', function () {
 					done();
 				});
 			});
+		});
+
+		it('should add and remove tags from topics properly', async () => {
+			const result = await topics.post({ uid: adminUid, tags: ['tag4', 'tag2', 'tag1', 'tag3'], title: 'tag topic', content: 'topic 1 content', cid: topic.categoryId });
+			const tid = result.topicData.tid;
+			let tags = await topics.getTopicTags(tid);
+			assert.deepStrictEqual(tags, ['tag1', 'tag2', 'tag3', 'tag4']);
+			await topics.addTags(['tag7', 'tag6', 'tag5'], [tid]);
+			tags = await topics.getTopicTags(tid);
+			assert.deepStrictEqual(tags, ['tag1', 'tag2', 'tag3', 'tag4', 'tag5', 'tag6', 'tag7']);
+			await topics.removeTags(['tag1', 'tag3', 'tag5', 'tag7'], [tid]);
+			tags = await topics.getTopicTags(tid);
+			assert.deepStrictEqual(tags, ['tag2', 'tag4', 'tag6']);
 		});
 	});
 
