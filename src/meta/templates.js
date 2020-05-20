@@ -116,7 +116,7 @@ async function compileTemplate(filename, source) {
 
 	source = await processImports(paths, filename, source);
 	const compiled = await Benchpress.precompile(source, {
-		minify: global.env !== 'development',
+		minify: process.env.NODE_ENV !== 'development',
 	});
 	return await fsWriteFile(path.join(viewsPath, filename.replace(/\.tpl$/, '.js')), compiled);
 }
