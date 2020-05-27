@@ -1,4 +1,4 @@
-require('../app.common');
+require('../app');
 require('../../../build/public/acp-scripts.min.js');
 
 // var Slideout = require('slideout');
