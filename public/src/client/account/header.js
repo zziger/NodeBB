@@ -54,6 +54,10 @@ define('forum/account/header', [
 		components.get('account/block').on('click', toggleBlockAccount);
 	};
 
+	// TODO: These exported methods are used in forum/flags/detail -- refactor??
+	AccountHeader.banAccount = banAccount;
+	AccountHeader.deleteAccount = deleteAccount;
+
 	function hidePrivateLinks() {
 		if (!app.user.uid || app.user.uid !== parseInt(ajaxify.data.theirid, 10)) {
 			$('.account-sub-links .plugin-link.private').addClass('hide');
@@ -110,7 +114,9 @@ define('forum/account/header', [
 		return false;
 	}
 
-	function banAccount() {
+	function banAccount(theirid, onSuccess) {
+		theirid = theirid || ajaxify.data.theirid;
+
 		Benchpress.parse('admin/partials/temporary-ban', {}, function (html) {
 			bootbox.dialog({
 				className: 'ban-modal',
@@ -136,6 +142,9 @@ define('forum/account/header', [
 								until: until,
 								reason: formData.reason || '',
 							}, () => {
+								if (typeof onSuccess === 'function') {
+									return onSuccess();
+								}
 								ajaxify.refresh();
 							}, err => app.alertError(err.status.message));
 						},
@@ -151,7 +160,10 @@ define('forum/account/header', [
 		}, err => app.alertError(err.status.message));
 	}
 
-	function deleteAccount() {
+
+	function deleteAccount(theirid, onSuccess) {
+		theirid = theirid || ajaxify.data.theirid;
+
 		translator.translate('[[user:delete-this-account-confirm]]', function (translated) {
 			bootbox.confirm(translated, function (confirm) {
 				if (!confirm) {
@@ -160,6 +172,9 @@ define('forum/account/header', [
 
 				api.del('/users/' + ajaxify.data.theirid, undefined, () => {
 					app.alertSuccess('[[user:account-deleted]]');
+					if (typeof onSuccess === 'function') {
+						return onSuccess();
+					}
 					ajaxify.go('users');
 				}, err => app.alertError(err.status.message));
 			});

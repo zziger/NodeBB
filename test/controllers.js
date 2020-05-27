@@ -680,13 +680,13 @@ describe('Controllers', function () {
 	});
 
 	it('should load users search page', function (done) {
-		privileges.global.give(['search:users'], 'guests', function (err) {
+		privileges.global.give(['groups:search:users'], 'guests', function (err) {
 			assert.ifError(err);
 			request(nconf.get('url') + '/users?term=bar&section=sort-posts', function (err, res, body) {
 				assert.ifError(err);
 				assert.equal(res.statusCode, 200);
 				assert(body);
-				privileges.global.rescind(['search:users'], 'guests', done);
+				privileges.global.rescind(['groups:search:users'], 'guests', done);
 			});
 		});
 	});
@@ -1335,13 +1335,13 @@ describe('Controllers', function () {
 		});
 
 		it('should return 401 if user does not have view:users privilege', function (done) {
-			privileges.global.rescind(['view:users'], 'guests', function (err) {
+			privileges.global.rescind(['groups:view:users'], 'guests', function (err) {
 				assert.ifError(err);
 				request(nconf.get('url') + '/api/user/foo', { json: true }, function (err, res, body) {
 					assert.ifError(err);
 					assert.equal(res.statusCode, 401);
 					assert.equal(body, 'not-authorized');
-					privileges.global.give(['view:users'], 'guests', done);
+					privileges.global.give(['groups:view:users'], 'guests', done);
 				});
 			});
 		});
@@ -1615,12 +1615,12 @@ describe('Controllers', function () {
 		});
 
 		it('should 403 if user does not have read privilege', function (done) {
-			privileges.categories.rescind(['topics:read'], category.cid, 'registered-users', function (err) {
+			privileges.categories.rescind(['groups:topics:read'], category.cid, 'registered-users', function (err) {
 				assert.ifError(err);
 				request(nconf.get('url') + '/api/post/' + pid, { jar: jar }, function (err, res) {
 					assert.ifError(err);
 					assert.equal(res.statusCode, 403);
-					privileges.categories.give(['topics:read'], category.cid, 'registered-users', done);
+					privileges.categories.give(['groups:topics:read'], category.cid, 'registered-users', done);
 				});
 			});
 		});
@@ -1880,7 +1880,7 @@ describe('Controllers', function () {
 		it('should return 401 if not allowed to read', function (done) {
 			categories.create({ name: 'hidden' }, function (err, category) {
 				assert.ifError(err);
-				privileges.categories.rescind(['read'], category.cid, 'guests', function (err) {
+				privileges.categories.rescind(['groups:read'], category.cid, 'guests', function (err) {
 					assert.ifError(err);
 					request(nconf.get('url') + '/api/category/' + category.slug, function (err, res) {
 						assert.ifError(err);

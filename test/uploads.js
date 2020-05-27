@@ -67,7 +67,7 @@ describe('Upload Controllers', function () {
 				assert.ifError(err);
 				jar = _jar;
 				csrf_token = _csrf_token;
-				privileges.global.give(['upload:post:file'], 'registered-users', done);
+				privileges.global.give(['groups:upload:post:file'], 'registered-users', done);
 			});
 		});
 
@@ -131,7 +131,6 @@ describe('Upload Controllers', function () {
 
 
 		it('should upload a file to a post', function (done) {
-			meta.config.allowFileUploads = 1;
 			var oldValue = meta.config.allowedFileExtensions;
 			meta.config.allowedFileExtensions = 'png,jpg,bmp,html';
 			helpers.uploadFile(nconf.get('url') + '/api/post/upload', path.join(__dirname, '../test/files/503.html'), {}, jar, csrf_token, function (err, res, body) {

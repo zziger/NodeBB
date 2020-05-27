@@ -4,7 +4,6 @@ define('forum/flags/list', ['components', 'chart.js'], function (components, Cha
 
 	Flags.init = function () {
 		Flags.enableFilterForm();
-		Flags.enableChatButtons();
 		Flags.handleGraphs();
 	};
 
@@ -23,12 +22,6 @@ define('forum/flags/list', ['components', 'chart.js'], function (components, Cha
 				return !!item.value;
 			});
 			ajaxify.go('flags?' + (payload.length ? $.param(payload) : 'reset=1'));
-		});
-	};
-
-	Flags.enableChatButtons = function () {
-		$('[data-chat]').on('click', function () {
-			app.newChat(this.getAttribute('data-chat'));
 		});
 	};
 

@@ -1,13 +1,20 @@
-define('forum/flags/detail', ['forum/flags/list', 'components', 'translator', 'benchpress'], function (FlagsList, components, translator, Benchpress) {
-	var Flags = {};
 
-	Flags.init = function () {
+define('forum/flags/detail', ['forum/flags/list', 'components', 'translator', 'benchpress', 'forum/account/header'], function (FlagsList, components, translator, Benchpress, AccountHeader) {
+	var Detail = {};
+
+	Detail.init = function () {
 		// Update attributes
 		$('#state').val(ajaxify.data.state).removeAttr('disabled');
 		$('#assignee').val(ajaxify.data.assignee).removeAttr('disabled');
 
 		$('[data-action]').on('click', function () {
 			var action = this.getAttribute('data-action');
+			var uid;
+			try {
+				uid = $(this).parents('[data-uid]').get(0).getAttribute('data-uid');
+			} catch (e) {
+				// noop
+			}
 
 			switch (action) {
 			case 'update':
@@ -19,7 +26,7 @@ define('forum/flags/detail', ['forum/flags/list', 'components', 'translator', 'b
 						return app.alertError(err.message);
 					}
 					app.alertSuccess('[[flags:updated]]');
-					Flags.reloadHistory(history);
+					Detail.reloadHistory(history);
 				});
 				break;
 
@@ -32,18 +39,29 @@ define('forum/flags/detail', ['forum/flags/list', 'components', 'translator', 'b
 						return app.alertError(err.message);
 					}
 					app.alertSuccess('[[flags:note-added]]');
-					Flags.reloadNotes(payload.notes);
-					Flags.reloadHistory(payload.history);
+					Detail.reloadNotes(payload.notes);
+					Detail.reloadHistory(payload.history);
 				});
+				break;
+
+			case 'chat':
+				app.newChat(uid);
+				break;
+
+			case 'ban':
+				AccountHeader.banAccount(uid, ajaxify.refresh);
+				break;
+
+			case 'delete':
+				AccountHeader.deleteAccount(uid, ajaxify.refresh);
 				break;
 			}
 		});
 
 		FlagsList.enableFilterForm();
-		FlagsList.enableChatButtons();
 	};
 
-	Flags.reloadNotes = function (notes) {
+	Detail.reloadNotes = function (notes) {
 		Benchpress.parse('flags/detail', 'notes', {
 			notes: notes,
 		}, function (html) {
@@ -55,7 +73,7 @@ define('forum/flags/detail', ['forum/flags/list', 'components', 'translator', 'b
 		});
 	};
 
-	Flags.reloadHistory = function (history) {
+	Detail.reloadHistory = function (history) {
 		Benchpress.parse('flags/detail', 'history', {
 			history: history,
 		}, function (html) {
@@ -68,5 +86,5 @@ define('forum/flags/detail', ['forum/flags/list', 'components', 'translator', 'b
 		});
 	};
 
-	return Flags;
+	return Detail;
 });

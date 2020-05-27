@@ -432,6 +432,8 @@ Flags.update = async function (flagId, uid, changeset) {
 Flags.getHistory = async function (flagId) {
 	const uids = [];
 	let history = await db.getSortedSetRevRangeWithScores('flag:' + flagId + ':history', 0, -1);
+	const flagData = await db.getObjectFields('flag:' + flagId, ['type', 'targetId']);
+	const targetUid = await Flags.getTargetUid(flagData.type, flagData.targetId);
 
 	history = history.map(function (entry) {
 		entry.value = JSON.parse(entry.value);
@@ -451,8 +453,17 @@ Flags.getHistory = async function (flagId) {
 			datetimeISO: utils.toISOString(entry.score),
 		};
 	});
+
+	// Append ban history and username change data
+	history = await mergeBanHistory(history, targetUid, uids);
+	history = await mergeUsernameEmailChanges(history, targetUid, uids);
+
 	const userData = await user.getUsersFields(uids, ['username', 'userslug', 'picture']);
 	history.forEach((event, idx) => { event.user = userData[idx]; });
+
+	// Resort by date
+	history = history.sort((a, b) => b.datetime - a.datetime);
+
 	return history;
 };
 
@@ -521,5 +532,72 @@ Flags.notify = async function (flagObj, uid) {
 	uids = uids.filter(_uid => parseInt(_uid, 10) !== parseInt(uid, 10));
 	await notifications.push(notifObj, uids);
 };
+
+async function mergeBanHistory(history, targetUid, uids) {
+	let recentBans = await db.getSortedSetRevRange('uid:' + targetUid + ':bans:timestamp', 0, 19);
+	recentBans = await db.getObjects(recentBans);
+
+	return history.concat(recentBans.reduce((memo, cur) => {
+		uids.push(cur.fromUid);
+		memo.push({
+			uid: cur.fromUid,
+			meta: [
+				{
+					key: '[[user:banned]]',
+					value: cur.reason,
+					labelClass: 'danger',
+				},
+				{
+					key: '[[user:info.banned-expiry]]',
+					value: new Date(parseInt(cur.expire, 10)).toISOString(),
+					labelClass: 'default',
+				},
+			],
+			datetime: parseInt(cur.timestamp, 10),
+			datetimeISO: utils.toISOString(parseInt(cur.timestamp, 10)),
+		});
+
+		return memo;
+	}, []));
+}
+
+async function mergeUsernameEmailChanges(history, targetUid, uids) {
+	const usernameChanges = await user.getHistory('user:' + targetUid + ':usernames');
+	const emailChanges = await user.getHistory('user:' + targetUid + ':emails');
+
+	return history.concat(usernameChanges.reduce((memo, changeObj) => {
+		uids.push(targetUid);
+		memo.push({
+			uid: targetUid,
+			meta: [
+				{
+					key: '[[user:change_username]]',
+					value: changeObj.value,
+					labelClass: 'primary',
+				},
+			],
+			datetime: changeObj.timestamp,
+			datetimeISO: changeObj.timestampISO,
+		});
+
+		return memo;
+	}, [])).concat(emailChanges.reduce((memo, changeObj) => {
+		uids.push(targetUid);
+		memo.push({
+			uid: targetUid,
+			meta: [
+				{
+					key: '[[user:change_email]]',
+					value: changeObj.value,
+					labelClass: 'primary',
+				},
+			],
+			datetime: changeObj.timestamp,
+			datetimeISO: changeObj.timestampISO,
+		});
+
+		return memo;
+	}, []));
+}
 
 require('./promisify')(Flags);

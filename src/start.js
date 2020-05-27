@@ -135,7 +135,7 @@ async function shutdown(code) {
 		winston.info('[app] Shutdown complete.');
 		process.exit(code || 0);
 	} catch (err) {
-		winston.error(err);
+		winston.error(err.stack);
 		return process.exit(code || 0);
 	}
 }

@@ -12,7 +12,9 @@ const nconf = require('nconf');
 const url = require('url');
 const util = require('util');
 
-global.env = process.env.TEST_ENV || 'production';
+process.env.NODE_ENV = process.env.TEST_ENV || 'production';
+global.env = process.env.NODE_ENV || 'production';
+
 
 const winston = require('winston');
 const packageInfo = require('../../package');
@@ -133,7 +135,7 @@ before(async function () {
 	nconf.set('theme_templates_path', meta.config['theme:templates'] ? path.join(nconf.get('themes_path'), meta.config['theme:id'], meta.config['theme:templates']) : nconf.get('base_templates_path'));
 	nconf.set('theme_config', path.join(nconf.get('themes_path'), 'nodebb-theme-persona', 'theme.json'));
 	nconf.set('bcrypt_rounds', 1);
-
+	nconf.set('socket.io:origins', '*:*');
 	nconf.set('version', packageInfo.version);
 
 	await meta.dependencies.check();
@@ -210,11 +212,12 @@ async function setupDefaultConfigs(meta) {
 async function giveDefaultGlobalPrivileges() {
 	const privileges = require('../../src/privileges');
 	await privileges.global.give([
-		'chat', 'upload:post:image', 'signature', 'search:content',
-		'search:users', 'search:tags', 'local:login', 'view:users', 'view:tags', 'view:groups',
+		'groups:chat', 'groups:upload:post:image', 'groups:signature', 'groups:search:content',
+		'groups:search:users', 'groups:search:tags', 'groups:local:login', 'groups:view:users',
+		'groups:view:tags', 'groups:view:groups',
 	], 'registered-users');
 	await privileges.global.give([
-		'view:users', 'view:tags', 'view:groups',
+		'groups:view:users', 'groups:view:tags', 'groups:view:groups',
 	], 'guests');
 }
 

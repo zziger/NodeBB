@@ -64,6 +64,7 @@ async function uploadAsImage(req, uploadedFile) {
 		return await plugins.fireHook('filter:uploadImage', {
 			image: uploadedFile,
 			uid: req.uid,
+			folder: 'files',
 		});
 	}
 	await image.isFileTypeAllowed(uploadedFile.path);
@@ -82,10 +83,6 @@ async function uploadAsFile(req, uploadedFile) {
 	const canUpload = await privileges.global.can('upload:post:file', req.uid);
 	if (!canUpload) {
 		throw new Error('[[error:no-privileges]]');
-	}
-
-	if (!meta.config.allowFileUploads) {
-		throw new Error('[[error:uploads-are-disabled]]');
 	}
 
 	const fileObj = await uploadsController.uploadFile(req.uid, uploadedFile);
@@ -133,6 +130,7 @@ uploadsController.uploadThumb = async function (req, res, next) {
 			return await plugins.fireHook('filter:uploadImage', {
 				image: uploadedFile,
 				uid: req.uid,
+				folder: 'files',
 			});
 		}
 
@@ -145,6 +143,7 @@ uploadsController.uploadFile = async function (uid, uploadedFile) {
 		return await plugins.fireHook('filter:uploadFile', {
 			file: uploadedFile,
 			uid: uid,
+			folder: 'files',
 		});
 	}
 
@@ -163,16 +162,16 @@ uploadsController.uploadFile = async function (uid, uploadedFile) {
 		throw new Error('[[error:invalid-file-type, ' + allowed.join('&#44; ') + ']]');
 	}
 
-	return await saveFileToLocal(uid, uploadedFile);
+	return await saveFileToLocal(uid, 'files', uploadedFile);
 };
 
-async function saveFileToLocal(uid, uploadedFile) {
+async function saveFileToLocal(uid, folder, uploadedFile) {
 	const name = uploadedFile.name || 'upload';
 	const extension = path.extname(name) || '';
 
 	const filename = Date.now() + '-' + validator.escape(name.substr(0, name.length - extension.length)).substr(0, 255) + extension;
 
-	const upload = await file.saveFileToLocal(filename, 'files', uploadedFile.path);
+	const upload = await file.saveFileToLocal(filename, folder, uploadedFile.path);
 	const storedFile = {
 		url: nconf.get('relative_path') + upload.url,
 		path: upload.path,
