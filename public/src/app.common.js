@@ -411,15 +411,16 @@ window.addEventListener('DOMContentLoaded', async function () {
 		var inputEl = options.inputEl;
 		var template = options.template || 'partials/quick-search-results';
 		var searchTimeoutId = 0;
+		var currentVal = inputEl.val();
 		inputEl.on('keyup', function () {
 			if (searchTimeoutId) {
 				clearTimeout(searchTimeoutId);
 				searchTimeoutId = 0;
 			}
-			if (inputEl.val().length < 3) {
+			if (inputEl.val().length < 3 || inputEl.val() === currentVal) {
 				return;
 			}
-
+			currentVal = inputEl.val();
 			searchTimeoutId = setTimeout(function () {
 				if (!inputEl.is(':focus')) {
 					return quickSearchResults.addClass('hidden');
@@ -455,15 +456,12 @@ window.addEventListener('DOMContentLoaded', async function () {
 		var searchInput = $('#search-fields input');
 		var quickSearchResults = $('#quick-search-results');
 
-		$('#search-form .advanced-search-link').on('mousedown', function () {
+		$('#search-form .advanced-search-link').off('mousedown').on('mousedown', function () {
 			ajaxify.go('/search');
 		});
 
-		$('#search-form').on('submit', function () {
-			searchInput.blur();
-		});
-		searchInput.on('blur', dismissSearch);
-		searchInput.on('focus', function () {
+		searchInput.off('blur').on('blur', dismissSearch);
+		searchInput.off('focus').on('focus', function () {
 			if (searchInput.val() && quickSearchResults.children().length) {
 				quickSearchResults.removeClass('hidden').show();
 			}
@@ -482,7 +480,7 @@ window.addEventListener('DOMContentLoaded', async function () {
 			}, 200);
 		}
 
-		searchButton.on('click', function (e) {
+		searchButton.off('click').on('click', function (e) {
 			if (!config.loggedIn && !app.user.privileges['search:content']) {
 				app.alert({
 					message: '[[error:search-requires-login]]',
@@ -497,7 +495,8 @@ window.addEventListener('DOMContentLoaded', async function () {
 			return false;
 		});
 
-		$('#search-form').on('submit', function () {
+		$('#search-form').off('submit').on('submit', function () {
+			searchInput.blur();
 			var input = $(this).find('input');
 			require(['search'], function (search) {
 				var data = search.getSearchPreferences();
