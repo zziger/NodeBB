@@ -409,41 +409,28 @@ window.addEventListener('DOMContentLoaded', async function () {
 	app.enableTopicSearch = function (options) {
 		var quickSearchResults = options.resultEl;
 		var inputEl = options.inputEl;
-		var template = options.template || 'partials/quick-search-results';
 		var searchTimeoutId = 0;
 		var currentVal = inputEl.val();
-		inputEl.on('keyup', function () {
+		inputEl.off('keyup').on('keyup', function () {
 			if (searchTimeoutId) {
 				clearTimeout(searchTimeoutId);
 				searchTimeoutId = 0;
 			}
-			if (inputEl.val().length < 3 || inputEl.val() === currentVal) {
-				return;
-			}
-			currentVal = inputEl.val();
 			searchTimeoutId = setTimeout(function () {
+				if (inputEl.val().length < 3 || inputEl.val() === currentVal) {
+					return;
+				}
+				currentVal = inputEl.val();
 				if (!inputEl.is(':focus')) {
 					return quickSearchResults.addClass('hidden');
 				}
 				require(['search'], function (search) {
-					var data = {
+					search.quick({
 						term: inputEl.val(),
 						in: 'titles',
-						searchOnly: 1,
-					};
-					$(window).trigger('action:search.quick', { data: data });
-					search.api(data, function (data) {
-						data.posts.forEach(function (p) {
-							p.snippet = utils.escapeHTML($('<div>' + p.content + '</div>').text().slice(0, 80) + '...');
-						});
-						app.parseAndTranslate(template, data, function (html) {
-							if (html.length) {
-								html.find('.timeago').timeago();
-								quickSearchResults.html(html).removeClass('hidden').show();
-							} else {
-								quickSearchResults.html('').addClass('hidden');
-							}
-						});
+					}, {
+						template: options.template,
+						resultEl: quickSearchResults,
 					});
 				});
 			}, 250);
