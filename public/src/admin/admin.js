@@ -47,7 +47,9 @@ require('../../../build/public/acp-scripts.min.js');
 			});
 		}
 
-		$('[data-component="logout"]').on('click', app.logout);
+		$('[data-component="logout"]').on('click', function () {
+			app.logout();
+		});
 
 		// configureSlidemenu();
 		setupNProgress();

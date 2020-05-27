@@ -220,6 +220,7 @@ module.exports = function (middleware) {
 					req: req,
 					res: res,
 					templateValues: templateValues,
+					data: data,
 				}, next);
 			},
 		], function (err, data) {
