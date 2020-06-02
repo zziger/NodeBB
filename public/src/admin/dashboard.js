@@ -1,5 +1,5 @@
 
-define('admin/general/dashboard', ['chart.js', 'translator', 'benchpress'], function (Chart, translator, Benchpress) {
+define('admin/dashboard', ['chart.js', 'translator', 'benchpress'], function (Chart, translator, Benchpress) {
 	var	Admin = {};
 	var	intervals = {
 		rooms: false,
@@ -62,19 +62,19 @@ define('admin/general/dashboard', ['chart.js', 'translator', 'benchpress'], func
 
 		var html = '<div class="text-center pull-left">' +
 						'<span class="formatted-number">' + data.onlineRegisteredCount + '</span>' +
-						'<div class="stat">[[admin/general/dashboard:active-users.users]]</div>' +
+						'<div class="stat">[[admin/dashboard:active-users.users]]</div>' +
 					'</div>' +
 					'<div class="text-center pull-left">' +
 						'<span class="formatted-number">' + data.onlineGuestCount + '</span>' +
-						'<div class="stat">[[admin/general/dashboard:active-users.guests]]</div>' +
+						'<div class="stat">[[admin/dashboard:active-users.guests]]</div>' +
 					'</div>' +
 					'<div class="text-center pull-left">' +
 						'<span class="formatted-number">' + (data.onlineRegisteredCount + data.onlineGuestCount) + '</span>' +
-						'<div class="stat">[[admin/general/dashboard:active-users.total]]</div>' +
+						'<div class="stat">[[admin/dashboard:active-users.total]]</div>' +
 					'</div>' +
 					'<div class="text-center pull-left">' +
 						'<span class="formatted-number">' + data.socketCount + '</span>' +
-						'<div class="stat">[[admin/general/dashboard:active-users.connections]]</div>' +
+						'<div class="stat">[[admin/dashboard:active-users.connections]]</div>' +
 					'</div>';
 
 		updateRegisteredGraph(data.onlineRegisteredCount, data.onlineGuestCount);
@@ -142,18 +142,18 @@ define('admin/general/dashboard', ['chart.js', 'translator', 'benchpress'], func
 
 		var t = translator.Translator.create();
 		Promise.all([
-			t.translateKey('admin/general/dashboard:graphs.page-views', []),
-			t.translateKey('admin/general/dashboard:graphs.page-views-registered', []),
-			t.translateKey('admin/general/dashboard:graphs.page-views-guest', []),
-			t.translateKey('admin/general/dashboard:graphs.page-views-bot', []),
-			t.translateKey('admin/general/dashboard:graphs.unique-visitors', []),
-			t.translateKey('admin/general/dashboard:graphs.registered-users', []),
-			t.translateKey('admin/general/dashboard:graphs.anonymous-users', []),
-			t.translateKey('admin/general/dashboard:on-categories', []),
-			t.translateKey('admin/general/dashboard:reading-posts', []),
-			t.translateKey('admin/general/dashboard:browsing-topics', []),
-			t.translateKey('admin/general/dashboard:recent', []),
-			t.translateKey('admin/general/dashboard:unread', []),
+			t.translateKey('admin/dashboard:graphs.page-views', []),
+			t.translateKey('admin/dashboard:graphs.page-views-registered', []),
+			t.translateKey('admin/dashboard:graphs.page-views-guest', []),
+			t.translateKey('admin/dashboard:graphs.page-views-bot', []),
+			t.translateKey('admin/dashboard:graphs.unique-visitors', []),
+			t.translateKey('admin/dashboard:graphs.registered-users', []),
+			t.translateKey('admin/dashboard:graphs.anonymous-users', []),
+			t.translateKey('admin/dashboard:on-categories', []),
+			t.translateKey('admin/dashboard:reading-posts', []),
+			t.translateKey('admin/dashboard:browsing-topics', []),
+			t.translateKey('admin/dashboard:recent', []),
+			t.translateKey('admin/dashboard:unread', []),
 		]).then(function (translations) {
 			var data = {
 				labels: trafficLabels,
@@ -332,7 +332,7 @@ define('admin/general/dashboard', ['chart.js', 'translator', 'benchpress'], func
 				$(this).addClass('active');
 
 				require(['translator'], function (translator) {
-					translator.translate('[[admin/general/dashboard:page-views-custom]]', function (translated) {
+					translator.translate('[[admin/dashboard:page-views-custom]]', function (translated) {
 						$('[data-action="updateGraph"][data-units="custom"]').text(translated);
 					});
 				});
@@ -343,7 +343,7 @@ define('admin/general/dashboard', ['chart.js', 'translator', 'benchpress'], func
 
 				Benchpress.parse('admin/partials/pageviews-range-select', {}, function (html) {
 					var modal = bootbox.dialog({
-						title: '[[admin/general/dashboard:page-views-custom]]',
+						title: '[[admin/dashboard:page-views-custom]]',
 						message: html,
 						buttons: {
 							submit: {
@@ -499,7 +499,7 @@ define('admin/general/dashboard', ['chart.js', 'translator', 'benchpress'], func
 	function updateTopicsGraph(topics) {
 		if (!topics.length) {
 			topics = [{
-				title: '[[admin/general/dashboard:no-users-browsing]]',
+				title: '[[admin/dashboard:no-users-browsing]]',
 				count: 1,
 			}];
 		}

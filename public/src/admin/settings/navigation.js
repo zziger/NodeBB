@@ -1,5 +1,5 @@
 
-define('admin/general/navigation', ['translator', 'iconSelect', 'benchpress', 'jquery-ui'], function (translator, iconSelect, Benchpress) {
+define('admin/settings/navigation', ['translator', 'iconSelect', 'benchpress', 'jquery-ui'], function (translator, iconSelect, Benchpress) {
 	var navigation = {};
 	var available;
 
@@ -68,7 +68,7 @@ define('admin/general/navigation', ['translator', 'iconSelect', 'benchpress', 'j
 		data.title = translator.escape(data.title);
 		data.text = translator.escape(data.text);
 		data.groups = ajaxify.data.groups;
-		Benchpress.parse('admin/general/navigation', 'navigation', { navigation: [data] }, function (li) {
+		Benchpress.parse('admin/settings/navigation', 'navigation', { navigation: [data] }, function (li) {
 			translator.translate(li, function (li) {
 				li = $(translator.unescape(li));
 				el.after(li);
@@ -76,7 +76,7 @@ define('admin/general/navigation', ['translator', 'iconSelect', 'benchpress', 'j
 			});
 		});
 
-		Benchpress.parse('admin/general/navigation', 'enabled', { enabled: [data] }, function (li) {
+		Benchpress.parse('admin/settings/navigation', 'enabled', { enabled: [data] }, function (li) {
 			translator.translate(li, function (li) {
 				li = $(translator.unescape(li));
 				$('#enabled').append(li);
@@ -143,7 +143,7 @@ define('admin/general/navigation', ['translator', 'iconSelect', 'benchpress', 'j
 	function toggle() {
 		var btn = $(this);
 		var disabled = btn.hasClass('btn-success');
-		translator.translate(disabled ? '[[admin/general/navigation:btn.disable]]' : '[[admin/general/navigation:btn.enable]]', function (html) {
+		translator.translate(disabled ? '[[admin/settings/navigation:btn.disable]]' : '[[admin/settings/navigation:btn.enable]]', function (html) {
 			btn.toggleClass('btn-warning').toggleClass('btn-success').html(html);
 			btn.parents('li').find('[name="enabled"]').val(disabled ? 'on' : '');
 		});
