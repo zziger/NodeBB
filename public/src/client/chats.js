@@ -134,18 +134,18 @@ define('forum/chats', [
 			var action = this.getAttribute('data-action');
 
 			switch (action) {
-			case 'edit':
-				var inputEl = $('[data-roomid="' + roomId + '"] [data-component="chat/input"]');
-				messages.prepEdit(inputEl, messageId, roomId);
-				break;
+				case 'edit':
+					var inputEl = $('[data-roomid="' + roomId + '"] [data-component="chat/input"]');
+					messages.prepEdit(inputEl, messageId, roomId);
+					break;
 
-			case 'delete':
-				messages.delete(messageId, roomId);
-				break;
+				case 'delete':
+					messages.delete(messageId, roomId);
+					break;
 
-			case 'restore':
-				messages.restore(messageId, roomId);
-				break;
+				case 'restore':
+					messages.restore(messageId, roomId);
+					break;
 			}
 		});
 	};

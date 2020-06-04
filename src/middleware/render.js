@@ -12,8 +12,6 @@ const widgets = require('../widgets');
 const utils = require('../utils');
 
 module.exports = function (middleware) {
-	const renderHeaderFooterAsync = util.promisify(renderHeaderFooter);
-
 	middleware.processRender = function processRender(req, res, next) {
 		// res.render post-processing, modified from here: https://gist.github.com/mrlannigan/5051687
 		const render = res.render;
@@ -71,9 +69,9 @@ module.exports = function (middleware) {
 			});
 
 			const [header, content, footer] = await Promise.all([
-				renderHeaderFooterAsync('renderHeader', req, res, options),
+				renderHeaderFooter('renderHeader', req, res, options),
 				renderAsync(templateToRender, options),
-				renderHeaderFooterAsync('renderFooter', req, res, options),
+				renderHeaderFooter('renderFooter', req, res, options),
 			]);
 
 			const str = header +
@@ -97,14 +95,13 @@ module.exports = function (middleware) {
 		next();
 	};
 
-	function renderHeaderFooter(method, req, res, options, next) {
+	async function renderHeaderFooter(method, req, res, options) {
 		if (res.locals.renderHeader) {
-			middleware[method](req, res, options, next);
+			return await middleware[method](req, res, options);
 		} else if (res.locals.renderAdminHeader) {
-			middleware.admin[method](req, res, options, next);
-		} else {
-			next(null, '');
+			return await middleware.admin[method](req, res, options);
 		}
+		return '';
 	}
 
 	async function translate(str, req, res) {

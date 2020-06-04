@@ -61,66 +61,65 @@ define('forum/groups/details', [
 			var action = btnEl.attr('data-action');
 
 			switch (action) {
-			case 'toggleOwnership':
-				socket.emit('groups.' + (isOwner ? 'rescind' : 'grant'), {
-					toUid: uid,
-					groupName: groupName,
-				}, function (err) {
-					if (!err) {
-						ownerFlagEl.toggleClass('invisible');
-					} else {
-						app.alertError(err.message);
-					}
-				});
-				break;
-
-			case 'kick':
-				translator.translate('[[groups:details.kick-confirm]]', function (translated) {
-					bootbox.confirm(translated, function (confirm) {
-						if (!confirm) {
-							return;
+				case 'toggleOwnership':
+					socket.emit('groups.' + (isOwner ? 'rescind' : 'grant'), {
+						toUid: uid,
+						groupName: groupName,
+					}, function (err) {
+						if (!err) {
+							ownerFlagEl.toggleClass('invisible');
+						} else {
+							app.alertError(err.message);
 						}
-
-						api.del('/groups/' + ajaxify.data.group.slug + '/membership/' + (uid || app.user.uid), undefined, () => userRow.slideUp().remove(), err => app.alertError(err.status.message));
 					});
-				});
-				break;
+					break;
+				case 'kick':
+					translator.translate('[[groups:details.kick-confirm]]', function (translated) {
+						bootbox.confirm(translated, function (confirm) {
+							if (!confirm) {
+								return;
+							}
 
-			case 'update':
-				Details.update();
-				break;
+							api.del('/groups/' + ajaxify.data.group.slug + '/membership/' + (uid || app.user.uid), undefined, () => userRow.slideUp().remove(), err => app.alertError(err.status.message));
+						});
+					});
+					break;
 
-			case 'delete':
-				Details.deleteGroup();
-				break;
+				case 'update':
+					Details.update();
+					break;
 
-			case 'join':
-				api.put('/groups/' + ajaxify.data.group.slug + '/membership/' + (uid || app.user.uid), undefined, () => ajaxify.refresh(), err => app.alertError(err.status.message));
-				break;
+				case 'delete':
+					Details.deleteGroup();
+					break;
 
-			case 'leave':
-				api.del('/groups/' + ajaxify.data.group.slug + '/membership/' + (uid || app.user.uid), undefined, () => ajaxify.refresh(), err => app.alertError(err.status.message));
-				break;
+				case 'join':
+					api.put('/groups/' + ajaxify.data.group.slug + '/membership/' + (uid || app.user.uid), undefined, () => ajaxify.refresh(), err => app.alertError(err.status.message));
+					break;
 
-			case 'accept':	// intentional fall-throughs!
-			case 'reject':
-			case 'issueInvite':
-			case 'rescindInvite':
-			case 'acceptInvite':
-			case 'rejectInvite':
-			case 'acceptAll':
-			case 'rejectAll':
-				socket.emit('groups.' + action, {
-					toUid: uid,
-					groupName: groupName,
-				}, function (err) {
-					if (!err) {
-						ajaxify.refresh();
-					} else {
-						app.alertError(err.message);
-					}
-				});
-				break;
+				case 'leave':
+					api.del('/groups/' + ajaxify.data.group.slug + '/membership/' + (uid || app.user.uid), undefined, () => ajaxify.refresh(), err => app.alertError(err.status.message));
+					break;
+
+				case 'accept':	// intentional fall-throughs!
+				case 'reject':
+				case 'issueInvite':
+				case 'rescindInvite':
+				case 'acceptInvite':
+				case 'rejectInvite':
+				case 'acceptAll':
+				case 'rejectAll':
+					socket.emit('groups.' + action, {
+						toUid: uid,
+						groupName: groupName,
+					}, function (err) {
+						if (!err) {
+							ajaxify.refresh();
+						} else {
+							app.alertError(err.message);
+						}
+					});
+					break;
 			}
 		});
 	};

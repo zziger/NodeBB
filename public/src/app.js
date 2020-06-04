@@ -281,21 +281,21 @@ window.addEventListener('DOMContentLoaded', async function () {
 
 		function showAlert(type, message) {
 			switch (messages[type].format) {
-			case 'alert':
-				app.alert({
-					type: 'success',
-					title: messages[type].title,
-					message: messages[type].message,
-					timeout: 5000,
-				});
-				break;
+				case 'alert':
+					app.alert({
+						type: 'success',
+						title: messages[type].title,
+						message: messages[type].message,
+						timeout: 5000,
+					});
+					break;
 
-			case 'modal':
-				bootbox.alert({
-					title: messages[type].title,
-					message: message || messages[type].message,
-				});
-				break;
+				case 'modal':
+					bootbox.alert({
+						title: messages[type].title,
+						message: message || messages[type].message,
+					});
+					break;
 			}
 		}
 

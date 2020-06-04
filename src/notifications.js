@@ -373,30 +373,30 @@ Notifications.merge = async function (notifications) {
 			}
 
 			switch (mergeId) {
-			case 'notifications:upvoted-your-post-in':
-			case 'notifications:user-started-following-you':
-			case 'notifications:user-posted-to':
-			case 'notifications:user-flagged-post-in':
-			case 'notifications:user-flagged-user':
-				var usernames = _.uniq(set.map(notifObj => notifObj && notifObj.user && notifObj.user.username));
-				var numUsers = usernames.length;
+				case 'notifications:upvoted-your-post-in':
+				case 'notifications:user-started-following-you':
+				case 'notifications:user-posted-to':
+				case 'notifications:user-flagged-post-in':
+				case 'notifications:user-flagged-user':
+					var usernames = _.uniq(set.map(notifObj => notifObj && notifObj.user && notifObj.user.username));
+					var numUsers = usernames.length;
 
-				var title = utils.decodeHTMLEntities(notifications[modifyIndex].topicTitle || '');
-				var titleEscaped = title.replace(/%/g, '&#37;').replace(/,/g, '&#44;');
-				titleEscaped = titleEscaped ? (', ' + titleEscaped) : '';
+					var title = utils.decodeHTMLEntities(notifications[modifyIndex].topicTitle || '');
+					var titleEscaped = title.replace(/%/g, '&#37;').replace(/,/g, '&#44;');
+					titleEscaped = titleEscaped ? (', ' + titleEscaped) : '';
 
-				if (numUsers === 2) {
-					notifications[modifyIndex].bodyShort = '[[' + mergeId + '-dual, ' + usernames.join(', ') + titleEscaped + ']]';
-				} else if (numUsers > 2) {
-					notifications[modifyIndex].bodyShort = '[[' + mergeId + '-multiple, ' + usernames[0] + ', ' + (numUsers - 1) + titleEscaped + ']]';
-				}
+					if (numUsers === 2) {
+						notifications[modifyIndex].bodyShort = '[[' + mergeId + '-dual, ' + usernames.join(', ') + titleEscaped + ']]';
+					} else if (numUsers > 2) {
+						notifications[modifyIndex].bodyShort = '[[' + mergeId + '-multiple, ' + usernames[0] + ', ' + (numUsers - 1) + titleEscaped + ']]';
+					}
 
-				notifications[modifyIndex].path = set[set.length - 1].path;
-				break;
+					notifications[modifyIndex].path = set[set.length - 1].path;
+					break;
 
-			case 'new-register':
-				notifications[modifyIndex].bodyShort = '[[notifications:' + mergeId + '-multiple, ' + set.length + ']]';
-				break;
+				case 'new-register':
+					notifications[modifyIndex].bodyShort = '[[notifications:' + mergeId + '-multiple, ' + set.length + ']]';
+					break;
 			}
 
 			// Filter out duplicates

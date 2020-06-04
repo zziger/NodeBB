@@ -53,21 +53,21 @@ define('admin/manage/groups', ['translator', 'benchpress', 'api'], function (tra
 			var groupName = el.parents('tr[data-groupname]').attr('data-groupname');
 
 			switch (action) {
-			case 'delete':
-				bootbox.confirm('[[admin/manage/groups:alerts.confirm-delete]]', function (confirm) {
-					if (confirm) {
-						socket.emit('groups.delete', {
-							groupName: groupName,
-						}, function (err) {
-							if (err) {
-								return app.alertError(err.message);
-							}
+				case 'delete':
+					bootbox.confirm('[[admin/manage/groups:alerts.confirm-delete]]', function (confirm) {
+						if (confirm) {
+							socket.emit('groups.delete', {
+								groupName: groupName,
+							}, function (err) {
+								if (err) {
+									return app.alertError(err.message);
+								}
 
-							ajaxify.refresh();
-						});
-					}
-				});
-				break;
+								ajaxify.refresh();
+							});
+						}
+					});
+					break;
 			}
 		});
 	};

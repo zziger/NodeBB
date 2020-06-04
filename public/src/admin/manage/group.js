@@ -43,30 +43,30 @@ define('admin/manage/group', [
 			var action = btnEl.attr('data-action');
 
 			switch (action) {
-			case 'toggleOwnership':
-				socket.emit('groups.' + (isOwner ? 'rescind' : 'grant'), {
-					toUid: uid,
-					groupName: groupName,
-				}, function (err) {
-					if (err) {
-						return app.alertError(err.message);
-					}
-					ownerFlagEl.toggleClass('invisible');
-				});
-				break;
+				case 'toggleOwnership':
+					socket.emit('groups.' + (isOwner ? 'rescind' : 'grant'), {
+						toUid: uid,
+						groupName: groupName,
+					}, function (err) {
+						if (err) {
+							return app.alertError(err.message);
+						}
+						ownerFlagEl.toggleClass('invisible');
+					});
+					break;
 
-			case 'kick':
-				bootbox.confirm('[[admin/manage/groups:edit.confirm-remove-user]]', function (confirm) {
-					if (!confirm) {
-						return;
-					}
-					api.del('/groups/' + ajaxify.data.group.slug + '/membership/' + uid, undefined, () => {
-						userRow.slideUp().remove();
-					}, err => app.alertError(err.status.message));
-				});
-				break;
-			default:
-				break;
+				case 'kick':
+					bootbox.confirm('[[admin/manage/groups:edit.confirm-remove-user]]', function (confirm) {
+						if (!confirm) {
+							return;
+						}
+						api.del('/groups/' + ajaxify.data.group.slug + '/membership/' + uid, undefined, () => {
+							userRow.slideUp().remove();
+						}, err => app.alertError(err.status.message));
+					});
+					break;
+				default:
+					break;
 			}
 		});
 
