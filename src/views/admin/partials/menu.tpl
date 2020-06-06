@@ -21,9 +21,10 @@
 	<section class="menu-section">
 		<h3 class="menu-section-title">[[admin/menu:section-manage]]</h3>
 		<ul class="menu-section-list">
-			<li><a href="{relative_path}/admin/manage/categories">[[admin/menu:manage/categories]]</a></li>
-			<li><a href="{relative_path}/admin/manage/privileges">[[admin/menu:manage/privileges]]</a></li>
-			<li><a href="{relative_path}/admin/manage/users">[[admin/menu:manage/users]]</a></li>
+			{{{ if user.privileges.admin:categories }}}<li><a href="{relative_path}/admin/manage/categories">[[admin/menu:manage/categories]]</a></li>{{{ end }}}
+			{{{ if user.privileges.admin:privileges }}}<li><a href="{relative_path}/admin/manage/privileges">[[admin/menu:manage/privileges]]</a></li>{{{ end }}}
+			{{{ if user.privileges.admin:users }}}<li><a href="{relative_path}/admin/manage/users">[[admin/menu:manage/users]]</a></li>{{{ end }}}
+			{{{ if user.privileges.superadmin }}}
 			<li><a href="{relative_path}/admin/manage/registration">[[admin/menu:manage/registration]]</a></li>
 			<li><a href="{relative_path}/admin/manage/admins-mods">[[admin/menu:manage/admins-mods]]</a></li>
 			<li><a href="{relative_path}/admin/manage/groups">[[admin/menu:manage/groups]]</a></li>
@@ -33,9 +34,11 @@
 
 			<li><a target="_top" href="{relative_path}/post-queue">[[admin/menu:manage/post-queue]] <i class="fa fa-external-link"></i></a></li>
 			<li><a target="_top" href="{relative_path}/ip-blacklist">[[admin/menu:manage/ip-blacklist]] <i class="fa fa-external-link"></i></a></li>
+			{{{ end }}}
 		</ul>
 	</section>
 
+	{{{ if user.privileges.admin:settings }}}
 	<section class="menu-section">
 		<h3 class="menu-section-title">[[admin/menu:section-settings]]</h3>
 		<ul class="menu-section-list">
@@ -61,7 +64,6 @@
 			<li><a href="{relative_path}/admin/settings/advanced">[[admin/menu:settings/advanced]]</a></li>
 		</ul>
 	</section>
-
 	<section class="menu-section">
 		<h3 class="menu-section-title">[[admin/menu:section-appearance]]</h3>
 		<ul class="menu-section-list">
@@ -105,7 +107,9 @@
 		</ul>
 	</section>
 	<!-- ENDIF authentication.length -->
+	{{{ end }}}
 
+	{{{ if user.privileges.superadmin }}}
 	<section class="menu-section">
 		<h3 class="menu-section-title">[[admin/menu:section-advanced]]</h3>
 		<ul class="menu-section-list">
@@ -120,6 +124,7 @@
 			<!-- ENDIF env -->
 		</ul>
 	</section>
+	{{{ end }}}
 </nav>
 
 <main id="panel">
@@ -136,6 +141,7 @@
 		<ul class="quick-actions hidden-xs hidden-sm">
 			<!-- IMPORT admin/partials/quick_actions/buttons.tpl -->
 
+			{{{ if user.privileges.admin:settings }}}
 			<form role="search">
 				<div id="acp-search" >
 					<div class="dropdown">
@@ -160,6 +166,7 @@
 					</div>
 				</div>
 			</form>
+			{{{ end }}}
 
 			<!-- IMPORT admin/partials/quick_actions/alerts.tpl -->
 
@@ -172,15 +179,19 @@
 
 
 		<ul id="main-menu">
+			{{{ if user.privileges.admin:dashboard }}}
 			<li class="menu-item">
 				<a href="{relative_path}/admin/dashboard">[[admin/menu:dashboard]]</a>
 			</li>
+			{{{ end }}}
+
 			<li class="dropdown menu-item">
 				<a id="manage-menu" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">[[admin/menu:section-manage]]</a>
 				<ul class="dropdown-menu" role="menu">
-					<li><a id="manage-categories" href="{relative_path}/admin/manage/categories">[[admin/menu:manage/categories]]</a></li>
-					<li><a href="{relative_path}/admin/manage/privileges">[[admin/menu:manage/privileges]]</a></li>
-					<li><a id="manage-users" href="{relative_path}/admin/manage/users">[[admin/menu:manage/users]]</a></li>
+					{{{ if user.privileges.admin:categories }}}<li><a id="manage-categories" href="{relative_path}/admin/manage/categories">[[admin/menu:manage/categories]]</a></li>{{{ end }}}
+					{{{ if user.privileges.admin:privileges }}}<li><a href="{relative_path}/admin/manage/privileges">[[admin/menu:manage/privileges]]</a></li>{{{ end }}}
+					{{{ if user.privileges.admin:users }}}<li><a id="manage-users" href="{relative_path}/admin/manage/users">[[admin/menu:manage/users]]</a></li>{{{ end }}}
+					{{{ if user.privileges.superadmin }}}
 					<li><a href="{relative_path}/admin/manage/registration">[[admin/menu:manage/registration]]</a></li>
 					<li><a href="{relative_path}/admin/manage/admins-mods">[[admin/menu:manage/admins-mods]]</a></li>
 					<li><a href="{relative_path}/admin/manage/groups">[[admin/menu:manage/groups]]</a></li>
@@ -190,8 +201,11 @@
 					<li role="separator" class="divider"></li>
 					<li><a target="_top" href="{relative_path}/post-queue">[[admin/menu:manage/post-queue]] <i class="fa fa-external-link"></i></a></li>
 					<li><a target="_top" href="{relative_path}/ip-blacklist">[[admin/menu:manage/ip-blacklist]] <i class="fa fa-external-link"></i></a></li>
+					{{{ end }}}
 				</ul>
 			</li>
+
+			{{{ if user.privileges.admin:settings }}}
 			<li class="dropdown menu-item">
 				<a id="settings-menu" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">[[admin/menu:section-settings]]</a>
 				<ul class="dropdown-menu" role="menu">
@@ -233,5 +247,51 @@
 					<li><a href="{relative_path}/admin/extend/rewards">[[admin/menu:extend/rewards]]</a></li>
 				</ul>
 			</li>
+			<!-- IF plugins.length -->
+			<li class="dropdown menu-item">
+				<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">[[admin/menu:section-plugins]]</a>
+				<ul class="dropdown-menu" role="menu">
+					<li class="dropdown-header">[[admin/menu:section-plugins]]</li>
+					<!-- BEGIN plugins -->
+					<li>
+						<a href="{relative_path}/admin{plugins.route}">{plugins.name}</a>
+					</li>
+					<!-- END plugins -->
+					<!-- IF authentication.length -->
+					<li class="divider"></li>
+					{{{if authentication.length}}}
+					<li class="dropdown-header">[[admin/menu:section-social-auth]]</li>
+					{{{each authentication}}}
+					<li>
+						<a href="{relative_path}/admin{authentication.route}">{authentication.name}</a>
+					</li>
+					{{{end}}}
+					{{{end}}}
+					<!-- ENDIF authentication.length -->
+					<li class="divider"></li>
+					<li data-link="1">
+						<a href="{relative_path}/admin/extend/plugins">[[admin/menu:extend/plugins.install]]</a>
+					</li>
+				</ul>
+			</li>
+			<!-- ENDIF plugins.length -->
+			{{{ end }}}
 
-<main id="panel">
+			{{{ if user.privileges.superadmin }}}
+			<li class="dropdown menu-item">
+				<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">[[admin/menu:section-advanced]]</a>
+				<ul class="dropdown-menu" role="menu">
+					<li><a href="{relative_path}/admin/advanced/database">[[admin/menu:advanced/database]]</a></li>
+					<li><a href="{relative_path}/admin/advanced/events">[[admin/menu:advanced/events]]</a></li>
+					<li><a href="{relative_path}/admin/advanced/hooks">[[admin/menu:advanced/hooks]]</a></li>
+					<li><a href="{relative_path}/admin/advanced/cache">[[admin/menu:advanced/cache]]</a></li>
+					<li><a href="{relative_path}/admin/advanced/errors">[[admin/menu:advanced/errors]]</a></li>
+					<li><a href="{relative_path}/admin/advanced/logs">[[admin/menu:advanced/logs]]</a></li>
+					<!-- IF env -->
+					<li><a href="{relative_path}/admin/development/logger">[[admin/menu:development/logger]]</a></li>
+					<!-- ENDIF env -->
+				</ul>
+			</li>
+			{{{ end }}}
+		</ul>
+	</nav>

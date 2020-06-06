@@ -42,23 +42,23 @@
 					<input id="maximumTagLength" type="text" class="form-control" value="15" data-field="maximumTagLength">
 				</div>
 			</div>
-
-			<div class="alert alert-secondary">
-				<a href="{config.relative_path}/admin/manage/tags"><i class="fa fa-external-link"></i> [[admin/settings/tags:goto-manage]]</a>
-			</div>
-
 		</div>
+	</div>
+	<div>
+		<div class="alert alert-secondary">
+			<a href="{config.relative_path}/admin/manage/tags"><i class="fa fa-external-link"></i> [[admin/settings/tags:goto-manage]]</a>
+		</div>
+	</div>
 
-		<div class="row mb-4">
-			<div class="col-sm-2 col-12 settings-header">[[admin/settings/tags:related-topics]]</div>
-			<div class="col-sm-10 col-12">
-				<div class="form-row">
-					<div class="form-group col-md-9">
-						<label for="maximumRelatedTopics">[[admin/settings/tags:max-related-topics]]</label>
-					</div>
-					<div class="form-group col-md-3">
-						<input id="maximumRelatedTopics" type="text" class="form-control" value="5" data-field="maximumRelatedTopics">
-					</div>
+	<div class="row mb-4">
+		<div class="col-sm-2 col-12 settings-header">[[admin/settings/tags:related-topics]]</div>
+		<div class="col-sm-10 col-12">
+			<div class="form-row">
+				<div class="form-group col-md-9">
+					<label for="maximumRelatedTopics">[[admin/settings/tags:max-related-topics]]</label>
+				</div>
+				<div class="form-group col-md-3">
+					<input id="maximumRelatedTopics" type="text" class="form-control" value="5" data-field="maximumRelatedTopics">
 				</div>
 			</div>
 		</div>

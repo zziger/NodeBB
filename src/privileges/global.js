@@ -71,8 +71,8 @@ module.exports = function (privileges) {
 			user.isAdministrator(uid),
 		]);
 
-		const privSet = userPrivileges.map(priv => priv || isAdministrator);
-		const privData = _.zipObject(privileges.global.userPrivilegeList, privSet);
+		const combined = userPrivileges.map(allowed => allowed || isAdministrator);
+		const privData = _.zipObject(privileges.global.userPrivilegeList, combined);
 
 		return await plugins.fireHook('filter:privileges.global.get', privData);
 	};

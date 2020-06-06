@@ -33,7 +33,7 @@ define('search', ['navigator', 'translator', 'storage'], function (nav, translat
 	Search.quick = function (query, options, callback) {
 		callback = callback || function () {};
 		var template = options.template || 'partials/quick-search-results';
-		$(window).trigger('action:search.quick', { data: query });
+		$(window).trigger('action:search.quick.start', { data: query });
 		query.searchOnly = 1;
 		Search.api(query, function (data) {
 			if (options.hideOnNoMatches && !data.posts.length) {
@@ -49,7 +49,7 @@ define('search', ['navigator', 'translator', 'storage'], function (nav, translat
 				} else {
 					options.resultEl.addClass('hidden').find('#quick-search-results-container').html('');
 				}
-				$(window).trigger('action:search.quick.complete', { });
+				$(window).trigger('action:search.quick.complete', { data: data });
 				callback();
 			});
 		});
