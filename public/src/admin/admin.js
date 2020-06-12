@@ -49,6 +49,7 @@ require('../../../build/public/acp-scripts.min.js');
 
 		$('[data-component="logout"]').on('click', function () {
 			app.logout();
+			return false;
 		});
 
 		// configureSlidemenu();
