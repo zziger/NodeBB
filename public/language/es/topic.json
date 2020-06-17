@@ -99,7 +99,11 @@
     "fork_pid_count": "%1 mensaje(s) seleccionados",
     "fork_success": "¡Se ha creado un nuevo tema a partir del original! Haz click aquí para ir al nuevo tema.",
     "delete_posts_instruction": "Haz click en los mensajes que quieres eliminar/limpiar",
-    "merge_topics_instruction": "Selecciona los temas que quieres fusionar",
+    "merge_topics_instruction": "Click the topics you want to merge or search for them",
+    "merge-topic-list-title": "List of topics to be merged",
+    "merge-options": "Merge options",
+    "merge-select-main-topic": "Select the main topic",
+    "merge-new-title-for-topic": "New title for topic",
     "move_posts_instruction": "Pulsa en los posts que quieras mover",
     "change_owner_instruction": "Haz click en los mensajes que quieres asignar a otro usuario",
     "composer.title_placeholder": "Ingresa el título de tu tema...",
@@ -134,6 +138,9 @@
     "diffs.no-revisions-description": "Este post ha tenido <strong>%1</strong> revisión(es).",
     "diffs.current-revision": "revisión actual",
     "diffs.original-revision": "revisión original",
+    "diffs.restore": "Restore this revision",
+    "diffs.restore-description": "A new revision will be appended to this post's edit history.",
+    "diffs.post-restored": "Post successfully restored to earlier revision",
     "timeago_later": "%1 después",
     "timeago_earlier": "%1 antes"
 }

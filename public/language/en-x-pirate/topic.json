@@ -99,7 +99,11 @@
     "fork_pid_count": "%1 post(s) selected",
     "fork_success": "Successfully forked topic! Click here to go to the forked topic.",
     "delete_posts_instruction": "Click the posts you want to delete/purge",
-    "merge_topics_instruction": "Click the topics you want to merge",
+    "merge_topics_instruction": "Click the topics you want to merge or search for them",
+    "merge-topic-list-title": "List of topics to be merged",
+    "merge-options": "Merge options",
+    "merge-select-main-topic": "Select the main topic",
+    "merge-new-title-for-topic": "New title for topic",
     "move_posts_instruction": "Click the posts you want to move",
     "change_owner_instruction": "Click the posts you want to assign to another user",
     "composer.title_placeholder": "Enter your topic title here...",
@@ -134,6 +138,9 @@
     "diffs.no-revisions-description": "This post has <strong>%1</strong> revisions.",
     "diffs.current-revision": "current revision",
     "diffs.original-revision": "original revision",
+    "diffs.restore": "Restore this revision",
+    "diffs.restore-description": "A new revision will be appended to this post's edit history.",
+    "diffs.post-restored": "Post successfully restored to earlier revision",
     "timeago_later": "%1 later",
     "timeago_earlier": "%1 earlier"
 }

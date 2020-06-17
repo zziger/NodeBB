@@ -123,7 +123,7 @@ mongoModule.close = function (callback) {
 };
 
 mongoModule.socketAdapter = function () {
-	const mongoAdapter = require('socket.io-adapter-mongo');
+	const mongoAdapter = require('@nodebb/socket.io-adapter-mongo');
 	return mongoAdapter(connection.getConnectionString());
 };
 

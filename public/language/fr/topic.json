@@ -100,6 +100,10 @@
     "fork_success": "Sujet copié avec succès ! Cliquez ici pour aller au sujet copié.",
     "delete_posts_instruction": "Sélectionnez les messages que vous souhaitez supprimer/vider",
     "merge_topics_instruction": "Cliquez sur les sujets que vous voulez fusionner",
+    "merge-topic-list-title": "Liste des sujets à fusionner",
+    "merge-options": "Options de fusion",
+    "merge-select-main-topic": "Sélectionnez le sujet principal",
+    "merge-new-title-for-topic": "Nouveau titre pour le sujet",
     "move_posts_instruction": "Cliquez sur les messages que vous souhaitez déplacer",
     "change_owner_instruction": "Cliquez sur les messages que vous souhaitez attribuer à un autre utilisateur.",
     "composer.title_placeholder": "Entrer le titre du sujet ici…",
@@ -134,6 +138,9 @@
     "diffs.no-revisions-description": "Cet article a <strong>%1</strong> révisions.",
     "diffs.current-revision": "Révision en cours",
     "diffs.original-revision": "Révision originale",
+    "diffs.restore": "Restaurer cette révision",
+    "diffs.restore-description": "Une nouvelle révision sera ajoutée à l'historique des modifications de ce message.",
+    "diffs.post-restored": "Restauration avec succès dans une révision antérieure",
     "timeago_later": "%1",
     "timeago_earlier": "il y a %1"
 }

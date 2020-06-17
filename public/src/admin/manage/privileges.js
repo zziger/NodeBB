@@ -9,7 +9,7 @@ define('admin/manage/privileges', [
 	var cid;
 
 	Privileges.init = function () {
-		cid = ajaxify.data.cid || 'admin';
+		cid = isNaN(parseInt(ajaxify.data.cid, 10)) ? 'admin' : ajaxify.data.cid;
 
 		categorySelector.init($('[data-component="category-selector"]'), function (category) {
 			var cid = parseInt(category.cid, 10);
