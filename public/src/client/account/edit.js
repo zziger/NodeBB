@@ -226,7 +226,6 @@ define('forum/account/edit', [
 
 			pictureCropper.show({
 				socketMethod: 'user.uploadCroppedPicture',
-				route: config.relative_path + '/api/user/' + ajaxify.data.userslug + '/uploadpicture',
 				aspectRatio: 1 / 1,
 				paramName: 'uid',
 				paramValue: ajaxify.data.theirid,

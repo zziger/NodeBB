@@ -73,7 +73,7 @@ web.install = function (port) {
 
 	async.parallel([compileSass, copyCSS, loadDefaults, runWebpack], function (err) {
 		if (err) {
-			winston.error(err);
+			winston.error(err.stack);
 		}
 		setupRoutes();
 		launchExpress(port);
@@ -223,14 +223,14 @@ function launch(req, res) {
 function compileSass(callback) {
 	fs.readFile(path.join(__dirname, '../public/scss/install.scss'), function (err, style) {
 		if (err) {
-			return winston.error('Unable to read SASS install file: ', err);
+			return winston.error('Unable to read SASS install file: ', err.stack);
 		}
 
 		sass.render({
 			data: style.toString(),
 		}, function (err, css) {
 			if (err) {
-				return winston.error('Unable to compile SASS: ', err);
+				return winston.error('Unable to compile SASS: ', err.stack);
 			}
 
 			fs.writeFile(path.join(__dirname, '../public/installer.css'), css.css, callback);

@@ -33,7 +33,7 @@ function setupWinston() {
 	}
 
 	winston.configure({
-		level: nconf.get('log-level') || (global.env === 'production' ? 'info' : 'verbose'),
+		level: nconf.get('log-level') || (process.env.NODE_ENV === 'production' ? 'info' : 'verbose'),
 		format: winston.format.combine.apply(null, formats),
 		transports: [
 			new winston.transports.Console({
@@ -71,7 +71,6 @@ function loadConfig(configFile) {
 	nconf.set('upload_path', path.resolve(nconf.get('base_dir'), nconf.get('upload_path')));
 	nconf.set('upload_url', '/assets/uploads');
 
-
 	// Explicitly cast 'jobsDisabled' as Bool
 	var castAsBool = ['jobsDisabled'];
 	nconf.stores.env.readOnly = false;
@@ -85,12 +84,14 @@ function loadConfig(configFile) {
 
 	nconf.set('runJobs', nconf.get('isPrimary') === 'true' && !nconf.get('jobsDisabled'));
 
+	// nconf defaults, if not set in config
 	if (!nconf.get('sessionKey')) {
 		nconf.set('sessionKey', 'express.sid');
 	}
-	// Parse out the relative_path and other goodies from the configured URL
+
 	if (nconf.get('url')) {
 		nconf.set('url_parsed', url.parse(nconf.get('url')));
+		// Parse out the relative_url and other goodies from the configured URL
 		const urlObject = url.parse(nconf.get('url'));
 		const relativePath = urlObject.pathname !== '/' ? urlObject.pathname.replace(/\/+$/, '') : '';
 		nconf.set('base_url', urlObject.protocol + '//' + urlObject.host);

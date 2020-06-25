@@ -196,6 +196,9 @@
 	"consent.right-to-data-portability-description": "You may request from us a machine-readable export of any collected data about you and your account. You can do so by clicking the appropriate button below.",
 
 	"consent.export-profile": "Export Profile (.json)",
+	"consent.export-profile-success": "Exporting profile, you will get a notification when it is complete.",
 	"consent.export-uploads": "Export Uploaded Content (.zip)",
-	"consent.export-posts": "Export Posts (.csv)"
+	"consent.export-uploads-success": "Exporting uploads, you will get a notification when it is complete.",
+	"consent.export-posts": "Export Posts (.csv)",
+	"consent.export-posts-success": "Exporting posts, you will get a notification when it is complete."
 }
