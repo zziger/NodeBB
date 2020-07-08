@@ -105,7 +105,7 @@ async function beforeBuild(targets) {
 		const plugins = require('../plugins');
 		await plugins.prepareForBuild(targets);
 	} catch (err) {
-		winston.error('[build] Encountered error preparing for build: ' + err.stack);
+		winston.error('[build] Encountered error preparing for build\n' + err.stack);
 		throw err;
 	}
 }
@@ -213,7 +213,7 @@ exports.build = function (targets, options, callback) {
 		},
 	], function (err) {
 		if (err) {
-			winston.error('[build] Encountered error during build step', err.stack);
+			winston.error('[build] Encountered error during build step\n' + err.stack);
 			return callback(err);
 		}
 

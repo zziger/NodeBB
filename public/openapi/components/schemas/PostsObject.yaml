@@ -107,7 +107,7 @@ PostsObject:
             type: string
           color:
             type: string
-          image:
+          backgroundImage:
             nullable: true
           imageClass:
             nullable: true

@@ -275,7 +275,7 @@ postgresModule.createSessionStore = function (options, callback) {
 		const store = new sessionStore({
 			pool: db,
 			ttl: meta.getSessionTTLSeconds(),
-			pruneSessionInterval: nconf.get('isPrimary') === 'true' ? 60 : false,
+			pruneSessionInterval: nconf.get('isPrimary') ? 60 : false,
 		});
 		callback(null, store);
 	}
@@ -284,7 +284,7 @@ postgresModule.createSessionStore = function (options, callback) {
 		if (err) {
 			return callback(err);
 		}
-		if (nconf.get('isPrimary') !== 'true') {
+		if (!nconf.get('isPrimary')) {
 			return done(db);
 		}
 		db.query(`

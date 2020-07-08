@@ -40,7 +40,8 @@
 	"bookmark-instructions" : "Click here to return to the last read post in this topic.",
 
 	"flag-title": "Flag this post for moderation",
-
+	"flag-post": "Flag this post",
+	"flag-user": "Flag this user",
 	"merged-message": "This topic has been merged into <a href=\"/topic/%1\">%2</a>",
 	"deleted-message": "This topic has been deleted. Only users with topic management privileges can see it.",
 

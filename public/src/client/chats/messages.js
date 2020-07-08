@@ -125,6 +125,12 @@ define('forum/chats/messages', ['components', 'translator', 'benchpress'], funct
 				// message, instead of posting a new one.
 				inputEl.attr('data-mid', messageId).addClass('editing');
 				inputEl.val(raw).focus();
+
+				$(window).trigger('action:chat.prepEdit', {
+					inputEl: inputEl,
+					messageId: messageId,
+					roomId: roomId,
+				});
 			}
 		});
 	};

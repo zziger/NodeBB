@@ -55,6 +55,19 @@ helpers.buildQueryString = function (cid, filter, term) {
 	return Object.keys(qs).length ? '?' + querystring.stringify(qs) : '';
 };
 
+helpers.addLinkTags = function (params) {
+	params.res.locals.linkTags = params.res.locals.linkTags || [];
+	params.res.locals.linkTags.push({
+		rel: 'canonical',
+		href: nconf.get('url') + '/' + params.url,
+	});
+
+	params.tags.forEach(function (rel) {
+		rel.href = nconf.get('url') + '/' + params.url + rel.href;
+		params.res.locals.linkTags.push(rel);
+	});
+};
+
 helpers.buildFilters = function (url, filter, query) {
 	return [{
 		name: '[[unread:all-topics]]',
@@ -370,34 +383,34 @@ helpers.generateError = (statusCode, message) => {
 
 	// Need to turn all these into translation strings
 	switch (statusCode) {
-	case 400:
-		payload.status.code = 'bad-request';
-		payload.status.message = message || 'Something was wrong with the request payload you passed in.';
-		break;
+		case 400:
+			payload.status.code = 'bad-request';
+			payload.status.message = message || 'Something was wrong with the request payload you passed in.';
+			break;
 
-	case 401:
-		payload.status.code = 'not-authorised';
-		payload.status.message = message || 'A valid login session was not found. Please log in and try again.';
-		break;
+		case 401:
+			payload.status.code = 'not-authorised';
+			payload.status.message = message || 'A valid login session was not found. Please log in and try again.';
+			break;
 
-	case 403:
-		payload.status.code = 'forbidden';
-		payload.status.message = message || 'You are not authorised to make this call';
-		break;
+		case 403:
+			payload.status.code = 'forbidden';
+			payload.status.message = message || 'You are not authorised to make this call';
+			break;
 
-	case 404:
-		payload.status.code = 'not-found';
-		payload.status.message = message || 'Invalid API call';
-		break;
+		case 404:
+			payload.status.code = 'not-found';
+			payload.status.message = message || 'Invalid API call';
+			break;
 
-	case 426:
-		payload.status.code = 'upgrade-required';
-		payload.status.message = message || 'HTTPS is required for requests to the write api, please re-send your request via HTTPS';
-		break;
+		case 426:
+			payload.status.code = 'upgrade-required';
+			payload.status.message = message || 'HTTPS is required for requests to the write api, please re-send your request via HTTPS';
+			break;
 
-	case 500:
-		payload.status.code = 'internal-server-error';
-		payload.status.message = message || payload.status.message;
+		case 500:
+			payload.status.code = 'internal-server-error';
+			payload.status.message = message || payload.status.message;
 	}
 
 	return payload;
