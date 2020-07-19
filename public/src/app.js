@@ -22,6 +22,7 @@ app = window.app || {};
 app.isFocused = true;
 app.currentRoom = null;
 app.widgets = {};
+app.flags = {};
 app.cacheBuster = config['cache-buster'];
 
 window.addEventListener('DOMContentLoaded', async function () {
@@ -122,6 +123,9 @@ window.addEventListener('DOMContentLoaded', async function () {
 			headers: {
 				'x-csrf-token': config.csrf_token,
 			},
+			beforeSend: function () {
+				app.flags._logout = true;
+			},
 			success: function (data) {
 				$(window).trigger('action:app.loggedOut', data);
 				if (redirect) {
@@ -174,6 +178,10 @@ window.addEventListener('DOMContentLoaded', async function () {
 	};
 
 	app.handleInvalidSession = function () {
+		if (app.flags._logout) {
+			return;
+		}
+
 		socket.disconnect();
 		bootbox.alert({
 			title: '[[error:invalid-session]]',

@@ -47,6 +47,10 @@ define('admin/manage/category', [
 		$('[data-name="bgColor"], [data-name="color"]').each(enableColorPicker);
 
 		$('#save').on('click', function () {
+			var tags = $('#tag-whitelist').val() ? $('#tag-whitelist').val().split(',') : [];
+			if (tags.length && tags.length < parseInt($('#cid-min-tags').val(), 10)) {
+				return app.alertError('[[admin/manage/categories:alert.not-enough-whitelisted-tags]]');
+			}
 			var cid = ajaxify.data.category.cid;
 			api.put('/categories/' + cid, updateHash, (res) => {
 				app.flags._unsaved = false;

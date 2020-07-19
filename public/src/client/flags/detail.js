@@ -7,9 +7,10 @@ define('forum/flags/detail', ['forum/flags/list', 'components', 'translator', 'b
 		$('#state').val(ajaxify.data.state).removeAttr('disabled');
 		$('#assignee').val(ajaxify.data.assignee).removeAttr('disabled');
 
-		$('[data-action]').on('click', function () {
+		$('#content > div').on('click', '[data-action]', function () {
 			var action = this.getAttribute('data-action');
 			var uid = $(this).parents('[data-uid]').attr('data-uid');
+			var noteEl = document.getElementById('note');
 
 			switch (action) {
 				case 'assign':
@@ -32,7 +33,8 @@ define('forum/flags/detail', ['forum/flags/list', 'components', 'translator', 'b
 				case 'appendNote':
 					socket.emit('flags.appendNote', {
 						flagId: ajaxify.data.flagId,
-						note: document.getElementById('note').value,
+						note: noteEl.value,
+						datetime: noteEl.getAttribute('data-datetime'),
 					}, function (err, payload) {
 						if (err) {
 							return app.alertError(err.message);
@@ -40,6 +42,9 @@ define('forum/flags/detail', ['forum/flags/list', 'components', 'translator', 'b
 						app.alertSuccess('[[flags:note-added]]');
 						Detail.reloadNotes(payload.notes);
 						Detail.reloadHistory(payload.history);
+
+						noteEl.setAttribute('data-action', 'appendNote');
+						noteEl.removeAttribute('data-datetime');
 					});
 					break;
 
@@ -74,6 +79,43 @@ define('forum/flags/detail', ['forum/flags/list', 'components', 'translator', 'b
 				case 'restore-post':
 					postAction('restore', ajaxify.data.target.pid, ajaxify.data.target.tid);
 					break;
+
+				case 'delete-note':
+					var datetime = this.closest('[data-datetime]').getAttribute('data-datetime');
+					bootbox.confirm('[[flags:delete-note-confirm]]', function (ok) {
+						if (ok) {
+							socket.emit('flags.deleteNote', {
+								flagId: ajaxify.data.flagId,
+								datetime: datetime,
+							}, function (err, payload) {
+								if (err) {
+									return app.alertError(err.message);
+								}
+
+								app.alertSuccess('[[flags:note-deleted]]');
+								Detail.reloadNotes(payload.notes);
+								Detail.reloadHistory(payload.history);
+							});
+						}
+					});
+					break;
+
+				case 'prepare-edit':
+					var selectedNoteEl = this.closest('[data-index]');
+					var index = selectedNoteEl.getAttribute('data-index');
+					var textareaEl = document.getElementById('note');
+					textareaEl.value = ajaxify.data.notes[index].content;
+					textareaEl.setAttribute('data-datetime', ajaxify.data.notes[index].datetime);
+
+					var siblings = selectedNoteEl.parentElement.children;
+					for (var el in siblings) {
+						if (siblings.hasOwnProperty(el)) {
+							siblings[el].classList.remove('editing');
+						}
+					}
+					selectedNoteEl.classList.add('editing');
+					textareaEl.focus();
+					break;
 			}
 		});
 
@@ -102,6 +144,7 @@ define('forum/flags/detail', ['forum/flags/list', 'components', 'translator', 'b
 	}
 
 	Detail.reloadNotes = function (notes) {
+		ajaxify.data.notes = notes;
 		Benchpress.parse('flags/detail', 'notes', {
 			notes: notes,
 		}, function (html) {

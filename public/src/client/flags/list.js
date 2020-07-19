@@ -4,7 +4,13 @@ define('forum/flags/list', ['components', 'chart.js'], function (components, Cha
 
 	Flags.init = function () {
 		Flags.enableFilterForm();
-		Flags.handleGraphs();
+
+		var graphWrapper = $('#flags-daily-wrapper');
+		var graphFooter = graphWrapper.siblings('.panel-footer');
+		$('#flags-daily-wrapper').one('shown.bs.collapse', function () {
+			Flags.handleGraphs();
+		});
+		graphFooter.on('click', graphWrapper.collapse.bind(graphWrapper, 'toggle'));
 	};
 
 	Flags.enableFilterForm = function () {
@@ -17,7 +23,7 @@ define('forum/flags/list', ['components', 'chart.js'], function (components, Cha
 			}
 		}
 
-		filtersEl.find('button').on('click', function () {
+		document.getElementById('apply-filters').addEventListener('click', function () {
 			var payload = filtersEl.serializeArray().filter(function (item) {
 				return !!item.value;
 			});

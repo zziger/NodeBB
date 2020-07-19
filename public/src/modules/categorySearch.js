@@ -9,8 +9,11 @@ define('categorySearch', function () {
 		if (!searchEl.length) {
 			return;
 		}
-		var toggleVisibility = searchEl.parent('[data-component="category/dropdown"]').length > 0;
+
+		var toggleVisibility = searchEl.parent('[data-component="category/dropdown"]').length > 0 ||
+			searchEl.parent('[data-component="category-selector"]').length > 0;
 		var categoryEls = el.find('[data-component="category/list"] [data-cid]');
+
 		el.on('show.bs.dropdown', function () {
 			function revealParents(cid) {
 				var parentCid = el.find('[data-component="category/list"] [data-cid="' + cid + '"]').attr('data-parent-cid');
