@@ -46,8 +46,6 @@ window.addEventListener('DOMContentLoaded', async function () {
 	app.load = function () {
 		translator.prepareDOM();
 
-		app.loadProgressiveStylesheet();
-
 		overrides.overrideTimeago();
 
 		var url = ajaxify.start(window.location.pathname.slice(1) + window.location.search + window.location.hash);
@@ -648,14 +646,6 @@ window.addEventListener('DOMContentLoaded', async function () {
 			});
 		});
 		Benchpress.parse.apply(Benchpress, args);
-	};
-
-	app.loadProgressiveStylesheet = function () {
-		var linkEl = document.createElement('link');
-		linkEl.rel = 'stylesheet';
-		linkEl.href = config.relative_path + '/assets/js-enabled.css?' + app.cacheBuster;
-
-		document.head.appendChild(linkEl);
 	};
 
 	app.showCookieWarning = function () {

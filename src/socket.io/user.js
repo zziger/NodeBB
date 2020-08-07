@@ -18,6 +18,7 @@ const userController = require('../controllers/user');
 const privileges = require('../privileges');
 const utils = require('../utils');
 const sockets = require('.');
+const flags = require('../flags');
 
 const SocketUser = module.exports;
 
@@ -53,7 +54,10 @@ SocketUser.deleteAccount = async function (socket, data) {
 	if (meta.config.allowAccountDelete !== 1) {
 		throw new Error('[[error:no-privileges]]');
 	}
+
+	await flags.resolveFlag('user', socket.uid, socket.uid);
 	const userData = await user.deleteAccount(socket.uid);
+
 	require('./index').server.sockets.emit('event:user_status_change', { uid: socket.uid, status: 'offline' });
 
 	await events.log({

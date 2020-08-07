@@ -19,6 +19,8 @@ apiController.loadConfig = async function (req) {
 	let config = {
 		relative_path: nconf.get('relative_path'),
 		upload_url: nconf.get('upload_url'),
+		requireBaseUrl: `${nconf.get('relative_path')}/assets/src/modules`,
+		l10nBaseUrl: `${nconf.get('relative_path')}/assets/language`,
 		siteTitle: validator.escape(String(meta.config.title || meta.config.browserTitle || 'NodeBB')),
 		browserTitle: validator.escape(String(meta.config.browserTitle || meta.config.title || 'NodeBB')),
 		titleLayout: (meta.config.titleLayout || '{pageTitle} | {browserTitle}').replace(/{/g, '&#123;').replace(/}/g, '&#125;'),
@@ -61,7 +63,6 @@ apiController.loadConfig = async function (req) {
 		searchEnabled: plugins.hasListeners('filter:search.query'),
 		bootswatchSkin: meta.config.bootswatchSkin || '',
 		enablePostHistory: meta.config.enablePostHistory === 1,
-		notificationAlertTimeout: meta.config.notificationAlertTimeout || 5000,
 		timeagoCutoff: meta.config.timeagoCutoff !== '' ? Math.max(0, parseInt(meta.config.timeagoCutoff, 10)) : meta.config.timeagoCutoff,
 		timeagoCodes: languages.timeagoCodes,
 		cookies: {

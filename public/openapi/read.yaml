@@ -634,7 +634,42 @@ paths:
           content:
             application/json:
               schema:
-                $ref: components/schemas/CommonProps.yaml#/CommonProps
+                allOf:
+                  - type : object
+                    properties:
+                      categories:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            cid:
+                              type: number
+                              description: A category identifier
+                            name:
+                              type: string
+                            disabled:
+                              type: number
+                            icon:
+                              type: string
+                            link:
+                              type: string
+                            parentCid:
+                              type: number
+                              description: The category identifier for the category that is the immediate
+                                ancestor of the current category
+                            color:
+                              type: string
+                            bgColor:
+                              type: string
+                            backgroundImage:
+                              type: string
+                              nullable: true
+                            imageClass:
+                              type: string
+                            children:
+                              type: array
+                              description: Array of children categories
+                  - $ref: components/schemas/CommonProps.yaml#/CommonProps
   "/api/admin/manage/categories/{category_id}":
     get:
       tags:
@@ -669,17 +704,60 @@ paths:
                                 type: string
                               parent:
                                 $ref: components/schemas/CategoryObject.yaml#/CategoryObject
-                      allCategories:
+                      categories:
                         type: array
                         items:
                           type: object
                           properties:
-                            text:
-                              type: string
-                            value:
+                            cid:
                               type: number
+                              description: A category identifier
+                            name:
+                              type: string
+                            icon:
+                              type: string
                             selected:
                               type: boolean
+                            level:
+                              type: string
+                            parentCid:
+                              type: number
+                              description: The category identifier for the category that is the immediate
+                                ancestor of the current category
+                            color:
+                              type: string
+                            bgColor:
+                              type: string
+                            imageClass:
+                              type: string
+                          required:
+                            - cid
+                            - name
+                            - icon
+                      selectedCategory:
+                        type: object
+                        properties:
+                          cid:
+                            type: number
+                            description: A category identifier
+                          name:
+                            type: string
+                          level:
+                            type: string
+                          icon:
+                            type: string
+                          parentCid:
+                            type: number
+                            description: The category identifier for the category that is the immediate
+                              ancestor of the current category
+                          color:
+                            type: string
+                          bgColor:
+                            type: string
+                          imageClass:
+                            type: string
+                          selected:
+                            type: boolean
                       customClasses:
                         type: array
                         items:
@@ -769,6 +847,17 @@ paths:
                                   properties:
                                     name:
                                       type: string
+                          keys:
+                            type: object
+                            properties:
+                              users:
+                                type: array
+                                items:
+                                  type: string
+                              groups:
+                                type: array
+                                items:
+                                  type: string
                           users:
                             type: array
                             items:
@@ -865,6 +954,8 @@ paths:
                       cid:
                         type: number
                         description: A category identifier
+                      group:
+                        type: string
                   - $ref: components/schemas/CommonProps.yaml#/CommonProps
   /api/admin/manage/tags:
     get:
@@ -1279,6 +1370,36 @@ paths:
                             - textColor
                             - createtimeISO
                             - cover:thumb:url
+                      categories:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            cid:
+                              type: number
+                              description: A category identifier
+                            name:
+                              type: string
+                            icon:
+                              type: string
+                            selected:
+                              type: boolean
+                            level:
+                              type: string
+                            parentCid:
+                              type: number
+                              description: The category identifier for the category that is the immediate
+                                ancestor of the current category
+                            color:
+                              type: string
+                            bgColor:
+                              type: string
+                            imageClass:
+                              type: string
+                          required:
+                            - cid
+                            - name
+                            - icon
                       yourid:
                         type: number
                   - $ref: components/schemas/Pagination.yaml#/Pagination
@@ -1317,6 +1438,36 @@ paths:
                               type: string
                             selected:
                               type: boolean
+                      categories:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            cid:
+                              type: number
+                              description: A category identifier
+                            name:
+                              type: string
+                            icon:
+                              type: string
+                            selected:
+                              type: boolean
+                            level:
+                              type: string
+                            parentCid:
+                              type: number
+                              description: The category identifier for the category that is the immediate
+                                ancestor of the current category
+                            color:
+                              type: string
+                            bgColor:
+                              type: string
+                            imageClass:
+                              type: string
+                          required:
+                            - cid
+                            - name
+                            - icon
                       allowPrivateGroups:
                         type: number
                       maximumGroupNameLength:
@@ -2195,10 +2346,23 @@ paths:
                                 load:
                                   type: string
                                   description: CPU load
+                            nodebb:
+                              type: object
+                              properties:
+                                isPrimary:
+                                  type: boolean
+                                isCluster:
+                                  type: boolean
+                                runJobs:
+                                  type: boolean
+                                jobsDisabled:
+                                  type: boolean
                             git:
                               type: object
                               properties:
                                 hash:
+                                  type: string
+                                hashShort:
                                   type: string
                                 branch:
                                   type: string
@@ -2639,6 +2803,8 @@ paths:
                     type: string
                   upload_url:
                     type: string
+                  requireBaseUrl:
+                    type: string
                   siteTitle:
                     type: string
                   browserTitle:
@@ -2724,8 +2890,6 @@ paths:
                     type: string
                   enablePostHistory:
                     type: boolean
-                  notificationAlertTimeout:
-                    type: number
                   timeagoCutoff:
                     type: number
                   timeagoCodes:
@@ -2845,8 +3009,6 @@ paths:
                               type: number
                             banned_until_readable:
                               type: string
-                            administrator:
-                              type: boolean
                       userCount:
                         type: number
                       title:
@@ -3046,6 +3208,9 @@ paths:
                     type: boolean
                   downvoted:
                     type: boolean
+                  flagId:
+                    type: number
+                    description: The flag identifier, if this particular post has been flagged before
   "/api/topic/tid/{id}":
     get:
       tags:
@@ -3692,6 +3857,9 @@ paths:
                               type: boolean
                             display_post_menu:
                               type: boolean
+                            flagId:
+                              type: number
+                              description: The flag identifier, if this particular post has been flagged before
                       category:
                         $ref: components/schemas/CategoryObject.yaml#/CategoryObject
                       tagWhitelist:
@@ -4745,6 +4913,9 @@ paths:
                           properties:
                             state:
                               type: string
+                            heat:
+                              type: number
+                              description: The number of reports that make up this flag
                             flagId:
                               type: number
                             type:
@@ -4753,34 +4924,8 @@ paths:
                               oneOf:
                                 - type: string
                                 - type: number
-                            description:
-                              type: string
-                            uid:
-                              type: number
-                              description: A user identifier
                             datetime:
                               type: number
-                            reporter:
-                              type: object
-                              properties:
-                                username:
-                                  type: string
-                                  description: A friendly name for a given user account
-                                picture:
-                                  nullable: true
-                                  type: string
-                                icon:bgColor:
-                                  type: string
-                                  description: A six-character hexadecimal colour code assigned to the user. This
-                                    value is used in conjunction with
-                                    `icon:text` for the user's auto-generated
-                                    icon
-                                  example: "#f44336"
-                                icon:text:
-                                  type: string
-                                  description: A single-letter representation of a username. This is used in the
-                                    auto-generated icon given to users without
-                                    an avatar
                             labelClass:
                               type: string
                             target_readable:
@@ -4843,11 +4988,6 @@ paths:
                         type: string
                       targetId:
                         type: number
-                      description:
-                        type: string
-                      uid:
-                        type: number
-                        description: A user identifier
                       datetime:
                         type: number
                       datetimeISO:
@@ -4963,34 +5103,45 @@ paths:
                                     `icon:text` for the user's auto-generated
                                     icon
                                   example: "#f44336"
-                      reporter:
-                        type: object
-                        properties:
-                          username:
-                            type: string
-                            description: A friendly name for a given user account
-                          userslug:
-                            type: string
-                            description: An URL-safe variant of the username (i.e. lower-cased, spaces
-                              removed, etc.)
-                          picture:
-                            nullable: true
-                          reputation:
-                            type: number
-                          uid:
-                            type: number
-                            description: A user identifier
-                          icon:text:
-                            type: string
-                            description: A single-letter representation of a username. This is used in the
-                              auto-generated icon given to users without an
-                              avatar
-                          icon:bgColor:
-                            type: string
-                            description: A six-character hexadecimal colour code assigned to the user. This
-                              value is used in conjunction with `icon:text` for
-                              the user's auto-generated icon
-                            example: "#f44336"
+                      reports:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            value:
+                              type: string
+                            timestamp:
+                              type: number
+                            timestampISO:
+                              type: string
+                            reporter:
+                              type: object
+                              properties:
+                                username:
+                                  type: string
+                                  description: A friendly name for a given user account
+                                userslug:
+                                  type: string
+                                  description: An URL-safe variant of the username (i.e. lower-cased, spaces
+                                    removed, etc.)
+                                picture:
+                                  nullable: true
+                                reputation:
+                                  type: number
+                                uid:
+                                  type: number
+                                  description: A user identifier
+                                icon:text:
+                                  type: string
+                                  description: A single-letter representation of a username. This is used in the
+                                    auto-generated icon given to users without an
+                                    avatar
+                                icon:bgColor:
+                                  type: string
+                                  description: A six-character hexadecimal colour code assigned to the user. This
+                                    value is used in conjunction with `icon:text` for
+                                    the user's auto-generated icon
+                                  example: "#f44336"
                       type_path:
                         type: string
                       assignees:
@@ -5043,6 +5194,35 @@ paths:
                     properties:
                       title:
                         type: string
+                      allCategories:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            bgColor:
+                              type: string
+                            cid:
+                              type: number
+                            color:
+                              type: string
+                            disabled:
+                              type: number
+                            disabledClass:
+                              type: boolean
+                            icon:
+                              type: string
+                            imageClass:
+                              type: string
+                            level:
+                              type: string
+                            link:
+                              type: string
+                            name:
+                              type: string
+                            parentCid:
+                              type: number
+                            slug:
+                              type: string
                       posts:
                         type: array
                         items:

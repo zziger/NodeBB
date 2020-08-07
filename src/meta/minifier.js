@@ -295,7 +295,8 @@ function preprocessStyles(data, callback) {
 function buildCSS(data, callback) {
 	preprocessStyles(data, function (err, resultCss) {
 		if (err) {
-			return callback(err);
+			// display less parser errors properly
+			return callback(new Error(String(err)));
 		}
 
 		postcss(data.minify ? [

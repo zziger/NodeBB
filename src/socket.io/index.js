@@ -150,6 +150,8 @@ async function onMessage(socket, payload) {
 			});
 		}
 	} catch (err) {
+		const event = JSON.stringify({ eventName, params });
+		winston.error(event + '\n' + (err.stack ? err.stack : err.message));
 		callback({ message: err.message });
 	}
 }

@@ -79,11 +79,13 @@ define('forum/chats/messages', ['components', 'translator', 'benchpress'], funct
 
 	function onMessagesParsed(chatContentEl, html) {
 		var newMessage = $(html);
-
+		var isAtBottom = messages.isAtBottom(chatContentEl);
 		newMessage.appendTo(chatContentEl);
 		newMessage.find('.timeago').timeago();
 		newMessage.find('img:not(.not-responsive)').addClass('img-responsive');
-		messages.scrollToBottom(chatContentEl);
+		if (isAtBottom) {
+			messages.scrollToBottom(chatContentEl);
+		}
 
 		$(window).trigger('action:chat.received', {
 			messageEl: newMessage,
@@ -107,11 +109,29 @@ define('forum/chats/messages', ['components', 'translator', 'benchpress'], funct
 		}
 	};
 
+	messages.isAtBottom = function (containerEl, threshold) {
+		if (containerEl.length) {
+			var distanceToBottom = containerEl[0].scrollHeight - (
+				containerEl.outerHeight() + containerEl.scrollTop()
+			);
+			return distanceToBottom < (threshold || 100);
+		}
+	};
 
 	messages.scrollToBottom = function (containerEl) {
-		if (containerEl.length) {
+		if (containerEl && containerEl.length) {
 			containerEl.scrollTop(containerEl[0].scrollHeight - containerEl.height());
+			containerEl.parent()
+				.find('[component="chat/messages/scroll-up-alert"]')
+				.addClass('hidden');
 		}
+	};
+
+	messages.toggleScrollUpAlert = function (containerEl) {
+		var isAtBottom = messages.isAtBottom(containerEl, 300);
+		containerEl.parent()
+			.find('[component="chat/messages/scroll-up-alert"]')
+			.toggleClass('hidden', isAtBottom);
 	};
 
 	messages.prepEdit = function (inputEl, messageId, roomId) {

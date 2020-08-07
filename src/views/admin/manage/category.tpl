@@ -1,11 +1,7 @@
 <div class="category" data-cid="{category.cid}">
 	<div class="row">
 		<div class="col-md-3 pull-right">
-			<select id="category-selector" class="form-control">
-				<!-- BEGIN allCategories -->
-				<option value="{allCategories.value}" <!-- IF allCategories.selected -->selected<!-- ENDIF allCategories.selected -->>{allCategories.text}</option>
-				<!-- END allCategories -->
-			</select>
+			<!-- IMPORT partials/category-selector.tpl -->
 		</div>
 	</div>
 
@@ -179,6 +175,9 @@
 					<hr/>
 					<a href="{config.relative_path}/admin/manage/privileges/{category.cid}" class="btn btn-info btn-block">
 						<i class="fa fa-gear"></i> [[admin/manage/privileges:edit-privileges]]
+					</a>
+					<a href="{config.relative_path}/category/{category.cid}" class="btn btn-info btn-block">
+						<i class="fa fa-eye"></i> [[admin/manage/categories:view-category]]
 					</a>
 					<button class="btn btn-info btn-block copy-settings">
 						<i class="fa fa-files-o"></i> [[admin/manage/categories:copy-settings]]

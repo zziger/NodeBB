@@ -5,6 +5,7 @@ const validator = require('validator');
 
 const db = require('../../database');
 const user = require('../../user');
+const categories = require('../../categories');
 const groups = require('../../groups');
 const meta = require('../../meta');
 const pagination = require('../../pagination');
@@ -20,13 +21,15 @@ groupsController.list = async function (req, res) {
 	const pageCount = Math.ceil(groupNames.length / groupsPerPage);
 	const start = (page - 1) * groupsPerPage;
 	const stop = start + groupsPerPage - 1;
-
 	groupNames = groupNames.slice(start, stop + 1);
+
+	const allCategories = await categories.buildForSelectAll();
 	const groupData = await groups.getGroupsData(groupNames);
 	res.render('admin/manage/groups', {
 		groups: groupData,
 		pagination: pagination.create(page, pageCount),
 		yourid: req.uid,
+		categories: allCategories,
 	});
 };
 
@@ -50,12 +53,15 @@ groupsController.get = async function (req, res, next) {
 		};
 	});
 
+	const allCategories = await categories.buildForSelectAll();
+
 	res.render('admin/manage/group', {
 		group: group,
 		groupNames: groupNameData,
 		allowPrivateGroups: meta.config.allowPrivateGroups,
 		maximumGroupNameLength: meta.config.maximumGroupNameLength,
 		maximumGroupTitleLength: meta.config.maximumGroupTitleLength,
+		categories: allCategories,
 	});
 };
 

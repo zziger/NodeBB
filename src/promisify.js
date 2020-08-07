@@ -8,7 +8,7 @@ module.exports = function (theModule, ignoreKeys) {
 		if (typeof func !== 'function') {
 			return false;
 		}
-		var str = func.toString().split('\n')[0];
+		const str = func.toString().split('\n')[0];
 		return str.includes('callback)');
 	}
 
@@ -16,13 +16,12 @@ module.exports = function (theModule, ignoreKeys) {
 		return fn && fn.constructor && fn.constructor.name === 'AsyncFunction';
 	}
 
-
 	function promisifyRecursive(module) {
 		if (!module) {
 			return;
 		}
 
-		var keys = Object.keys(module);
+		const keys = Object.keys(module);
 		keys.forEach(function (key) {
 			if (ignoreKeys.includes(key)) {
 				return;

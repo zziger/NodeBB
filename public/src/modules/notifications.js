@@ -55,31 +55,6 @@ define('notifications', [
 	};
 
 	Notifications.onNewNotification = function (notifData) {
-		// If a path is defined, show notif data, otherwise show generic data
-		var payload = {
-			alert_id: 'new_notif',
-			title: '[[notifications:new-notification]]',
-			timeout: parseInt(config.notificationAlertTimeout, 10) || 5000,
-		};
-
-		if (notifData.path) {
-			payload.message = notifData.bodyShort;
-			payload.type = 'info';
-			payload.clickfn = function () {
-				markNotification(notifData.nid, true);
-				if (notifData.path.startsWith('http') || notifData.path.startsWith('https')) {
-					window.location.href = notifData.path;
-				} else {
-					window.location.href = window.location.protocol + '//' + window.location.host + config.relative_path + notifData.path;
-				}
-			};
-		} else {
-			payload.message = '[[notifications:you-have-unread-notifications]]';
-			payload.type = 'warning';
-		}
-
-		app.alert(payload);
-
 		if (ajaxify.currentPage === 'notifications') {
 			ajaxify.refresh();
 		}

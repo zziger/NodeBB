@@ -53,6 +53,7 @@ define('forum/chats', [
 		Chats.addRenameHandler(ajaxify.data.roomId, components.get('chat/controls').find('[data-action="rename"]'));
 		Chats.addLeaveHandler(ajaxify.data.roomId, components.get('chat/controls').find('[data-action="leave"]'));
 		Chats.addScrollHandler(ajaxify.data.roomId, ajaxify.data.uid, $('.chat-content'));
+		Chats.addScrollBottomHandler($('.chat-content'));
 		Chats.addCharactersLeftHandler($('[data-component="chat/main-wrapper"]'));
 		Chats.addIPHandler($('[data-component="chat/main-wrapper"]'));
 		Chats.createAutoComplete($('[data-component="chat/input"]'));
@@ -78,6 +79,7 @@ define('forum/chats', [
 	Chats.addScrollHandler = function (roomId, uid, el) {
 		var loading = false;
 		el.off('scroll').on('scroll', function () {
+			messages.toggleScrollUpAlert(el);
 			if (loading) {
 				return;
 			}
@@ -119,6 +121,14 @@ define('forum/chats', [
 				});
 			});
 		});
+	};
+
+	Chats.addScrollBottomHandler = function (chatContent) {
+		chatContent.parent()
+			.find('[component="chat/messages/scroll-up-alert"]')
+			.off('click').on('click', function () {
+				messages.scrollToBottom(chatContent);
+			});
 	};
 
 	Chats.addCharactersLeftHandler = function (parent) {

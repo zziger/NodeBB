@@ -343,8 +343,8 @@ define('admin/manage/users', ['translator', 'benchpress', 'autocomplete', 'api']
 
 		function handleUserCreate() {
 			$('#createUser').on('click', function () {
-				Benchpress.parse('admin/modals/create-user-modal', {}, function (html) {
-					bootbox.dialog({
+				Benchpress.parse('admin/partials/create-user-modal', {}, function (html) {
+					var modal = bootbox.dialog({
 						message: html,
 						title: '[[admin/manage/users:alerts.create]]',
 						onEscape: true,
@@ -362,6 +362,9 @@ define('admin/manage/users', ['translator', 'benchpress', 'autocomplete', 'api']
 								},
 							},
 						},
+					});
+					modal.on('shown.bs.modal', function () {
+						modal.find('#create-user-name').focus();
 					});
 				});
 				return false;

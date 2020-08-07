@@ -56,6 +56,7 @@ notificationsController.get = async function (req, res, next) {
 	nids = nids.slice(start, stop + 1);
 
 	const notifications = await user.notifications.getNotifications(nids, req.uid);
+
 	res.render('notifications', {
 		notifications: notifications,
 		pagination: pagination.create(page, pageCount, req.query),
