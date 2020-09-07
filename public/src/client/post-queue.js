@@ -1,4 +1,7 @@
-define('admin/manage/post-queue', ['categorySelector'], function (categorySelector) {
+'use strict';
+
+
+define('forum/post-queue', ['categorySelector'], function (categorySelector) {
 	var PostQueue = {};
 
 	PostQueue.init = function () {
@@ -8,13 +11,23 @@ define('admin/manage/post-queue', ['categorySelector'], function (categorySelect
 			var parent = $(this).parents('[data-id]');
 			var action = $(this).attr('data-action');
 			var id = parent.attr('data-id');
-			var method = action === 'accept' ? 'posts.accept' : 'posts.reject';
+			var listContainer = parent.get(0).parentNode;
 
-			socket.emit(method, { id: id }, function (err) {
+			if (!['accept', 'reject'].some(function (valid) {
+				return action === valid;
+			})) {
+				return;
+			}
+
+			socket.emit('posts.' + action, { id: id }, function (err) {
 				if (err) {
 					return app.alertError(err.message);
 				}
 				parent.remove();
+
+				if (listContainer.childElementCount === 0) {
+					ajaxify.refresh();
+				}
 			});
 			return false;
 		});
@@ -52,9 +65,11 @@ define('admin/manage/post-queue', ['categorySelector'], function (categorySelect
 	function handleContentEdit(displayClass, editableClass, inputSelector) {
 		$('.posts-list').on('click', displayClass, function () {
 			var el = $(this);
-			el.addClass('hidden');
 			var inputEl = el.parent().find(editableClass);
-			inputEl.removeClass('hidden').find(inputSelector).focus();
+			if (inputEl.length) {
+				el.addClass('hidden');
+				inputEl.removeClass('hidden').find(inputSelector).focus();
+			}
 		});
 
 		$('.posts-list').on('blur', editableClass + ' ' + inputSelector, function () {

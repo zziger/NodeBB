@@ -57,6 +57,16 @@
 	"state-rejected": "Rejeté",
 	"no-assignee": "Non assigné",
 
+	"sort": "Trier par",
+	"sort-newest": "Le plus récent",
+	"sort-oldest": "Le plus ancien",
+	"sort-reports": "Rapports",
+	"sort-all": "Tous les signalements...",
+	"sort-posts-only": "Messages seulement...",
+	"sort-downvotes": "Demandes négatives",
+	"sort-upvotes": "Demandes positives",
+	"sort-replies": "Réponses",
+
 	"modal-title": "Signaler un contenu inapproprié",
 	"modal-body": "Veuillez saisir le motif de votre signalement pour %1 %2 et sélectionner le bouton ci-dessous le plus approprié.",
 	"modal-reason-spam": "Spam",
@@ -67,5 +77,9 @@
 	"modal-submit-success": "Le contenu a été soumis pour examen.",
 	"modal-submit-confirm": "Confirmer l'envoi",
 	"modal-submit-confirm-text": "Vous avez déjà spécifié un signalement. Êtes-vous sûr de vouloir soumettre une demande ?",
-	"modal-submit-confirm-text-help": "La soumission d'une demande écrase tous les signalements définis."
+	"modal-submit-confirm-text-help": "La soumission d'une demande écrase tous les signalements définis.",
+
+	"bulk-actions": "Actions",
+	"bulk-resolve": "Signalement(s) résolu(s)",
+	"bulk-success": "%1 signalement mis à jour"
 }

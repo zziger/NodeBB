@@ -97,7 +97,8 @@
 	"tools.merge-topics-instruction": "Click the topics you want to merge",
 	"tools.merge": "Merge",
 
-	"topic-move-success": "This topic has been successfully moved to %1",
+	"topic-move-success": "This topic has been successfully moved to %1. Click here to undo.",
+	"topic-move-undone": "Topic move undone",
 
 	"post-delete-confirm": "Are you sure you want to delete this post?",
 	"post-restore-confirm": "Are you sure you want to restore this post?",

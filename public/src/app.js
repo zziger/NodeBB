@@ -43,15 +43,15 @@ window.addEventListener('DOMContentLoaded', async function () {
 		locale: config.userLang,
 	});
 
+	$(document).ready(function () {
+		ajaxify.parseData();
+		app.load();
+	});
+
 	app.load = function () {
 		translator.prepareDOM();
 
 		overrides.overrideTimeago();
-
-		var url = ajaxify.start(window.location.pathname.slice(1) + window.location.search + window.location.hash);
-		ajaxify.updateHistory(url, true);
-		ajaxify.parseData();
-		ajaxify.end(url, ajaxify.data.template.name);
 
 		handleStatusChange();
 
@@ -152,6 +152,7 @@ window.addEventListener('DOMContentLoaded', async function () {
 
 	app.alertSuccess = function (message, timeout) {
 		app.alert({
+			alert_id: utils.generateUUID(),
 			title: '[[global:alert.success]]',
 			message: message,
 			type: 'success',
@@ -168,6 +169,7 @@ window.addEventListener('DOMContentLoaded', async function () {
 		}
 
 		app.alert({
+			alert_id: utils.generateUUID(),
 			title: '[[global:alert.error]]',
 			message: message,
 			type: 'danger',

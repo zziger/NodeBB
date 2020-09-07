@@ -9,10 +9,6 @@ const htmlToText = require('html-to-text');
 const url = require('url');
 const path = require('path');
 const fs = require('fs');
-const util = require('util');
-const readFileAsync = util.promisify(fs.readFile);
-const writeFileAsync = util.promisify(fs.writeFile);
-
 const _ = require('lodash');
 const jwt = require('jsonwebtoken');
 
@@ -29,9 +25,6 @@ Emailer.transports = {
 	sendmail: nodemailer.createTransport({
 		sendmail: true,
 		newline: 'unix',
-		pool: true,
-		rateLimit: meta.config['email:sendmail:rateLimit'],
-		rateDelta: meta.config['email:sendmail:rateDelta'],
 	}),
 	smtp: undefined,
 };
@@ -47,7 +40,7 @@ Emailer.getTemplates = async function (config) {
 
 	const templates = await Promise.all(emails.map(async (email) => {
 		const path = email.replace(emailsPath, '').substr(1).replace('.tpl', '');
-		const original = await readFileAsync(email, 'utf8');
+		const original = await fs.promises.readFile(email, 'utf8');
 
 		return {
 			path: path,
@@ -70,7 +63,9 @@ Emailer.setupFallbackTransport = function (config) {
 	winston.verbose('[emailer] Setting up SMTP fallback transport');
 	// Enable Gmail transport if enabled in ACP
 	if (parseInt(config['email:smtpTransport:enabled'], 10) === 1) {
-		var smtpOptions = {};
+		var smtpOptions = {
+			pool: config['email:smtpTransport:pool'],
+		};
 
 		if (config['email:smtpTransport:user'] || config['email:smtpTransport:pass']) {
 			smtpOptions.auth = {
@@ -175,11 +170,8 @@ Emailer.send = async function (template, uid, params) {
 		return;
 	}
 
-	// Combined passed-in payload with default values
-	params = { ...Emailer._defaultPayload, ...params };
-
 	const [userData, userSettings] = await Promise.all([
-		User.getUserFields(uid, ['email', 'username']),
+		User.getUserFields(uid, ['email', 'username', 'email:confirmed']),
 		User.getSettings(uid),
 	]);
 
@@ -187,6 +179,15 @@ Emailer.send = async function (template, uid, params) {
 		winston.warn('uid : ' + uid + ' has no email, not sending.');
 		return;
 	}
+
+	const allowedTpls = ['verify_email', 'welcome', 'registration_accepted'];
+	if (meta.config.requireEmailConfirmation && !userData['email:confirmed'] && !allowedTpls.includes(template)) {
+		winston.warn('uid : ' + uid + ' has not confirmed email, not sending "' + template + '" email.');
+		return;
+	}
+
+	// Combined passed-in payload with default values
+	params = { ...Emailer._defaultPayload, ...params };
 	params.uid = uid;
 	params.username = userData.username;
 	params.rtl = await translator.translate('[[language:dir]]', userSettings.userLang) === 'rtl';
@@ -316,7 +317,7 @@ async function buildCustomTemplates(config) {
 			const compiled = await Benchpress.precompile(source, {
 				minify: global.env !== 'development',
 			});
-			await writeFileAsync(template.fullpath.replace(/\.tpl$/, '.js'), compiled);
+			await fs.promises.writeFile(template.fullpath.replace(/\.tpl$/, '.js'), compiled);
 		}));
 
 		Benchpress.flush();

@@ -164,7 +164,7 @@ define('forum/topic/postTools', [
 			var timestamp = parseInt(getData(btn, 'data-timestamp'), 10);
 			var postDeleteDuration = parseInt(ajaxify.data.postDeleteDuration, 10);
 			if (checkDuration(postDeleteDuration, timestamp, 'post-delete-duration-expired')) {
-				togglePostDelete($(this), tid);
+				togglePostDelete($(this));
 			}
 		});
 
@@ -201,11 +201,11 @@ define('forum/topic/postTools', [
 		}
 
 		postContainer.on('click', '[data-component="post/restore"]', function () {
-			togglePostDelete($(this), tid);
+			togglePostDelete($(this));
 		});
 
 		postContainer.on('click', '[data-component="post/purge"]', function () {
-			purgePost($(this), tid);
+			purgePost($(this));
 		});
 
 		postContainer.on('click', '[data-component="post/move"]', function () {
@@ -369,19 +369,19 @@ define('forum/topic/postTools', [
 		return slug;
 	}
 
-	function togglePostDelete(button, tid) {
+	function togglePostDelete(button) {
 		var pid = getData(button, 'data-pid');
 		var postEl = components.get('post', 'pid', pid);
 		var action = !postEl.hasClass('deleted') ? 'delete' : 'restore';
 
-		postAction(action, pid, tid);
+		postAction(action, pid);
 	}
 
-	function purgePost(button, tid) {
-		postAction('purge', getData(button, 'data-pid'), tid);
+	function purgePost(button) {
+		postAction('purge', getData(button, 'data-pid'));
 	}
 
-	function postAction(action, pid, tid) {
+	function postAction(action, pid) {
 		translator.translate('[[topic:post_' + action + '_confirm]]', function (msg) {
 			bootbox.confirm(msg, function (confirm) {
 				if (!confirm) {
@@ -390,7 +390,6 @@ define('forum/topic/postTools', [
 
 				socket.emit('posts.' + action, {
 					pid: pid,
-					tid: tid,
 				}, function (err) {
 					if (err) {
 						app.alertError(err.message);

@@ -223,6 +223,14 @@ ajaxify.go = function (url, callback, quiet) {
 	return true;
 };
 
+// this function is called just once from footer on page load
+ajaxify.coldLoad = function () {
+	var url = ajaxify.start(window.location.pathname.slice(1) + window.location.search + window.location.hash);
+	ajaxify.updateHistory(url, true);
+	ajaxify.end(url, app.template);
+	$(window).trigger('action:ajaxify.coldLoad');
+};
+
 ajaxify.isCold = function () {
 	return ajaxify.count <= 1;
 };

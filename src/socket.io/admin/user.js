@@ -125,20 +125,14 @@ User.forcePasswordReset = async function (socket, uids) {
 };
 
 User.deleteUsers = async function (socket, uids) {
+	await canDeleteUids(uids);
 	deleteUsers(socket, uids, async function (uid) {
 		return await user.deleteAccount(uid);
 	});
 };
 
 User.deleteUsersContent = async function (socket, uids) {
-	if (!Array.isArray(uids)) {
-		throw new Error('[[error:invalid-data]]');
-	}
-	const isMembers = await groups.isMembers(uids, 'administrators');
-	if (isMembers.includes(true)) {
-		throw new Error('[[error:cant-delete-other-admins]]');
-	}
-
+	await canDeleteUids(uids);
 	await Promise.all(uids.map(async (uid) => {
 		await user.deleteContent(socket.uid, uid);
 	}));
@@ -147,12 +141,13 @@ User.deleteUsersContent = async function (socket, uids) {
 User.deleteUsersAndContent = async function (socket, uids) {
 	sockets.warnDeprecated(socket, 'DELETE /api/v1/users or DELETE /api/v1/users/:uid');
 
+	await canDeleteUids(uids);
 	deleteUsers(socket, uids, async function (uid) {
 		return await user.delete(socket.uid, uid);
 	});
 };
 
-async function deleteUsers(socket, uids, method) {
+async function canDeleteUids(uids) {
 	if (!Array.isArray(uids)) {
 		throw new Error('[[error:invalid-data]]');
 	}
@@ -160,6 +155,9 @@ async function deleteUsers(socket, uids, method) {
 	if (isMembers.includes(true)) {
 		throw new Error('[[error:cant-delete-other-admins]]');
 	}
+}
+
+async function deleteUsers(socket, uids, method) {
 	async function doDelete(uid) {
 		await flags.resolveFlag('user', uid, socket.uid);
 		const userData = await method(uid);
@@ -175,6 +173,7 @@ async function deleteUsers(socket, uids, method) {
 			callerUid: socket.uid,
 			uid: uid,
 			ip: socket.ip,
+			user: userData,
 		});
 	}
 	try {

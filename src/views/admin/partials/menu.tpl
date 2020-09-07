@@ -1,23 +1,17 @@
-<nav>
-	<ul class="nav nav-tabs mb-2">
-		<div class="btn-group">
-			<!-- IMPORT admin/partials/quick-actions/buttons.tpl -->
-		</div>
-		<!-- IMPORT admin/partials/quick-actions/alerts.tpl -->
-		<li class="nav-item dropdown">
-			<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">[[admin/menu:section-general]]</a>
-			<div class="dropdown-menu">
-				<a class="dropdown-item" href="{relative_path}/admin/general/dashboard">[[admin/menu:general/dashboard]]</a>
-				<a class="dropdown-item" href="{relative_path}/admin/general/homepage">[[admin/menu:general/homepage]]</a>
-				<a class="dropdown-item" href="{relative_path}/admin/general/navigation">[[admin/menu:general/navigation]]</a>
-				<a class="dropdown-item" href="{relative_path}/admin/general/languages">[[admin/menu:general/languages]]</a>
-				<a class="dropdown-item" href="{relative_path}/admin/general/social">[[admin/menu:general/social]]</a>
+<nav id="menu" class="hidden-md hidden-lg">
+	<section class="menu-section quick-actions">
+		<ul class="menu-section-list">
+			{{{ if user.privileges.superadmin }}}
+			<div class="button-group">
+				<!-- IMPORT admin/partials/quick_actions/buttons.tpl -->
 			</div>
+			{{{ end }}}
 
 			<!-- IMPORT admin/partials/quick_actions/alerts.tpl -->
 		</ul>
 	</section>
 
+	{{{ if showManageMenu }}}
 	<section class="menu-section">
 		<h3 class="menu-section-title">[[admin/menu:section-manage]]</h3>
 		<ul class="menu-section-list">
@@ -37,6 +31,7 @@
 			{{{ end }}}
 		</ul>
 	</section>
+	{{{ end }}}
 
 	{{{ if user.privileges.admin:settings }}}
 	<section class="menu-section">
@@ -168,7 +163,9 @@
 			</form>
 			{{{ end }}}
 
+			{{{ if user.privileges.superadmin }}}
 			<!-- IMPORT admin/partials/quick_actions/alerts.tpl -->
+			{{{ end }}}
 
 			<li class="reconnect-spinner">
 				<a href="#" id="reconnect" class="hide" title="[[admin/menu:connection-lost, {title}]]">
@@ -185,6 +182,7 @@
 			</li>
 			{{{ end }}}
 
+			{{{ if showManageMenu }}}
 			<li class="dropdown menu-item">
 				<a id="manage-menu" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">[[admin/menu:section-manage]]</a>
 				<ul class="dropdown-menu" role="menu">
@@ -204,6 +202,7 @@
 					{{{ end }}}
 				</ul>
 			</li>
+			{{{ end }}}
 
 			{{{ if user.privileges.admin:settings }}}
 			<li class="dropdown menu-item">

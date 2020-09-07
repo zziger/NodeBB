@@ -16,6 +16,7 @@ const posts = require('./posts');
 const privileges = require('./privileges');
 const plugins = require('./plugins');
 const utils = require('./utils');
+const batch = require('./batch');
 
 const Flags = module.exports;
 
@@ -112,8 +113,8 @@ Flags.get = async function (flagId) {
 	return data.flag;
 };
 
-Flags.list = async function (filters, uid) {
-	filters = filters || {};
+Flags.list = async function (data) {
+	const filters = data.filters || {};
 
 	let sets = [];
 	const orSets = [];
@@ -125,7 +126,7 @@ Flags.list = async function (filters, uid) {
 	for (var type in filters) {
 		if (filters.hasOwnProperty(type)) {
 			if (Flags._filters.hasOwnProperty(type)) {
-				Flags._filters[type](sets, orSets, filters[type], uid);
+				Flags._filters[type](sets, orSets, filters[type], data.uid);
 			} else {
 				winston.warn('[flags/list] No flag filter type found: ' + type);
 			}
@@ -151,6 +152,8 @@ Flags.list = async function (filters, uid) {
 		}
 	}
 
+	flagIds = await Flags.sort(flagIds, data.sort);
+
 	// Create subset for parsing based on page number (n=20)
 	const flagsPerPage = Math.abs(parseInt(filters.perPage, 10) || 1);
 	const pageCount = Math.ceil(flagIds.length / flagsPerPage);
@@ -174,16 +177,62 @@ Flags.list = async function (filters, uid) {
 		});
 	}));
 
-	const data = await plugins.fireHook('filter:flags.list', {
+	const payload = await plugins.fireHook('filter:flags.list', {
 		flags: flags,
 		page: filters.page,
+		uid: data.uid,
 	});
 
 	return {
-		flags: data.flags,
-		page: data.page,
+		flags: payload.flags,
+		page: payload.page,
 		pageCount: pageCount,
 	};
+};
+
+Flags.sort = async function (flagIds, sort) {
+	const filterPosts = async (flagIds) => {
+		const keys = flagIds.map(id => `flag:${id}`);
+		const types = await db.getObjectsFields(keys, ['type']);
+		return flagIds.filter((id, idx) => types[idx].type === 'post');
+	};
+
+	switch (sort) {
+		// 'newest' is not handled because that is default
+		case 'oldest':
+			flagIds = flagIds.reverse();
+			break;
+
+		case 'reports': {
+			const keys = flagIds.map(id => `flag:${id}:reports`);
+			const heat = await db.sortedSetsCard(keys);
+			const mapped = heat.map((el, i) => ({
+				index: i, heat: el,
+			}));
+			mapped.sort(function (a, b) {
+				return b.heat - a.heat;
+			});
+			flagIds = mapped.map(obj => flagIds[obj.index]);
+			break;
+		}
+
+		case 'upvotes':	// fall-through
+		case 'downvotes':
+		case 'replies': {
+			flagIds = await filterPosts(flagIds);
+			const keys = flagIds.map(id => `flag:${id}`);
+			const pids = (await db.getObjectsFields(keys, ['targetId'])).map(obj => obj.targetId);
+			const votes = (await posts.getPostsFields(pids, [sort])).map(obj => parseInt(obj[sort], 10) || 0);
+			const sortRef = flagIds.reduce((memo, cur, idx) => {
+				memo[cur] = votes[idx];
+				return memo;
+			}, {});
+
+			flagIds = flagIds.sort((a, b) => sortRef[b] - sortRef[a]);
+		}
+	}
+
+	return flagIds;
 };
 
 Flags.validate = async function (payload) {
@@ -322,6 +371,7 @@ Flags.create = async function (type, id, uid, reason, timestamp) {
 			flagId: flagId,
 			type: type,
 			targetId: id,
+			targetUid: targetUid,
 			datetime: timestamp,
 		}),
 		Flags.addReport(flagId, type, id, uid, reason, timestamp),
@@ -544,11 +594,25 @@ Flags.resolveFlag = async function (type, id, uid) {
 	}
 };
 
+Flags.resolveUserPostFlags = async function (uid, callerUid) {
+	await batch.processSortedSet('uid:' + uid + ':posts', async function (pids) {
+		let postData = await posts.getPostsFields(pids, ['pid', 'flagId']);
+		postData = postData.filter(p => p && p.flagId);
+		for (const postObj of postData) {
+			if (parseInt(postObj.flagId, 10)) {
+				// eslint-disable-next-line no-await-in-loop
+				await Flags.update(postObj.flagId, callerUid, { state: 'resolved' });
+			}
+		}
+	}, {
+		batch: 500,
+	});
+};
+
 Flags.getHistory = async function (flagId) {
 	const uids = [];
 	let history = await db.getSortedSetRevRangeWithScores('flag:' + flagId + ':history', 0, -1);
-	const flagData = await db.getObjectFields('flag:' + flagId, ['type', 'targetId']);
-	const targetUid = await Flags.getTargetUid(flagData.type, flagData.targetId);
+	const targetUid = await db.getObjectField('flag:' + flagId, 'targetUid');
 
 	history = history.map(function (entry) {
 		entry.value = JSON.parse(entry.value);

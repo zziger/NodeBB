@@ -57,6 +57,16 @@
 	"state-rejected": "거절된 신고",
 	"no-assignee": "담당자 미정",
 
+	"sort": "Sort by",
+	"sort-newest": "Newest first",
+	"sort-oldest": "Oldest first",
+	"sort-reports": "Most reports",
+	"sort-all": "All flag types...",
+	"sort-posts-only": "Posts only...",
+	"sort-downvotes": "Most downvotes",
+	"sort-upvotes": "Most upvotes",
+	"sort-replies": "Most replies",
+
 	"modal-title": "부적절한 컨텐츠 신고",
 	"modal-body": "%1 %2 에 대한 신고 사유를 적어주시거나, 빠른 신고 버튼 중 하나를 사용해 주세요.",
 	"modal-reason-spam": "스팸",
@@ -67,5 +77,9 @@
 	"modal-submit-success": "이 컨텐츠는 신고되었습니다.",
 	"modal-submit-confirm": "제출 확인",
 	"modal-submit-confirm-text": "You have a custom reason specified already. Are you sure you wish to submit via quick-report?",
-	"modal-submit-confirm-text-help": "Submitting a quick report will overwrite any custom reasons defined."
+	"modal-submit-confirm-text-help": "Submitting a quick report will overwrite any custom reasons defined.",
+
+	"bulk-actions": "Bulk Actions",
+	"bulk-resolve": "Resolve Flag(s)",
+	"bulk-success": "%1 flags updated"
 }

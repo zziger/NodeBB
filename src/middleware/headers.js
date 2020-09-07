@@ -1,24 +1,33 @@
 'use strict';
 
-var os = require('os');
-var winston = require('winston');
-var _ = require('lodash');
+const os = require('os');
+const winston = require('winston');
+const _ = require('lodash');
 
-var meta = require('../meta');
-var languages = require('../languages');
-var helpers = require('./helpers');
+const meta = require('../meta');
+const languages = require('../languages');
+const helpers = require('./helpers');
 
 module.exports = function (middleware) {
 	middleware.addHeaders = helpers.try(function addHeaders(req, res, next) {
-		var headers = {
+		const headers = {
 			'X-Powered-By': encodeURI(meta.config['powered-by'] || 'NodeBB'),
-			'X-Frame-Options': meta.config['allow-from-uri'] ? 'ALLOW-FROM ' + encodeURI(meta.config['allow-from-uri']) : 'SAMEORIGIN',
 			'Access-Control-Allow-Methods': encodeURI(meta.config['access-control-allow-methods'] || ''),
 			'Access-Control-Allow-Headers': encodeURI(meta.config['access-control-allow-headers'] || ''),
 		};
 
+		if (meta.config['csp-frame-ancestors']) {
+			headers['Content-Security-Policy'] = 'frame-ancestors ' + meta.config['csp-frame-ancestors'];
+			if (meta.config['csp-frame-ancestors'] === '\'none\'') {
+				headers['X-Frame-Options'] = 'DENY';
+			}
+		} else {
+			headers['Content-Security-Policy'] = 'frame-ancestors \'self\'';
+			headers['X-Frame-Options'] = 'SAMEORIGIN';
+		}
+
 		if (meta.config['access-control-allow-origin']) {
-			var origins = meta.config['access-control-allow-origin'].split(',');
+			let origins = meta.config['access-control-allow-origin'].split(',');
 			origins = origins.map(function (origin) {
 				return origin && origin.trim();
 			});
@@ -29,7 +38,7 @@ module.exports = function (middleware) {
 		}
 
 		if (meta.config['access-control-allow-origin-regex']) {
-			var originsRegex = meta.config['access-control-allow-origin-regex'].split(',');
+			let originsRegex = meta.config['access-control-allow-origin-regex'].split(',');
 			originsRegex = originsRegex.map(function (origin) {
 				try {
 					origin = new RegExp(origin.trim());
@@ -55,7 +64,7 @@ module.exports = function (middleware) {
 			headers['X-Upstream-Hostname'] = os.hostname();
 		}
 
-		for (var key in headers) {
+		for (const key in headers) {
 			if (headers.hasOwnProperty(key) && headers[key]) {
 				res.setHeader(key, headers[key]);
 			}

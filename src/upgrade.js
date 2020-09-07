@@ -141,7 +141,8 @@ Upgrade.process = async function (files, skipCount) {
 			process.stdout.write(' skipped\n'.grey);
 
 			await db.sortedSetAdd('schemaLog', Date.now(), path.basename(file, '.js'));
-			return;
+			// eslint-disable-next-line no-continue
+			continue;
 		}
 
 		// Promisify method if necessary
@@ -169,10 +170,15 @@ Upgrade.process = async function (files, skipCount) {
 };
 
 Upgrade.incrementProgress = function (value) {
+	// Newline on first invocation
+	if (this.current === 0) {
+		process.stdout.write('\n');
+	}
+
 	this.current += value || 1;
 
 	// Redraw the progress bar every 100 units
-	if (this.current % 100 === 0) {
+	if (this.current % (this.total ? Math.floor(this.total / 100) : 100) === 0 || this.current === this.total) {
 		var percentage = 0;
 		var filled = 0;
 		var unfilled = 15;

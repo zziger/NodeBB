@@ -1,3 +1,224 @@
+#### v1.15.0-beta.12 (2020-09-03)
+
+##### Chores
+
+*  incrementing version number - v1.15.0-beta.12 (b852c9b7)
+*  update changelog for v1.15.0-beta.11 (f07ba866)
+
+##### Bug Fixes
+
+* **deps:**  update dependency nodebb-plugin-composer-default to v6.3.55 (#8606) (dfeb65bb)
+
+##### Refactors
+
+*  socket posts delete/restore/purge so tid is not necessary (#8607) (f743f920)
+
+#### v1.15.0-beta.11 (2020-09-02)
+
+##### Chores
+
+*  incrementing version number - v1.15.0-beta.11 (c1ce7391)
+*  update changelog for v1.15.0-beta.10 (9c34eced)
+
+##### New Features
+
+*  add client side action:flag.create (09de364e)
+
+#### v1.15.0-beta.10 (2020-09-01)
+
+##### Chores
+
+*  incrementing version number - v1.15.0-beta.10 (f252d4d7)
+*  update changelog for v1.15.0-beta.9 (affc7927)
+* **deps:**
+  *  update dependency mocha to v8.1.3 (#8588) (05efeff6)
+  *  update dependency eslint to v7.8.0 (#8594) (e1b98142)
+
+##### New Features
+
+*  additional sorting options for flags (0c203517)
+
+##### Bug Fixes
+
+* **deps:**  update dependency nodebb-plugin-markdown to v8.12.1 (27426c06)
+*  don't crash on outdated redis instances (896fe9d6)
+
+#### v1.15.0-beta.9 (2020-08-28)
+
+##### Chores
+
+*  incrementing version number - v1.15.0-beta.9 (8dc513da)
+*  update changelog for v1.15.0-beta.8 (3b960c3b)
+
+##### Bug Fixes
+
+*  update post-queue hook names (0e58d2b8)
+
+#### v1.15.0-beta.8 (2020-08-28)
+
+##### Chores
+
+*  incrementing version number - v1.15.0-beta.8 (34bb869c)
+*  update changelog for v1.15.0-beta.7 (e449ff9a)
+
+##### Bug Fixes
+
+*  accept/reject in post-queue instead of accept/delete (694f4b2b)
+
+#### v1.15.0-beta.7 (2020-08-28)
+
+##### Chores
+
+*  incrementing version number - v1.15.0-beta.7 (fd917b8e)
+*  update changelog for v1.15.0-beta.6 (a7f03b64)
+
+##### New Features
+
+*  new filter hook prior to post queue addition (8cc36de2)
+*  add replies to getPostSummaryByPids (a9dfc9a7)
+*  add reply count to getPostSummaryByPids (de0f4aad)
+
+##### Bug Fixes
+
+* **deps:**
+  *  update dependency nodebb-theme-vanilla to v11.2.5 (64f4179a)
+  *  update dependency nodebb-theme-persona to v10.2.10 (777419b2)
+*  new openapi def for replies addition (b5871275)
+
+#### v1.15.0-beta.6 (2020-08-27)
+
+##### Chores
+
+*  incrementing version number - v1.15.0-beta.6 (a9019cbe)
+*  update changelog for v1.15.0-beta.5 (0e90064e)
+* **deps:**  update dependency lint-staged to v10.2.13 (efc30e97)
+
+##### New Features
+
+*  theme work for #8580, closes #8580 (6e805c1b)
+
+##### Bug Fixes
+
+*  #8582 (9f9164a9)
+*  debug logging :dog: (fb3b4a02)
+*  ip-blacklist not working after #8580 (56101ae5)
+*  ip-blacklist not working after #8580 (c681b4b2)
+*  post-queue not working after #8580 (dc5bd760)
+*  #8411 missing language sources for ip-blacklist/post-queue (a93e1955)
+*  removed invalid options for the sendmail transport (#8576) (2b785628)
+
+##### Refactors
+
+*  ip-blacklist and post-queue language files (4dc6e64a)
+*  moved ip-blacklist and post-queue styles/tpls to themes (b6b94a56)
+
+#### v1.15.0-beta.5 (2020-08-26)
+
+##### Chores
+
+*  incrementing version number - v1.15.0-beta.5 (81e4c4df)
+*  update changelog for v1.15.0-beta.4 (6c4aed8c)
+* **deps:**  update dependency mocha to v8.1.2 (#8579) (c722b0e5)
+
+##### New Features
+
+*  allow undo of topic move (abb5e81d)
+*  added alert.timeoutfn (cd8e7963)
+*  sort dependencies alphabetically (a4dbbc37)
+
+##### Bug Fixes
+
+*  missing localisation for topic move error (bacee6b4)
+*  select all checkbox does not re-enable bulk actions button (5d60dce3)
+* **deps:**  update dependency sharp to v0.26.0 (#8578) (7ca967ee)
+
+#### v1.15.0-beta.4 (2020-08-25)
+
+##### Chores
+
+*  incrementing version number - v1.15.0-beta.4 (f2726a6d)
+*  update changelog for v1.15.0-beta.3 (11e2ccab)
+
+##### New Features
+
+*  up persona (af9f328c)
+
+##### Bug Fixes
+
+*  dupes in unread followed topics (55533b11)
+*  wrong data passed to getCategories (39f4bbaa)
+
+#### v1.15.0-beta.3 (2020-08-22)
+
+##### Chores
+
+*  incrementing version number - v1.15.0-beta.3 (39178c2d)
+*  update changelog for v1.15.0-beta.2 (d8a9f1c3)
+
+##### New Features
+
+*  banning a user will resolve their post flags (354e6ccc)
+
+##### Bug Fixes
+
+*  openapi spec (4f7cfd53)
+*  api spec (c4ad14cb)
+*  username, email history disappering if content was deleted (91d9333a)
+*  up composer (9fd37753)
+*  package-install clobbering scoped nodebb plugins (840cb510)
+
+#### v1.15.0-beta.2 (2020-08-21)
+
+##### Chores
+
+*  incrementing version number - v1.15.0-beta.2 (59b50d0a)
+*  update changelog for v1.15.0-beta.1 (aeca19d5)
+
+##### Bug Fixes
+
+*  empty "manage" menu showing in ACP (4b0cb26b)
+*  hide nodebb version in ACP for non-superadmins (cc268605)
+*  change how admin middlewares are exported (f00595b3)
+*  one less return, to appease codeclimate (ae68a254)
+*  inability to access /admin if not superadmin (03bd76de)
+*  #8560, fix old upgrade script (29e3ab24)
+*  use promises in privilege save (9cbe9389)
+*  overzealous click handler on flag list row (7a5daff4)
+*  +comment, -debug log (9608b44f)
+
+##### Refactors
+
+*  changed way middleware was exported (cf2f1e95)
+
+#### v1.15.0-beta.1 (2020-08-20)
+
+##### Chores
+
+*  incrementing version number - v1.15.0-beta.1 (4fa57fbb)
+
+##### New Features
+
+*  theme changes for #8571 (5415c01c)
+*  logic for bulk actions in flags list, #8571 (a3a22793)
+*  expose global/admin privileges to all routes (4737f937)
+
+##### Bug Fixes
+
+*  multiple alerts in the same millisecond overwrite each other (589216e7)
+*  reintroduce 20s delay for api tests (56393795)
+*  client-side error in flags/detail (b2271eb6)
+*  #8570 (7daba7dd)
+
+##### Tests
+
+* **openapi:**  missing commonprops addition (0dc55bbc)
+
+#### 1.14.3 (2020-07-08)
+
+##### Bug Fixes
+
+*  improper targetUid check during password change (c2477d9d)
+
 #### 1.14.2 (2020-07-15)
 
 ##### Chores

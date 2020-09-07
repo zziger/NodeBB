@@ -1,5 +1,6 @@
 
-define('admin/manage/ip-blacklist', ['chart.js', 'benchpress'], function (Chart, Benchpress) {
+
+define('forum/ip-blacklist', ['chart.js', 'benchpress'], function (Chart, Benchpress) {
 	var Blacklist = {};
 
 	Blacklist.init = function () {
@@ -17,7 +18,7 @@ define('admin/manage/ip-blacklist', ['chart.js', 'benchpress'], function (Chart,
 				app.alert({
 					type: 'success',
 					alert_id: 'blacklist-saved',
-					title: '[[admin/manage/ip-blacklist:alerts.applied-success]]',
+					title: '[[ip-blacklist:alerts.applied-success]]',
 				});
 			});
 		});

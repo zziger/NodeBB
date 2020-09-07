@@ -57,6 +57,16 @@
 	"state-rejected": "رد شده",
 	"no-assignee": "اختصاص داده نشده",
 
+	"sort": "Sort by",
+	"sort-newest": "Newest first",
+	"sort-oldest": "Oldest first",
+	"sort-reports": "Most reports",
+	"sort-all": "All flag types...",
+	"sort-posts-only": "Posts only...",
+	"sort-downvotes": "Most downvotes",
+	"sort-upvotes": "Most upvotes",
+	"sort-replies": "Most replies",
+
 	"modal-title": "گزارش محتوای نامناسب",
 	"modal-body": "لطفا علت گزارش <strong>%2</strong> <strong>%1</strong> را برای بررسی مشخص کنید. همچنین می توانید از یکی از دکمه های ارسال سریع استفاده کنید.",
 	"modal-reason-spam": "هرزنامه",
@@ -67,5 +77,9 @@
 	"modal-submit-success": "محتوا برای بررسی گزارش شد",
 	"modal-submit-confirm": "تأیید ارسال",
 	"modal-submit-confirm-text": "شما همواره علت دیگری را مشخص کردید. آیا مطمئن هستید که می خواهید از طریق گزینه های گزارش سریع ارسال کنید؟",
-	"modal-submit-confirm-text-help": "ارسال از طریق گزارش سریع جایگزین علت های مشخص شده دیگر می شود."
+	"modal-submit-confirm-text-help": "ارسال از طریق گزارش سریع جایگزین علت های مشخص شده دیگر می شود.",
+
+	"bulk-actions": "Bulk Actions",
+	"bulk-resolve": "Resolve Flag(s)",
+	"bulk-success": "%1 flags updated"
 }
