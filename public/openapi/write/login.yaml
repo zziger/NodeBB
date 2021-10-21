@@ -6,6 +6,8 @@ post:
     This route accepts a username/password or email/password pair (dependent on forum settings), returning a standard user object if credentials are validated successfully.
     This route also initializes a standard login session and returns a valid cookie that can be used in subsequent API calls as though it were a browser session.
     **Note**: Cookie-based sessions require a CSRF token for non-`GET` routes.
+
+    `username` and `password` are expected to be passed in to this call.
   requestBody:
     content:
       application/json:
@@ -18,6 +20,9 @@ post:
             password:
               type: string
               example: '123456'
+            session:
+              type: number
+              example: 1
   responses:
     '200':
       description: credentials successfully validated
